@@ -1,0 +1,664 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>W8 - Think before you build</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c314f37a-82e1-4ad4-92d1-9d5303817f98" class="page sans"><header><h1 class="page-title">W8 - Think before you build</h1></header><div class="page-body"><p id="d98df1d6-5644-4ca3-b6f8-27b436723fba" class=""><strong>Compilers</strong></p><p id="1f8d8acf-5663-47ad-be61-0951e0eff608" class="">Lesson of the week - when screen sharing on Zoom, disconnect additional monitor(s).</p><p id="2bc3e007-dc3a-43d9-8b53-acd05b2d02c9" class="">I&#x27;ve been working on porting Crafting Interpreters from C to Python, and this naturally involves making some adjustments. First is avoiding circular dependencies in the Python version. I imagine this is less of an issue in C as the linking/compilation stage simply moves all the source code into a single blob. Second is separating out pointers to arrays into arrays and arrays indices.</p><p id="8e731682-2d62-4eb1-8336-52b594ece1c1" class="">I&#x27;m happy with the progress so far, but now I&#x27;m at implementing functions and the interactions are getting a lot more complex. In particular is how variable scopes interact with function call frames; I&#x27;m constantly puzzled on how to debug (and if my adjustments overlooked more fundamental underpinnings of how things work). I know, last week I was all about &quot;let&#x27;s set up guardrails&quot; to make reasoning about the code easier - it&#x27;s all there now and I&#x27;m still stuck.</p><p id="b64837bf-f0ea-49ff-ba14-00e7801cc481" class="">I&#x27;m contemplating starting over with my own custom implementation, but with function support right out of the door (or at least, with the minimal infrastructure needed for to the implementation). I anticipate this involves a lot more sketching designs on paper even before the first line of code - how fun!</p><p id="09906545-0e54-4c8e-b8c2-63db53230824" class="">The other fun thing with creating your own toy implementation is selecting your own set of reserved words. I&#x27;ve switched from &#x27;var&#x27; to &#x27;let&#x27; (to suppress prior trauma of learning JavaScript pre-ES6) and from &#x27;this&#x27; to &#x27;self&#x27;.</p><p id="4ec62b0c-a188-42f7-a4a2-f34536df55d5" class="">
+</p><p id="347d71a9-d204-46b6-a742-3de3db715cfa" class=""><strong>WebAssembly</strong></p><p id="a260764f-73ea-4192-b96b-4b234797aac3" class="">New technology can be rough around the edges. Earlier in my time at RC I wanted to set up Python-Rust <a href="https://payments.posthaven.com/rc-w5d3-why-doctors-hate-their-computers">interop</a> via WebAssembly. This involves compiling Rust functions to WebAssembly and loading the .wasm binaries in Python, in order to benefit from performance improvements.</p><p id="e795f67c-b3d2-48b5-8898-ee3f46a72edc" class="">I finally got this to work, example <a href="https://github.com/savarin/bridge">here</a>. Calculating the 10,000th prime in Python with Rust achieves a 10x speedup vs pure Python. What&#x27;s interesting is this closed <a href="https://github.com/bytecodealliance/wasmtime-py/pull/44">issue</a>, which might have been what tripped me up previously. The issue close date? August 24, 2020.</p><p id="bc2e13f7-bc99-49fa-b6ea-58bebe00d336" class="">
+</p><p id="d0636e87-26ad-4a81-88cd-48bbdb2513bb" class=""><strong>Content: What you&#x27;ll wish you&#x27;d known</strong></p><p id="0dbf5e54-91c9-4416-93e2-66500475d47d" class=""><a href="https://twitter.com/paulg">Paul Graham</a> was invited to speak at a high school in 2005, but somehow the school authorities vetoed the plan. I wonder if they&#x27;re kicking themselves now.</p><p id="0087c534-6c32-41dc-9f27-60e7ed9bae95" class=""><a href="http://www.paulgraham.com/hs.html">http://www.paulgraham.com/hs.html</a></p><p id="2c8bc40b-724e-4db1-99c8-5b14c6612058" class="">The excerpt below is a highlight from a recent re-reading of the talk he prepared. On the back of this I&#x27;m going to indulge myself on something I&#x27;ve been curious about for a while - <a href="https://www.figma.com/resources/learn-design">design</a>.</p><blockquote id="d592dc4d-60ee-4aa0-8e39-ae22cc763496" class="">If you&#x27;re deciding between two projects, choose whichever seems most fun. If one blows up in your face, start another. Repeat till, like an internal combustion engine, the process becomes self-sustaining, and each project generates the next one. (This could take years.)</blockquote><p id="a826c3bb-45ec-46b0-b0ad-3de98ee4235a" class="">The excerpt that caught my eye on the first reading emphasizes the importance of experience, and draws parallels with Rilke&#x27;s <a href="https://payments.posthaven.com/rc-w5d1-connecting-the-dots">quote</a>.</p><blockquote id="5ba6d0a7-3bc1-440c-b1e7-b1b2cf1057e3" class="">If it takes years to articulate great questions, what do you do now, at sixteen? Work toward finding one. Great questions don&#x27;t appear suddenly. They gradually congeal in your head. And what makes them congeal is experience.</blockquote><p id="4631161f-4691-4db8-a595-17997dac7409" class="">
+</p><p id="c159c266-6721-4b14-bbb0-3eb4638c7d62" class=""><strong>Content: Experiments at Airbnb</strong></p><p id="a31f6559-f3f3-4c99-8b03-c09ae357e7ed" class="">Data science at Airbnb had a mixed reputation a few years back, but something they did very well was marketing the practice through content and events. The well-curated blog attracted many to apply for a role. The post I enjoyed the most discussed best practices for A/B testing - on duration of experiments, understanding context and setting up guardrails.</p><p id="00d7bb04-fb80-4d41-984d-cc1e371527db" class=""><a href="https://medium.com/airbnb-engineering/experiments-at-airbnb-e2db3abf39e7">https://medium.com/airbnb-engineering/experiments-at-airbnb-e2db3abf39e7</a></p><p id="2c9a1c71-029b-45a6-aa59-10ff5dd75967" class="">Speaking of experiments and causal inference, I&#x27;m adding causal forests to the list of things to review...</p><p id="68a12ffc-c3e9-4db6-a199-b1a2b23e5c38" class="">
+</p><p id="36b005b8-a8fd-4fe7-96ff-d323e5030748" class=""><strong>Content: Indie Game</strong></p><p id="7eef0a4f-72bd-47bb-a4f5-395161475b2f" class="">I&#x27;m fascinated how distribution (or perhaps in a more direct way, monetization) plays a role in content creation. <a href="https://twitter.com/Jonathan_Blow">Jonathan Blow</a> in his <a href="https://www.youtube.com/watch?v=AxFzf6yIfcc">talk</a> discusses parallels between TV shows and computer games when each medium moves from gatekeepers to direct-to-consumer distribution - highly recommended.</p><p id="a2056f22-378e-4c88-8a92-07aa81c59067" class="">What&#x27;s also super fascinating is seeing the <a href="https://www.youtube.com/watch?v=lq5HRdTyKUs">travails</a> of indie game developers. The attention to detail, the degree of craftsmanship and the pursuit of perfection - I can&#x27;t help but think of <a href="https://payments.posthaven.com/rc-w1d5-think-clearly-from-first-principles">Jiro</a>.</p><p id="1c6818ea-13b0-4937-ac0a-068cbcfdd8d8" class="">
+</p><p id="2281f3ee-bc16-4db8-8a19-614050434797" class=""><strong>Content: Empty Streets (Haji + Emanuel Remix)</strong></p><p id="e04ac6df-97e4-46b0-b993-4bb7dc80b37a" class="">This <a href="https://www.youtube.com/watch?v=DT-EpUkEyw8">mix</a> is legendary, and amusingly, apt for 2020.</p><p id="207f3a7f-7b5e-4b00-8960-279d7990c4d2" class="">
+</p><p id="4b9aeafb-f2cb-4cc0-912e-a9ae2e5b13df" class=""><strong>Content: Think before you build</strong></p><p id="2dc46844-ff87-4e91-9834-4e59f72b4ac9" class="">I remember reading this post, spending hours on Google looking for it again, and feeling very sad when I couldn&#x27;t find it. When I was compiling the content I wanted to share on this blog, I looked through my notes and there it was. The lone URL, no annotations, no comments. It was like finding treasure. I was overjoyed.</p><p id="b10bea85-2b05-4004-8735-4407948d4abd" class="">Perhaps there&#x27;s a dream job there somewhere. Content finder?</p><p id="ab1bea11-6c47-411c-a291-2e93fe793ff0" class=""><a href="http://www.slate.com/id/2289527">http://www.slate.com/id/2289527</a></p><p id="e56c38d4-ec94-4651-a920-eb526a49f4e5" class="">The post is about how computers have done wonders for productivity, but in many cases speed compensates for the lack of rigorous thought. It&#x27;s a reminder to pause and reflect before we write that first line of code, and as per a previous <a href="https://payments.posthaven.com/rc-w2d2-be-a-chef">post</a>, to cut through to what matters by thinking clearly from first principles.</p><p id="b5d92985-0f9d-4953-b940-2c0f1e1faba3" class="">What kept me looking for this post were the immortal words of Renzo Piano.</p><blockquote id="010c06a1-8f26-49fc-b1cd-943fb7b8e802" class="">But architecture is about thinking. It&#x27;s about slowness in some way. You need time. The bad thing about computers is that they make everything run very fast, so fast that you can have a baby in nine weeks instead of nine months. But you still need nine months, not nine weeks, to make a baby.</blockquote><p id="751cc218-2f3e-471d-a481-7a068e806798" class="">
+</p><div id="4fc6d662-0a98-4979-815c-40412aed815d" class="column-list"><div id="bc6b6c0f-b4f4-4828-b2de-e66ccf07ffbd" style="width:50%" class="column"><p id="467c36d0-a5fd-4243-9617-c6b3194f05d5" class=""><a href="W7%20-%20Advice%20for%20IC%20lifers%202b6257cfcdc44830b1233466f0f03e1b.html">Previous</a></p></div><div id="2a160165-4d59-41f3-85de-adc647da52df" style="width:50%" class="column"><p id="b79bf2c4-5394-4ce4-bc7a-cd7c89a2c069" class=""><a href="W9%20-%20Pass%20the%20simplicity%20through%20f6b32f169eb9468fb1f5e3113fded86a.html">Next</a></p></div></div></div></article></body></html>

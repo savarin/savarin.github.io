@@ -1,0 +1,664 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>W6D5 - Change is the only constant</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="25451285-fdfe-41f4-ad9a-37562bc544ee" class="page sans"><header><h1 class="page-title">W6D5 - Change is the only constant</h1></header><div class="page-body"><p id="467de8fb-b563-45d0-a497-ea510510f863" class=""><strong>Halftime</strong></p><p id="36ac0b6a-92d8-42f5-9db4-4d5a2732a23b" class="">It&#x27;s the end of my half batch at RC. I had extended my stay from 6 weeks to 12, so today marks the halfway point.</p><p id="9c7255bc-0916-407e-873f-1e2949264981" class="">We had an end-of-batch ceremony, but true to RC&#x27;s philosophy of Never Graduate, it merely marks the start of a new phase. I was touched by the kind words to those making the transition. The nicest words have to go to the RC faculty; I&#x27;m amazed at how well they&#x27;ve been keeping the program going despite the lockdown. I wished I could give all of them a hug, or given the new world we now live in, an elbow bump.</p><p id="5fa4a277-1a36-41ea-a706-6b33c775bd52" class="">I started RC planning to develop my front end skills. I thought this would involve JavaScript and frameworks; it appears I&#x27;ve gone a bit of a detour. That said I&#x27;m still on the <a href="https://payments.posthaven.com/rc-w5d1-connecting-the-dots">path</a> of thinking of the browser as the platform, as initially intended.</p><ul id="798ebbdf-069e-43fb-85dd-f37efa7b6612" class="bulleted-list"><li style="list-style-type:disc">Week 1 - Getting started</li></ul><ul id="d3aaa82e-290a-481a-85fd-5d09958ae584" class="bulleted-list"><li style="list-style-type:disc">Week 2 - Open source</li></ul><ul id="8c263289-f7a2-4858-9d6a-d9b7076d45ad" class="bulleted-list"><li style="list-style-type:disc">Week 3 - Rust</li></ul><ul id="33a48d3d-365a-42d7-b384-65948687a843" class="bulleted-list"><li style="list-style-type:disc">Week 4 - WebAssembly</li></ul><ul id="73f10d55-ad05-490b-a264-a7de630ff43f" class="bulleted-list"><li style="list-style-type:disc">Week 5 - Microbenchmarks</li></ul><ul id="93acd771-e7a9-4039-9c1a-7e9c22d59cd2" class="bulleted-list"><li style="list-style-type:disc">Week 6 - Compilers</li></ul><p id="14e8a65e-be58-465a-ac22-18820e0578cb" class="">I had the chance to answer questions from the incoming batch this week, and excited to be vicariously infused with a healthy dose of enthusiasm next week! RC faculty are fantastic at getting the most interesting and intellectually curious people to join. I mentioned to the incoming batch how I&#x27;m a little jealous at my batchmates with interests in domains with well-defined boundaries, it appears they&#x27;re better able to concentrate their collective efforts and get a lot done that way.</p><p id="caecea45-7c7d-4e73-ab15-2d8208c632fe" class="">The varied interests on my part continue irrespective. In the morning, I polished up a bit more code from my Python implementation of <a href="https://github.com/munificent/craftinginterpreters/tree/master/c">lox</a>.</p><p id="700b3b13-3e62-4142-9b82-8188a8f12b44" class="">I&#x27;m not sure what got me started looking at algebraic data types (ADTs), but I spent some time between events translating a Rust <a href="https://blog.softwaremill.com/algebraic-data-types-in-four-languages-858788043d4e">example</a> to Python. The PEP 484 <a href="https://www.python.org/dev/peps/pep-0484/#forward-references">change</a> on forward references seems to have made all the difference <a href="https://github.com/savarin/etc/blob/master/python/adt.py">here</a>. I haven&#x27;t yet been able to fully wrap my head around &quot;Why bother?&quot;, but did discover a thoughtful <a href="https://blog.ploeh.dk/2020/01/20/algebraic-data-types-arent-numbers-on-steroids/">post</a> by <a href="https://github.com/ploeh">Mark Seemann</a>. Instead of thinking about these more sophisticated types as &#x27;stronger&#x27; <a href="https://payments.posthaven.com/rc-w3d3-a-tool-for-every-trade">tests</a>, the better framing is to consider how ADTs make illegal states unrepresentable.</p><p id="4cc1cd69-d76d-4c67-8196-15e8007d5674" class="">I discovered the RC publication Code Words along the way, with a <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">post</a> on ADTs and <a href="https://codewords.recurse.com/issues/seven/dragon-taming-with-tailbiter-a-bytecode-compiler">one</a> on compilers. I&#x27;m reminded of Legal Affairs, an excellent general interest <a href="https://www.legalaffairs.org/">magazine</a> about the law by Yale Law School students. Like Code Words, the publication sadly only lasted a few years.</p><p id="43461773-8582-452c-beed-747ff5d1fd37" class="">Re: frameworks, I recently found out Vue has <a href="https://hasvuepassedreactyet.surge.sh/">surpassed</a> React in the number of Github stars. I mentioned this amusingly at the Rust learning group, and <a href="https://github.com/vinayak-mehta">Vinayak</a> responded by sharing this cool <a href="https://www.youtube.com/watch?v=OrxmtDw4pVI&amp;vl">documentary</a>. Since I do use the blog as an accountability <a href="https://payments.posthaven.com/rc-w4d2-lets-try-something-different">tool</a>, my plan is to try out Vue in addition to reading this <a href="https://github.com/yyx990803">Evan You</a> <a href="https://increment.com/frontend/making-vue-3">interview</a> in Increment.</p><p id="b15e130f-34cd-4199-9041-6501d92b6d19" class="">
+</p><p id="542399d8-11eb-4aa3-ad25-f22922f671fa" class=""><strong>On writing</strong></p><p id="bdf70445-6ced-48cf-9c2e-69ba1676d4fe" class="">To become a better developer, there&#x27;s no way around writing lots of code. Making the effort to write daily has definitely made me feel a lot more comfortable about sharing what I&#x27;ve learned. As per a previous <a href="https://payments.posthaven.com/rc-w2d3-economic-empowerment">post</a>, the problem I feared was that people might care too much when in reality it&#x27;s the opposite.</p><p id="2f722187-23bf-4c43-84e3-683a3e414428" class="">From now on I&#x27;ll shift to a weekly cadence. I&#x27;ll try to keep the length reasonable. *wink*</p><p id="d7ded7fb-7f2f-48fe-a144-7d11a385f64b" class="">
+</p><p id="dbf9ca3d-364e-4d6c-8e19-78f7e4ba3f63" class=""><strong>Content: E lucevan le stelle</strong></p><p id="de0d1f01-3f7f-4e12-b80f-99813595b715" class="">I also use the blog to embarrass my younger self. I previously claimed a love for opera, thinking I&#x27;ll emerge as a more cultured version of myself. It&#x27;s not clear that has happened, but I did come out of this phase with a few favorites. Here&#x27;s the <a href="https://www.youtube.com/watch?v=TU5roitYI1s">aria</a> from Tosca, performed by Luciano Pavarotti.</p><p id="9da9c6bf-674e-42a4-a5bb-b2b44f6f7469" class="">
+</p><p id="d53c5f20-0776-4cee-bcff-be5a2d1f6f49" class=""><strong>Content: The rise of human-computer cooperation</strong></p><p id="8a149474-7e79-4f12-a471-05751d778cab" class="">I know, it&#x27;s a TED <a href="https://www.youtube.com/watch?v=ltCVp1ic-L8">talk</a> (and not <a href="https://twitter.com/BreneBrown">Brené Brown</a> <a href="https://www.youtube.com/watch?v=iCvmsMzlF7o">either</a>). When I first picked up programming, I was fascinated by the idea how humans and computers excel at different skills. The best teams are usually not the smartest humans or fastest computers working individually, but composite teams that can assess who&#x27;s better where and have a &#x27;streamlined&#x27; human-computer interface. This idea was touched on briefly in the featured article of a previous <a href="https://payments.posthaven.com/rc-w1d3-are-computers-making-society-more-unequal">post</a>, and it&#x27;s put across really well by <a href="https://twitter.com/ssankar">Shyam Sankar</a>.</p><p id="943a9414-120a-4471-8c31-2f80f89ef576" class="">
+</p><p id="7679ffb7-53de-439e-928c-5cd3bc7c54b9" class=""><strong>Content: Change is the only constant</strong></p><p id="a3e23fe1-e91f-4468-b258-64e0b717d827" class="">When I was making the career transition to software, I constantly wondered if I was making the right move. A part of me wanted to return to professional services; it felt familiar not just to myself but also to my family and friends. It felt safe.</p><p id="e7d9115f-c109-442c-9506-b40f490d145c" class="">I feel extremely fortunate to have made the shift, not for any sector specifically, but for taking the <a href="https://payments.posthaven.com/rc-w1d1-recommit-yourself-to-lifelong-learning">step</a> towards lifelong learning. If I could do it once, perhaps I can do it again. Not an unlikely proposition as the world changes ever more rapidly.</p><p id="33068338-195e-42bd-b6d4-c99b5274a2c3" class="">This FT Weekend article by <a href="https://www.lrb.co.uk/contributors/john-lanchester">John Lanchester</a> captures this sentiment perfectly (enclosed below).</p><blockquote id="143a33f9-7b0d-46b9-baf1-65bf14cad2dc" class="">The moral of the story is that even if you think you understand the impact economic forces can have, they can still strike dangerously close to home. It helps to have a compass, and mine is based on two principles, both of them learnt from my banker father: anxiety is freedom, and the way you are living will have been your life.</blockquote><p id="210f2482-db52-4159-91b2-43441f5a9d7f" class="">
+</p><p id="1687d3c1-a9ed-416d-847a-14685b1543e2" class=""><strong>Content: Designing Data-Intensive Applications</strong></p><p id="c44059da-5d70-406b-80ec-1bed8f0de2ce" class="">This last section of my Friday posts usually feature a book excerpt. Designing Data-Intensive Applications by <a href="https://github.com/ept">Martin Kleppmann</a> is not one that I&#x27;ve completed, or at least, not cover-to-cover (conveniently the reading group starts next week). The excerpt I&#x27;d like to feature is its excellent dedication.</p><blockquote id="6cf5dc00-fa4a-459f-ab05-6fd9f30e3458" class="">Technology is a powerful force in our society. Data, software, and communication can be used for bad: to entrench unfair power structures, to undermine human rights, and to protect vested interests. But they can also be used for good: to make underrepresented people’s voices heard, to create opportunities for everyone, and to avert disasters. This book is dedicated to everyone working toward the good.</blockquote><p id="d1e5f092-2bfe-4c60-bea6-63fc82cdd74c" class="">
+</p><div id="f97b8f44-1125-4878-b574-9e583abc8b53" class="column-list"><div id="8a32ac11-bcda-4749-ab9e-91525f0f9ceb" style="width:50%" class="column"><p id="241c707e-4f16-4e21-a0ad-a04f995bbca7" class=""><a href="W6D4%20-%20The%20engineer&#x27;s%20guide%20to%20career%20growth%203495c6b4421145c7b8c28ee6498f4177.html">Previous</a></p></div><div id="1efad5e6-69ac-4432-9a2c-61c37a4b071e" style="width:50%" class="column"><p id="8b63fa06-e2f3-4568-994f-bc0f0877609b" class=""><a href="W7%20-%20Advice%20for%20IC%20lifers%202b6257cfcdc44830b1233466f0f03e1b.html">Next</a></p></div></div><p id="cfedfaa5-58e4-4bc5-bd30-386e126f62b2" class="">
+</p><figure id="ea02ca7f-a405-4a25-aa10-0a317a4a2837"><div class="source"><a href="https://gist.github.com/savarin/77449f22e0977b094bf4906b9f9caa89#file-change_constant-md">https://gist.github.com/savarin/77449f22e0977b094bf4906b9f9caa89#file-change_constant-md</a></div></figure></div></article></body></html>

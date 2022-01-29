@@ -1,0 +1,662 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>W11 - The beginner&#x27;s mind</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ff841216-43ae-4da2-9a8e-3a038f5aa43c" class="page sans"><header><h1 class="page-title">W11 - The beginner&#x27;s mind</h1></header><div class="page-body"><p id="04d2c2bb-3309-4766-94a3-da6e5fa6f6d7" class=""><strong>Functional programming</strong></p><p id="767e82ad-da41-473f-97f5-e0695c999dca" class="">I&#x27;ve been watching a couple of <a href="https://twitter.com/worrydream">Bret Victor</a> videos recently. In this <a href="https://youtu.be/8pTEmbeENF4?t=180">video</a>, he mentioned how there was a lot of hostility towards assembly when it was first introduced. Assembly allowed machine code to be represented in words, for example writing `add $t1 $t2 $t3` to mean add values in $t2 and $t3 then place it into $t1, instead of say `0000 0001 0000 1001 0101 0000 0010 0001`.</p><p id="495612a2-95cd-4950-94dc-9d407f281f8d" class="">Despite improving developer productivity and reducing likelihood of errors, those who had been programming in binary didn&#x27;t see much value to assembly. This resistance to new ways of working, to unlearn what you&#x27;ve already learned and think in new ways, is present in 2020 as it was in the 1950s. If anything, it&#x27;s a more concerning anti-pattern today given how much faster the world is changing.</p><p id="abe177e0-5c88-42bc-b0c1-e8b42028ac15" class="">This thought motivated me to look into category theory. Perhaps understanding more theoretical aspects could help illuminate why things were implemented the way they did. Perhaps doing so would highlight concepts that we take for granted. In last week&#x27;s <a href="https://payments.posthaven.com/rc-w10-the-rise-of-functional-programming">post</a>, I mentioned consuming more of <a href="https://github.com/BartoszMilewski">Bartosz Milewski</a>&#x27;s <a href="https://www.youtube.com/watch?v=I8LbkfSSR58&amp;list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_">content</a>. I thought I&#x27;d complete all three parts before starting Haskell. I&#x27;m almost done with Part 1, and then realized I want a bit more intuition on what applying the theory looks like.</p><p id="714e1701-08c3-40b4-9245-c3eba0bd66f7" class="">Instead of more Haskell, I actually found <a href="https://github.com/ccorcos">Chet Corcos</a>&#x27; <a href="https://medium.com/@chetcorcos/functional-programming-for-javascript-people-1915d8775504">post</a> on functional JavaScript super helpful. A pure function is a function where the return value is only determined by its input values, without dependencies or side effects. He describes how pure functions &quot;bound the cognitive load of programming&quot;, because pure functions forces you to be concerned only with the body of the function.</p><p id="6ec27542-6f7a-4174-b37e-ae782f1c072d" class="">A core concept in category theory is composition; the following is from the <a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface">preface</a> of Milewski&#x27;s book.</p><blockquote id="1e6d417f-9f3a-4bb3-a665-b633125a91f2" class="">Composition is at the very root of category theory - it’s part of the definition of the category itself. And I will argue strongly that composition is the essence of programming.</blockquote><p id="e5a5b621-feec-4d65-bba9-f1359c9d31cb" class="">In Corcos&#x27; post, he emphasizes how writing code through composition of pure functions makes it much easier to trace errors - you&#x27;ll get a stack trace through every function all the way to the source of the bug. This is in contrast to object-oriented programming, where the state of the object may not be exposed.</p><p id="12a1e94e-8b92-464d-aa5d-0d929d3f5faf" class="">What&#x27;s very cool is seeing how, in implementing a map operation of two successive functions on a list, the version applying a single map of the composition of the two functions is faster than the version applying two successive maps of each function individually! The sections on lazy loading (with similarly getting performance gains) are fascinating, though perhaps best described in the post itself.</p><p id="7ee010ee-4a7c-465a-9cee-6b40140f9624" class="">Like all things in life, there&#x27;s always trade-offs. <a href="https://github.com/Gabriel439">Gabriel Gonzales</a>&#x27; blog Haskell for All has an excellent <a href="http://www.haskellforall.com/2016/04/worst-practices-should-be-hard.html">post</a> on how Haskell is better for long-term productivity because it enforces best practices. I first came across the Option type in Rust, perhaps this was inspired by Haskell&#x27;s Maybe. In any case, this framing forces you to invest time at the start dealing with edge cases, as opposed to investing time later on when things break.</p><p id="f5fff2a1-f6ec-48dd-9810-e3c03a9dd7aa" class="">The post goes on to talk about the flip side of Haskell. I didn&#x27;t realize Haskell implements its default String type as a linked list (perhaps a counter-example to those claiming linked lists only come up in interviews). While abstraction is a &#x27;good thing&#x27;, any good thing in excess is bad - Haskell makes advanced abstraction syntactically cheap and thus easy to get carried away. Amusingly there&#x27;s even a Hitler <a href="https://www.youtube.com/watch?v=ADqLBc1vFwI">parody</a> for that...</p><p id="42ac7f11-4f22-4ac1-b24f-11e86583c80e" class="">
+</p><p id="9c2d120f-045d-4556-ab99-302654ab8665" class=""><strong>Content: Naval Ravikant podcasts</strong></p><p id="035ffb0d-cce9-45b2-b7ee-655933848553" class="">There are a number of content formats I&#x27;ve collected but not enough for a series. I&#x27;ll feature them this week.</p><p id="a7d821ac-a8f6-44dd-afc8-c66153b8f894" class="">First is podcasts. I enjoy listening to <a href="https://twitter.com/naval">Naval Ravikant</a>, the co-founder of AngelList but perhaps best known for his How to Get Rich <a href="https://twitter.com/naval/status/1002103360646823936">series</a> of tweets. On <a href="https://twitter.com/SamanthaRyNZ">Samantha Ryan</a>&#x27;s <a href="https://www.buzzsprout.com/836356/3597493-5-a-conversation-with-naval-ravikant">podcast</a>, his response to the question of how we decide what to do with our limited time (at 25:39) emphasizes the importance of being honest and effective.</p><blockquote id="f9d03c26-745d-49f3-80ce-5f90139a4779" class="">It&#x27;s very important to be honest with yourself so you can actually succeed without hurting yourself, without being in self conflict all the time and without being ineffective. Because if you&#x27;re effective and you just get what you want, you can trade it for other things.</blockquote><p id="e633b309-5f6e-454a-a985-abf2ad892883" class="">On <a href="https://twitter.com/tferriss">Tim Ferriss</a>&#x27; <a href="https://youtu.be/HiYo14wylQw?t=1882">podcast</a>, he elaborates a <a href="https://twitter.com/naval/status/1002103670400417792">tweet</a> in the series which talks about gaining financial freedom through ownership of equity. The discussion (at 31:22) echoes Bret Victor above, on the hard part of any endeavor is getting over one&#x27;s resistance to change.</p><blockquote id="d5eae953-c4a8-4880-bad1-81dd7c7c0887" class="">The hard parts are not the learning, it is the unlearning. It’s not the climbing up the mountain. It’s the going back down to the bottom of the mountain and starting over.<p id="1bacc667-0491-416f-9885-6d3932f88fcc" class="">It’s the beginner’s mind that every great artist, or every great business person has, which is: you have to be willing to start from scratch. You have to be willing to hit reset and go back to zero. Because you have to realize that what you already know, and what you’re already doing, is actually an impediment to your full potential.</p></blockquote><p id="c408a3f2-df1a-44ed-bc74-56d5a7732d9e" class="">
+</p><p id="83f17864-4cde-44e0-86f4-32bcf540546b" class=""><strong>Content: Sam Altman talks</strong></p><p id="66a03de7-9009-4ada-9c0b-4686104b888a" class="">On the theme of inertia, I learned a lot at Square but I did go through a phase of feeling comfortable. Towards the end of that phase I realized that by not pushing harder I did a disservice to the company, and perhaps more importantly, I did a disservice to myself.</p><p id="2e4053a5-d629-4de0-ab73-ac3f0ccfe28c" class="">I thought a change of environment would be a good wake up call. I moved from the 3,000+ person company to a 30+ startup. To help prepare the transition I listened to a number of Y Combinator talks, in particular the ones with <a href="https://twitter.com/sama">Sam Altman</a>. This <a href="https://youtu.be/cN62reafxLg?t=980">talk</a> is from Work at a Startup Expo 2018 (at 16:20).</p><blockquote id="e8e4d0b6-c29f-4491-a555-0342e63c59e0" class="">Every job I&#x27;ve ever had I&#x27;ve been wildly unqualified for, and doing that is the #1 secret to having a really great career. That&#x27;s the way you have a super fast rate of personal growth, and I think the way careers go is you should put in the most of the effort at the beginning. Because it&#x27;s this compound interest-like thing, where the work you do now, the learning the you do now, the improvement you make early in your career gets to pay off for all the rest.</blockquote><p id="8324ddf8-57fe-47ee-b6fb-7135a8921a4d" class="">The <a href="https://youtu.be/0lJKucu6HJc?t=497">talk</a> from How to Succeed with a Startup discusses staying positive as a team, stepping up and a bias towards action (at 8:17).</p><blockquote id="b613645a-70c9-4b0c-b56e-eac6f672a6cf" class="">The spirit of &quot;we&#x27;ll figure it out&quot; is my favorite thing to hear among early startup team members. A lot of things go wrong, the situations that startups win in tend to be incredibly dynamic, and so this idea that even if I&#x27;m not qualified on paper, even if I haven&#x27;t solved this problem before, even if this problem feels like it&#x27;s going to kill the company (which many problems will feel that way), the spirit among the team of &quot;we&#x27;ve got the people we need, we&#x27;re gonna figure this out, we&#x27;re gonna get this done&quot;, that&#x27;s super important.</blockquote><p id="02ebbd8c-a714-4549-a90a-bb9f411c0184" class="">
+</p><p id="ce45868d-5c8f-42d9-97d3-b4dc30a15c29" class=""><strong>Content: Credit card processing flow</strong></p><p id="31ba7a63-e7fc-4bdd-a049-06bf62122d05" class="">The final content format is static visuals. I know, spending time in payments makes this flowchart more interesting for me personally. It&#x27;s also curious that this comes up in an article about Chinese payment apps.</p><p id="eb61766b-8d96-4939-b86e-c395c25e3941" class=""><a href="https://www.bloomberg.com/graphics/2018-payment-systems-china-usa/">https://www.bloomberg.com/graphics/2018-payment-systems-china-usa</a></p><p id="b1f37673-4482-43b0-b6b6-34b9e1bb3198" class="">
+</p><p id="93637b20-04c4-40b5-aea4-eef13e4200d7" class=""><strong>Content: A Day at the Park</strong></p><p id="13af0437-94e8-462f-9c12-53bbc00150e0" class="">On questioning our own assumptions, especially long-held beliefs, this comic makes for a nice finish.</p><p id="1ef10a56-c7c5-49fc-97bd-6b16c1db5bcc" class=""><a href="https://www.quora.com/q/comicsthatsaysomething/A-Day-at-the-Park">https://www.quora.com/q/comicsthatsaysomething/A-Day-at-the-Park</a></p><p id="28fcf169-f9e8-4ea7-adc4-9a12078e993d" class="">
+</p><div id="a5074ba0-7c40-4688-a3a0-bb70fe6be278" class="column-list"><div id="00bedc52-db4a-4f53-935b-71f2f6f72ff6" style="width:50%" class="column"><p id="2a9a0883-a236-4913-933a-8a8e3567cf68" class=""><a href="W10%20-%20The%20rise%20of%20functional%20programming%20c518bf641e8640f79c2e8bde40c8f462.html">Previous</a></p></div><div id="f9a5075f-594c-4429-974f-0c850cfb7a17" style="width:50%" class="column"><p id="1ae3860d-b759-4d28-b672-8e114ae1da81" class=""><a href="W12%20-%20Never%20graduate%2003845a9324fe4586b0eab8a8cdd7d0f6.html">Next</a></p></div></div></div></article></body></html>

@@ -1,0 +1,665 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>W10 - The rise of functional programming</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c518bf64-1e86-40f7-9c2e-8bde40c8f462" class="page sans"><header><h1 class="page-title">W10 - The rise of functional programming</h1></header><div class="page-body"><p id="c1ae1604-976f-4872-a0c1-3540360b5fc5" class=""><strong>Caching</strong></p><p id="292fed43-ca98-4fc0-8e4f-88035c3b738f" class="">There&#x27;s a weekly book club at RC on <a href="https://github.com/ept">Martin Kleppmann</a>&#x27;s Designing Data-Intensive Applications. Recent discussions reminded me of things I learned at <a href="https://payments.posthaven.com/rc-w1d5-think-clearly-from-first-principles">Bradfield</a>; it&#x27;s been a fun process of rediscovery.</p><p id="8234afad-dd8a-4778-8b1c-90e343bf7cdb" class="">The first is on how caching affects memory access. Let&#x27;s start with Moore&#x27;s law. In the 1960s, everything was slow. Processors got a speedup in over the 70s and the 80s, memory access too but not to the same degree. By the 90s we have a real gap - it&#x27;s fast to process data but slow to access data, say by a factor of 100.</p><p id="f4c8705c-4b3c-431b-a040-2781aa52deb4" class="">How did we bridge this gap? Caching. The idea is if it&#x27;s slow to go all the way to RAM for data, let&#x27;s move it a bit closer. This was achieved with a piece of dedicated hardware called the cache. Thus we have a &#x27;memory hierarchy&#x27; - first registers, next cache, then RAM. Estimates of access times can be found <a href="http://norvig.com/21-days.html#answers">here</a>.</p><p id="317e1474-105b-4200-bc02-afc7642ee90c" class="">The cache retrieves data a bit like how we get library books. Instead of getting one book at a time, we would get a couple of books at one go. The cache&#x27;s analogy to the number of books is what&#x27;s called a cache line. For simplicity let&#x27;s just say that 64 bytes of data is retrieved at a time and stored on the cache.</p><p id="de431815-e640-40c2-ae27-ca6421597c44" class="">Thoughts about caching came up when we were discussing database indexing. We can index a database with binary search trees, but this is inefficient because the node of a binary tree occupies only a fraction of the cache line. This means there&#x27;ll be more cache misses (when the data we&#x27;re looking for is not in the cache), compared to cache hits.</p><p id="059f117e-378d-470f-b6e4-17a09d16eca5" class="">B+ trees remedy this by increasing the branching factor, i.e. the number of references to child nodes in each node of the tree. This ensures the whole cache line is used up. In practice the branching factor depends on the amount of space required to store node references and the range boundaries. A toy implementation of a B+ tree in Python can be found <a href="https://github.com/savarin/sql/blob/master/index.py">here</a>.</p><p id="a1518ce3-9609-4832-a84f-a7d428f65d18" class="">
+</p><p id="bbe6bc13-1f47-42b5-810c-506e2b68626d" class=""><strong>Encoding</strong></p><p id="00ed11ad-d25b-4c79-a94e-bb103210182b" class="">The second is on encoding. Computers store data in binary, i.e. a collection of 1s and 0s, but binary data by itself doesn&#x27;t tell us what it means. We could think about it as a series of Booleans. We could also &#x27;chunk&#x27; the binary data 8 at a time and have each chunk represent a character. This encoding is called ascii, and can be found by typing `man ascii` in the Terminal. Each ascii character is one byte i.e. 8 bits.</p><p id="a359fed1-7963-455d-bedd-182816fcefbc" class="">Suppose we were to send integer values to each other, say the number 1000. We could do it in &#x27;text&#x27; format, where each character takes up one byte. This means we&#x27;ll need 4 bytes for &quot;1000&quot;. Alternatively we could also send it in &#x27;binary&#x27; format, where 4 bytes can range from -2,147,483,648 to 2,147,483,647 (i.e. the range of signed integers given 2^32). In other words, sending integers in binary format is a lot more compact.</p><p id="d8ced65c-e903-4940-83c3-28f14d4cdc48" class="">Thoughts about encoding came up when we were discussing data encoding formats. A commonly-used format is JSON, which is all text. This keeps things simple but the lack of compactness means it&#x27;ll be slower to send over the wire. Protocol Buffers, commonly-known as protobuf, allows integers to be encoded in binary format and thus more compact over the wire. This makes a real difference not just for integers but also for binary attachments, like images.</p><p id="f4849cf2-2649-480a-a31d-bc17b2b9a815" class="">A simple binary encoding is Bencode, which is the encoding used by BitTorrent. Bencode supports strings, integers, lists and dictionaries. Alas it&#x27;s not that widely used, despite being a &quot;human-readable&quot; binary encoding format. A toy implementation of Bencode can be found <a href="https://github.com/savarin/balancer/blob/master/helpers/bencode.py">here</a>.</p><p id="9720b79e-1d67-48e8-82c2-ae850f06c293" class="">
+</p><p id="1398d047-a7d9-4fb7-8546-dee380710d60" class=""><strong>Functional programming</strong></p><p id="474172bd-c1cc-47b1-bf74-c115ad272dec" class="">It&#x27;s hard to miss the excitement around Haskell at RC. A few weeks back I told myself I&#x27;d like to spend a bit of time on it at my next RC to see what the hype is about. Then I found myself at a stopping point on other projects, and conveniently had Haskell lined up.</p><p id="9675abb9-ef9a-4bc6-87fb-c5af9877304d" class="">Like most things in life, plans only go so far. I came across category theory while reviewing RC discussions on Haskell. I watched the first <a href="https://www.youtube.com/watch?v=I8LbkfSSR58">video</a> in <a href="https://github.com/BartoszMilewski">Bartosz Milewski</a>&#x27;s Category Theory for Programmers series; I was hooked.</p><p id="dea5a292-2139-48ac-91ea-86c74af9b4d9" class="">I&#x27;ll admit part of it is Milewski&#x27;s infectious enthusiasm on the subject. In the <a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface">preface</a> of his book, he describes how category theory is a &quot;treasure trove of extremely useful programming ideas&quot;, which inspired a lot of ideas in Haskell. It&#x27;s an area of math that&#x27;s unlike calculus of algebra, because instead of dealing with particulars, it deals with structure. It deals with the kind of structure that makes programs composable.</p><p id="fae513a3-a709-4b00-83a9-0c0c662f33e2" class="">What I also found quite interesting in Milewski&#x27;s thread on the &#x27;rise&#x27; of functional programming. For a long time we were happy with imperative programming, and use object-oriented programming as the paradigm for abstraction by hiding complexity (in particular, hiding state) inside the object.</p><p id="f898a6a3-79aa-4f13-8ee0-4b69565d3efd" class="">The &#x27;end&#x27; of Moore&#x27;s law has since brought multicore processors (on this topic, <a href="https://computerhistory.org/profile/sophie-wilson">Sophie Wilson</a> has an excellent talk <a href="https://www.youtube.com/watch?v=_9mzmvhwMqw">here</a>). However, imperative programming allows for side effects and hiding state in objects makes data races more likely. While we can carry on doing what we&#x27;ve been doing thus far, it&#x27;ll be an ongoing struggle in this new concurrent world.</p><p id="f67a30c6-f0a6-4ba8-8463-530c0ae454f8" class="">Why needlessly endure complexity? Why not simply shift to functional programming paradigm, where objects are immutable and functions are pure? Instead of building on shaky ground, Milewski&#x27;s rallying cry is to fix the foundations in order for us to all more effortlessly move forward.</p><p id="950a1184-321c-497f-bdf2-eb15c24f1346" class="">
+</p><p id="1b9515a7-af0e-4544-8d51-5e5189ffee4f" class=""><strong>Content: The moral bucket list</strong></p><p id="2aaa0678-be22-4d97-8735-a8c7d267a536" class="">David Brooks disarmed me with &quot;I’m a pundit, more or less paid to appear smarter and better than I really am&quot;, yet this essay makes me pause to reflect every time.</p><p id="0b5c926e-ecca-408f-a839-779753dbc0ca" class=""><a href="http://www.nytimes.com/2015/04/12/opinion/sunday/david-brooks-the-moral-bucket-list.html">http://www.nytimes.com/2015/04/12/opinion/sunday/david-brooks-the-moral-bucket-list.html</a></p><blockquote id="862d7abb-d9d6-4aad-921a-387e56a2376a" class="">When I meet such a person it brightens my whole day. But I confess I often have a sadder thought: It occurs to me that I’ve achieved a decent level of career success, but I have not achieved that. I have not achieved that generosity of spirit, or that depth of character.</blockquote><p id="4398b8b9-5344-402a-9a1f-886688faaaf3" class="">
+</p><p id="571c9f68-5a7e-42b8-b1ba-7fb2f413a19d" class=""><strong>Content: How to interview your interviewers</strong></p><p id="dfc161a8-f25f-480b-8171-5b1bd79de02b" class="">I&#x27;ve started doing interviews recently. Thinking about interviews as a chat to get to know potential colleagues can help take the edge off.</p><p id="1e8be2c4-f304-4e7e-a3ef-5d35465f8755" class=""><a href="http://blog.alinelerner.com/how-to-interview-your-interviewers/">http://blog.alinelerner.com/how-to-interview-your-interviewers</a></p><p id="94fafd6b-cf86-46ca-8a06-56ffbbdddad3" class="">The guide by <a href="https://github.com/leeny">Aline Lerner</a> is a great place to start.</p><p id="550a55c8-84d2-4057-ab98-37dc4a13c6f3" class="">
+</p><p id="e0c9b7bd-1897-4372-a5f6-8d1c0f8816d0" class=""><strong>Content: Tiësto&#x27;s Adagio For Strings</strong></p><p id="d4ec4342-c681-4da8-846a-f2fb50c8bcaa" class="">I have my favorite classical pieces. I have my favorite DJs. Why not <a href="https://www.youtube.com/watch?v=kzUqhw_yymM">both</a>?</p><p id="750cca73-ad8c-4711-8bd8-c397e74c94e1" class="">
+</p><p id="c7cf08b1-c485-40de-8a87-81c84d656081" class=""><strong>Content: Wacoal</strong></p><p id="ba1d57d3-c3d2-4b07-a69c-cc6b003690cb" class="">I know. I&#x27;ll spare the <a href="https://payments.posthaven.com/rc-w7-advice-for-ic-lifers">refrain</a> on the Thai <a href="https://www.youtube.com/watch?v=wPtOm9UXfnU">ads</a>.</p><p id="077e9d3b-8bf1-4209-9fbd-2fe2f428a01e" class="">
+</p><p id="e189c2ca-5e73-4a5e-82cf-a3c18cfa10f9" class=""><strong>Content: Melting into air</strong></p><p id="aabe9ea6-8dc4-409e-95f0-863a13985171" class="">I love historical narratives, and <a href="https://www.lrb.co.uk/contributors/john-lanchester">John Lanchester</a>&#x27;s essay on the financial crisis says it best.</p><p id="eb1e71df-03bf-441e-b935-6856392546ee" class=""><a href="http://www.newyorker.com/magazine/2008/11/10/melting-into-air">http://www.newyorker.com/magazine/2008/11/10/melting-into-air</a></p><blockquote id="fb6c669e-d1ec-4949-8bc9-42e3fcf9570e" class="">That’s because finance, like other forms of human behavior, underwent a change in the twentieth century, a shift equivalent to the emergence of modernism in the arts—a break with common sense, a turn toward self-referentiality and abstraction and notions that couldn’t be explained in workaday English.<p id="06e842c6-eaae-4f45-a6f7-b380911866d9" class="">In poetry, this moment took place with the publication of “The Waste Land.” In classical music, it was, perhaps, the première of “The Rite of Spring.” Jazz, dance, architecture, painting—all had comparable moments. The moment in finance came in 1973, with the publication of a paper in the Journal of Political Economy titled “The Pricing of Options and Corporate Liabilities,” by Fischer Black and Myron Scholes.</p></blockquote><p id="f1e21339-7c15-4f54-8d7b-8908324b6631" class="">
+</p><div id="4bb5ef1d-ce7a-46b6-b269-c4cfaa07284b" class="column-list"><div id="a19fec5a-4396-4dd4-a156-b1cbcb776976" style="width:50%" class="column"><p id="1c2c35e2-a3bf-4934-9cbf-62cd7a48ebfa" class=""><a href="W9%20-%20Pass%20the%20simplicity%20through%20f6b32f169eb9468fb1f5e3113fded86a.html">Previous</a></p></div><div id="80aaf697-5eff-4513-a075-fc7b1b72089b" style="width:50%" class="column"><p id="7f7f3149-b7e2-4125-8de0-fb9a7811ab73" class=""><a href="W11%20-%20The%20beginner&#x27;s%20mind%20ff84121643ae4da29a8e3a038f5aa43c.html">Next</a></p></div></div></div></article></body></html>

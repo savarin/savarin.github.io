@@ -1,0 +1,668 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Recurse Center</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23454a4b-6d25-45fb-8f70-018a0f33f0f1" class="page sans"><header><h1 class="page-title">Recurse Center</h1></header><div class="page-body"><figure id="63c1b2a1-9d2f-4b54-b695-054b469a70ec" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W1D1%20-%20Recommit%20yourself%20to%20lifelong%20learning%2063c1b2a19d2f4b54b695054b469a70ec.html">W1D1 - Recommit yourself to lifelong learning</a></figure><figure id="dfaf2cf1-bbd0-4618-b23d-e6eb2101c73f" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W1D2%20-%20The%20aspiring%20polyglot%20full%20stack%20developer%20dfaf2cf1bbd04618b23de6eb2101c73f.html">W1D2 - The aspiring polyglot full stack developer</a></figure><figure id="1d1bf640-7d7b-46b2-b931-60c951034035" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W1D3%20-%20Are%20computers%20making%20society%20more%20unequal%201d1bf6407d7b46b2b93160c951034035.html">W1D3 - Are computers making society more unequal?</a></figure><figure id="2010b309-7b2a-4a2b-b6e3-6d607a2a1844" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W1D4%20-%20Advice%20for%20data%20scientists%202010b3097b2a4a2bb6e36d607a2a1844.html">W1D4 - Advice for data scientists</a></figure><figure id="2350813b-908f-4b31-81ff-fe9a8af51935" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W1D5%20-%20Think%20clearly%20from%20first%20principles%202350813b908f4b3181fffe9a8af51935.html">W1D5 - Think clearly from first principles</a></figure><p id="1727d018-a253-4217-8888-cbd8642112c6" class="">
+</p><figure id="a675dc70-8b09-4664-b94a-a7f249be0028" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W2D1%20-%20Work%20hard%20a675dc708b094664b94aa7f249be0028.html">W2D1 - Work hard</a></figure><figure id="fc06b385-43a1-4919-8435-146d0f487155" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W2D2%20-%20Be%20a%20chef%20fc06b38543a149198435146d0f487155.html">W2D2 - Be a chef</a></figure><figure id="3cd6e104-98ae-4149-908c-f5f2c63b25d1" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W2D3%20-%20Economic%20empowerment%203cd6e10498ae4149908cf5f2c63b25d1.html">W2D3 - Economic empowerment</a></figure><figure id="65aafb0d-b03f-4866-98ff-5a085622ada6" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W2D4%20-%20The%20product-minded%20engineer%2065aafb0db03f486698ff5a085622ada6.html">W2D4 - The product-minded engineer</a></figure><figure id="92864e9b-335d-4f7a-a0a6-6f52fc2bbf44" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W2D5%20-%20My%20first%20open%20source%20contribution%2092864e9b335d4f7aa0a66f52fc2bbf44.html">W2D5 - My first open source contribution</a></figure><p id="cbe9a337-c62d-494b-93e1-eba202e69a70" class="">
+</p><figure id="1c6c01de-f71c-487e-bad8-c78de38263e8" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W3D1%20-%20Fake%20it%20till%20you%20make%20it%201c6c01def71c487ebad8c78de38263e8.html">W3D1 - Fake it till you make it</a></figure><figure id="3adebc0c-6bb7-49a3-8075-03bac8c998cc" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W3D2%20-%20Choose%20boring%20technology%203adebc0c6bb749a3807503bac8c998cc.html">W3D2 - Choose boring technology</a></figure><figure id="b0b16caf-df3e-4933-bae0-53b2d9fd8f8f" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W3D3%20-%20A%20tool%20for%20every%20trade%20b0b16cafdf3e4933bae053b2d9fd8f8f.html">W3D3 - A tool for every trade</a></figure><figure id="72105dbb-01a2-483f-993a-2c8876d5ebe2" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W3D4%20-%20Enabling%20business%20models%20with%20technology%2072105dbb01a2483f993a2c8876d5ebe2.html">W3D4 - Enabling business models with technology</a></figure><figure id="ae320ad2-5acf-4fbd-a800-7ebdedcfcf58" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W3D5%20-%20Reflecting%20on%20experience%20ae320ad25acf4fbda8007ebdedcfcf58.html">W3D5 - Reflecting on experience</a></figure><p id="7fa27eb9-521c-4e8d-954a-52368606a887" class="">
+</p><figure id="781c71eb-9987-4c65-820c-9de8b99fc29d" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W4D1%20-%20Maximize%20your%20learning%20781c71eb99874c65820c9de8b99fc29d.html">W4D1 - Maximize your learning</a></figure><figure id="0e1649e7-eb06-4f3c-b9b6-f416c24d2fb7" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W4D2%20-%20Let&#x27;s%20try%20something%20different%200e1649e7eb064f3cb9b6f416c24d2fb7.html">W4D2 - Let&#x27;s try something different</a></figure><figure id="e172d7e0-2ad1-416e-821c-5a5ab91c225d" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W4D3%20-%20L&#x27;esprit%20de%20l&#x27;escalier%20e172d7e02ad1416e821c5a5ab91c225d.html">W4D3 - L&#x27;esprit de l&#x27;escalier</a></figure><figure id="d7d30ed6-4a30-4412-9767-b664f31f171f" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W4D4%20-%20The%20only%20intro%20you&#x27;ll%20need%20d7d30ed64a3044129767b664f31f171f.html">W4D4 - The only intro you&#x27;ll need</a></figure><figure id="9a7f3483-384d-4e78-838f-a43961cb2593" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W4D5%20-%20The%20ride%20of%20a%20lifetime%209a7f3483384d4e78838fa43961cb2593.html">W4D5 - The ride of a lifetime</a></figure><p id="033fee39-5e64-456e-8645-6c5e51199631" class="">
+</p><figure id="788a00dc-80a7-44aa-abb3-c75a022e4bc4" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W5D1%20-%20Connecting%20the%20dots%20788a00dc80a744aaabb3c75a022e4bc4.html">W5D1 - Connecting the dots</a></figure><figure id="621b45fd-16df-481f-befb-ffe19c462018" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W5D2%20-%20Relentlessly%20resourceful%20621b45fd16df481fbefbffe19c462018.html">W5D2 - Relentlessly resourceful</a></figure><figure id="4e1c88cc-34c2-4054-a12c-bb67531721cf" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W5D3%20-%20Why%20doctors%20hate%20their%20computers%204e1c88cc34c24054a12cbb67531721cf.html">W5D3 - Why doctors hate their computers</a></figure><figure id="9dc22466-248d-482a-b039-8e2632e83bac" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W5D4%20-%20Engineers%20shouldn&#x27;t%20write%20ETLs%209dc22466248d482ab0398e2632e83bac.html">W5D4 - Engineers shouldn&#x27;t write ETLs</a></figure><figure id="17272d1b-b5d8-459a-b584-774f4cbdd82f" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W5D5%20-%20Speed%20without%20wizardry%2017272d1bb5d8459ab584774f4cbdd82f.html">W5D5 - Speed without wizardry</a></figure><p id="a6ba2db0-a59b-4832-af61-c1d4b91f78e4" class="">
+</p><figure id="6c98fd3d-3dac-4e1b-83e6-a7302898eb40" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W6D1%20-%20Grow%20the%20puzzle%20around%20you%206c98fd3d3dac4e1b83e6a7302898eb40.html">W6D1 - Grow the puzzle around you</a></figure><figure id="182ccda7-53e4-42ad-b0cf-5eba2dd87595" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W6D2%20-%20How%20the%20browser%20works%20182ccda753e442adb0cf5eba2dd87595.html">W6D2 - How the browser works</a></figure><figure id="85d512bc-b59c-4167-9caf-65d01ab61a80" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W6D3%20-%20Finding%20a%20success%20metric%2085d512bcb59c41679caf65d01ab61a80.html">W6D3 - Finding a success metric</a></figure><figure id="3495c6b4-4211-45c7-b8c2-8ee6498f4177" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W6D4%20-%20The%20engineer&#x27;s%20guide%20to%20career%20growth%203495c6b4421145c7b8c28ee6498f4177.html">W6D4 - The engineer&#x27;s guide to career growth</a></figure><figure id="25451285-fdfe-41f4-ad9a-37562bc544ee" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W6D5%20-%20Change%20is%20the%20only%20constant%2025451285fdfe41f4ad9a37562bc544ee.html">W6D5 - Change is the only constant</a></figure><p id="d3ba637c-fea2-4e39-b212-296c205f965b" class="">
+</p><figure id="2b6257cf-cdc4-4830-b123-3466f0f03e1b" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W7%20-%20Advice%20for%20IC%20lifers%202b6257cfcdc44830b1233466f0f03e1b.html">W7 - Advice for IC lifers</a></figure><p id="3bc06b5c-540a-4285-b4f5-9a6c75c8fddc" class="">
+</p><figure id="c314f37a-82e1-4ad4-92d1-9d5303817f98" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W8%20-%20Think%20before%20you%20build%20c314f37a82e14ad492d19d5303817f98.html">W8 - Think before you build</a></figure><p id="74e8eae3-9671-49e9-9e00-5f7953dc14b9" class="">
+</p><figure id="f6b32f16-9eb9-468f-b1f5-e3113fded86a" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W9%20-%20Pass%20the%20simplicity%20through%20f6b32f169eb9468fb1f5e3113fded86a.html">W9 - Pass the simplicity through</a></figure><p id="e03ec285-2645-4ce1-a812-e8b527ba8cc9" class="">
+</p><figure id="c518bf64-1e86-40f7-9c2e-8bde40c8f462" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W10%20-%20The%20rise%20of%20functional%20programming%20c518bf641e8640f79c2e8bde40c8f462.html">W10 - The rise of functional programming</a></figure><p id="48668084-2662-49cc-9ebd-d471769d2c42" class="">
+</p><figure id="ff841216-43ae-4da2-9a8e-3a038f5aa43c" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W11%20-%20The%20beginner&#x27;s%20mind%20ff84121643ae4da29a8e3a038f5aa43c.html">W11 - The beginner&#x27;s mind</a></figure><p id="4f52a53c-e741-4523-99c6-9f46f1a6f47c" class="">
+</p><figure id="03845a93-24fe-4586-b0ea-b8a8cdd7d0f6" class="link-to-page"><a href="Recurse%20Center%2023454a4b6d2545fb8f70018a0f33f0f1/W12%20-%20Never%20graduate%2003845a9324fe4586b0eab8a8cdd7d0f6.html">W12 - Never graduate</a></figure></div></article></body></html>
