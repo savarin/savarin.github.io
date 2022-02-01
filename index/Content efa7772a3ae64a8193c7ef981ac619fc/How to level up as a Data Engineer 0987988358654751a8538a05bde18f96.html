@@ -1,0 +1,803 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How to level up as a Data Engineer</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="09879883-5865-4751-a853-8a05bde18f96" class="page sans"><header><img class="page-cover-image" src="How%20to%20level%20up%20as%20a%20Data%20Engineer%200987988358654751a8538a05bde18f96/node2.jpg" style="object-position:center 16.33%"/><h1 class="page-title">How to level up as a Data Engineer</h1></header><div class="page-body"><p id="3152a8d8-a41c-4776-8331-ded056947300" class="">The Slack messages are coming in hard and fast. Why is the cluster slow? How is gross revenue smaller vs net revenue? When will the marketing columns get added? Why does the dashboard not match the enterprise accounts table? How long will the backfill take? You feel like quitting.</p><p id="dc360736-d2f8-4e46-a8b3-478db081a088" class="">
+</p><p id="009e34f9-a30f-4dc9-bd26-17032b067b48" class="">Getting technical people to solve problems faced by business people is not new. What’s new is how every part of the business now runs on data, and thus the growing need for data experts to keep things moving. The tricky part is when context goes ‘over the wall’ - the consumer finds an issue with the data but the producer is not familiar with the domain to see it’s a problem. Over time, information transfer between the two sides becomes the bottleneck and issues pile up.</p><p id="ab00a9f4-f70b-4735-b6aa-24db438325c8" class="">
+</p><p id="b02e5b10-b397-4e69-bbef-d9385c819ae6" class="">In proposing a solution, Stitch Fix even had a blog post titled <a href="https://multithreaded.stitchfix.com/blog/2016/03/16/engineers-shouldnt-write-etl">Engineers Shouldn’t Write ETL</a>. The idea here is the engineering team creates ‘Lego blocks’ that consumers then assemble into end-to-end data pipelines. This tends to work better when consumers are themselves technical; in any case a lot of investment is needed. More startups get created every day with the promise to make this process effortless, but for now you’re the data engineer and you need to figure it out.</p><p id="df4459e0-b15a-4b7d-a3a2-f95bf1f4f1ac" class="">
+</p><p id="bd407c69-910c-442f-bb7a-13f9e4c1fb9a" class="">Maybe this isn’t what you signed up for. Maybe there was some bait-and-switch; you were hired to write Python but due to ‘critical initiatives’ you end up writing SQL (side note: SQL is Turing complete). Maybe the manager who hired you left and the new one feels the team should have a wider scope. Maybe the CTO left and sales/marketing/finance/ops now has the CEO’s ear.</p><p id="9cadc9dd-8259-4901-a9bb-dbf833ed49e8" class="">
+</p><p id="41768adf-4d16-4847-93bf-37fda07a1f7d" class="">It doesn’t matter. You’re here. The question is, what do you do now?</p><h1 id="14874b32-4608-4da1-930d-c8fb0e060b9c" class="">Learn internals</h1><p id="9fbe47c1-b761-4906-ae12-8524b4110964" class="">Tell your customers you’ll speed up their queries and they’ll love you for it. I’ve worked with the following relational databases (or if you’re pedantic, RDBMS) in production: MySQL, Hive, Vertica, Snowflake, Redshift, Postgres. The common thread? Complaints about slow queries.</p><p id="ab82f394-78db-45fb-aeb9-530c3338cb8f" class="">
+</p><p id="40b5e4e4-2b62-4d2b-8d7a-c13da8640f90" class="">Relational databases have been around for a while, and are among the most ‘battle-tested’ software around. If your query is slow, odds are it’s your query and not the database.</p><p id="6ce3daf6-34eb-4911-8561-317c09a00129" class="">
+</p><p id="391fe352-a810-4bfd-bf20-77e51baa86e1" class="">Databases used in data warehouses tend to be columnar-store; in this section we’ll focus on Redshift. The simplest way to make your queries run faster is to select only the columns you need. Let’s say you have a table where each row represents an event.</p><pre id="67bd6298-17aa-40cc-8824-ee13663d12df" class="code"><code>CREATE TABLE events (
+    event_id      VARCHAR
+    event_ts      TIMESTAMP
+    user_id       VARCHAR
+    browser_id    VARCHAR
+);</code></pre><p id="a941c479-6dc5-4b21-bde1-d033b9388f8a" class="">
+</p><p id="a45a71c9-0602-45dd-bc58-204d22c9ab06" class="">Suppose you only need the first two columns. Instead of using selecting all the columns, you get a speed up for free by specifying only the columns you need.</p><pre id="519f7793-ac1c-4a71-8232-951951c75fa3" class="code"><code>SELECT
+    *
+
+FROM
+    events</code></pre><pre id="a55f12d2-7c48-4e90-8fbf-f5caf0f6dcbc" class="code"><code>SELECT
+    event_id
+  , event_ts
+
+FROM
+    events</code></pre><p id="db54c0d4-0467-4eb5-a25e-4296a3e74f63" class="">
+</p><p id="c38087b8-dd4d-4aa3-8876-ecba32985106" class="">In diagnosing slow queries, joins tend to be the main culprit. What I wished someone told me about Redshift is to set the most common join column as the distribution key and the most common range filter column as the sort key. This is the 80/20.</p><p id="a24a37bd-b3e7-401b-b009-435125627773" class="">
+</p><p id="2a0dc2fb-3707-4d05-8be3-bedb24b9d96a" class="">Let’s look back at our table. Suppose <code>event_id</code> is the unique identifier for each event, but consumers mainly use the table to investigate user behavior. This means that most joins to other tables will be on the <code>user_id</code> column. Setting <code>user_id</code> as the distribution key means the rows will be distributed in the cluster with <code>user_id</code> as the hash key.</p><p id="cdf42057-8386-41b8-a3ab-4653c0d3a964" class="">
+</p><p id="7413feb1-90ad-4645-adee-3672064c2a4f" class="">If you’re joining to another table which also has a <code>user_id</code> distribution key, then the data is co-located. Less I/O means faster queries. Even if only one table has <code>user_id</code> as the distribution key, then only the rows from one table need to be ‘fanned out’ across the cluster (instead of both). Like most operations with hash keys, you also want to ensure that <code>user_id</code> has low percentage of nulls and high cardinality to ensure an even distribution.</p><p id="20254b70-5971-4cd5-b21f-994cb53817b0" class="">
+</p><p id="cf7a87f5-4e77-4742-92a3-3d64b9df1c81" class="">Time-based filters is one of the most commonly-used filters in a query. In our example, we may be looking to restrict our attention to only events in the previous quarter. This means that <code>event_ts</code> would be a good candidate for the sort key, as the rows in the cluster would be ordered by that column. Less sorting means faster queries.</p><p id="ebb3993e-7f76-447d-87cd-2e128e753cd5" class="">
+</p><p id="5c46b544-13e2-4f9c-a5ab-d0d356ef9a3a" class="">To create the table with <code>user_id</code> as the distribution key and <code>event_ts</code> as the sort key, specify the distribution and sort key details at the end.</p><pre id="0fa8a3c1-96f8-4cd9-a85c-201869f08f07" class="code"><code>CREATE TABLE events (
+    event_id      VARCHAR
+    event_ts      TIMESTAMP
+    user_id       VARCHAR
+    browser_id    VARCHAR
+)
+DISTSTYLE KEY
+DISTKEY (browser_id)
+COMPOUND SORTKEY (event_ts);
+;</code></pre><p id="668b7357-e0d9-4ebe-9aed-2df298088bce" class="">
+</p><p id="bfb53198-3d49-4770-a14a-9492cfe18b2a" class="">There’s definitely more to be said on Redshift (AWS post <a href="https://aws.amazon.com/blogs/big-data/amazon-redshift-engineerings-advanced-table-design-playbook-distribution-styles-and-distribution-keys">here</a>) or how things work ‘under the hood’ more generally: Redshift vs Postgres (faster aggregates vs faster single row access), key-value stores, compact formats for data-at-rest like Parquet or data-over-the-wire like Protocol Buffers - more suggestions in the <a href="How%20to%20level%20up%20as%20a%20Data%20Engineer%200987988358654751a8538a05bde18f96.html">section below</a>. It’s my vote of confidence for <a href="https://www.benkuhn.net/blub">blub studies</a>.</p><h1 id="ad4ec229-fc10-45fc-9541-95d806d683a6" class="">Write code</h1><p id="c0a73b10-035a-4174-aba9-4f4d7503d4f8" class="">OK queries are now faster, you’ve bought yourself some time to write code. While offering to rewrite the stack in Rust might be hard sell, setting up a framework to improve data quality is something everyone can get on board with.</p><p id="a02d85b9-1579-49f6-9b12-01075cdb1907" class="">
+</p><p id="10b74a1c-c78d-4f8c-8a12-81e8adebff7f" class="">Let’s first take a step back and ask, how did we end up with poor data quality?</p><p id="f23a8cb3-649e-49d6-8c50-3582c7c718b9" class="">
+</p><p id="48e3757b-a46f-4732-a136-f4fdbab8665a" class="">The first is with bad data. Suppose <code>event_id</code> should never be null. To prevent this, we can introduce data quality checks to raise a runtime error if there are null values in the column. This way the rows in question are not inserted into the final table, but remain in a staging table for closer review. We’ll refer back to data quality checks at the end of this section.</p><p id="36631ad5-3604-4116-8923-493828d73bdf" class="">
+</p><p id="70e563e1-9979-4b59-8d79-2aeb9827d614" class="">The second is with bad queries. Suppose we have the following rows in the events table (remaining columns omitted for clarity).</p><pre id="8e1b0d80-1baa-49f4-b192-bbee44abe5a1" class="code"><code> user_id  | browser_id
+----------+------------
+          | brws0001
+ user0001 | brws0002</code></pre><p id="40858b91-2ce6-4ddf-95de-c26a752247b9" class="">
+</p><p id="0cda77a7-7d3e-4611-b108-3a666afc76cc" class="">Now let’s say our query looks for <code>browser_id</code> seen with a non-null <code>user_id</code>. If our query returns the pair <code>brws0001 - user0001</code>, then we know something is wrong. To protect ourselves against this, we can borrow a pattern we see all the time in software: unit testing.</p><p id="652711d3-8841-480b-9767-2713e44accc5" class="">
+</p><p id="ffa7a101-d505-4d10-abae-dee9a0d2a54f" class="">Here’s how it works.</p><ol type="1" id="70d85dba-bf62-4d5c-bb6c-24ce84c71315" class="numbered-list" start="1"><li>Set up mock input table</li></ol><ol type="1" id="29b62d45-4a44-43e7-91d4-506224a2e568" class="numbered-list" start="2"><li>Insert rows above</li></ol><ol type="1" id="32fc7d4b-00e4-4d8f-92d9-05545e8d8e17" class="numbered-list" start="3"><li>Run query</li></ol><ol type="1" id="c9a88b85-b6aa-41a4-a748-833efe2d01fc" class="numbered-list" start="4"><li>Read from output table</li></ol><ol type="1" id="1128033d-2f7b-4590-9d68-32a4da614cb2" class="numbered-list" start="5"><li>Assert output row has desired value</li></ol><p id="174220a6-6973-402f-a1ff-980cf93cc9aa" class="">
+</p><p id="1e9e1a20-1892-476b-8df3-01ebadc16f8d" class="">To do this you might want to set up a local Postgres instance to avoid calling Redshift; this way all tests can be run locally. Sounds like a lot of work? Good, you’ll get to write lots of code. In fact, a SQL unit testing framework is a great opportunity to try out a few novel programming ideas.</p><p id="993d7ee8-16c6-47e9-b568-0e1a7d082275" class="">
+</p><h3 id="a9e6b9e6-f92e-4f32-a844-ed84a969fcd7" class="">ORMs</h3><p id="95d9be47-8ff0-468b-b807-0db7cb95278c" class="">I first came across ORMs (Object Relational Mapping) when building web apps. ORMs like SQLAlchemy let you manipulate the data model as Python classes, as opposed to having to write SQL (or worse, custom string formatting functions that output SQL strings).</p><p id="d0f85170-7165-482b-9b3e-28df8a6b4cce" class="">
+</p><p id="093de486-eed2-4a7d-b720-8ca1e6765aab" class="">In setting up Postgres for testing, we can leverage the SQLAlchemy engine and connection objects to abstract away interactions with the database. In other words, we can write the same code whether we’re interacting with Redshift (in production) or Postgres (in tests).</p><p id="3fe0e44e-7fff-443f-8493-c567d5b44836" class="">
+</p><p id="cb5b1510-4db1-4a2a-b359-00e182db8d4c" class="">We can also leverage SQLAlchemy table and column objects. For example, we can define our events table above as follows.</p><pre id="b6a3451b-9bd8-4f9e-8585-deb2879b4bd7" class="code"><code>class Table:
+    __table__: sqlalchemy.Table
+
+
+Base = declarative_base(cls=Table)
+
+
+class Events(Base):
+    __tablename__ = &quot;events&quot;
+
+    event_id = sqlalchemy.Column(sqlalchemy.String, primary_key=True)
+    event_ts = sqlalchemy.Column(sqlalchemy.DateTime)
+    user_id = sqlalchemy.Column(sqlalchemy.String)
+    browser_id = sqlalchemy.Column(sqlalchemy.String)</code></pre><p id="7e283c58-c9a7-4579-8221-1f1336a80ca4" class="">
+</p><h3 id="07e0af69-1875-41d7-a67c-b22a4a76d810" class="">Code generation</h3><p id="cd99fb52-8c49-4666-bb79-e735d1c68546" class="">We can access Redshift to see what the column name and types are, and individually type them into the table schema. That’s no fun.</p><p id="d266c056-cef7-4b85-90bd-7de5656f678d" class="">
+</p><p id="426250e4-a4a3-448b-b071-4f74f8926595" class="">We could instead run code to create more code. The <a href="https://pypi.org/project/sqlacodegen">sqlacodegen</a> library lets you generate SQLAlchemy table schemas from the table in the database. This works well in a script. The table name of interest is specified as input. Running the script will load the schema from Redshift, convert it to a SQLAlchemy table and write it to a Python file. </p><p id="b5891ea1-101a-4aca-991e-3168de184d80" class="">
+</p><h3 id="4fb9fa07-0193-4a71-8cc9-151ef418bfc9" class="">Fixtures</h3><p id="114f096e-8685-4ef6-8400-c6aeba5d6bf5" class="">We now have our mock tables, let’s take a closer look at inserting rows. Rows can be represented as a dictionary, where the keys are column names and values are the column values.</p><pre id="11a79d32-9dbf-4b48-a3ae-b537543f26e0" class="code"><code>row = dict(
+		event_id = &quot;evnt0001&quot;,
+		event_ts = datetime.datetime(2021, 1, 1, 0, 0, 0)
+		user_id = &quot;user0001&quot;,
+		browser_id = &quot;brws0001&quot;,   
+)</code></pre><p id="cf15b46e-6790-4e87-bd04-27655747b7d2" class="">
+</p><p id="9e020387-416a-4d39-b2d8-a402ee7c700e" class="">When we need two rows, we can copy-and-paste boilerplate code. The problem here is we have to specify every key-value pair, which doesn’t help highlight the fact that the <code>user_id</code> and <code>browser_id</code> are the columns being tested.</p><pre id="e72137e5-6b19-48d1-b3ba-c4e983fe3ac8" class="code"><code>rows = [
+    dict(
+        event_id =&quot;evnt0001&quot;,
+        event_ts = datetime.datetime(2021, 1, 1, 0, 0, 0),
+        user_id = &quot;user0001&quot;,
+        browser_id = &quot;brws0001&quot;,
+    ),
+    dict(
+        event_id = &quot;evnt0001&quot;,
+        event_ts = datetime.datetime(2021, 1, 1, 0, 0, 0),
+        user_id = None,
+        browser_id = &quot;brws0002&quot;,
+    ),
+]</code></pre><p id="fdd8ff7d-04a6-4c47-921b-487a8cb68d62" class="">
+</p><p id="d177340a-6f2d-4560-8b86-c711831e1a0b" class="">Since we have our events table above, why not use it? We can create a function that takes in a generic table schema and returns a row from the table. The <code>init_column</code> function here can either generate a random id (with a common prefix) or a default value based on the type.</p><pre id="32b1376c-2f56-40fc-94ce-654f073d1cf0" class="code"><code>ColumnType = typing.Union[
+    None, str, bool, int, float, datetime.date, datetime.datetime
+]
+
+
+def init_row(table_schema: typing.Type[Base]) -&gt; typing.Dict[str, ColumnType]:
+    &quot;&quot;&quot; &quot;&quot;&quot;
+    row: typing.Dict[str, ColumnType] = {}
+
+    for column in table_schema.__table__.columns:
+        row[column.name] = init_column(column.name)
+
+    return row</code></pre><p id="af9a237f-f02b-4d2d-92db-f7d1db3f381f" class="">
+</p><p id="ab84ba0b-e575-4ad3-82a9-c04d4abd8451" class="">For our desired row, we can simply override the column values.</p><pre id="cb450b8a-a23a-416a-9467-261d0a7789b6" class="code"><code>row = init_row(Events)
+row[&quot;user_id&quot;] = &quot;user0001&quot;
+row[&quot;browser_id&quot;] = &quot;brws0002&quot;
+print(row)</code></pre><pre id="06c685f0-ccfa-4036-a6ce-03836a96812c" class="code"><code>{
+    &#x27;event_id&#x27;: &#x27;evntxF7z&#x27;,
+    &#x27;event_ts&#x27;: datetime.datetime(2021, 1, 1, 0, 0),
+    &#x27;user_id&#x27;: &#x27;user0001&#x27;,
+    &#x27;browser_id&#x27;: &#x27;brws0002&#x27;
+}</code></pre><p id="11870e86-e051-4e81-87e1-edc12fac6bb4" class="">
+</p><h3 id="898e39b4-242d-44e7-8d95-addfb05a7654" class="">Functional programming</h3><p id="206a2851-90a1-4420-8e63-13af78d1a631" class="">It a little repetitive to call <code>init_row</code> multiple times when we need multiple rows. To generate multiple rows from a single function call, we can set up a row factory.</p><p id="138aedf8-90bf-4cfa-8500-44345d25658c" class="">
+</p><p id="471e0600-f15f-48b9-bac3-d8fc24055190" class="">The <code>init_row</code> function takes in a table schema as input and outputs a row. Let’s kick this up a notch. We can define a function that takes in a table schema and outputs a custom function. The custom function takes in a dictionary with the override column values, and returns the row with the given override column values where specified and the pre-set values elsewhere.</p><p id="d5591333-d7c3-4d40-9c45-661b51cffd58" class="">
+</p><p id="f66fe9fb-1079-4070-a001-1ed18749f394" class="">This might be easier to explain in code.</p><pre id="2e9f16b1-d848-4d39-ac0b-dcc8d8a1f5ae" class="code"><code>ColumnTypeDict = typing.Dict[str, ColumnType]
+
+
+def init_row_factory(
+    table_schema: typing.Type[Base],
+) -&gt; typing.Callable[[ColumnTypeDict], ColumnTypeDict]:
+    &quot;&quot;&quot; &quot;&quot;&quot;
+    row_initial = init_row(table_schema)
+
+    def closure(column_values: ColumnTypeDict) -&gt; ColumnTypeDict:
+				&quot;&quot;&quot; &quot;&quot;&quot;
+        row_final = row_initial.copy()
+        row_final.update(column_values)
+
+        return row_final
+
+    return closure</code></pre><p id="61dbcb67-98e3-4333-9225-db7920acfe8f" class="">
+</p><p id="fc651b8d-6d57-41a4-b6b6-6987d589d9f8" class="">Let’s try it out.</p><pre id="81debc9d-14c2-45db-a298-1d15be204b98" class="code"><code>row_factory = init_row_factory(Events)
+row = row_factory(dict(user_id=&quot;user0001&quot;, browser_id=&quot;brws0002&quot;))
+print(row)</code></pre><pre id="e5199f5d-dc3a-49ea-8b37-59882ccf0922" class="code"><code>{
+    &#x27;event_id&#x27;: &#x27;evntCX51&#x27;,
+    &#x27;event_ts&#x27;: datetime.datetime(2021, 1, 1, 0, 0),
+    &#x27;user_id&#x27;: &#x27;user0001&#x27;,
+    &#x27;browser_id&#x27;: &#x27;brws0002&#x27;
+}</code></pre><p id="4826cb6e-0e04-4164-b44f-feb33fd76176" class="">
+</p><h3 id="6ddc98b5-8c43-4c7a-8070-57524471fa59" class="">Meta-programming</h3><p id="cc9d83c2-4b67-455f-94be-e0e7d403ac32" class="">Let’s recap. We now have a SQL unit testing framework set up to ensure queries are correctly written, and data quality checks to provide confidence that data in production tables has the desired properties. </p><p id="29ac4631-025a-45be-b3a4-23316cf27c96" class="">
+</p><p id="c60f4315-43c3-4b00-b4d8-7826f66f9469" class="">How do we involve consumers in data quality checks?</p><p id="e368f9ba-ddcc-4ace-936c-cd4a42c3891d" class="">
+</p><p id="cde6d389-a255-4594-b8ef-198c633c7373" class="">The purpose here is two-fold. First, consumers have the best context to know when data looks ‘off’, and thus what checks to put in place. Second, making check creation self-serve helps everyone feel invested in the data quality. </p><p id="24705638-f590-49d2-aaea-5942cf2df2a8" class="">
+</p><p id="34b9d4b6-9463-470e-82b7-d8133058b97c" class="">Suppose we have the following check.</p><pre id="31957c0b-4de6-4904-ac06-2bf5bb6266be" class="code"><code>def check_non_null_column(rows: List[ColumnTypeDict], column_name: str):
+    &quot;&quot;&quot; &quot;&quot;&quot;
+    assert None not in [row[column_name] for row in rows]</code></pre><p id="8be32644-8d19-41a7-a0fe-9550380a7e49" class="">
+</p><p id="2d0e97c9-b588-42dd-af95-b4f79b74197d" class="">We set this up for our events table to make sure <code>event_id</code> is not null.</p><pre id="4d7f3284-cf00-49db-8297-4aaa1f2c5637" class="code"><code>check_non_null_column(rows, &quot;event_id&quot;)</code></pre><p id="2aea0052-407b-4ac6-b5cd-6341b2362275" class="">
+</p><p id="ef61a60d-006c-488d-8656-130321e2a9c2" class="">It might not be too difficult for consumers to set this up, but let’s make this even easier. We can set up a ‘parallel’ process so that checks can be defined in a config file like yaml.</p><pre id="57439a12-069a-4e81-af14-236f2dfa0d4d" class="code"><code>check_non_null_column:
+    column_name: event_id</code></pre><p id="03e968c3-25e1-4385-a255-5d2803cd4e96" class="">
+</p><p id="a9ed8426-2951-4faa-8087-6cd119dad86f" class="">To prevent configs from being incorrectly set up, we can set up a Python test to load the config and compare it against the Python definition. In particular, we can use the function’s annotations (via <code>__annotations__</code>) to check that the config values have the same type as our function. For generic types, we can use the non-parametrized generic class (via <code>__origin__</code>). </p><h1 id="9ad08f1c-a52b-4534-8344-e1a0852925a8" class="">Take courses</h1><p id="e815422d-12d8-4597-9f64-1d6036b79cd4" class="">When you need to sound convincing, quote Donald Knuth.</p><blockquote id="d2f7b25f-ad1d-4afd-9dd0-623d30e47c3d" class="">If you find that you’re spending almost all your time on theory, start turning some attention to practical things; it will improve your theories. If you find that you’re spending almost all your time on practice, start turning some attention to theoretical things; it will improve your practice.</blockquote><p id="8034de3c-62e5-49d9-b286-68863de67692" class="">
+</p><p id="f69fdcc2-eb54-458d-b0d2-23c857cad4ae" class="">If you have the budget and can fit in a part time course, I would recommend <a href="https://bradfieldcs.com">Bradfield</a>. If you don’t have the budget but can take time off, I would recommend <a href="https://www.recurse.com">Recurse Center</a>. If it’s one book I’d recommend (for RC or otherwise), it’s <a href="https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321">Designing Data-Intensive Applications</a> by <a href="https://twitter.com/martinkl">Martin Kleppmann</a>. <a href="https://twitter.com/chipro">Chip Nguyen</a> has also made available her Data Engineering 101 <a href="https://twitter.com/chipro/status/1357329955131191298">notes</a> for free.</p><p id="d67c357c-8c86-46c9-9931-f147f6530add" class="">
+</p><h1 id="5bcc5be6-391c-499e-a287-e21c6a5de112" class="">Epilogue</h1><p id="a75fd267-f440-4c42-9659-1408b01d09fa" class="">Think of your job as a relationship. When things get bumpy, is breaking up the first thing that comes to mind? There’s nothing stopping you, but maybe you want to try to see if you can make it work. At the very least, think about the opportunity lost to implement all the cool things we just talked about because you have to re-learn the stack at the new job.</p><p id="d58c39b2-39be-4be4-a589-ba05b9eea605" class="">
+</p><p id="18d46c22-a5f7-40ce-945c-b54af52131f2" class="">The data producer vs consumer divide has its share of drama and politics (the other divide is moving from writing SQL to training machine learning models, but that’s for another post). Everyone is trying to <a href="https://erikbern.com/2021/07/07/the-data-team-a-short-story.html">figure it out</a>. Give your manager the benefit of doubt. Trust your colleagues have the best intentions. Keep your head up, keep shipping. Things will get better.</p><p id="67a52288-0d87-447c-ba78-69c1e30edfaf" class="">
+</p><p id="93329d21-87ee-4cf3-a24f-fac1c5e82761" class="">Imagine this scenario a year from now. Queries are fast. Data is trustworthy. Everyone gets to chip in. That’s looks like a promotion packet.</p></div></article></body></html>
