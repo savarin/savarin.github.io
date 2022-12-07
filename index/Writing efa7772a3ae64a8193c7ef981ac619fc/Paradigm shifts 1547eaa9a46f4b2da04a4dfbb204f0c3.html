@@ -1,0 +1,695 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Paradigm shifts</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1547eaa9-a46f-4b2d-a04a-4dfbb204f0c3" class="page sans"><header><h1 class="page-title">Paradigm shifts</h1></header><div class="page-body"><p id="7b868471-f625-4379-b090-4d827481e0ec" class="">I kept a <a href="https://payments.posthaven.com">blog</a> while at <a href="https://www.recurse.com">Recurse Center</a>. I took the chance to re-read and share the articles I’ve kept over the years. Recently I realized a common thread between most of them: paradigm shifts.</p><p id="96a1f74e-b643-422e-8cac-13f092c992b6" class="">
+</p><h3 id="3713a847-26b8-460e-96f3-33d32199fcb0" class=""><a href="https://gist.github.com/savarin/aac05afe7ee68be5184d60867c055adc#file-caste_out-md">Caste out</a></h3><p id="3bc84806-0545-46e4-b4d2-c2e9efea2c4f" class=""><em>By Jo Johnson in the FT Weekend</em><div class="indented"><p id="4c9a9f65-a205-4f14-9406-0f7a9dfa229a" class="">
+</p><p id="8b1a6933-aff0-48bd-8f62-c1477bc7dd2c" class="">In January, the fabled training ground of the French political and business elite will be compelled to quit the Left Bank, the plush district by the Seine that is a byword for metropolitan sophistication, for the provincial torpor of Alsace. ENA’s Parisian premises will be sold and the school that honed the minds of all French presidents young enough to attend it, from Valery Giscard d’Estaing to Jacques Chirac, will be relocated in its entirety to its Strasbourg campus, a former prison. There, four hours by train from Paris, the alma mater of nine government ministers, six of the last nine prime ministers and many of the captains of finance and industry will continue along the glidepath to banality. </p><p id="56f19517-7099-46da-8268-fb14410a358a" class="">
+</p><p id="1304cee4-9c36-4f55-8aa8-c5a5b00b7b54" class="">Set back from the road in an 18th-century building behind the Boulevard Saint-Germain, ENA hardly looks the stuff of controversy. Sixty years old this year, it is in fact probably the most ruthlessly effective old boys’ network in Europe. The closely guarded alumni handbook, which includes the telephone numbers and addresses of all the 4,500 enarques still alive, right up to the presidents of the Republic, shows that the caste pervades every corner of the French Republic. The graduates of no other school in the world, with the exception of the ubiquitous alumni of Tokyo University, monopolise positions of power as comprehensively as the enarques do in France.do in France.</p><p id="260da858-caba-436d-88fa-57e2011c5c67" class="">
+</p><p id="b6180449-4226-460e-baf2-b2d1ae9a757d" class="">Today, however, ENA is in crisis. It is no longer needed for the task for which it was founded - to provide the mandarins to run a dirigiste economy - and is struggling to find a role for itself as France faces globalisation. “I sometimes say they should just close ENA down altogether so that people remember only the good things about it,” says Alain Minc, who was top of his ENA class in 1975, and is now, as chairman of Le Monde, a perfect example of the way the enarque diaspora has colonised positions of power in French society. “I don’t criticise ENA as it was 30 years ago,” he says. “It did the job it was meant to do brilliantly, but today, in a global economy, the ENA training is embarrassingly provincial.”</p></div></p><p id="dd90e300-253a-4b3b-82a3-85f37d1d0ff8" class="">
+</p><p id="c0610604-e961-450d-8dfb-a4cbb3abd293" class="">
+</p><h3 id="fe84c57f-ffc5-4591-9d4a-b3063f31eaf4" class=""><a href="https://gist.github.com/savarin/c819b8637eba3ea5ee3b4243b88c4d01#file-iraqi_norway_oil-md">The Iraqi who saved Norway from oil</a></h3><p id="e1a366fc-c6fd-4434-8644-27d98ee88cec" class=""><em>By Martin Sandbu in the FT Weekend</em></p><p id="5bf5da91-48b3-46e0-98e0-7c195ffc3020" class=""><div class="indented"><p id="d7ae1bff-988e-4613-b8c0-ce10cf2022ab" class="">Oil companies were starting to leave Norway. Well after well had turned out dry and Phillips Petroleum, the first company to explore the Norwegian continental shelf and the last one still searching, was getting ready to throw in the towel. In summer 1969, it asked to be relieved of the final exploration well remaining in its work programme. The government’s oil office refused: if Phillips did not drill the well, it would have to pay a fee equal to the cost of drilling. Realising it would be cheaper just to drill, Phillips went ahead one last time. This well banished any thought of leaving. Forty years ago this December, Phillips declared the Ekofisk field one of the world’s largest offshore oil basins.</p><p id="562443b3-2f8d-400b-a9d5-0875f73a0d29" class="">
+</p><p id="8673ea61-8122-4b90-87da-685c094a3a0c" class="">Overnight, Norway turned into a hydrocarbon superpower. Today, it is the world’s sixth-biggest net exporter of oil and the second-biggest net natural gas exporter. In the years since the Ekofisk discovery, the country has exported oil and gas equivalent to some 30 billion barrels of crude – and the continental shelf still contains, by official estimates, almost twice as much again. Yet the country has escaped the problems that beset most other oil exporters. Rather than stifling productivity, the oil sector has spawned world-class exploration, oil services and construction technology. Norway’s state oil company, StatoilHydro, is internationally recognised as a competitive commercial player and one of the most environmentally and socially conscious ones to boot. Since 1996, every krone the government has earned from oil has gone into a savings fund, which now totals some £240bn – more than a year’s gross domestic product and equivalent to about £50,000 for each of Norway’s 4.8 million citizens.</p><p id="ce5908a2-25d9-407a-9e3e-44fda52de603" class="">
+</p><p id="faa923f0-9d6e-43c2-bb3a-d2526c7bf01d" class="">The real achievement, in other words, was not finding oil but coping with its discovery. Norway faced the same dilemma as every other new oil producer with no experience of the industry: if you rely too much on private foreign companies, too little of the oil wealth benefits the country in the form of government revenue or economic development; if you go too far in the other direction, you risk a bloated, politicised oil sector that evades both accountability to the people and competitive pressures to be efficient.</p></div></p><p id="e2b44ebe-4efa-4353-972f-53a64a24cc85" class="">
+</p><p id="77cedff3-1433-4d44-a9e1-44c8b200c186" class="">
+</p><h3 id="06a91840-fc2c-440c-850b-9d13bd8db29c" class=""><a href="https://www.newyorker.com/magazine/2018/12/10/the-friendship-that-made-google-huge">The friendship that made Google huge</a></h3><p id="af9a2567-f8c5-49e7-8314-5067974f16cd" class=""><em>By James Somers in the New Yorker</em></p><p id="9dc9e06c-a6f6-4407-9c4e-2c7913da7b46" class=""><div class="indented"><p id="3c9f9313-4ab7-46c2-a791-a9176614d218" class="">We say that we “search the Web,” but we don’t, really; our search engines traverse an index of the Web—a map. When Google was still called BackRub, in 1996, its map was small enough to fit on computers installed in Page’s dorm room. In March of 2000, there was no supercomputer big enough to process it. The only way that Google could keep up was by buying consumer machines and wiring them together into a fleet. Because half the cost of these computers was in parts that Google considered junk—floppy drives, metal chassis—the company would order raw motherboards and hard drives and sandwich them together. Google had fifteen hundred of these devices stacked in towers six feet high, in a building in Santa Clara, California; because of hardware glitches, only twelve hundred worked. Failures, which occurred seemingly at random, kept breaking the system. To survive, Google would have to unite its computers into a seamless, resilient whole.</p><p id="8c0fd555-662f-4415-923f-6eae22429123" class="">
+</p><p id="73ebf796-4af4-4cc0-9356-1d13facc4154" class="">Side by side, Jeff and Sanjay took charge of this effort. Wayne Rosing, who had worked at Apple on the precursor to the Macintosh, joined Google in November, 2000, to run its hundred-person engineering team. “They were the leaders,” he said. Working ninety-hour weeks, they wrote code so that a single hard drive could fail without bringing down the entire system. They added checkpoints to the crawling process so that it could be re-started midstream. By developing new encoding and compression schemes, they effectively doubled the system’s capacity. They were relentless optimizers. When a car goes around a turn, more ground must be covered by the outside wheels; likewise, the outer edge of a spinning hard disk moves faster than the inner one. Google had moved the most frequently accessed data to the outside, so that bits could flow faster under the read-head, but had left the inner half empty; Jeff and Sanjay used the space to store preprocessed data for common search queries. Over four days in 2001, they proved that Google’s index could be stored using fast random-access memory instead of relatively slow hard drives; the discovery reshaped the company’s economics. Page and Brin knew that users would flock to a service that delivered answers instantly. The problem was that speed required computing power, and computing power cost money. Jeff and Sanjay threaded the needle with software.</p></div></p><p id="d9ea18df-1cbf-4da6-8b45-2896254b16f8" class="">
+</p><p id="5e020c82-0356-4b98-8f63-9b5fd114c101" class="">
+</p><h3 id="a9bbeba4-263e-4e8b-89f1-0f83aa77cf7d" class=""><a href="https://gist.github.com/savarin/6dd40d679333fd49dc62f42ffe0bb1c8#file-crisis_of_confidence-md">Crisis of confidence</a></h3><p id="7569f022-d7c0-4a8c-b8fc-e77760e342b3" class=""><em>By Caroline Moorehead in the FT Weekend</em></p><p id="d78ca534-7ec4-4b8e-8c5d-c949b0bf7b94" class=""><div class="indented"><p id="e6be5d12-0200-4e31-bc46-49cabb7a458c" class="">But then there was a second leak. This time it concerned Guantanamo, where the defence department said prisoners were “providing valuable information about terrorism” in an “environment that is stable, secure, safe and humane”. On November 30 2004, The New York Times published a report on Guantanamo, drawn on material gathered by the ICRC, who had been visiting the detainees since January 2002. Prisoners were revealed to have been stripped to their underwear, manacled hand and foot to a chair bolted to the ground, while strobe lights flashed and loud rap and rock music was played through speakers close to their ears.</p><p id="bb2cd028-daf3-4d6f-a547-2b49b5a3d86b" class="">
+</p><p id="3931b3f2-e091-4852-aee8-b10bd27e55ad" class="">Again, after the public outrage at the revelations had died down, there were attacks on the ICRC in the American press, but the ICRC is again certain that the leak had not come from its own people. However, even if one part of the American administration had misgivings about the Geneva Conventions and the ICRC (Gonzales once said in a memo that some Conventions provisions were “quaint”) and that international humanitarian law did not apply to the US global war on terror, it was clear that the president himself was determined that relations should not be soured. Earlier this year, the US committed itself to a further four years’ funding.</p><p id="321a276f-4866-4a99-bab9-e47c16506f0f" class="">
+</p><p id="f16f3578-be35-4f62-8209-a35c8166ec25" class="">For the ICRC, however, something fundamental had taken place. Abu Ghraib and Guantanamo highlighted for the first time not only the changing patterns of modern conflict and the ICRC’s difficulties when dealing with a western democracy, but the very nature and ambiguities of the ICRC’s work, and in particular the question of confidentiality. Like its profession of neutrality, the ICRC’s attachment to confidentiality is almost an article of faith. Confidentiality, the famous quid pro quo that allows the ICRC access to everything in return for publicising nothing, has been at the heart of their work for most of the past century. No other organisation has this pact with governments, and no other organisation has had such an impact on the lives of prisoners of war. The question raised by Abu Ghraib and Guantanamo was simple: had confidentiality become obsolete in the face of modern warfare?</p></div></p><p id="cc6a88e4-d339-4194-8d57-359cc680288e" class="">
+</p><p id="4d503b75-5e64-466a-b5a9-11cf670bea4e" class="">
+</p><h3 id="c72c2b60-a065-4ac8-bbfc-614f9a0f4647" class=""><a href="https://www.newyorker.com/magazine/2018/11/12/why-doctors-hate-their-computers">Why doctors hate their computers</a></h3><p id="35f8145a-23cd-4fce-a2af-c41772af6ff8" class=""><em>By Atul Gawande in the New Yorker</em></p><p id="1e3dced5-c6ef-42ce-892c-91e54bbeaf42" class=""><div class="indented"><p id="efefb6eb-7ea7-45cd-85d5-00eab3796cbd" class="">My hospital had, over the years, computerized many records and processes, but the new system would give us one platform for doing almost everything health professionals needed—recording and communicating our medical observations, sending prescriptions to a patient’s pharmacy, ordering tests and scans, viewing results, scheduling surgery, sending insurance bills. With Epic, paper lab-order slips, vital-signs charts, and hospital-ward records would disappear. We’d be greener, faster, better.</p></div></p><p id="35df6b10-abf0-43a6-a85d-4e9fbe8e0622" class=""><div class="indented"><p id="0f7c69d2-b104-4b63-8566-d03284530e47" class="">But three years later I’ve come to feel that a system that promised to increase my mastery over my work has, instead, increased my work’s mastery over me. I’m not the only one. A 2016 study found that physicians spent about two hours doing computer work for every hour spent face to face with a patient—whatever the brand of medical software. In the examination room, physicians devoted half of their patient time facing the screen to do electronic tasks. And these tasks were spilling over after hours. The University of Wisconsin found that the average workday for its family physicians had grown to eleven and a half hours. The result has been epidemic levels of burnout among clinicians. Forty per cent screen positive for depression, and seven per cent report suicidal thinking—almost double the rate of the general working population.</p><p id="d75c5137-7e3a-411a-a214-7114fa50a929" class="">
+</p><p id="9d1c70d6-ce1c-4fd1-a9a4-1fd5700ce03a" class="">Something’s gone terribly wrong. Doctors are among the most technology-avid people in society; computerization has simplified tasks in many industries. Yet somehow we’ve reached a point where people in the medical profession actively, viscerally, volubly hate their computers.</p></div></p><p id="d157d3bc-eca3-4b01-89db-64d6d03b0db8" class="">
+</p><p id="49b04241-ae59-4abc-a838-f65794118879" class="">
+</p><h3 id="4efe59c4-30ec-4b98-bb82-f98290040932" class=""><a href="https://gist.github.com/savarin/77449f22e0977b094bf4906b9f9caa89#file-change_constant-md">Can money set you free?</a></h3><p id="4726d170-9094-426d-82c5-9552c77c588c" class=""><em>By John Lanchester in the FT Weekend</em></p><p id="8fc067d9-a9be-4737-961f-c5d03b5f7fa7" class=""><div class="indented"><p id="dd3ce3b2-8b88-460a-882a-59199d3a7856" class="">What I didn’t understand was the way economic forces were at work in writing too. I left university in 1986, planning on a career in literary journalism while I got going on the book I wanted to write. That seemed a natural ambition at the time but looking back it seems like a precise snapshot of a moment in history. The breaking of the print unions had opened up all areas of the press; you could now set out to try and write pieces for the papers without the formal training of a diploma in journalism and time spent in the regional press. Five years earlier, and my ambition wouldn’t have been even thinkable. A quarter of a century later and the very idea of literary journalism is dead, outside heroic outposts such as the London Review of Books and the Times Literary Supplement.</p><p id="2990ad74-630d-4beb-9791-68c9fd32de87" class="">
+</p><p id="9dd5f06e-9f26-4664-a730-fb10b47a9251" class="">To come out of university today wanting to be a literary journalist would be like planning a career as one of those people who used to walk in front of cars waving a warning flag. This isn’t because people don’t want to write literary journalism; they still do. But there isn’t the economic infrastructure to support it.</p></div></p><p id="149ed35f-352b-4335-9e93-2ef3bc64ea45" class=""><div class="indented"><p id="d8e82001-1834-4ebc-95a9-edd78922fdce" class="">When I finished my first novel, The Debt to Pleasure, in the mid-1990s, I was again the beneficiary of a specific set of historical conditions, to do with the expansion of the hardback reading public and, in particular, the growth of the Waterstone’s bookshop chain. At the time I had no idea how lucky I was to catch that moment. These days, British bookselling looks very different. The future of high street bookstores is even more uncertain with the threat from new digital forms of distribution, direct to the customer.</p></div></p><p id="60189cdc-a4d3-4cc3-bb1f-bda052f7ca13" class=""><div class="indented"><p id="b1588293-b47b-49ee-822d-001b832cd8f1" class="">This means that, like every writer in the world, I’m facing what might be the biggest change in the literary means of production since Gutenberg. If books go mainly electronic, everything could change. This week, with the announcement of Apple’s iPad, may have been the very moment when that change arrived. The change could mean a greater share of the profits for the writer. But the arrival of the e-book could make the book business resemble the music business, if customers believe that books should be free. That would be the end of the world for serious writers, who are not performers and who can’t earn a living giving concerts and selling T-shirts. Nobody knows how this is going to play out.</p></div></p><p id="735a6456-7f00-4a72-a2ac-de6cf0a79dda" class="">
+</p><p id="9abd1432-8ee0-420c-95ac-a806cdad3b4e" class="">
+</p><h3 id="30fd8699-9d8d-43cb-aef0-c1c9cedbf4b2" class=""><a href="https://www.newyorker.com/magazine/2012/03/05/magic-mountain">Magic mountain</a></h3><p id="1db0431f-1c29-4b60-8682-00e586c5f438" class=""><em>By Nick Paumgarten in the New Yorker</em></p><p id="546b4aaf-e51d-4629-a070-7091f183d69c" class=""><div class="indented"><p id="e805262d-ff8b-42d4-841f-fcf69fbe229c" class="">“My approach is shaped by a single generational theme, an idea I came upon thirty years ago,” he said. A fuller explanation required some life history. Arbess, who is fifty-one, grew up in Montreal and got a law degree at Harvard. In the early eighties, he developed an interest and expertise in nuclear policy. He was among the motley array of intellectuals, celebrities, and arms-control experts who flew to Moscow by Aeroflot jetliner, in 1987, to hear Mikhail Gorbachev unveil some of his intentions with regard to perestroika and glasnost. “Listening to him, I developed this conviction: If he is going to start democratizing the country, the regime will not be able to maintain control. It will collapse, and this will mean the end of the Communist system.” He signed on as a first-year associate at the law firm White &amp; Case, and volunteered to work in the Stockholm office, for its proximity to Russia. Back in New York, in 1989, a partner introduced him to the manager of the U.N. Plaza Hotel, a Czech expat whose sister, an actress in Prague, had a friend who needed legal advice. That friend was Vaclav Havel. In the coming years, Arbess became the main legal adviser to Havel’s government in its efforts to privatize the Czech economy. He later expanded the firm’s practice into Russia, Poland, and Kazakhstan and developed the belief that, as he put it, “the devolution of Communism would be the single biggest driver of opportunity in our time.” He spent the ensuing decades investing in some of the repercussions: privatized companies, the transformation of China, the acceleration of leveraged consumption in the United States, mining interests, currencies, consumer goods. He sold his latest fund, Xerion, to Perella Weinberg in 2007, but still managed it. “The money follows the ideas,” he said.</p></div></p><p id="d696a73f-f723-4802-b496-e85f630fcc79" class="">
+</p><p id="7b40b0a8-d5d0-43b7-b9f3-c578d13323ac" class="">
+</p><h3 id="7676936b-b0ae-45e7-a674-d0f7d133b382" class=""><a href="https://www.newyorker.com/magazine/2008/11/10/melting-into-air">Melting into air</a></h3><p id="ae1fb9c4-3d9c-4a80-9fdb-30e200e14dfe" class="">By John Lanchester in the New Yorker</p><p id="3d7d37f1-f307-4784-99b1-b2577b95a141" class=""><div class="indented"><p id="dd3588a0-e305-4ba0-89ef-8cae9c6b947f" class="">There’s something almost nineteenth century about Buffett’s writing on finance—calm, sane, and literate. It’s not a tone you’ll readily find in anyone else’s company reports, letters to shareholders, public filings, or press releases. That’s because finance, like other forms of human behavior, underwent a change in the twentieth century, a shift equivalent to the emergence of modernism in the arts—a break with common sense, a turn toward self-referentiality and abstraction and notions that couldn’t be explained in workaday English. In poetry, this moment took place with the publication of “The Waste Land.” In classical music, it was, perhaps, the première of “The Rite of Spring.” Jazz, dance, architecture, painting—all had comparable moments. The moment in finance came in 1973, with the publication of a paper in the Journal of Political Economy titled “The Pricing of Options and Corporate Liabilities,” by Fischer Black and Myron Scholes.</p><p id="727c622d-91a2-45be-b814-767d9d91d263" class="">
+</p><p id="22af1559-4c2a-4c19-9e7b-b32009513bac" class="">The revolutionary aspect of Black and Scholes’s paper was an equation that enabled people to calculate the price of financial derivatives based on the value of the underlying asset. Derivatives themselves had been a long-standing feature of financial markets. At their simplest, a farmer would agree to a price for his next harvest a few months in advance—and the right to buy this harvest was a derivative, which could itself be sold. A similar arrangement could be made with equity shares, where what was traded was an option to buy or sell them at a given price on a given date. The trade in these derivatives was hampered, however, by the fact that—owing to the numerous variables of time and risk—no one knew how to price them. The Black-Scholes formula provided a way to do so. It was a defining moment in the mathematization of the market. The trade in derivatives took off, to the extent that the total market in derivative products around the world is counted in the hundreds of trillions of dollars. Nobody knows the exact figure, but the notional amount certainly exceeds the total value of all the world’s economic output, roughly sixty-six trillion dollars, by a huge factor—perhaps tenfold.</p></div></p></div></article></body></html>

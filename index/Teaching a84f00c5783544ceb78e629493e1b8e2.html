@@ -286,11 +286,23 @@ ol > li {
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
 }
 
-.simple-table-header {
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
 	background: rgb(247, 246, 243);
 	color: black;
+}
+.simple-table-header {
 	font-weight: 500;
 }
 
@@ -497,39 +509,39 @@ blockquote {
 }
 .highlight-gray {
 	color: rgba(120, 119, 116, 1);
-	fill: rgba(145, 145, 142, 1);
+	fill: rgba(120, 119, 116, 1);
 }
 .highlight-brown {
 	color: rgba(159, 107, 83, 1);
-	fill: rgba(187, 132, 108, 1);
+	fill: rgba(159, 107, 83, 1);
 }
 .highlight-orange {
 	color: rgba(217, 115, 13, 1);
-	fill: rgba(215, 129, 58, 1);
+	fill: rgba(217, 115, 13, 1);
 }
 .highlight-yellow {
 	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 148, 51, 1);
+	fill: rgba(203, 145, 47, 1);
 }
 .highlight-teal {
 	color: rgba(68, 131, 97, 1);
-	fill: rgba(108, 155, 125, 1);
+	fill: rgba(68, 131, 97, 1);
 }
 .highlight-blue {
 	color: rgba(51, 126, 169, 1);
-	fill: rgba(91, 151, 189, 1);
+	fill: rgba(51, 126, 169, 1);
 }
 .highlight-purple {
 	color: rgba(144, 101, 176, 1);
-	fill: rgba(167, 130, 195, 1);
+	fill: rgba(144, 101, 176, 1);
 }
 .highlight-pink {
 	color: rgba(193, 76, 138, 1);
-	fill: rgba(205, 116, 159, 1);
+	fill: rgba(193, 76, 138, 1);
 }
 .highlight-red {
 	color: rgba(212, 76, 71, 1);
-	fill: rgba(225, 111, 100, 1);
+	fill: rgba(212, 76, 71, 1);
 }
 .highlight-gray_background {
 	background: rgba(241, 241, 239, 1);
@@ -564,39 +576,39 @@ blockquote {
 }
 .block-color-gray {
 	color: rgba(120, 119, 116, 1);
-	fill: rgba(145, 145, 142, 1);
+	fill: rgba(120, 119, 116, 1);
 }
 .block-color-brown {
 	color: rgba(159, 107, 83, 1);
-	fill: rgba(187, 132, 108, 1);
+	fill: rgba(159, 107, 83, 1);
 }
 .block-color-orange {
 	color: rgba(217, 115, 13, 1);
-	fill: rgba(215, 129, 58, 1);
+	fill: rgba(217, 115, 13, 1);
 }
 .block-color-yellow {
 	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 148, 51, 1);
+	fill: rgba(203, 145, 47, 1);
 }
 .block-color-teal {
 	color: rgba(68, 131, 97, 1);
-	fill: rgba(108, 155, 125, 1);
+	fill: rgba(68, 131, 97, 1);
 }
 .block-color-blue {
 	color: rgba(51, 126, 169, 1);
-	fill: rgba(91, 151, 189, 1);
+	fill: rgba(51, 126, 169, 1);
 }
 .block-color-purple {
 	color: rgba(144, 101, 176, 1);
-	fill: rgba(167, 130, 195, 1);
+	fill: rgba(144, 101, 176, 1);
 }
 .block-color-pink {
 	color: rgba(193, 76, 138, 1);
-	fill: rgba(205, 116, 159, 1);
+	fill: rgba(193, 76, 138, 1);
 }
 .block-color-red {
 	color: rgba(212, 76, 71, 1);
-	fill: rgba(225, 111, 100, 1);
+	fill: rgba(212, 76, 71, 1);
 }
 .block-color-gray_background {
 	background: rgba(241, 241, 239, 1);
@@ -657,4 +669,4 @@ blockquote {
 </style></head><body><article id="a84f00c5-7835-44ce-b78e-629493e1b8e2" class="page sans"><header><h1 class="page-title">Teaching</h1></header><div class="page-body"><p id="bc651a15-4d82-49cd-a391-81c69a888933" class="">Teaching is the best way to learn. While I was at Square, I led SquareU tutorials on Python for machine learning / neural networks every quarter or so. If you&#x27;re interested in any of the tutorials below, please fill in the form <a href="https://airtable.com/shrD8RP70wTlTIS6e">here</a>.</p><p id="4f055245-b3b6-4bfd-8321-c447048768a3" class="">
 </p><h3 id="526cb768-dc3f-4649-9bf6-00b09af6d18b" class="">Intro to Python for machine learning</h3><p id="0fb281dd-fe11-4162-abdd-7cf3e4b54c9c" class="">This <a href="https://github.com/savarin/pyconuk-introtutorial">tutorial</a> starts with data manipulation using pandas to clean up the data. We&#x27;ll then use scikit-learn to make predictions. By the end of the 1-hour session, we would have worked on the Kaggle Titanic dataset from start to finish, through a number of iterations in increasing order of sophistication. The first version of this tutorial was delivered at PyCon UK 2014 (reviews <a href="https://twitter.com/peterbowyer/status/513271457527656448">here</a> and <a href="https://twitter.com/drvinceknight/status/513292421166542849">here</a>, Korean translation <a href="https://github.com/edte1020/Pycon-UK-Introductory-Tutorial">here</a>). The most recent session was September 2021.</p><p id="3a0648d2-5069-43cd-9314-adce2e7fde13" class="">
 </p><h3 id="8ae5ff84-5d6f-4b03-bfb7-f6b9b3fb1ec8" class="">Intro to Python for neural networks</h3><p id="cef1f5bc-a570-49e4-a364-08bb19ceece1" class="">This <a href="https://github.com/savarin/neural-networks">tutorial</a> is designed to get the audience training neural networks by the end of a 1-hour session. In particular, it covers areas where neural networks really shine - CNNs and RNNs. These techniques are applied on the Kaggle Titanic, MNIST and Rotten Tomatoes datasets. The most recent session was October 2021.</p><p id="4f862425-f887-4d20-b4ba-c46b2734d501" class="">
-</p><h3 id="51e2cf95-ac4f-4cbd-bac6-63588b97e043" class="">Applying machine learning to payments</h3><p id="f41effff-0937-4608-97ff-6204b889f3a3" class="">This is a case study on applying machine learning to flag suspicious payments. It assumes no prior knowledge of payments or machine learning, and is designed for a non-technical audience. The was first presented at Blackrock, and later at Metis.</p></div></article></body></html>
+</p><h3 id="51e2cf95-ac4f-4cbd-bac6-63588b97e043" class="">Applying machine learning to payments</h3><p id="f41effff-0937-4608-97ff-6204b889f3a3" class="">This is a case study on applying machine learning to flag suspicious payments. It assumes no prior knowledge of payments or machine learning, and is designed for a general audience. The was first presented at Blackrock, and later at Metis.</p></div></article></body></html>

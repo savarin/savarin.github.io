@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>About</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Nodes</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -666,6 +666,193 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="a38e136d-592c-4f7b-be7f-802e22d5bd79" class="page sans"><header><h1 class="page-title">About</h1></header><div class="page-body"><p id="2002f5e0-7806-41f0-a2b6-facae1f42019" class="">I&#x27;m a software engineer at <a href="https://www.airtable.com/">Airtable</a>. My previous experience includes payments, lending and machine learning. I&#x27;ve spoken at PyCon UK and continue to lead Python tutorials. I can be reached <a href="https://airtable.com/shrqMzRrrdIWkv0fg">here</a>.</p><p id="b7d1d57a-b583-432c-bc0a-3a8fb324c130" class="">
-</p><p id="3d126ca1-c48a-4276-bf45-fe71d75850f0" class=""><a href="https://twitter.com/EzzeriEsa">Twitter</a></p><p id="d1788d88-2bf2-49d6-9b03-7904b900e687" class=""><a href="https://github.com/savarin">GitHub</a></p><p id="49a5f3ff-61f0-45ef-b492-e6fe9a17393c" class="">
-</p></div></article></body></html>
+</style></head><body><article id="2faee375-971f-45e2-804f-143c8ffb1fd7" class="page sans"><header><img class="page-cover-image" src="Nodes%202faee375971f45e2804f143c8ffb1fd7/node2.jpg" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📶</span></div><h1 class="page-title">Nodes</h1></header><div class="page-body"><p id="1477abe2-724f-4517-b28d-8c2ed6c75865" class="">In the previous <a href="Chains%20564943cf92ee48c98da4e51d3789d559.html">post</a>, we introduced a single miner. Now let&#x27;s set up 3 nodes that mine and broadcast to each other.</p><p id="702f97a3-b038-432d-98b0-6f6be2da8e0a" class="">
+</p><h3 id="cae88c8e-9029-41ab-8f88-71fc6bd49eb6" class="">Context</h3><p id="00e7feeb-e14c-4096-ad50-800898e06406" class="">Let&#x27;s start by sketching out what each node would do. In mining mode, the node tries 1,000 nonce values at a time and extends the blockchain if a solution is found. In listening mode, the node listens to the network and replaces its blockchain if the broadcasted blockchain is valid and longer than the existing blockchain. To keep things simple, the node would alternate between the two modes instead of running both in parallel.</p><pre id="c25d4f10-439a-4389-984d-c53740f18194" class="code code-wrap"><code>while True:
+    try:
+        # Listen for incoming messages.
+        #     If message received, check blockchain received is valid and longer      
+        #     than existing blockchain.
+        #         If true, replace existing blockchain.
+        #         Otherwise, continue listening.
+        #     Otherwise, switch to mining mode.
+    except:
+        # Run proof-of-work.
+        #     If not solved after 1000 nonce values, switch to listening mode.
+        #     Otherwise, update blockchain and broadcast to network.</code></pre><p id="944aa21e-8ea0-477b-8ff1-ee8ad91d657a" class="">
+</p><h3 id="28b72693-3a5b-4ca1-bc88-f8b92aff03ed" class="">Broadcasters</h3><p id="2c59e54a-af2f-4b46-96bf-99d19b167e46" class="">Since most of our focus so far has been on mining, let&#x27;s switch gears briefly to set up nodes that broadcast to each other. To ensure our nodes are set up correctly, we create a <code>.env</code> file with the IP address by running the following command in a terminal window.</p><pre id="a4f4ee5d-cfbb-4733-a0a0-8be4720b3d00" class="code code-wrap"><code>echo &#x27;NODE_IP=&#x27;&quot;$(ipconfig getifaddr en0)&quot; &gt; .env</code></pre><p id="f6e5864a-36ab-4efb-95da-95aa13807ded" class="">
+</p><p id="bf1e7621-448e-4dff-b41d-46ee7c698a9f" class="">Next we load the IP address as an environment variable, and enumerate all the ports to be used.</p><pre id="1d642b10-42b4-47ee-bf7b-64b3b562758d" class="code code-wrap"><code>import dotenv
+import os
+
+dotenv.load_dotenv()
+
+NODE_IP = os.getenv(&quot;NODE_IP&quot;)
+NODE_PORTS = [7000, 8000, 9000]</code></pre><p id="b0dc8deb-017f-4c81-95d0-adc73daeb287" class="">
+</p><p id="31cc18a2-1477-4109-90a1-09ddd0f59f87" class="">We introduce a helper function to bind the network socket to the IP address-port pair.</p><pre id="52def574-3bd6-4f7a-8d1b-4f7eaf1a46a9" class="code code-wrap"><code>import socket
+
+def bind_socket(ip_address: str, port: int) -&gt; socket.socket:
+    &quot;&quot;&quot; &quot;&quot;&quot;
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind((ip_address, port))
+    return sock</code></pre><p id="a89e282c-e75e-466a-8833-cc4babf2e02e" class="">
+</p><p id="584cfe7e-7c49-486c-8624-317e270decff" class="">Let&#x27;s wrap the socket in a class and create functions to (i) initialize the node, and (ii) broadcast to other nodes. The node class also stores the blockchain state - we&#x27;ll use this in the next section.</p><pre id="a822b49e-2023-4490-822d-a47e670f4e6f" class="code code-wrap"><code>import dataclasses
+
+@dataclasses.dataclass
+class Node:
+    &quot;&quot;&quot; &quot;&quot;&quot;
+
+    port: int
+    sock: socket.socket
+    blockchain: bytes
+    block_counter: int
+
+def init_node(
+    port: int, blockchain: bytes = b&quot;&quot;, block_counter: int = 0
+) -&gt; Node:
+    &quot;&quot;&quot; &quot;&quot;&quot;
+    assert NODE_IP is not None
+    sock = bind_socket(NODE_IP, port)
+
+    return Node(
+        port=port,
+        sock=sock,
+        blockchain=blockchain,
+        block_counter=block_counter,
+    )
+
+def broadcast(node: Node, message: bytes):
+    &quot;&quot;&quot; &quot;&quot;&quot;
+    for node_port in NODE_PORTS:
+        if node_port == node.port:
+            continue
+
+        node.sock.sendto(message, (NODE_IP, node_port))</code></pre><p id="095fbb07-94db-4f1b-a7cd-ab721cf703e4" class="">
+</p><p id="756d8825-6297-455a-aef9-bc11c883d9da" class="">In the placeholder version, we set up the nodes to broadcast a simple message to the network and then sleep for a random time.</p><pre id="403d90c4-35bf-474d-a068-6f1ec61c1d5f" class="code code-wrap"><code>import random
+import time
+
+def run(node: Node):
+    &quot;&quot;&quot; &quot;&quot;&quot;
+    while True:
+        try:
+            node.sock.settimeout(1)
+            message, _ = node.sock.recvfrom(9216)
+
+            node_port = int.from_bytes(message[:2], byteorder=&quot;big&quot;)
+            sleep_time = message[2]
+
+            print(f&quot;OTHER {node_port} sleep for {sleep_time} seconds...&quot;)
+
+        except socket.timeout:
+            sleep_time = random.randint(1, 9)
+            message = node.port.to_bytes(
+                2, byteorder=&quot;big&quot;
+            ) + sleep_time.to_bytes(1, byteorder=&quot;big&quot;)
+
+            broadcast(node, message)
+            print(f&quot;SELF {node.port} sleep for {sleep_time} seconds...&quot;)
+
+            time.sleep(sleep_time)</code></pre><p id="bac0d61a-83ab-48a7-ae05-5c146829266b" class="">
+</p><p id="e71e6351-da21-40a4-969a-298db6ebf02b" class="">We set up main to take in the port number as a command line argument.</p><pre id="4bc0ad70-db90-428b-b8b4-15a6d61f8be2" class="code code-wrap"><code>import sys
+
+if __name__ == &quot;__main__&quot;:
+    port = int(sys.argv[1])
+    assert port in NODE_PORTS
+
+    node = init_node(port)
+    run(node)</code></pre><p id="8125dd44-6e4d-458b-84d4-6870b29b5c14" class="">
+</p><p id="d52aff1a-32c9-4e17-9495-3c0274109d85" class="">That&#x27;s a fair amount of setup! Now respectively run each line in different terminal windows. A sample run can be seen <a href="https://vimeo.com/647162718">here</a>, and the code in a single file <a href="https://github.com/savarin/readcoin/blob/v1-basic/src/node.py">here</a>.</p><pre id="25d23cf0-09cf-43cc-ae48-892d41c9e3ae" class="code code-wrap"><code>python node.py 7000
+python node.py 8000
+python node.py 9000</code></pre><p id="480d66ba-2a72-4f9b-b8c6-943b875720d5" class="">
+</p><h3 id="2c6db033-28e9-4f76-a103-f3dae4af6d43" class="">Miners</h3><p id="b595a3a6-f9ab-4a51-a8d1-6ee66c35c12b" class="">Now that we&#x27;ve done the heavy-lifting of setting up nodes that broadcast to each other, we can incorporate mining into the nodes.</p><p id="c058dce5-9aa3-47de-a494-567cc8474777" class="">
+</p><p id="809b2d37-6372-424b-a032-ff042a823823" class="">We modify the node initialization so that the blockchain starts with the genesis block.</p><pre id="710cbfe6-df7a-443e-8422-5724d0e05328" class="code code-wrap"><code>import sys
+
+import blocks
+
+genesis_hash, genesis_block = blocks.init_genesis_block()
+
+if __name__ == &quot;__main__&quot;:
+    port = int(sys.argv[1])
+    assert port in NODE_PORTS
+
+    node = init_node(port, genesis_block, 1)
+    run(node)</code></pre><p id="b9bde7e0-4770-46aa-a125-cdf5038add01" class="">
+</p><p id="f882c92b-c495-4795-b72b-cb68d3ae592a" class="">At the <a href="Nodes%202faee375971f45e2804f143c8ffb1fd7.html">start</a> of this post, we discussed alternating between mining mode and listening mode. The steps in mining mode is similar to the previous <a href="Chains%20564943cf92ee48c98da4e51d3789d559.html">post</a>; the switch from mining to listening mode happens after trying 1,000 nonce values. The steps in listening mode are as follows.</p><ol type="1" id="abff0ccd-d3fc-41ec-be73-6af091a1bd21" class="numbered-list" start="1"><li>Listen to incoming messages from other nodes.</li></ol><ol type="1" id="f3f7e9a4-67d9-4d7c-a878-87d6df5121ef" class="numbered-list" start="2"><li>If message is received, check broadcasted blockchain in the message is valid and longer than the existing blockchain.<ol type="a" id="182b44c2-20da-422e-ab75-10da15d07edb" class="numbered-list" start="1"><li>If the broadcasted blockchain is valid and longer than the existing blockchain, replace the stored blockchain with the broadcasted blockchain.</li></ol><ol type="a" id="57cc6a70-8ac4-46f4-8317-04bdbe450437" class="numbered-list" start="2"><li>If the broadcasted blockchain is invalid or not longer than the existing blockchain, ignore the broadcasted blockchain.</li></ol></li></ol><ol type="1" id="7f9ca01d-4a17-4ae0-bedb-d2a3ab16773e" class="numbered-list" start="3"><li>If no message is received after listening for 1 second, switch to mining mode.</li></ol><p id="f8b06071-f0fe-427a-9d8b-d1eef14ee37f" class="">
+</p><p id="344637fa-17ef-46e7-a7db-0bcb58e28056" class="">Since the blockchain is an array of bytes, we can broadcast it directly! For simplicity, the whole blockchain is sent over the wire instead of only the latest block. </p><pre id="31c33903-d7e0-4aa6-b4ba-cd5790272c36" class="code code-wrap"><code>import binascii
+import time
+
+def run(node: Node):
+    &quot;&quot;&quot; &quot;&quot;&quot;
+    previous_hash = GENESIS_HASH
+    timestamp = int(time.time())
+    nonce = 0
+
+    while True:
+        try:
+            # Listen for incoming messages, with maximum size set at OS X
+            # maximum UDP package size of 9216 bytes.
+            node.sock.settimeout(1)
+            blockchain, _ = node.sock.recvfrom(9216)
+
+            # Check blockchain received is valid.
+            (
+                is_new_block,
+                block_counter,
+                current_hash,
+            ) = blocks.validate_blockchain(blockchain)
+
+            # Skip if invalid or not longer than existing blockchain.
+            if not is_new_block or block_counter &lt;= node.block_counter:
+                print(&quot;IGNORE blockchain...&quot;)
+                continue
+
+            # Replace if valid and longer than existing.
+            node.blockchain = blockchain
+            node.block_counter = block_counter
+
+            assert current_hash is not None
+            print(
+                f&quot;COPY block {node.block_counter - 1}: {binascii.hexlify(current_hash).decode()}!&quot;
+            )
+
+            # Force sleep to randomize timestamp.
+            sleep_time = (node.port + block_counter) % 3 + 1
+            print(f&quot;SLEEP for {sleep_time} seconds...&quot;)
+            time.sleep(sleep_time)
+
+        except socket.timeout:
+            # Run proof-of-work.
+            print(f&quot;TRY up to {nonce}...&quot;)
+            is_new_block, _, current_hash, header = blocks.run_proof_of_work(
+                previous_hash, timestamp, nonce, 1000
+            )
+
+            # Switch to listening mode if not solved after 1000 nonce values.
+            if not is_new_block:
+                nonce += 1000
+                continue
+
+            # Create block reward if solved.
+            assert current_hash is not None and header is not None
+            transaction_counter, transactions = blocks.init_transactions(
+                node.port
+            )
+            block = blocks.init_block(header, transaction_counter, transactions)
+
+            # Append new block to blockchain.
+            node.blockchain += block
+            node.block_counter += 1
+
+            # Broadcast full blockchain to network.
+            broadcast(node, node.blockchain)
+            print(
+                f&quot;CREATE block {node.block_counter - 1}: {binascii.hexlify(current_hash).decode()}!&quot;
+            )
+
+        # Reset values for next block header.
+        previous_hash = current_hash
+        timestamp = int(time.time())
+        nonce = 0</code></pre><p id="ccd4d06a-05b5-47ac-a6b5-64a0861537b5" class="">
+</p><p id="91c2cd5e-47a2-46f8-926f-204fa7d8cc75" class="">With the changes in place, we re-run each line below in different terminal windows. A sample run is shown below.</p><pre id="f96bd192-841f-4424-8254-5235bcefed83" class="code code-wrap"><code>python node.py 7000
+python node.py 8000
+python node.py 9000</code></pre><p id="6d0c320e-c3ea-477a-8902-41d0a8b2fb9c" class="">
+</p><figure id="a8f054ba-ca9c-44e2-b223-66b55b338209"><div class="source"><a href="https://vimeo.com/647162882">https://vimeo.com/647162882</a></div></figure><p id="b125aeda-83a9-4d6a-bd7d-ee688fc09a23" class="">
+</p><p id="56d18ec9-8dfc-4dab-9880-fdd3e6d680c8" class="">In the next series of posts, we&#x27;ll take a closer look at transactions and validating that each coin is only spent once.</p></div></article></body></html>

@@ -286,11 +286,23 @@ ol > li {
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
 }
 
-.simple-table-header {
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
 	background: rgb(247, 246, 243);
 	color: black;
+}
+.simple-table-header {
 	font-weight: 500;
 }
 
@@ -497,39 +509,39 @@ blockquote {
 }
 .highlight-gray {
 	color: rgba(120, 119, 116, 1);
-	fill: rgba(145, 145, 142, 1);
+	fill: rgba(120, 119, 116, 1);
 }
 .highlight-brown {
 	color: rgba(159, 107, 83, 1);
-	fill: rgba(187, 132, 108, 1);
+	fill: rgba(159, 107, 83, 1);
 }
 .highlight-orange {
 	color: rgba(217, 115, 13, 1);
-	fill: rgba(215, 129, 58, 1);
+	fill: rgba(217, 115, 13, 1);
 }
 .highlight-yellow {
 	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 148, 51, 1);
+	fill: rgba(203, 145, 47, 1);
 }
 .highlight-teal {
 	color: rgba(68, 131, 97, 1);
-	fill: rgba(108, 155, 125, 1);
+	fill: rgba(68, 131, 97, 1);
 }
 .highlight-blue {
 	color: rgba(51, 126, 169, 1);
-	fill: rgba(91, 151, 189, 1);
+	fill: rgba(51, 126, 169, 1);
 }
 .highlight-purple {
 	color: rgba(144, 101, 176, 1);
-	fill: rgba(167, 130, 195, 1);
+	fill: rgba(144, 101, 176, 1);
 }
 .highlight-pink {
 	color: rgba(193, 76, 138, 1);
-	fill: rgba(205, 116, 159, 1);
+	fill: rgba(193, 76, 138, 1);
 }
 .highlight-red {
 	color: rgba(212, 76, 71, 1);
-	fill: rgba(225, 111, 100, 1);
+	fill: rgba(212, 76, 71, 1);
 }
 .highlight-gray_background {
 	background: rgba(241, 241, 239, 1);
@@ -564,39 +576,39 @@ blockquote {
 }
 .block-color-gray {
 	color: rgba(120, 119, 116, 1);
-	fill: rgba(145, 145, 142, 1);
+	fill: rgba(120, 119, 116, 1);
 }
 .block-color-brown {
 	color: rgba(159, 107, 83, 1);
-	fill: rgba(187, 132, 108, 1);
+	fill: rgba(159, 107, 83, 1);
 }
 .block-color-orange {
 	color: rgba(217, 115, 13, 1);
-	fill: rgba(215, 129, 58, 1);
+	fill: rgba(217, 115, 13, 1);
 }
 .block-color-yellow {
 	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 148, 51, 1);
+	fill: rgba(203, 145, 47, 1);
 }
 .block-color-teal {
 	color: rgba(68, 131, 97, 1);
-	fill: rgba(108, 155, 125, 1);
+	fill: rgba(68, 131, 97, 1);
 }
 .block-color-blue {
 	color: rgba(51, 126, 169, 1);
-	fill: rgba(91, 151, 189, 1);
+	fill: rgba(51, 126, 169, 1);
 }
 .block-color-purple {
 	color: rgba(144, 101, 176, 1);
-	fill: rgba(167, 130, 195, 1);
+	fill: rgba(144, 101, 176, 1);
 }
 .block-color-pink {
 	color: rgba(193, 76, 138, 1);
-	fill: rgba(205, 116, 159, 1);
+	fill: rgba(193, 76, 138, 1);
 }
 .block-color-red {
 	color: rgba(212, 76, 71, 1);
-	fill: rgba(225, 111, 100, 1);
+	fill: rgba(212, 76, 71, 1);
 }
 .block-color-gray_background {
 	background: rgba(241, 241, 239, 1);
@@ -657,6 +669,6 @@ blockquote {
 </style></head><body><article id="f8bf3625-5b44-44d0-9417-0ce63cefe757" class="page sans"><header><h1 class="page-title">Learning</h1></header><div class="page-body"><p id="aa64fb61-bd22-4976-b286-82a717443e61" class="">I did math in college, had my first job in finance, went to law school, and moved into software / data in the mid-2010s. I believe in lifelong learning. I believe that the job offer is the start of the journey, not the end (cue <a href="https://norvig.com/21-days.html">Peter Norvig</a>). I believe <a href="https://www.ft.com/content/740d3986-0c63-11df-a941-00144feabdc0">anxiety is freedom</a>.</p><p id="290527a3-6b10-4847-9466-c10bbe9794c9" class="">
 </p><h3 id="44f0cbdd-52dd-4e4f-9081-9d623cdaa5dd" class="">Zipfian Academy</h3><p id="2c1a234b-96af-44d7-aea2-12df2f65528b" class="">My <a href="https://github.com/savarin/rateflask">capstone project</a> at data science bootcamp involved building a model to run active selection on Lending Club loans. Lending Club buckets loans into risk grades. My hypothesis is it&#x27;s possible to &#x27;cherry pick&#x27; loans to outperform average returns; the model consistently achieved a 1-2% uplift to returns across the board. It turns out Theorem LP (YC 2014) does exactly this as a business. I joined Square post-Zipfian, and joined Theorem post-Square.</p><p id="38521b8d-fb22-46f1-81f5-271b237309d9" class="">
 </p><h3 id="912c3c98-8eee-45fb-8d00-01a9eeccac17" class="">UC Berkeley Extension</h3><p id="49801d77-56e5-4267-aeb4-db3fd545b5d2" class="">My <a href="https://github.com/savarin/deep-matrix-java">capstone project</a> for Berkeley&#x27;s Java: Discovering its Power <a href="https://extension.berkeley.edu/search/publicCourseSearchDetails.do?method=load&amp;courseId=40962">course</a> was building a neural network predictive model from scratch. I later <a href="https://github.com/savarin/deep-matrix-clojure">ported</a> the repo to Clojure.</p><p id="a7e6fa99-868e-45df-bf1f-d95e7688edd7" class="">
-</p><h3 id="d4c6e253-06a7-4841-b9d7-74c62b16d1d5" class="">Recurse Center</h3><p id="3b19c9b7-b3c4-44ed-9b92-2364ca5b124b" class=""><a href="https://www.recurse.com">RC</a> is like a writers&#x27; retreat for programmers. I spent time on WebAssembly (repos <a href="https://github.com/savarin/minimal">here</a> and <a href="https://github.com/savarin/bridge">here</a>), compilers and functional programming. I contributed to the open source Python HTTP client <a href="https://github.com/urllib3/urllib3">urrlib3</a>. I wrote a <a href="https://payments.posthaven.com/">blog</a> about the experience.</p><p id="f2570a17-872e-4c25-bc3a-f14f40e38b26" class="">
+</p><h3 id="d4c6e253-06a7-4841-b9d7-74c62b16d1d5" class="">Recurse Center</h3><p id="3b19c9b7-b3c4-44ed-9b92-2364ca5b124b" class=""><a href="https://www.recurse.com">RC</a> is like a writers&#x27; retreat for programmers. I spent time on WebAssembly (repos <a href="https://github.com/savarin/minimal">here</a> and <a href="https://github.com/savarin/bridge">here</a>), compilers and functional programming. I contributed to the open source Python HTTP client <a href="https://github.com/urllib3/urllib3">urrlib3</a>. I wrote a <a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Experiments%20in%20managing%20perfectionism%2023454a4b6d2545fb8f70018a0f33f0f1.html">blog</a> about the experience. I returned for a mini-batch at the start of 2022; my <a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Rewriting%20my%20toy%20blockchain%20in%20Rust%209a130f225666488491ba497004821fbb.html">post</a> on the experience reached top 10 of Hacker News.</p><p id="f2570a17-872e-4c25-bc3a-f14f40e38b26" class="">
 </p><h3 id="d19f2493-ca7a-46f8-b30b-f353e6bc1526" class="">Bradfield School of CS</h3><p id="b77d220e-a33e-444e-9020-0297405a3ddb" class="">I love <a href="https://bradfieldcs.com">Bradfield</a>, perhaps best known for their Teach Yourself CS <a href="https://teachyourselfcs.com/">guide</a>. I completed the set of <a href="https://bradfieldcs.com/courses/">courses</a> that make up the CS undergrad curriculum, particularly memorable were projects for <a href="https://github.com/savarin/minimal-lox">compilers</a>, <a href="https://github.com/savarin/sql">databases</a> and <a href="https://github.com/savarin/tost">APIs</a>. I&#x27;m currently in Cohort 3 of Bradfield&#x27;s Computer Science Intensive <a href="https://bradfieldcs.com/csi/">program</a>.</p><p id="a7ab3e06-3508-4c11-95ab-d72e6ee16932" class="">
 </p></div></article></body></html>
