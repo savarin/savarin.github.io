@@ -1,0 +1,730 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Compressing chess positions for fun and profit</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="df1fdb53-64eb-42fd-ac11-eb23b25e9605" class="page sans"><header><h1 class="page-title">Compressing chess positions for fun and profit</h1></header><div class="page-body"><p id="e07b95c2-cdaa-48a9-82b2-49506bc9c38e" class=""><em>Author&#x27;s note: This post was adapted from a presentation at the </em><a href="https://www.recurse.com"><em>Recurse Center</em></a><em>.</em></p><p id="f156f8d0-c87b-4e92-9d42-e4b6cdd7fa09" class="">
+</p><p id="5980285b-06d2-46e7-89d6-2c4c7dd1fe6f" class="">This excursion started with <a href="https://sr.ht/~ntietz">Nicholas Tietz-Sokolsky</a>’s <a href="https://ntietz.com/blog/rc-week-8-recap">blog post</a>.</p><figure id="d286047d-b8c7-4a24-b45d-79dba4f3c030" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled.png"/></a></figure><p id="b5427a57-6459-4145-91af-f4050ea00478" class="">
+</p><p id="75626a80-7e01-4d8f-b097-e903c7658826" class="">I couldn’t help but wonder - is this really the case?</p><h1 id="719eccf0-cac8-48d5-ab4f-3c9bc828a5b4" class="">Easy mode</h1><p id="3a49b9c5-4345-46bb-b963-b62c008d4d45" class="">There are 32 pieces on a chess board. Here we line them up side-by-side.</p><figure id="ad853419-3d00-42f1-85e5-be317f70fbf7" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%201.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%201.png"/></a></figure><p id="771428fc-bc0d-406f-ba93-6c3875764543" class="">
+</p><p id="20551ec7-35e3-411b-b79b-9b2af54c32ec" class="">Each piece can occupy one of 64 squares. Let’s denote each piece by a number between 0 and 63 to represent the respective square.</p><figure id="50d9f16d-5480-4c16-90a8-08fdfd1ce6b3" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%202.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%202.png"/></a></figure><p id="b260a449-3f5f-4cc5-8331-629c6d9fefdc" class="">
+</p><p id="1424b30a-ca74-493a-b7df-5f680fc83d15" class="">Since each position takes up 6 bits (<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>6</mn></msup><mo>=</mo><mn>64</mn></mrow><annotation encoding="application/x-tex">2^6 = 64</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">64</span></span></span></span></span><span>﻿</span></span>), multiplying 6 bits by 32 pieces gives us 192 bits / <strong>24 bytes</strong> (1 byte = 8 bits).</p><h1 id="388c9724-9c85-40a7-99f2-060d4ca0ccdd" class="">Not so fast</h1><p id="da13f86c-d33c-41d5-a019-ad021cdb4243" class="">Of course, it’s rarely that simple <a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605.html">[1]</a>.</p><h3 id="5cdc8ec1-6569-49e6-8647-4b27771922b7" class="">Captures</h3><p id="46e4d1db-9ca9-4e4a-bc30-65d4f6d03e67" class="">In addition to positions, we need to keep track of captured pieces as these pieces do not appear on the board.</p><figure id="ab9477c8-2304-4d3f-a7b1-17e619b5ecf7" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%203.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%203.png"/></a></figure><h3 id="b061dfe7-6e2e-47ef-8577-d6cb0264347f" class="">Castling availability</h3><p id="a41230c7-2327-4334-adca-7c3bd98fab65" class="">We need to track if <a href="https://en.wikipedia.org/wiki/Castling">castling</a> is available on the king’s side, on the queen’s side, or both. In particular, castling is not permitted if the king or the rook has previously moved.</p><figure id="31c4644c-7187-48b1-a910-5082d5fba2f5" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%204.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%204.png"/></a></figure><h3 id="9a21dd78-c126-49bb-881b-d7892d2a4cbe" class="">En passant target</h3><p id="244e8f1f-efc9-4ca8-a259-b522253fa95e" class="">The <a href="https://en.wikipedia.org/wiki/En_passant">en passant</a> capture is permitted on the turn immediately after the opposing pawn makes the double move. The capturing pawn moves to the square behind the opposing pawn; this square is called the en passant target.</p><figure id="9f97dc95-abbb-45cc-aabb-77a8fc4ad90a" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%205.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%205.png"/></a></figure><h3 id="a655043c-0250-465f-80da-33b681452d5a" class="">Promotions</h3><p id="636f7d45-f29c-4b50-a15a-351da4e30fd0" class="">A <a href="https://en.wikipedia.org/wiki/Promotion_(chess)">promotion</a> takes place when a pawn makes it to the final rank, and is then replaced with a knight, bishop, rook or queen.</p><figure id="cdc7c016-b25b-486e-bc2b-d8465310c822" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%206.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%206.png"/></a></figure><p id="e5ccbc32-c5ec-491c-965c-2537775dcec1" class="">
+</p><p id="78f3766e-63e2-4c60-9486-5a2b0cc96863" class="">We can track captures with a bitmap of <strong>32 bits</strong>, each bit representing a piece. We can similarly use bitmaps for castling availability and en passant targets with <strong>4</strong> and <strong>16 bits</strong> respectively (1 bit for each rook and 1 bit for each pawn) <a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605.html">[2]</a>.</p><p id="07167018-4155-4b3e-8b41-8d12e3535309" class="">
+</p><p id="9e7d4a8d-172c-4a7f-a00f-4a744e88606b" class="">Promotions take a bit more space. For each pawn we need 3 bits: 1 bit for whether or not its been promoted, plus 2 bits for what piece its been promoted to. That’s <strong>48 bits</strong> altogether.</p><p id="af36e33d-d4f3-41ca-adb4-36f3df9eea57" class="">
+</p><p id="915827b5-f47d-4924-a233-2c24ee0f8225" class="">In summary:</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="31deacd2-1cfb-4dc8-8d5f-bf5a27cd2950"><div style="font-size:1.5em"><span class="icon">🔴</span></div><div style="width:100%">1 bit x 32 (for captures)
++ 1 bit x 4 (for castling)
++ 1 bit x 16 (for en passant)
++ 3 bits x 16 (for promotions)
+= 100 bits / <strong>~12 bytes</strong></div></figure><p id="0840d506-e15e-4d12-9291-50506827c8e6" class="">
+</p><p id="afe3c75d-50f4-4c56-843f-21f94fe2cea0" class="">Can we do better?</p><h1 id="ab6c59ae-6b4c-4396-ac7d-2ec993c365b3" class="">No two pieces occupy the same square</h1><p id="d1bb2faa-8bb7-4abf-bfbe-9f47beca2446" class="">The first observation is that no two pieces can occupy the same square on the board.</p><p id="44f5cb0c-5e84-4e0c-b867-0873a51b8c89" class="">
+</p><p id="51e0eb38-3c4d-4a51-b809-9844fdc5895f" class="">We can apply this to captures by using the opposing king’s position to represent the capture of that piece.</p><figure id="68458c78-37a6-41e4-83cb-5e18f300c938" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%207.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%207.png"/></a></figure><p id="3492c0a1-fde5-4e42-a3a8-e2e17fc30e3f" class="">
+</p><p id="632bb571-fbae-44a6-b428-474719a050b2" class=""><a href="https://github.com/cthulahoops">Adam Kelly</a> noted how we can take this further by using our own king’s position. For castling, we simply replace the rook’s position. Since castling is available only if the rook has not moved, we know that the rook would be at its original position.</p><figure id="09ba174f-e463-46f2-9d20-4cbfd03aaec5" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%208.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%208.png"/></a></figure><p id="05703a9f-57fb-4828-b06b-dac140503652" class="">
+</p><p id="2429d053-83d6-4d63-bef1-15534fc1bfb8" class="">For en passant, we know that the pawn that just made the double move is at its home file and at a specific rank (4 for white or 5 for black). We similarly replace the pawn’s position with our own king’s position.</p><figure id="572eb05c-1624-49d9-8b99-229dc27a9103" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%209.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%209.png"/></a></figure><p id="407efc57-0e14-41e9-aa82-772e1dd91e80" class="">
+</p><p id="d9891164-8c06-46ab-9e38-3056f300cf02" class="">By using this trick, we can store captures, castling availability and the en passant target for free!</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a049dd50-0105-4408-9b1a-606ec82ee3cf"><div style="font-size:1.5em"><span class="icon">🟡</span></div><div style="width:100%"><em><mark class="highlight-red">free!</mark></em> (for captures)
++ <em><mark class="highlight-red">free!</mark></em> (for castling)
++ <em><mark class="highlight-red">free!</mark></em> (for en passant)
++ 3 bits x 16 (for promotions)
+= 48 bits / <strong>6 bytes</strong></div></figure><p id="697e6174-0233-4785-b534-4deacc28e436" class="">
+</p><p id="fa3657ee-245b-4c9f-8d13-543634faeaca" class="">Let’s take a closer look at promotions.</p><h1 id="17bf8eaa-aa94-4bc8-9008-c7267ef3fdd9" class="">Ordering of promotions can be unique</h1><p id="324af255-bbb5-489a-ac93-0fd8afec92cd" class="">The second observation is that the ordering of promoted pawns can be made unique.</p><p id="8271b348-1bd0-4b64-a73e-7d746c32b148" class="">
+</p><p id="b5300c9c-7848-4293-8685-47c3e2bb0773" class="">In this illustrative example, one pawn is promoted to a queen and another to a rook. The top line on the right represents white pawn positions, while the bottom lines represent the promotion encoding (3 bits for each white pawn) <a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605.html">[3]</a>.</p><figure id="897bb330-6989-48d5-b6d4-5fdc3ed5b51e" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%2010.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%2010.png"/></a></figure><p id="4be41d50-b928-4911-ad02-c6cdef4f6e22" class="">
+</p><p id="860be3ac-98e4-4d3c-982b-b5f015d64374" class="">Now let’s do the following:</p><ol type="1" id="4f8fbbfe-1142-467c-a064-8fb0440b8572" class="numbered-list" start="1"><li>Represent non-promoted pawns by <code>0</code> and the promoted pawns by <code>1</code> to <code>4</code>.</li></ol><ol type="1" id="d5c835f1-41d0-44db-8f19-712024a6ab24" class="numbered-list" start="2"><li>Sort the representation in ascending order and reorder the positions accordingly <a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605.html">[4]</a>.</li></ol><figure id="dc39fee7-38f6-4e8d-9558-3e7c635450e9" class="image"><a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%2011.png"><img style="width:3738px" src="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605/Untitled%2011.png"/></a></figure><p id="afb81be5-29c7-4979-a4e4-bb46022693ab" class="">
+</p><p id="dfe5cd79-a941-46cb-8827-c664f9a1791b" class="">This gives us the string <code>00000034</code> to uniquely represent this specific set of promotions, without information loss.</p><p id="6057f4e4-7f0d-409d-91eb-6bea2dbc8948" class="">
+</p><p id="999d6161-7eb7-4ec8-8a2a-b50fd54a7e98" class="">How many possible strings are there? Generating this by brute force, we end up with 495 distinct strings <a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605.html">[5]</a>. </p><pre id="701a63b6-224d-4ea3-b2c1-caa487ee14c5" class="code"><code>len(
+    set(
+        [
+            tuple(sorted((a, b, c, d, e, f, g, h)))
+            for a in [0, 1, 2, 3, 4]
+            for b in [0, 1, 2, 3, 4]
+            for c in [0, 1, 2, 3, 4]
+            for d in [0, 1, 2, 3, 4]
+            for e in [0, 1, 2, 3, 4]
+            for f in [0, 1, 2, 3, 4]
+            for g in [0, 1, 2, 3, 4]
+            for h in [0, 1, 2, 3, 4]
+        ]
+    )
+)</code></pre><p id="e83ba3b2-9ff4-4ced-9bd1-9a884bce199a" class="">
+</p><p id="6415f740-cf42-4bba-a851-ce486f7d7611" class="">This can be stored in <strong>9 bits</strong> for each side <a href="Compressing%20chess%20positions%20for%20fun%20and%20profit%20df1fdb5364eb42fdac11eb23b25e9605.html">[6]</a>.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="db0e1083-bfb5-4fa0-9abe-aee2c9bb4cb5"><div style="font-size:1.5em"><span class="icon">🟢</span></div><div style="width:100%"><em>free!</em> (for captures)
++ <em>free!</em> (for castling)
++ <em>free!</em> (for en passant)
++ <mark class="highlight-red">9 bits x 2</mark> (for promotions)
+= 18 bits / <strong>~2 bytes</strong></div></figure><p id="ac8fb6da-8735-4cf3-b8f9-4a2eec77fa05" class="">
+</p><p id="1557a776-d6ff-41aa-87fd-3c4c42b95fbc" class="">We add this to the 24 bytes for positions and end up with a total of <strong>~26 bytes</strong>!</p><h1 id="e0d766ca-d211-4dfa-b702-66285a236a3e" class="">Next steps</h1><p id="1f13eb0c-706e-4235-8423-d5b2edb91aeb" class="">Feel free to try this out on Replit <a href="https://replit.com/@savarin/bitpacker?v=1">here</a>! The code can be found on Github <a href="https://github.com/savarin/bitpacker">here</a>.</p><p id="ca0b3131-d1b6-472d-a9b6-649b98b3bd14" class="">
+</p><p id="16ff9a8a-4267-4e88-99e3-4c2e38285c7a" class="">Chess encoding (and compression in general!) is a deep and fascinating topic. This <a href="https://lichess.org/blog/Wqa7GiAAAOIpBLoY/developer-update-275-improved-game-compression">post</a> discusses the use of <a href="https://en.wikipedia.org/wiki/Huffman_coding">Huffman coding</a> to efficiently store chess games.</p><p id="badf7126-4c6c-4b2c-aa0c-fc38a110e1ed" class="">
+</p><p id="d78c008b-0d88-4313-bccf-f78da0f1809d" class="">If this sounds like fun, you should apply to Recurse Center! The <a href="https://www.recurse.com/faq#:~:text=The%20next%20batch%20starts%20on%20Tuesday%2C%20January%203rd%2C%202023">next batch</a> starts on Jan 3 2023, with an <a href="https://www.recurse.com/events/rc-december-info-session">information session</a> on Dec 9 2022.</p><p id="96e8f542-3e8a-4cf4-976f-d8ce04f0dfee" class="">
+</p><p id="c85cf8f1-8cc2-49e4-8699-516ce17f5d4f" class="">If you’re curious about my take, I’m reachable <a href="https://airtable.com/shrqMzRrrdIWkv0fg">here</a>. Other RC posts can be found <a href="Rewriting%20my%20toy%20blockchain%20in%20Rust%209a130f225666488491ba497004821fbb.html">here</a> and <a href="https://payments.posthaven.com">here</a>.</p><p id="829ab9e5-abfc-433d-bace-3acfc53f110f" class="">
+</p><p id="bbc4a857-8aff-453c-b21a-1170a7208ba5" class="">
+</p><p id="c945ac31-3d51-4735-885f-428bf988f343" class="">
+</p><p id="0b4460c8-dbc6-4a54-8950-0151b7f65ae0" class=""><strong>[1]</strong> The <a href="https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">Forsyth-Edwards Notation</a> stores the positions, active color, castling availability, target square, the half-move clock and full-move number.</p><p id="65d74fbb-b55b-4ace-9b79-bdcd76a64ddd" class="">
+</p><p id="793a78f7-7a1b-49aa-84c1-5e65206bf354" class=""><strong>[2]</strong> Since at most 1 pawn is available for en passant capture, we can actually make this more compact. We need 1 bit for whether or not it’s available, plus 4 bits to represent 16 pawns, for a total of 5 bits.</p><p id="46b7a289-70eb-4399-92f7-b32f549529a1" class="">
+</p><p id="844401b3-9e80-432a-873f-8d7354f9991f" class=""><strong>[3]</strong> We use <code>n</code>, <code>b</code>, <code>r</code> and <code>q</code> to represent the promotions to knight, bishop, rook and queen respectively. This is purposely chosen, as a contrast to the <code>0</code> - <code>4</code> representation that follows.</p><p id="7586fc0a-ae72-4558-b825-0ffa826beff9" class="">
+</p><p id="27411817-cac5-48d6-ac84-0c3d3a7df391" class=""><strong>[4]</strong> For en passant we need the pawn to remain on its home file. Hence we exclude the pawn from this step if it can be captured en passant. Captures can appear on any file.</p><p id="40058f49-65c7-4e9a-a0c6-dea63395f2c7" class="">
+</p><p id="cc3f030f-552c-4c6a-9639-6605f71ef73e" class=""><strong>[5]</strong> <a href="https://github.com/bzinberg">Ben Zinberg</a> uses a balls-and-urns argument to come up with 495.</p><blockquote id="2539d345-a58d-4608-899f-7cc734bdf420" class="">For each string of 0s, 1s and 2s having length 3 in weakly ascending order as you describe, you can imagine writing the string on 5 blank spaces, where there is a ‘divider’ space any time the digit changes. For example, the string <code>012</code> would be written <code>0 _ 1 _ 2</code> where the <code>_</code>s are divider spaces. The string <code>000</code> would be written <code>0 0 0 _ _</code> with a string of zero 1s after the first divider and a string of zero 2s after the second divider.
+
+The digits to write on the non-divider spaces are uniquely determined by where you place the dividers. Thus, the strings you describe are in one-to-one correspondence with choices of how to place the 2 dividers, and the number of ways to do that is the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">binomial coefficient</a> <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mn>5</mn><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><mo stretchy="false">(</mo><mn>25</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\binom{5}{2}(25)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.245118em;vertical-align:-0.35001em;"></span><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8951079999999999em;"><span style="top:-2.3550000000000004em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.144em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span><span class="mopen">(</span><span class="mord">25</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>.
+
+This argument generalizes to say, the number of weakly-ascending sequences of integers in <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{ 0, \ldots, k - 1 \}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">}</span></span></span></span></span><span>﻿</span></span> having length <em><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span></em> is equal to the number of ways to place <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span> divider spaces among <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n + k - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span> blank spaces, which is equal to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mrow><mi>n</mi><mo>+</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\binom{n + k - 1}{k - 1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3334389999999998em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9301079999999999em;"><span style="top:-2.355em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.144em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span></span><span>﻿</span></span>.</blockquote><p id="1e2cdf3d-6100-4554-a310-6d96398db3be" class="">
+</p><p id="c197a41b-3bbc-400c-9941-3ff6b0837865" class=""><strong>[6]</strong> With a limit of 8 bits for each side, we can fully track at most 4 promoted pawns. Alternatively we note that promotions always involve a capture; we can potentially reclaim 1 bit by convention of denoting captures either left-most or right-most.</p><p id="1b32eabe-118e-41bf-be6d-01bb582cc5b0" class="">
+</p></div></article></body></html>
