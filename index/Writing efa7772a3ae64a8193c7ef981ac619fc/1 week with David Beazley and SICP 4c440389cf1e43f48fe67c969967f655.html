@@ -668,7 +668,7 @@ blockquote {
 	
 </style></head><body><article id="4c440389-cf1e-43f4-8fe6-7c969967f655" class="page sans"><header><h1 class="page-title">1 week with David Beazley and SICP</h1></header><div class="page-body"><p id="efc51075-24f6-4632-9681-3ab2237f4091" class="">I had the chance to do David Beazley’s <a href="https://www.dabeaz.com/sicp.html">SICP course</a> towards the end of 2022. I have only good things to say.</p><p id="1999a836-b069-4911-b6a2-980baab87409" class="">
 </p><p id="1d920363-c4fb-4c5e-ab8a-37ef1cd34238" class="">There are a lot of free resources out there <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[1]</a>. Having Dave as a guide, I was amazed at how much we covered in a week. I loved how he cherry-picked topics for the high-level overview, but takes the time to hone in on critical sections. In some cases, Dave even comes up with his own examples to more cleanly illustrate concepts being discussed.</p><p id="e4cb229c-1923-46b5-be5c-99cbcf5b3258" class="">
-</p><p id="6747fc3c-0961-4d4c-b048-e0f0ea3875ef" class="">What did I learn? It’s hard to describe. I’ll explain by analogy. When I learned about compilers, I discovered languages have much more in common than I realized; I now see the big picture <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[2]</a>. With SICP it’s a bit like that, but with the idea of computation more generally.</p><p id="135f728c-4193-4413-92ae-d5de7c0fa454" class="">
+</p><p id="6747fc3c-0961-4d4c-b048-e0f0ea3875ef" class="">What did I learn? It’s hard to describe. I’ll explain by analogy. When I learned about compilers, I discovered that languages have much more in common than I realized; I now see the big picture <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[2]</a>. With SICP it’s a bit like that, but with the idea of computation more generally.</p><p id="135f728c-4193-4413-92ae-d5de7c0fa454" class="">
 </p><p id="be7b0024-915f-48c5-a7a5-0694b46bb114" class="">Let’s review a few key concepts, and then go into what I found especially mind-blowing.</p><h1 id="f27bc090-2eb7-4483-8186-487a2b09f915" class="">Starting point</h1><p id="aa820f83-691e-44ca-94b4-3213131aa896" class="">In this section, we build a simple model of computation through the process of substitution. We start with a quick review of Scheme (the language used in SICP), next build a Scheme interpreter in Python, and then take a closer look at substitution.</p><h3 id="926c8719-01d6-42ac-bac9-d14cdfdad3c0" class="">Scheme</h3><p id="8a9b57d1-149e-419d-8ea7-ccdae469cb9a" class=""><a href="https://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a> is a dialect of <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a>. For the course we actually used <a href="https://en.wikipedia.org/wiki/Racket_(programming_language)">Racket</a>, which is similar but easier to set up <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[3]</a>. For our purposes we only need a small part of the language; here Scheme and Racket coincide. The <code>&gt;</code> in this subsection represents the Scheme REPL.</p><p id="83ebc154-bfd9-4a2e-b34d-c985b705eebf" class="">
 </p><p id="6e466513-fd82-42fc-8f16-7594c2d5dc95" class="">Primitives are the simplest entities in the language. We only need integers. When evaluated we simply get it back.</p><pre id="74e7d259-7045-4578-b5aa-6e6bac93463a" class="code"><code>&gt; 1
 1</code></pre><p id="4bbf7183-651c-45e3-8eaf-9f5b0ebbc2c9" class="">
@@ -688,7 +688,14 @@ blockquote {
 </p><p id="68130016-abe9-486f-9d26-cd460f7b1a9a" class="">By combining <code>define</code> and <code>lambda</code>, we can create user-defined functions. Here we bind the operation in the previous example to <code>square</code>.</p><pre id="51a31ccc-87e3-4a30-be13-c4a6cb796f0f" class="code"><code>&gt; (define square (lambda (x) (* x x)))
 
 &gt; (square 3)
-9</code></pre><p id="ae98c898-035c-48f2-bf89-5533e032d336" class=""> </p><h3 id="e5676316-be07-43c4-b934-8ed66c72ca9a" class="">Scheme interpreter in Python</h3><p id="fb3499ef-446a-47fb-a5b5-489ef93d6ac5" class="">How do we write a Python function that takes in Scheme source code and returns what Scheme would return? The <code>&gt;</code> in this subsection represents the Python REPL.</p><p id="8402fc89-1833-4601-b66c-d497d7fe79f2" class="">
+9</code></pre><p id="ae98c898-035c-48f2-bf89-5533e032d336" class=""> </p><p id="529c2a7b-c414-4623-bdde-e5c0749f5dbe" class="">We introduce these here for use in later sections. The special form <code>cons</code> lets you create data pairs. The first item in the pair is accessed with <code>car</code>, the remainder with <code>cdr</code> <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[4]</a>.</p><pre id="2d891ea2-4be9-4b1f-996b-3dbd4322725a" class="code"><code>&gt; (define pair (cons 1 2))
+
+&gt; (car pair)
+1
+
+&gt; (cdr pair)
+2</code></pre><p id="e5676316-be07-43c4-b934-8ed66c72ca9a" class="">
+</p><h3 id="5c64d6da-99d8-44e8-89cc-09c6fd893043" class="">Scheme interpreter in Python</h3><p id="fb3499ef-446a-47fb-a5b5-489ef93d6ac5" class="">How do we write a Python function that takes in Scheme source code and returns what Scheme would return? The <code>&gt;</code> in this subsection represents the Python REPL.</p><p id="8402fc89-1833-4601-b66c-d497d7fe79f2" class="">
 </p><p id="d97ae2cc-1d0a-4de0-a356-083f3e3b340a" class="">For primitives, we return as is.</p><pre id="dce37738-99f1-4855-a58a-e3e7a74bdcba" class="code"><code>def evaluate(expression):
     if isinstance(expression, int):
         return expression</code></pre><p id="687035dd-77c9-43c2-a431-65975b2d9107" class="">
@@ -722,7 +729,7 @@ def evaluate(expression):
 # (lambda x, y: x + y)(*[2, 3)])
 # 2 + 3
 5</code></pre><p id="36bd9917-1cf7-443b-aaee-394868d36713" class="">
-</p><p id="dd6ddaf5-b5e8-44d9-873f-a81568906d89" class="">With <code>define</code>, we evaluate the expression and then store in <code>definitions</code>.</p><pre id="56f5c58a-31c6-4141-ad26-14105c92032e" class="code"><code>def evaluate(expression):
+</p><p id="dd6ddaf5-b5e8-44d9-873f-a81568906d89" class="">With <code>define</code>, we evaluate the expression and then store the name-result pair in <code>definitions</code>.</p><pre id="56f5c58a-31c6-4141-ad26-14105c92032e" class="code"><code>def evaluate(expression):
     ...
 
     elif isinstance(expression, tuple):
@@ -731,7 +738,7 @@ def evaluate(expression):
             return None
 
         ...</code></pre><p id="fe201522-4274-432b-90df-7df82eac1d76" class="">
-</p><p id="29b2eca5-c820-4ccb-a8c5-1430c0f11c4d" class="">When called, we substitute from <code>definitions</code>. For simplicity, we use <code>definitions</code> for both built-ins and <code>define</code> operations.</p><pre id="229602ed-9ecc-493a-9264-cf567b356aa1" class="code"><code>&gt; evaluate((&quot;define&quot;, &quot;x&quot;, 2))
+</p><p id="29b2eca5-c820-4ccb-a8c5-1430c0f11c4d" class="">When called, we get the value from <code>definitions</code> and substitute into the expression. For simplicity, we use <code>definitions</code> for both built-ins and <code>define</code> operations.</p><pre id="229602ed-9ecc-493a-9264-cf567b356aa1" class="code"><code>&gt; evaluate((&quot;define&quot;, &quot;x&quot;, 2))
 # definitions[&quot;x&quot;] = 2
 None
 
@@ -744,7 +751,7 @@ None
 # (lambda x, y: x + y)(*[2, evaluate(3)])
 # (lambda x, y: x + y)(*[2, 3])
 5</code></pre><p id="3c5caa53-b98e-42cf-ade4-67a614ecb103" class="">
-</p><p id="59639712-1a21-4245-a3f0-eb2a79d17b3b" class="">Re: <code>if</code>, suppose we have the form <code>(if predicate then else)</code>. If the <code>predicate</code> is true, we evaluate the <code>then</code> clause and return the result. Otherwise evaluate the <code>else</code> clause and return the result.</p><pre id="8a1c91c6-fa6b-407a-ac0e-643b35f68282" class="code"><code>definitions = {
+</p><p id="59639712-1a21-4245-a3f0-eb2a79d17b3b" class="">For <code>if</code>, suppose we have the form <code>(if predicate then else)</code>. If the <code>predicate</code> is true, we evaluate the <code>then</code> clause and return the result. Otherwise evaluate the <code>else</code> clause and return the result.</p><pre id="8a1c91c6-fa6b-407a-ac0e-643b35f68282" class="code"><code>definitions = {
     ...
     &quot;=&quot;: lambda x, y: x == y,
     &quot;&lt;&quot;: lambda x, y: x &lt; y,
@@ -824,7 +831,7 @@ None
 # definitions[&quot;square&quot;](*[evaluate(expr) for expr in [3])
 # evaluate((&quot;lambda&quot;, (&quot;x&quot;,) (&quot;*&quot;, &quot;x&quot;, &quot;x&quot;)))(*[evaluate(expr) for expr in (3,)])
 9</code></pre><p id="e28d694e-6c1c-4e83-96cd-f481ac96e3b2" class="">
-</p><h3 id="8ec7c87e-2c0f-4414-9ba3-a5781754696a" class="">The substitution model</h3><p id="22c5411d-2cab-45b1-81ea-475d661fe69f" class="">Learning compilers usually involves creating a toy language. To wrap my head around how selected parts of the language work, I built an <a href="https://github.com/savarin/minimal-lox">MVP</a> to generate Fibonacci numbers. It’s a nice use case, requiring built-in operations, control flow and recursive function calls (twice!).</p><p id="61c8900b-8c31-4b0c-bbee-4279af044a63" class="">
+</p><h3 id="8ec7c87e-2c0f-4414-9ba3-a5781754696a" class="">The substitution model</h3><p id="22c5411d-2cab-45b1-81ea-475d661fe69f" class="">Learning compilers often involves creating a toy language. To wrap my head around how it works, I implemented a minimal <a href="https://github.com/savarin/minimal-lox">version</a> that allows Fibonacci number generation. It’s a nice use case, requiring built-in operations, control flow and recursive function calls (twice!).</p><p id="61c8900b-8c31-4b0c-bbee-4279af044a63" class="">
 </p><p id="a1c67aae-c775-482e-8850-43227e201158" class="">I was impressed how our previous construction can be used to generate Fibonacci numbers.</p><pre id="d6399fdd-145d-434f-8bcd-ed9263806f7f" class="code"><code>fibonacci = (
     &quot;lambda&quot;, (&quot;n&quot;,),
     (
@@ -833,122 +840,102 @@ None
             (&quot;+&quot;, (&quot;fib&quot;, (&quot;-&quot;, &quot;n&quot;, 2)), (&quot;fib&quot;, (&quot;-&quot;, &quot;n&quot;, 1))),
     ),
 )</code></pre><p id="8d05686a-bbb0-40fb-9d27-6bac6aaca2aa" class="">
-</p><p id="bec756f3-13fc-4a0e-9f02-f577b41dd1c5" class="">Here we use it to generate the first 10 numbers. The full code can be found <a href="https://github.com/savarin/pyscheme/blob/0f47292c8e5112425b50db19b744a50d8cabde4f/src/test_pyscheme.py#L33-L42">here</a>.</p><pre id="68de4d1c-4216-4a16-9d36-e898f9fb215b" class="code"><code>&gt; evaluate((&quot;define&quot;, &quot;fibonacci&quot;, fibonacci))
+</p><p id="bec756f3-13fc-4a0e-9f02-f577b41dd1c5" class="">Here we use it to generate the first 10 numbers. The full code can be found <a href="https://github.com/savarin/pyscheme/blob/0f47292c8e5112425b50db19b744a50d8cabde4f/src/pyscheme.py">here</a>.</p><pre id="68de4d1c-4216-4a16-9d36-e898f9fb215b" class="code"><code>&gt; evaluate((&quot;define&quot;, &quot;fibonacci&quot;, fibonacci))
 None
 
 &gt; [evaluate((&quot;fibonacci&quot;, i)) for i in range(10)]
 [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</code></pre><p id="7a9e2c2c-85ee-43b8-b83c-76f3028f1036" class="">
-</p><p id="a1b8332a-fd41-4b1b-b25e-7c2ded3aa5db" class="">It feels we haven’t done very much, but somehow end up with a pretty sophisticated system. We do this by only applying substitution.</p><p id="05524553-db8c-4666-99b0-4415af109f20" class="">
-</p><p id="79e1a63c-593a-45af-ae51-601eac5ce5be" class="">Let’s phrase this in SICP terms.</p><blockquote id="15a0d77d-0a61-42ed-ac8a-a1318910d51b" class="">In programming, we deal with two kinds of elements: procedures and data. … Informally, data is “stuff” that we want to manipulate, and procedures are descriptions of the rules for manipulating the data.</blockquote><p id="80bc9a10-508a-4e91-9e3b-f4da45c0f0ce" class="">
+</p><p id="a1b8332a-fd41-4b1b-b25e-7c2ded3aa5db" class="">It feels we haven’t done that much, but somehow end up with a pretty sophisticated system. We do this by only applying substitution.</p><p id="05524553-db8c-4666-99b0-4415af109f20" class="">
+</p><p id="79e1a63c-593a-45af-ae51-601eac5ce5be" class="">Let’s phrase this in SICP <a href="http://sarabander.github.io/sicp/html/1_002e1.xhtml#g_t1_002e1">terms</a>.</p><blockquote id="15a0d77d-0a61-42ed-ac8a-a1318910d51b" class="">In programming, we deal with two kinds of elements: procedures and data. … Informally, data is “stuff” that we want to manipulate, and procedures are descriptions of the rules for manipulating the data.</blockquote><p id="80bc9a10-508a-4e91-9e3b-f4da45c0f0ce" class="">
 </p><p id="cdee0760-b38b-4f1d-896b-825bcbd68905" class="">Hence the idea of substitution serves as an introductory mental model of how a procedure works. In fact, the first two chapters can be described entirely via substitution (about one-third of a ~600-page book).</p><p id="bfa18373-67c3-4103-8816-6a411b60f365" class="">
-</p><p id="0286297a-ce79-4481-ad5d-fae1a2792ecb" class="">SICP does emphasize how interpreters do not typically operate by means of substitution. However, this model provides a useful starting point.</p><h1 id="ef5e7fba-0f12-436f-83a7-63cc03e5cbc0" class="">State</h1><p id="8762a64d-2202-4576-ab6d-8184e4e9ef63" class="">In this section, we explore where the substitution model breaks down.</p><h3 id="c6c342fc-10ce-4f9a-86d2-18356ef4c4c8" class="">Assignment</h3><p id="7efa518e-58b6-4ae9-b845-11ce91c70221" class="">Suppose we’re modeling a bank account with a balance that changes. Scheme has the special form <code>set!</code> to change the value of an existing variable. We use it in the procedure <code>withdraw</code> that reduces the balance by the value <code>amount</code> and returns the updated balance.</p><pre id="280d9a8c-200b-4ef3-b10f-9cebe4d0c47f" class="code"><code>(define balance 100)
+</p><p id="0286297a-ce79-4481-ad5d-fae1a2792ecb" class="">SICP does emphasize how interpreters do not typically operate by means of substitution. However, this model provides a useful starting point <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[5]</a>.</p><h1 id="ef5e7fba-0f12-436f-83a7-63cc03e5cbc0" class="">State</h1><p id="8762a64d-2202-4576-ab6d-8184e4e9ef63" class="">In this section, we explore where the substitution model breaks down.</p><p id="70501a16-fbb6-405b-a84d-b041db6fec32" class="">
+</p><p id="7efa518e-58b6-4ae9-b845-11ce91c70221" class="">The following shorthand notation can be used to define procedures in Scheme; this notation omits the <code>lambda</code>. This will be our method going forward.</p><pre id="a25661fb-ceb7-436e-b0b4-5f8d4f6ef017" class="code"><code>(define (square x) (* x x))</code></pre><p id="c6c342fc-10ce-4f9a-86d2-18356ef4c4c8" class="">
+</p><h3 id="48041e8b-3569-4091-bb3c-8599d48c01f7" class="">Assignment</h3><p id="806bbf9e-e570-410a-8fda-5b73daf0141d" class="">Suppose we’re modeling a bank account with a balance that changes. Scheme has the special form <code>set!</code> to change the value of an existing variable. We use it in the procedure <code>withdraw</code> that reduces the balance by the value <code>amount</code> and returns the updated balance.</p><pre id="280d9a8c-200b-4ef3-b10f-9cebe4d0c47f" class="code"><code>(define balance 100)
 
-(define withdraw
-  (lambda (amount)
-    (set! balance (- balance amount))
-    balance))</code></pre><p id="d49e3a42-8b9a-4873-8aa7-9345634dd393" class="">
+(define (withdraw amount)
+  (set! balance (- balance amount))
+  balance)</code></pre><p id="d49e3a42-8b9a-4873-8aa7-9345634dd393" class="">
 </p><p id="91440197-7e10-4fe4-9d85-d271d15eb9a2" class="">When we make withdrawals, the balance changes as expected. The <code>&gt;</code> in this from this point onwards represents the Scheme REPL.</p><pre id="f12c8d54-72cd-4d38-8424-c9322e8c1d29" class="code"><code>&gt; balance
 100
 
 &gt; (withdraw 20)
 80</code></pre><p id="88a27966-4f5f-4089-8d59-1eda479efcad" class="">
-</p><p id="bede06aa-2f42-40ee-9d22-9fade3b0e027" class="">However if we simply apply the substitution model and replace <code>balance</code> with the value <code>100</code>, <code>withdraw</code> will always return the initial <code>balance</code>.</p><pre id="58886b39-491e-4e16-86ca-25e5a7f9ee64" class="code"><code>(define withdraw
-  (lambda (amount)
-    (set! 100 (- 100 amount))
-    100))</code></pre><p id="e66eddf7-fb1f-41ff-80fa-e8e80b6e7322" class="">
+</p><p id="bede06aa-2f42-40ee-9d22-9fade3b0e027" class="">However if we simply apply the substitution model and replace <code>balance</code> with the value <code>100</code>, <code>withdraw</code> will always return the initial balance.</p><pre id="58886b39-491e-4e16-86ca-25e5a7f9ee64" class="code"><code>(define (withdraw amount)
+  (set! 100 (- 100 amount))
+  100)</code></pre><p id="e66eddf7-fb1f-41ff-80fa-e8e80b6e7322" class="">
 </p><p id="685dd99e-d027-479f-b48b-52924c262f0f" class="">In other words, assignment breaks down the substitution model. The substitution model cannot distinguish between the balance before the <code>set!</code> and the balance after the <code>set!</code>.</p><p id="a9189c72-7ae4-4638-9408-4e491ac93831" class="">
 </p><p id="d8d3dd8e-ff9f-48a4-8d34-cea46553731c" class="">To accommodate assignment, we can no longer have <code>define</code> serving as an alias. We need to introduce an environment where variables are defined, with corresponding get and set operators. Each procedure now has an attached environment in which they were defined. Every application of the procedure creates a new environment that holds procedure arguments.</p><p id="573823b3-e725-4263-bb2c-813dbd02b4a5" class="">
-</p><p id="1f276544-b535-42d5-8830-4009bbf4b785" class="">The environment determines the context in which an expression should be evaluated, but understanding how multiple environments relate to one another is non-trivial. I distinctly recall Dave patiently walking us through different scenarios, sketching box-and-arrow diagrams along the way. Having this exposition before a closer review of the section in the book is priceless.</p><p id="a83cca87-143f-472a-ba6a-a51121737a22" class="">
-</p><h3 id="dee36e65-8dc0-4755-b950-2f378f045065" class="">Streams</h3><p id="601bac10-54c8-4a10-8c6f-44c601bca6a0" class="">Let’s briefly review another model. Instead of a single change to the balance, suppose we have the sequence <code>amounts</code> that represents additions to or subtractions from the balance. Consider the following procedure, which gives us the whole balance history <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[4]</a>.</p><pre id="22c36d2c-fdbf-4007-81b0-eb0618f3a01e" class="code"><code>(define withdraw
-  (lambda (balance amounts)
-    (cons
-      balance
-      (withdraw (- balance (car amounts)) (cdr amounts)))))</code></pre><p id="faa190f5-4f2a-4f66-bff4-657dbd9f1680" class="">
-</p><p id="3b48201c-0ecc-495a-b7ed-08ff2b93716a" class="">Let’s take this a step further. What if there are terms in <code>amounts</code> that do not yet exist, either because the event has yet to happen or because materializing the next term requires a forced evaluation? This notion of delayed evaluation (analogous to a generator in Python), turns the sequence into what’s called a stream.</p><p id="fbe9916d-4323-4c70-8052-33704df3e3ae" class="">
-</p><p id="3d164624-5f83-40c5-a6e1-919d06ed693b" class="">I couldn’t help but smile to myself, when stream processing was described to me as a way to model state without ever using assignment or mutable data <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[5]</a>.</p><p id="3875e650-59a4-45b2-8e68-117b2d08b3ed" class="">
-</p><h3 id="f5cef2c7-fdba-4751-b159-5bc42a9d4677" class="">Trade-offs</h3><p id="2b6d5994-3c94-41f5-8a54-46c05d49dd90" class="">At the start of Chapter 3, SICP emphasizes how important it is to base the structure of our program on the structure of the system being modeled. As such, modeling real-world bank account balances seems most natural with mutable variables.</p><p id="e8c32359-c8b3-43e8-9b8f-f39001e16663" class="">
-</p><p id="714ffe02-5ef5-46b3-aa4b-010e482e114a" class="">The imperative or mutable model of programming is based on the idea of using assignments and mutable data structures to represent and manipulate state. We introduced environments to be able to handle mutable data. This is in contrast to the functional or immutable model, where pure functions are used to manipulate data without changing the state of the system.</p><p id="a494aa4f-0dc8-468d-8f0a-e3262f413e2f" class="">
-</p><p id="8857bb5d-89e0-430a-a2da-cdfeb423f492" class="">It is worth noting that the imperative model introduces side effects. This means that the order of operations now matter, as we need to ensure every statement is using the correct version of each variable <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[6]</a>. Managing this complexity often gets worse when we have concurrency <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[7]</a>.</p><p id="0b72a845-2fb2-4cb1-a062-7778e4f4f85b" class="">
+</p><p id="1f276544-b535-42d5-8830-4009bbf4b785" class="">The environment determines the context in which an expression should be evaluated, but it can be challenging to understand how multiple environments relate to each other. I distinctly recall Dave patiently walking us through different scenarios, sketching box-and-arrow diagrams along the way. Having this exposition before a closer review of the section in the book is priceless.</p><p id="a83cca87-143f-472a-ba6a-a51121737a22" class="">
+</p><h3 id="dee36e65-8dc0-4755-b950-2f378f045065" class="">Streams</h3><p id="27770e4c-5320-4463-89f9-1aed8c734a7a" class="">Let’s briefly review another model. Instead of a single change to the balance, suppose we have the sequence <code>amounts</code> that represents additions to or subtractions from the balance. Consider the following procedure, which gives us the whole balance history <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[6]</a>.</p><pre id="22c36d2c-fdbf-4007-81b0-eb0618f3a01e" class="code"><code>(define (withdraw balance amount)
+  (cons
+    balance
+    (withdraw (- balance (car amounts)) (cdr amounts))))</code></pre><p id="faa190f5-4f2a-4f66-bff4-657dbd9f1680" class="">
+</p><p id="3b48201c-0ecc-495a-b7ed-08ff2b93716a" class="">Let’s take this a step further. What if there are terms in <code>amounts</code> that do not yet exist, either because the event has not yet occurred or because generating the next term requires a forced evaluation? This notion of delayed evaluation (analogous to a generator in Python), turns the sequence into what’s called a stream.</p><p id="fbe9916d-4323-4c70-8052-33704df3e3ae" class="">
+</p><p id="3d164624-5f83-40c5-a6e1-919d06ed693b" class="">When stream processing was described as a way to “model systems that have state without ever using assignment or mutable data”, all the pieces came together <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[7]</a>.</p><p id="3875e650-59a4-45b2-8e68-117b2d08b3ed" class="">
+</p><h3 id="f5cef2c7-fdba-4751-b159-5bc42a9d4677" class="">Trade-offs</h3><p id="2b6d5994-3c94-41f5-8a54-46c05d49dd90" class="">At the start of Chapter 3, SICP emphasizes how important it is to base the structure of our program on the structure of the system being modeled. As such, modeling a real-world bank account balance seems most natural with mutable variables.</p><p id="e8c32359-c8b3-43e8-9b8f-f39001e16663" class="">
+</p><p id="714ffe02-5ef5-46b3-aa4b-010e482e114a" class="">The imperative or mutable model of programming is based on the idea of using assignments and mutable data structures to represent and manipulate state. We introduced environments to be able to handle mutable data. This is in contrast to the functional or immutable model, where pure functions are used to manipulate data without changing the state of the system <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[8]</a>.</p><p id="a494aa4f-0dc8-468d-8f0a-e3262f413e2f" class="">
+</p><p id="8857bb5d-89e0-430a-a2da-cdfeb423f492" class="">It is worth noting that the imperative model introduces side effects. This means that the order of operations now matter, as we need to ensure every statement is using the correct version of each variable <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[9]</a>. Managing this complexity gets worse when we have concurrency <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[10]</a>.</p><p id="0b72a845-2fb2-4cb1-a062-7778e4f4f85b" class="">
 </p><p id="bf2845e5-d446-4783-92cd-3aec55fe1092" class="">The other tricky issue has to do with the concept of equality. Are two objects equal when they have the same value? Are they equal if if they have the same memory address? Do we need multiple equality operators? Different languages handle this differently, making different trade-offs along the way.</p><p id="570d997f-e744-4284-b22d-6c2bfc183798" class="">
-</p><p id="88de9dc8-adfa-47e5-9bad-593364b46d87" class="">The end of Chapter 3 says this best.</p><blockquote id="76bc7177-1c7b-402d-802b-2b6b1d8fc800" class="">We can model the world as a collection of separate, time-bound interacting objects with state, or we can model the worlds as a single, timeless, stateless unity. Each view has powerful advantages, but neither alone is completely satisfactory. A grand unification has yet to emerge.</blockquote><h1 id="0dcea40b-b321-40c3-985c-73b01db06f07" class="">Mind blown</h1><p id="16d94e26-21ae-4a7e-9b12-8f44528b6f2a" class="">Now for the fun parts…</p><h3 id="8859f92a-9e53-498f-abd0-225c6ea03851" class="">Lambda calculus</h3><p id="f5d022f1-a261-44a2-b8b8-b0e2775655ff" class="">Consider the following procedures that take in other procedures as arguments <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[8]</a>. In particular, <code>zero</code> maps any procedure to the identity procedure.</p><pre id="c8aadc8f-f483-41a1-8c7b-7d9377079d39" class="code"><code>(define zero
-  (lambda (f)
-    (lambda (x) x)))
+</p><p id="88de9dc8-adfa-47e5-9bad-593364b46d87" class="">The end of Chapter 3 says this best.</p><blockquote id="76bc7177-1c7b-402d-802b-2b6b1d8fc800" class="">We can model the world as a collection of separate, time-bound interacting objects with state, or we can model the worlds as a single, timeless, stateless unity. Each view has powerful advantages, but neither alone is completely satisfactory. A grand unification has yet to emerge.</blockquote><h1 id="0dcea40b-b321-40c3-985c-73b01db06f07" class="">Mind blown</h1><p id="16d94e26-21ae-4a7e-9b12-8f44528b6f2a" class="">Now for the fun parts…</p><h3 id="8859f92a-9e53-498f-abd0-225c6ea03851" class="">Lambda calculus</h3><p id="f5d022f1-a261-44a2-b8b8-b0e2775655ff" class="">Consider the following procedures that take in other procedures as arguments <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[11]</a>. In particular, <code>zero</code> maps any procedure to the identity procedure.</p><pre id="c8aadc8f-f483-41a1-8c7b-7d9377079d39" class="code"><code>(define (identity x) x)
 
-(define increment
-  (lambda (n)
-    (lambda (f)
-      (lambda (x) (f ((n f) x))))))</code></pre><p id="8aebe44b-abce-4079-9a2e-8e36ee0d03f2" class="">
+(define (zero f) identity)
+
+(define (increment n)
+  (lambda (f)
+    (lambda (x) (f ((n f) x)))))</code></pre><p id="8aebe44b-abce-4079-9a2e-8e36ee0d03f2" class="">
 </p><p id="889d6eb2-5f6b-4182-95d9-dd16f3ee80e8" class="">We apply <code>zero</code> and <code>(increment zero)</code> to a procedure that adds <code>1</code>.</p><pre id="87f7dc9d-05ac-47e9-8d44-21c2a025734f" class="code"><code>&gt; ((zero (lambda (x) (+ x 1))) 0)
 0
 
 &gt; (((increment zero) (lambda (x) (+ x 1))) 0)
 1</code></pre><p id="26cda986-f382-46dd-a04c-de2699a41ada" class="">
-</p><p id="351342bc-0058-4b1d-936d-0208713d1ea1" class="">Essentially what we have are integers represented as procedures. That’s right. Numbers as procedures. Let that sink in…</p><p id="79740b54-09a4-4597-9bf2-314ccaaff68e" class="">
+</p><p id="351342bc-0058-4b1d-936d-0208713d1ea1" class="">Essentially what we have are integers represented as procedures. That’s right. Numbers as procedures. Take a moment to let that sink in…</p><p id="79740b54-09a4-4597-9bf2-314ccaaff68e" class="">
 </p><p id="e1b31389-aa23-478e-becf-635416a6145e" class="">This representation is known as <a href="https://en.wikipedia.org/wiki/Church_encoding#Church_numerals">Church numerals</a>, after <a href="https://en.wikipedia.org/wiki/Alonzo_Church">Alonzo Church</a>.</p><p id="c90a5afc-24e7-4014-9b42-7ded8cedb6f0" class="">
-</p><p id="6b7a5423-d85b-4bc9-ba6e-b68a4d6b96c2" class="">We define <code>one</code> as a procedure that takes a procedure argument and applies it once. We can also arrive at this result by expanding out <code>(increment zero)</code>.</p><pre id="438777e3-4335-47d4-8f4b-417292842112" class="code"><code>(define one
-  (lambda (f)
-    (lambda (x) (f x))))
+</p><p id="6b7a5423-d85b-4bc9-ba6e-b68a4d6b96c2" class="">We define <code>one</code> as a procedure that takes a procedure argument and applies it once. We can also arrive at this result by expanding out <code>(increment zero)</code>. Recall that <code>zero</code> maps a procedure <code>f</code> to <code>identity</code>, and <code>identity</code> maps <code>x</code> to itself.</p><pre id="438777e3-4335-47d4-8f4b-417292842112" class="code"><code>(define (one f)
+  (lambda (x) (f x)))
 
 ; (increment zero)
 ; (lambda (f) (lambda (x) (f ((zero f) x))))
-; (lambda (f) (lambda (x) (f (((lambda (f) (lambda (x) x)) f) x))))
-; (lambda (f) (lambda (x) (f ((lambda (x) x) x))))
+; (lambda (f) (lambda (x) (f (identity x))))
 ; (lambda (f) (lambda (x) (f x)))</code></pre><p id="b3bb8a13-5427-4b54-abb9-620c79601e8c" class="">
-</p><p id="638ac92b-1f8b-4abf-ba7f-55724232185e" class="">Now the encore.</p><pre id="b00b316e-7442-4da6-a8ad-7ac22aa7ede0" class="code"><code>(define two
-  (lambda (f)
-    (lambda (x) (f (f x)))))
+</p><p id="638ac92b-1f8b-4abf-ba7f-55724232185e" class="">Now the encore. If <code>one</code> applies a procedure argument once, we expect <code>two</code> to apply it twice. Expanding out <code>(increment one)</code> confirms this is indeed the case.</p><pre id="b00b316e-7442-4da6-a8ad-7ac22aa7ede0" class="code"><code>(define (two f)
+  (lambda (x) (f (f x))))
 
 ; (increment one)
 ; (lambda (f) (lambda (x) (f ((one f) x))))
-; (lambda (f) (lambda (x) (f (((lambda (g) (lambda (y) (g y))) f) x))))
-; (lambda (f) (lambda (x) (f ((lambda (y) (f y)) x))))
 ; (lambda (f) (lambda (x) (f (f x))))</code></pre><p id="84b36e60-77c0-42bd-8135-7d5a0755e8b1" class="">
-</p><p id="c4042f4b-6642-405b-b1da-05b44db3deec" class="">We apply <code>one</code> and <code>two</code> to the same procedure. It’s magic.</p><pre id="4bbc0031-534f-4c9c-b99d-a40ace29d49e" class="code"><code>&gt; ((one (lambda (x) (+ x 1))) 0)
+</p><p id="c4042f4b-6642-405b-b1da-05b44db3deec" class="">We apply <code>one</code> and <code>two</code> to the same procedure above. It’s magic.</p><pre id="4bbc0031-534f-4c9c-b99d-a40ace29d49e" class="code"><code>&gt; ((one (lambda (x) (+ x 1))) 0)
 1
 
 &gt; ((two (lambda (x) (+ x 1))) 0)
 2</code></pre><p id="d2ee33f0-770e-4fe0-a358-87a026df6ece" class="">
-</p><p id="529c2a7b-c414-4623-bdde-e5c0749f5dbe" class="">Chapter 2 introduces the special form <code>cons</code> that lets you create data pairs. The first item in the pair is accessed with <code>car</code>, the remainder with <code>cdr</code> <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[9]</a>.</p><pre id="2d891ea2-4be9-4b1f-996b-3dbd4322725a" class="code"><code>&gt; (define pair (cons 1 2))
+</p><p id="5cedab03-65ab-4f0b-844e-e7d08f7432be" class="">In our Scheme interpreter <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">above</a>, we handled the special forms <code>define</code>, <code>if</code> and <code>lambda</code>. We need <code>lambda</code> to create procedures, so that’s a keeper. We can sort of do without <code>define</code>. That leaves us with <code>if</code>, or does it?</p><pre id="1cbb5805-bb8f-477c-8fd5-ddbd55361b26" class="code"><code>(define (true x)
+  (lambda (y) x))
 
-&gt; (car pair)
-1
+(define (false x)
+  (lambda (y) y))
 
-&gt; (cdr pair)
-2</code></pre><p id="86b2a915-664f-4c3c-92d6-57db59336bc6" class="">
-</p><p id="72aab7ca-bc51-4586-b937-648b5c6cfe1a" class="">Chapter 2 is dedicated to manipulation of complex forms with these simple tools. In particular, compound data structures such as lists and dictionaries can be built on top of these pairs. </p><p id="4d3f8f9f-5a18-4a8c-b1da-b7854933a588" class="">
-</p><p id="03be334c-44a6-4262-b105-88cb5ebb0278" class="">It turns out you can represent <code>cons</code>, <code>car</code> and <code>cdr</code> with procedures.</p><pre id="1df74293-5a40-44ea-8e1a-e97ab20fa3ce" class="code"><code>(define cons
-  (lambda (x y) 
-    (lambda (m) (m x y))))
+(define (if f)
+  (lambda (a)
+    (lambda (b) ((f a) b))))</code></pre><p id="1ea22105-207f-4b44-b6e4-386bac7fabbd" class="">
+</p><p id="24201bb2-9a2b-48c9-a9ea-e868efc10b22" class="">Yes, it does work. The interpreter needs a <a href="https://github.com/savarin/pyscheme/blob/8a662d4553f655cb614b6debdc9349ecf2553c2a/src/pyscheme.py#L14">tweak</a>; tests <a href="https://github.com/savarin/pyscheme/blob/8a662d4553f655cb614b6debdc9349ecf2553c2a/src/test_pyscheme.py#L47-L163">here</a> will now pass.</p><pre id="73991661-fd6e-4741-ba18-0421779d473d" class="code"><code>&gt; (((if true) 2) 3)
+2
 
-(define car
-  (lambda (z) 
-    (z (lambda (p q) p))))
+&gt; (((if false) 2) 3)
+3</code></pre><p id="aba04fd6-9de8-4eea-aa4d-5c1c3bee90f5" class="">
+</p><p id="72aab7ca-bc51-4586-b937-648b5c6cfe1a" class="">Chapter 2 is dedicated to manipulating complex forms with <code>cons</code>, <code>car</code> and <code>cdr</code>. In particular, compound data structures such as lists and dictionaries can be built on top of pairs.</p><p id="b42ecbaa-ac2b-46a7-a84d-53eb2b96b7d6" class="">
+</p><p id="03be334c-44a6-4262-b105-88cb5ebb0278" class="">It turns out you can also represent these with procedures.</p><pre id="1df74293-5a40-44ea-8e1a-e97ab20fa3ce" class="code"><code>(define (cons x y)
+  (lambda (m) (m x y)))
 
-(define cdr
-  (lambda (z) 
-    (z (lambda (p q) q))))</code></pre><p id="624259be-f377-4e2e-95c6-86aff699e49b" class="">
+(define (car z)
+  (z (lambda (p q) p)))
+
+(define (cdr z)
+  (z (lambda (p q) q)))</code></pre><p id="624259be-f377-4e2e-95c6-86aff699e49b" class="">
 </p><p id="aa2deb83-165d-4126-84bc-b7a5d47e4315" class="">Here we go.</p><pre id="fbbe1ba8-b77f-42c3-9530-bedc1a34807a" class="code"><code>&gt; (car (cons 1 2))
 1
 
 &gt; (cdr (cons 1 2))
 2</code></pre><p id="f7fb98e1-c6b5-4e1d-8a8a-99260ac2ab00" class="">
-</p><p id="5cedab03-65ab-4f0b-844e-e7d08f7432be" class="">In the Scheme subsection <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">above</a>, we reviewed the special forms <code>define</code>, <code>if</code> and <code>lambda</code>. We use <code>lambda</code> to create procedures, so that’s a keeper. We can sort of do without <code>define</code>. That leaves us with <code>if</code>, or does it?</p><pre id="1cbb5805-bb8f-477c-8fd5-ddbd55361b26" class="code"><code>(define true
-  (lambda (x)
-    (lambda (y) x)))
-
-(define false
-  (lambda (x)
-    (lambda (y) y)))
-
-(define if
-  (lambda (f)
-    (lambda (a)
-      (lambda (b) ((f a) b)))))</code></pre><p id="1ea22105-207f-4b44-b6e4-386bac7fabbd" class="">
-</p><p id="24201bb2-9a2b-48c9-a9ea-e868efc10b22" class="">Yes, it does work. The interpreter earlier needs a <a href="https://github.com/savarin/pyscheme/blob/8a662d4553f655cb614b6debdc9349ecf2553c2a/src/pyscheme.py#L14">tweak</a>; tests <a href="https://github.com/savarin/pyscheme/blob/8a662d4553f655cb614b6debdc9349ecf2553c2a/src/test_pyscheme.py#L47-L163">here</a> will now pass.</p><pre id="73991661-fd6e-4741-ba18-0421779d473d" class="code"><code>&gt; (((if true) 2) 3)
-2
-
-&gt; (((if false) 2) 3)
-3</code></pre><p id="aba04fd6-9de8-4eea-aa4d-5c1c3bee90f5" class="">
 </p><p id="0e1178db-d1d7-42bc-9276-ec7c4bffd1a9" class="">Let’s circle back to the idea that the building blocks of programming are data and procedures. Based on our excursion here, we can say the following.</p><p id="0ecffd80-da8c-4034-9bc9-3325ebda3fc1" class="">
 </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="40058842-b584-4114-a774-6bfdd55f59c5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">All you need is procedures.</div></figure><p id="0154b7c8-af3a-4f84-aefc-2d6b2697bbab" class="">
 </p><p id="1725dcc8-127c-4a1c-932b-537c3ac55baa" class="">Theoretically we can now write Fibonacci using only procedures. Perhaps for another time…</p><p id="164583a8-b837-40cb-a306-fda4faeead35" class="">
@@ -963,18 +950,18 @@ None
 ; (* 3 (+ 1 2))
 ; (* 3 3)
 9</code></pre><p id="08532547-114e-4ec2-b7d7-1a80cba34401" class="">
-</p><p id="af27aa04-667a-4a58-a698-f060fc9b72b7" class="">Applicative order is simpler to implement and understand. It can also be more efficient; in our example <code>(+ 1 2)</code> is evaluated once. That said there are cases where applicative order evaluates unnecessarily, in which normal order would skip. Normal order does have extra overhead, as we need to keep track which parts have been evaluated and which have not.</p><p id="a249873a-792a-454f-93cd-ad6faaeb8629" class="">
-</p><p id="a11c49ea-7771-4691-a523-bb1f7d5b9738" class="">At first glance, it may appear that we get the same answer either way. Like lambda calculus, this is an insight-bomb hiding in an exercise.</p><pre id="aae4d921-aaf6-488a-ba29-b1a020d83ac2" class="code"><code>&gt; (define p (lambda () (p)))
+</p><p id="af27aa04-667a-4a58-a698-f060fc9b72b7" class="">Applicative order is simpler to implement and understand. It can also be more efficient; in our example <code>(+ 1 2)</code> is evaluated once. That said there are cases where applicative order leads to unnecessary evaluations, while normal order would skip those steps. Normal order does have extra overhead; it requires tracking which parts have been evaluated and which have not.</p><p id="a249873a-792a-454f-93cd-ad6faaeb8629" class="">
+</p><p id="a11c49ea-7771-4691-a523-bb1f7d5b9738" class="">At first glance, it may appear that we get the same answer either way. Like lambda calculus, this is an insight-bomb hiding in an exercise.</p><pre id="aae4d921-aaf6-488a-ba29-b1a020d83ac2" class="code"><code>&gt; (define (p) (p))
 
-&gt; (define test (lambda (x y) (if (= x 0) 0 y)))
+&gt; (define (test x y) (if (= x 0)) 0 y)
 
 &gt; (test 0 (p))
 ; spins forever</code></pre><p id="f9c7ab91-6ae2-4c57-ba52-045cff876ac5" class="">
-</p><p id="44f044e7-0179-4ce1-aab0-58267d2e073e" class="">Running the last line, we go into an infinite loop due to applicative order. In normal order, we simply return <code>0</code> <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[10]</a>.</p><p id="f85f64ff-c38a-4ae1-96eb-66dd78f293e6" class="">
-</p><h3 id="67ad5931-4f56-4354-af79-e5449b610791" class="">Recursion vs iteration</h3><p id="00cfe1b7-65ae-4937-9940-f8082627c43c" class="">Scheme does not have for loops. Instead we do repeated operations through recursion, in which the procedure calls itself. The example here calculates factorials.</p><pre id="e0c07bb0-626f-48d7-9e24-2a3e349cfec4" class="code"><code>(define factorial (lambda (n)
-  (if (= n 1)
-    1
-    (* n (factorial (- n 1))))))</code></pre><p id="f4e47331-75f3-4ea0-bc44-324572a0df84" class="">
+</p><p id="44f044e7-0179-4ce1-aab0-58267d2e073e" class="">Running the last line, we go into an infinite loop using applicative order. In normal order, we simply return <code>0</code> <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[12]</a>.</p><p id="f85f64ff-c38a-4ae1-96eb-66dd78f293e6" class="">
+</p><h3 id="67ad5931-4f56-4354-af79-e5449b610791" class="">Recursion vs iteration</h3><p id="00cfe1b7-65ae-4937-9940-f8082627c43c" class="">Scheme does not have for loops. Instead we do repeated operations through recursion, in which the procedure calls itself. The example here calculates factorials.</p><pre id="e0c07bb0-626f-48d7-9e24-2a3e349cfec4" class="code"><code>(define (factorial n)
+  (if (= n 1) 
+    1 
+    (* n (factorial (- n 1)))))</code></pre><p id="f4e47331-75f3-4ea0-bc44-324572a0df84" class="">
 </p><p id="726846f4-7861-4ecf-9d47-848b271677d2" class="">A recursive process always leaves some part of the computation behind to be completed later. This results in a chain of pending operations that grows until we hit the base case, at which point the chain starts to collapse.</p><pre id="8b2d80a2-0cb6-4bbe-a91b-3a082cf73a1b" class="code"><code>&gt; (factorial 6)
 ; (* 6 (factorial 5))
 ; (* 6 (* 5 (factorial 4)))
@@ -987,13 +974,13 @@ None
 ; (* 6 (* 5 24)
 ; (* 6 120)
 720</code></pre><p id="14916f41-5b31-4f3c-9364-fe4ee41cb12b" class="">
-</p><p id="e0ed1959-59e9-4c15-a560-204e7989151c" class="">To avoid this growth-and-collapse pattern, we can use what SICP calls iteration. The idea is we keep track of a counter and a result, which are ‘carried forward’ on each procedure call. The calculation returns the result when the stopping point is reached.</p><pre id="13945e0f-f71f-45c0-9748-159d66dd63eb" class="code"><code>(define factorial (lambda (n)
-  (define fact-iter (lambda (product counter max-count)
+</p><p id="e0ed1959-59e9-4c15-a560-204e7989151c" class="">To avoid this growth-and-collapse pattern, we can use what SICP calls iteration. The idea is we keep track of a counter and a result, which are ‘carried forward’ on each procedure call. The calculation returns the result when the stopping point is reached.</p><pre id="13945e0f-f71f-45c0-9748-159d66dd63eb" class="code"><code>(define (factorial n)
+  (define (fact-iter product counter max-count)
     (if (&gt; counter max-count)
       product
-      (fact-iter (* counter product) (+ counter 1) max-count))))
-
-  (fact-iter 1 1 n)))</code></pre><p id="2bc56010-609b-4165-aa18-ae5437ab9092" class="">
+      (fact-iter (* counter product) (+ counter 1) max-count)))
+  
+  (fact-iter 1 1 n))</code></pre><p id="2bc56010-609b-4165-aa18-ae5437ab9092" class="">
 </p><p id="973b15ef-a041-4277-9161-a89b4141c9a7" class="">The subprocedure (or closure) <code>fact-iter</code> is called by <code>factorial</code>, and returns when <code>counter</code> is larger than <code>6</code>.</p><pre id="a4833f14-ba4c-4566-9163-5be0504ef238" class="code"><code>&gt; (factorial 6)
 ; (fact-iter   1 1 6)
 ; (fact-iter   1 2 6)
@@ -1003,21 +990,22 @@ None
 ; (fact-iter 120 6 6)
 ; (fact-iter 720 7 6)
 720</code></pre><p id="f0417bc9-5d09-432e-92c1-8ca05202b6ad" class="">
-</p><p id="c9385e6d-660c-47e9-97f4-7ccf10917be4" class="">A quick aside: these approaches map nicely to problem-solving techniques. Recursion is ‘breaking down big problems into smaller ones’, iteration is ‘start small and build up to a result’.</p><p id="0f564102-7e6e-446f-8986-471534033b4c" class="">
+</p><p id="c9385e6d-660c-47e9-97f4-7ccf10917be4" class="">As an aside, it’s interesting to note that these approaches can be related to problem-solving techniques. Recursion is ‘breaking down large problems into smaller ones’, iteration is ‘start small and gradually build up to a result’.</p><p id="0f564102-7e6e-446f-8986-471534033b4c" class="">
 </p><p id="cea32d64-4bea-46b8-a484-e69ffaaa9f89" class="">From a space perspective, recursion is as efficient as for loops. In the context of stack frames, however, repeated function calls would use up increasing amounts of memory. To get around this, Scheme takes advantage of a technique called tail-call optimization. This eliminates the memory overhead by implementing what is practically a for loop under-the-hood.</p><p id="98224fd0-6a3d-4f84-bc49-381903c833c3" class="">
-</p><p id="eac6c7cd-0c42-45c5-bcf1-76d0089809ef" class="">Peter Norvig even implements tail call optimization into his interpreter <a href="https://norvig.com/lispy2.html">here</a>.</p><h1 id="58ee6b04-35b2-4e26-bd62-4b33ffed94df" class="">Postscript</h1><p id="7f7411cb-df39-40c0-a79a-f223f81f0bc9" class="">OK so Dave cherry-picked topics for a week-long course; I cherry-picked from those topics for a blog post. What did I leave out? Lots. Metacircular evaluator. Repeated procedure application to calculate square roots. Discussions on classes, functional programming, macros, types, symbolic manipulation…</p><p id="e476339d-bdbc-4e64-979d-4bf30e891626" class="">
+</p><p id="eac6c7cd-0c42-45c5-bcf1-76d0089809ef" class="">Peter Norvig even implements tail call optimization into his interpreter <a href="https://norvig.com/lispy2.html">here</a>.</p><h1 id="58ee6b04-35b2-4e26-bd62-4b33ffed94df" class="">Postscript</h1><p id="7f7411cb-df39-40c0-a79a-f223f81f0bc9" class="">OK so Dave cherry-picked topics for a week-long course; I cherry-picked from those topics for a blog post. What did I leave out? A fair bit. Metacircular evaluator. Repeated procedure application to calculate square roots. Discussions on classes, functional programming, macros, types, symbolic manipulation…</p><p id="e476339d-bdbc-4e64-979d-4bf30e891626" class="">
 </p><p id="aa9334d3-64b5-4772-a9d4-aa49845c8eba" class="">It’s unclear when I’ll get to writing a follow-up post; I’m already on to Dave’s other <a href="https://www.dabeaz.com/winter.html">courses</a>. That’s right, I’m all-in. In the meantime, Chelsea Troy has a more comprehensive write-up <a href="https://chelseatroy.com/tag/sicp">here</a>.</p><p id="fbff6f23-4160-4dd0-8327-d38cd4eba1f3" class="">
-</p><p id="cdc702d3-4031-4ed4-b08b-999bf5c79de5" class="">Is the material too theoretical for software engineers? Maybe. I will, however, leave you with this quote by Donald Knuth.</p><blockquote id="0b8cd151-7ddd-4a99-a11c-b3a2eefb055c" class="">If you find that you’re spending almost all your time on theory, start turning some attention to practical things; it will improve your theories. If you find that you’re spending almost all your time on practice, start turning some attention to theoretical things; it will improve your practice.</blockquote><p id="765d276a-7b38-4380-a1fc-ca0ada1bacd5" class="">
-</p><p id="19ceb8a3-acb9-4799-a30f-31cbaafea39b" class="">All insights are Dave’s, all errors my own.</p><p id="6209b014-b835-4fd2-8a7a-871ec7b991b9" class="">
+</p><p id="cdc702d3-4031-4ed4-b08b-999bf5c79de5" class="">Is the material too theoretical for software engineers? Maybe. I will, however, leave you with this quote by Donald Knuth.</p><blockquote id="0b8cd151-7ddd-4a99-a11c-b3a2eefb055c" class="">If you find that you’re spending almost all your time on theory, start turning some attention to practical things; it will improve your theories. If you find that you’re spending almost all your time on practice, start turning some attention to theoretical things; it will improve your practice.</blockquote><p id="6209b014-b835-4fd2-8a7a-871ec7b991b9" class="">
 </p><p id="bfb0dacf-9ef1-4c16-8f1a-448e523f5f97" class="">
 </p><p id="77c2f7d0-5211-4933-b9ee-554f098edb51" class="">
 </p><p id="c345d4cf-4817-4e92-9902-6eb37a16deb9" class="">[1] The SICP book can be found <a href="http://sarabander.github.io/sicp/html/index.xhtml">here</a>, recorded lectures <a href="https://www.youtube.com/playlist?list=PLE18841CABEA24090">here</a>.</p><p id="5346ed66-a6e1-4094-9db6-84c68d1e08a5" class="">
 </p><p id="25317781-7591-4656-a424-7b70abc40de1" class="">[2] Differences include static vs dynamic types, compiled vs interpreted, with vs without garbage collection. The <a href="https://bradfieldcs.com/courses/languages">course</a> I did started off with this wonderful quote by Ras Bodik.</p><blockquote id="e988afc9-83f2-41d1-b9ec-629174f44225" class="">Take historical note of textile and steel industries: do you want to build machines and tools, or do you want to operate those machines?</blockquote><p id="435706c5-be26-485b-b759-66bc4a7bc303" class="">
 </p><p id="582cdfbf-70e2-476b-b735-6cda1bed81f1" class="">[3] The name Racket is a playful reference to Scheme, in the sense that the word ‘scheme’ means a plan that is often dishonest or illegal.</p><p id="3ae9574b-a712-4f41-a986-f47b5d15d66e" class="">
-</p><p id="f223858b-5605-47af-be09-90877d89b568" class="">[4] For convenience, we did not distinguish between the non-stream and stream versions of <code>car</code> and <code>cdr</code>.</p><p id="5250b2d4-616a-41a7-874b-d16ccbab8a85" class="">
-</p><p id="299c4056-da62-4f6b-ac94-6d3ed0a7969b" class="">[5] This quote came out of a different SICP session, details <a href="https://chelseatroy.com/2019/11/27/sicp-5-modularity-objects-and-state">here</a>.</p><p id="c0c0c31f-359c-442f-9862-074f86b97e3a" class="">
-</p><p id="38d1dfe7-6bf6-4e88-8f56-6c8a31d46c7e" class="">[6] <a href="http://sarabander.github.io/sicp/html/3_002e1.xhtml#Exercise-3_002e8">Exercise 3.8</a> involves coming up with a procedure <code>f</code> such that evaluating <code>(+ (f 0) (f 1))</code> returns <code>0</code> but <code>(+ (f 1) (f 0))</code> returns <code>1</code>.</p><p id="0d5548e4-78da-4003-89a5-eb1707a21be1" class="">
-</p><p id="046123bb-c3d7-48a8-af55-f5792849cb73" class="">[7] Bartosz Milewski calls for a return to functional programming in the multicore world, in the preface of his book <a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface">here</a>.</p><p id="249e8c05-9e65-4150-b91f-0f2460160330" class="">
-</p><p id="23f656a5-4ea9-406c-b742-c6bb1927bfb6" class="">[8] This subsection is actually set up as <a href="http://sarabander.github.io/sicp/html/2_002e1.xhtml#Exercise-2_002e6">Exercise 2.6</a> in the book.</p><p id="855ab54e-4aff-4e24-a6fe-f43bf7fd3ee6" class="">
-</p><p id="7229a6f2-d4aa-4f00-a22b-6e01a883ba71" class="">[9] Clojure uses <code>first</code> and <code>rest</code> as more intuitively-named versions of <code>car</code> and <code>cdr</code>.</p><p id="6a029f99-3f22-463c-91c9-0cb58355acb7" class="">
-</p><p id="f4fe35e5-8f8d-42cc-a3d9-7012ab370156" class="">[10] Another way to think about special forms is as procedures where ‘normal rules do not apply’. In the case of <code>if</code>, the <code>else</code> clause can lead to an infinite loop but is short-circuited to the <code>then</code> clause when the <code>predicate</code> is true.</p></div></article></body></html>
+</p><p id="7229a6f2-d4aa-4f00-a22b-6e01a883ba71" class="">[4] Clojure uses <code>first</code> and <code>rest</code> as more intuitively-named versions of <code>car</code> and <code>cdr</code>.</p><p id="170e8dea-a237-4ee4-a906-1054c3223e8c" class="">
+</p><p id="8bcbfbd8-2b4b-4494-8333-176eda9deb8d" class="">[5] This is described in SICP <a href="http://sarabander.github.io/sicp/html/1_002e1.xhtml#g_t1_002e1_002e5">here</a>.</p><blockquote id="883213b9-f09e-4761-85b0-f327bcb712f8" class="">The purpose of substitution is to help us think about procedure application, not to provide a description of how the interpreter really works. Typical interpreters do not evaluate procedure applications by manipulating the text of a procedure to substitute values for the formal parameters. … The substitution model is only the first of these models — a way to get started thinking formally about the evaluation process.</blockquote><p id="c9f9ef15-e2f4-4f39-a03d-2543d8c8d9c5" class="">
+</p><p id="f223858b-5605-47af-be09-90877d89b568" class="">[6] For convenience, we did not distinguish between the non-stream and stream versions of <code>car</code> and <code>cdr</code>.</p><p id="5250b2d4-616a-41a7-874b-d16ccbab8a85" class="">
+</p><p id="299c4056-da62-4f6b-ac94-6d3ed0a7969b" class="">[7] This phrasing came out of a different SICP session, details <a href="https://chelseatroy.com/2019/11/27/sicp-5-modularity-objects-and-state">here</a>.</p><p id="c0c0c31f-359c-442f-9862-074f86b97e3a" class="">
+</p><p id="c7bcd2d3-9bcb-4df8-9cb3-4436d244532b" class="">[8] Bob Nystrom has an amusing <a href="https://craftinginterpreters.com/statements-and-state.html#assignment">paragraph</a> in Crafting Interpreters on the opposing camps.</p><blockquote id="3cd8eafe-9693-4729-a625-a932cc823a1e" class="">Mutating a variable is a side effect and, as the name suggests, some language folks think side effects are dirty or inelegant. Code should be pure math that produces values —crystalline, unchanging ones — like an act of divine creation. Not some grubby automaton that beats blobs of data into shape, one imperative grunt at a time.</blockquote><p id="3cb7bad3-5b51-488d-bc1b-55745df9ea4d" class="">
+</p><p id="38d1dfe7-6bf6-4e88-8f56-6c8a31d46c7e" class="">[9] <a href="http://sarabander.github.io/sicp/html/3_002e1.xhtml#Exercise-3_002e8">Exercise 3.8</a> involves coming up with a procedure <code>f</code> such that evaluating <code>(+ (f 0) (f 1))</code> returns <code>0</code> but <code>(+ (f 1) (f 0))</code> returns <code>1</code>.</p><p id="0d5548e4-78da-4003-89a5-eb1707a21be1" class="">
+</p><p id="046123bb-c3d7-48a8-af55-f5792849cb73" class="">[10] Bartosz Milewski calls for a return to functional programming in the multicore world, in the preface of his book <a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface">here</a>.</p><p id="249e8c05-9e65-4150-b91f-0f2460160330" class="">
+</p><p id="23f656a5-4ea9-406c-b742-c6bb1927bfb6" class="">[11] This subsection is actually set up as <a href="http://sarabander.github.io/sicp/html/2_002e1.xhtml#Exercise-2_002e6">Exercise 2.6</a> in the book.</p><p id="855ab54e-4aff-4e24-a6fe-f43bf7fd3ee6" class="">
+</p><p id="f4fe35e5-8f8d-42cc-a3d9-7012ab370156" class="">[12] Another way to think about special forms is as procedures where ‘normal rules do not apply’. In the case of <code>if</code>, the <code>else</code> clause can lead to an infinite loop if evaluated but is short-circuited to the <code>then</code> clause when the <code>predicate</code> is true.</p></div></article></body></html>
