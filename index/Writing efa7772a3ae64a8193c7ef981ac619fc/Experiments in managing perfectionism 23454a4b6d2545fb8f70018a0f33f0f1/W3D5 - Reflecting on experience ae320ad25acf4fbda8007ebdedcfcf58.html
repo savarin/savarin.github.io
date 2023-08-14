@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="ae320ad2-5acf-4fbd-a800-7ebdedcfcf58" class="page sans"><header><h1 class="page-title">W3D5 - Reflecting on experience</h1></header><div class="page-body"><p id="6426a168-27e9-4292-bf7d-258fca23a1b2" class=""><strong>Go</strong></p><p id="15df786a-b50f-41b8-a249-53ed9905ad24" class="">I&#x27;ve been spending the week on reading and writing code. I needed a breather, and made it a touch lighter today with blog posts and Youtube videos.</p><p id="af96c063-5f55-4c68-b0e8-752ac5e2754b" class="">I found this <a href="https://blog.discord.com/why-discord-is-switching-from-go-to-rust-a190bbca2b1f">post</a> by Discord describing how they moved one of their services from Go to Rust. The engineering team discovered latency spikes from garbage collection, how performance issues persisted after tuning, and then decided to make the switch. <a href="https://github.com/jonhoo">Jon Gjengset</a> in this <a href="https://youtu.be/DnT-LUQgc7s?t=600">video</a> described how in Go, &quot;even though concurrency is very easy, that concurrency is very easy to shoot yourself in the foot with&quot;.</p><p id="4032ef09-79c5-4c3c-8283-24cb6dcdb621" class="">
+</style></head><body><article id="ae320ad2-5acf-4fbd-a800-7ebdedcfcf58" class="page sans"><header><h1 class="page-title">W3D5 - Reflecting on experience</h1><p class="page-description"></p></header><div class="page-body"><p id="6426a168-27e9-4292-bf7d-258fca23a1b2" class=""><strong>Go</strong></p><p id="15df786a-b50f-41b8-a249-53ed9905ad24" class="">I&#x27;ve been spending the week on reading and writing code. I needed a breather, and made it a touch lighter today with blog posts and Youtube videos.</p><p id="af96c063-5f55-4c68-b0e8-752ac5e2754b" class="">I found this <a href="https://blog.discord.com/why-discord-is-switching-from-go-to-rust-a190bbca2b1f">post</a> by Discord describing how they moved one of their services from Go to Rust. The engineering team discovered latency spikes from garbage collection, how performance issues persisted after tuning, and then decided to make the switch. <a href="https://github.com/jonhoo">Jon Gjengset</a> in this <a href="https://youtu.be/DnT-LUQgc7s?t=600">video</a> described how in Go, &quot;even though concurrency is very easy, that concurrency is very easy to shoot yourself in the foot with&quot;.</p><p id="4032ef09-79c5-4c3c-8283-24cb6dcdb621" class="">
 </p><p id="07705436-e0e5-4e4c-abff-731412f62e2c" class=""><strong>Rust</strong></p><p id="7a13ace3-dffd-4fc1-a305-ea4eee8ed7d9" class="">I&#x27;m a <a href="https://payments.posthaven.com/rc-w3d3-a-tool-for-every-trade">believer</a> that there&#x27;s a tool for every trade, and keen to develop the sense where one would choose one tool vs another. I didn&#x27;t pick this up in my earlier readings, but found out that creating a doubly-linked list in Rust is <a href="https://youtu.be/2q1AzGUwL7M?t=1196">non-trivial</a>.</p><p id="697eb6e8-a3a1-43dd-b1fc-69e197d7cf4b" class="">
 </p><p id="7fa716a1-cd76-4ffb-bc42-5c752be8e91f" class=""><strong>Content: Farouk al-Kasim</strong></p><p id="5a3b003b-5b56-42d7-bd14-f27c9895eb65" class="">I re-read my favourite articles before sharing them on here, some really do make me pause to reflect. This is a story of Farouk al-Kasim, who left Iraq months before the Ba&#x27;ath party took power and then prevented Norway from squandering its new-found oil wealth (enclosed below).</p><p id="0e75c623-bdc3-466e-818e-c9661d9a39a0" class="">
 </p><p id="1c0db708-e200-475d-b81b-4549a0d4ef14" class=""><strong>Content: Tango pour Claude</strong></p><p id="9820f457-18a0-4edf-b62b-d4d4d8097d06" class="">I remember hearing <a href="https://www.youtube.com/watch?v=ZZQUnZs9p4s">this</a> and being very, very happy I asked for the name of the piece.</p><p id="757eaac9-c516-455b-b7ac-e6e181887c20" class="">

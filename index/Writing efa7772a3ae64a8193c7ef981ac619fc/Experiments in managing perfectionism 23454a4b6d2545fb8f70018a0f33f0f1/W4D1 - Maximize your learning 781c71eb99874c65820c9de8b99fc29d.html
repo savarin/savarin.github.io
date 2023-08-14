@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="781c71eb-9987-4c65-820c-9de8b99fc29d" class="page sans"><header><h1 class="page-title">W4D1 - Maximize your learning</h1></header><div class="page-body"><p id="af42c96a-32b6-474e-9a07-d1c862cc88cb" class=""><strong>On exposure</strong></p><p id="9fda94c0-e9af-466d-bc59-8ccd61201546" class="">Every Friday I would look back at the past week, but would be too wiped out to articulate it clearly. This occurrence was especially annoying last week, as it marked a quarter into the batch.</p><p id="6d94b917-4816-430a-89f7-1b141b336216" class="">I&#x27;ve covered a number of different areas in the first three weeks. At a coffee chat today I realized the time so far had not reinforced my interest in any particularly, but instead exposed me to a whole new world of things. Suppose I had three choices before, how strongly I feel about each of them hasn&#x27;t really changed. However I now know there are seven choices.</p><p id="06ec74ea-f2e9-4d80-ae93-ddbac1464c4b" class="">
+</style></head><body><article id="781c71eb-9987-4c65-820c-9de8b99fc29d" class="page sans"><header><h1 class="page-title">W4D1 - Maximize your learning</h1><p class="page-description"></p></header><div class="page-body"><p id="af42c96a-32b6-474e-9a07-d1c862cc88cb" class=""><strong>On exposure</strong></p><p id="9fda94c0-e9af-466d-bc59-8ccd61201546" class="">Every Friday I would look back at the past week, but would be too wiped out to articulate it clearly. This occurrence was especially annoying last week, as it marked a quarter into the batch.</p><p id="6d94b917-4816-430a-89f7-1b141b336216" class="">I&#x27;ve covered a number of different areas in the first three weeks. At a coffee chat today I realized the time so far had not reinforced my interest in any particularly, but instead exposed me to a whole new world of things. Suppose I had three choices before, how strongly I feel about each of them hasn&#x27;t really changed. However I now know there are seven choices.</p><p id="06ec74ea-f2e9-4d80-ae93-ddbac1464c4b" class="">
 </p><p id="810a9e1d-8826-451c-9484-be411054e230" class=""><strong>Rust</strong></p><p id="5103b37f-a33e-4bc4-9510-2a37e1f5e2bc" class="">I&#x27;m very much enjoying Rust. I haven&#x27;t done it for long so I won&#x27;t say too much, but it appears the compile times can take a while. That being said, a toy implementation of generating the 10,000th prime number averages at 0.25 seconds for Rust vs 3.88 seconds for Python (code <a href="https://github.com/savarin/primes">here</a>, inspired by post <a href="https://codeburst.io/how-to-use-rust-to-extend-python-360174ee5819">here</a>).</p><p id="613288a9-94eb-49b3-8547-311677b8f593" class="">Over the weekend I discovered <a href="https://github.com/RustPython/RustPython">RustPython</a>, a Python interpreter in Rust. Since Rust can be compiled to WebAssembly, the interpreter can be made to run in the <a href="https://rustpython.github.io/demo">browser</a>. The FOSDEM 2019 talk can be found <a href="https://www.youtube.com/watch?v=nJDY9ASuiLc">here</a>.</p><p id="064e03b6-7535-4c61-a0b2-66f58a9c269e" class="">
 </p><p id="9a87f904-16c2-4bc1-8425-fe9bf5c8f220" class=""><strong>Content: Learning at startups</strong></p><p id="5ffb13e6-3c37-4bc0-b972-39cf4afe4c30" class="">I&#x27;ve always believed in choosing a role that allows you to maximize your learning. In the context of startups, <a href="https://twitter.com/paultoo">Paul Buchheit</a> says it best.</p><p id="90980635-ab53-4b68-964c-356d20beddba" class=""><a href="https://triplebyte.com/blog/interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit">https://triplebyte.com/blog/interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit</a></p><blockquote id="9d7b530b-ce5e-49eb-a4c0-e729b3a55a85" class="">I would suggest thinking about joining a startup as more like going to grad school to learn. Optimize around learning when choosing a job. That’s the best thing. Then if a startup fails, you can always go back to Google and probably get paid a lot more, because now you’re actually a much better engineer than you would have been if you had stayed there like everyone else.</blockquote><p id="6b07a1ce-08a6-4cf0-a4bd-018ea70bcaa0" class="">
 </p><div id="59f04457-0b38-421a-a418-9f6e2b8e2a1a" class="column-list"><div id="3b4b86fd-921e-4085-9fe7-79e5ee720576" style="width:50%" class="column"><p id="4a80d330-85ba-4f10-8433-76c9f73de819" class=""><a href="W3D5%20-%20Reflecting%20on%20experience%20ae320ad25acf4fbda8007ebdedcfcf58.html">Previous</a></p></div><div id="b7bd6fa7-6563-4097-a062-9637d792c5ca" style="width:50%" class="column"><p id="c9d2b37c-813e-4f2b-b6fd-37261c505e7a" class=""><a href="W4D2%20-%20Let&#x27;s%20try%20something%20different%200e1649e7eb064f3cb9b6f416c24d2fb7.html">Next</a></p></div></div></div></article></body></html>

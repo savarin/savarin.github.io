@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="b0b16caf-df3e-4933-bae0-53b2d9fd8f8f" class="page sans"><header><h1 class="page-title">W3D3 - A tool for every trade</h1></header><div class="page-body"><p id="b028333d-3fa4-4c49-bedb-5ef5214659cf" class=""><strong>Python</strong></p><p id="86591485-448e-4141-be69-86ec26d3a05e" class="">I&#x27;ve been spending a fair bit of time learning new programming languages recently, and I&#x27;m quite happy to have the progression be Python to Go to Rust. When learning something new, your motivation gets a boost when you can do lots of things and do it fast. From this perspective, it&#x27;s hard to beat an interpreted language like Python.</p><p id="c58d2ce4-9f76-4698-a661-222ee5597e04" class="">Python is the main language at my previous role, and this choice makes sense given how key ML models were to the business model. Having the data science and engineering share the same language helped reduce maintenance and tooling overheads, as well as provide better context in handoffs.</p><p id="b861087d-7bf4-42a5-889a-5fcab2ef9707" class="">The drawbacks were speed and lack of types. For speed, we had bindings to C++ on the hot path - the need for speed in an auction setting is clear. For types, we gradually introduced type comments with mypy. Why types? It&#x27;s easy to introduce bugs when refactoring a codebase with limited guard rails; types are like tests that you get for free.</p><p id="62f981bb-5ceb-412d-8421-8aa7254e89a0" class="">
+</style></head><body><article id="b0b16caf-df3e-4933-bae0-53b2d9fd8f8f" class="page sans"><header><h1 class="page-title">W3D3 - A tool for every trade</h1><p class="page-description"></p></header><div class="page-body"><p id="b028333d-3fa4-4c49-bedb-5ef5214659cf" class=""><strong>Python</strong></p><p id="86591485-448e-4141-be69-86ec26d3a05e" class="">I&#x27;ve been spending a fair bit of time learning new programming languages recently, and I&#x27;m quite happy to have the progression be Python to Go to Rust. When learning something new, your motivation gets a boost when you can do lots of things and do it fast. From this perspective, it&#x27;s hard to beat an interpreted language like Python.</p><p id="c58d2ce4-9f76-4698-a661-222ee5597e04" class="">Python is the main language at my previous role, and this choice makes sense given how key ML models were to the business model. Having the data science and engineering share the same language helped reduce maintenance and tooling overheads, as well as provide better context in handoffs.</p><p id="b861087d-7bf4-42a5-889a-5fcab2ef9707" class="">The drawbacks were speed and lack of types. For speed, we had bindings to C++ on the hot path - the need for speed in an auction setting is clear. For types, we gradually introduced type comments with mypy. Why types? It&#x27;s easy to introduce bugs when refactoring a codebase with limited guard rails; types are like tests that you get for free.</p><p id="62f981bb-5ceb-412d-8421-8aa7254e89a0" class="">
 </p><p id="231904f7-4b4b-4cde-918e-6b6cee36e75f" class=""><strong>Go</strong></p><p id="5774f772-4a88-4364-a178-fc9169b6c7f8" class="">I had the chance to learn a bit of Go just before RC, motivated partly because it&#x27;s the main language for Bradfield&#x27;s CS Intensive <a href="https://bradfieldcs.com/csi">course</a>. I was pleasantly surprised to find a lot of tooling we used for Python comes built-in in Go (brief discussion <a href="https://payments.posthaven.com/rc-w1d2-the-aspiring-polyglot-full-stack-developer">here</a>). Go also has first class support for concurrency; the language is a popular choice for servers given the need to support multiple clients simultaneously. The syntax was surprisingly easy to pick up coming from Python.</p><p id="e245c708-bb3c-490c-b98d-976e2521db38" class="">
 </p><p id="f195242b-3f23-40f2-85b4-1bc38c35d913" class=""><strong>Rust</strong></p><p id="074d4944-44bc-462a-b3c0-8ec548739d61" class="">I wanted to know more about the front end at RC, but curiously got into WebAssembly in the first week. I then found out from <a href="https://github.com/thomasballinger">Tom</a> how Rust has the best from-scratch support for compiling to WebAssembly. Another reason Rust works better is the smaller runtime - the smallest achievable binary <a href="https://opensource.com/article/19/2/why-use-rust-webassembly">size</a> uncompressed from Go is ~2 MB vs ~2 KB for Rust. I&#x27;m not as familiar with the finer details, perhaps a sizeable part of that can be attributed to garbage collection in Go.</p><p id="be8c5bb6-8717-49aa-9bf4-d0692140223a" class="">In summary, Python for fast prototyping and &#x27;glue code&#x27;, Go for concurrency and Rust for the low level stuff. Next comes lots and lots of practice.</p><p id="d64dbeb5-8f2a-4e00-bf61-ebc2016ec0ee" class="">
 </p><p id="b6560ba0-f2dc-493e-aad5-a0ee738330a7" class=""><strong>Content: Disruptive innovation</strong></p><p id="03b22b9c-42e5-4970-8c9c-43e8ab125052" class="">If you&#x27;ve come across the theory of disruptive innovation, <a href="https://scholar.harvard.edu/jlepore">Jill Lepore</a> offers an interesting and persuasive take in the New Yorker.</p><p id="6c6f84bb-c2ff-4808-9ee6-bcd3caee7e30" class=""><a href="https://www.newyorker.com/magazine/2014/06/23/the-disruption-machine">https://www.newyorker.com/magazine/2014/06/23/the-disruption-machine</a></p><p id="eeb20ac9-d299-4a62-afe3-1cc3847e3db7" class="">Love how there&#x27;s a reference to HBO&#x27;s Silicon Valley.</p><p id="c125ac13-0e1c-4a0e-8d5e-aeea41168c30" class="">

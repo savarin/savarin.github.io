@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="9559908f-03ad-4cb7-a09e-e60a457198e2" class="page sans"><header><h1 class="page-title">A minimal Bitcoin-inspired implementation</h1></header><div class="page-body"><p id="b00affc6-8c08-4adc-8ba6-8f4a6ae8aa70" class="">I wanted to learn crypto. I read a lot of posts. I got overwhelmed. The list of buzzwords was long and unending - proof-of-work, Merkle trees, elliptic curves, smart contracts, DeFi, DAOs, NFTs, ZK-rollups. I switched gears, and started building a prototype based on what I picked up so far.</p><p id="f14dd64d-df1c-4d1f-835a-bdfb1313a084" class="">
+</style></head><body><article id="9559908f-03ad-4cb7-a09e-e60a457198e2" class="page sans"><header><h1 class="page-title">A minimal Bitcoin-inspired implementation</h1><p class="page-description"></p></header><div class="page-body"><p id="b00affc6-8c08-4adc-8ba6-8f4a6ae8aa70" class="">I wanted to learn crypto. I read a lot of posts. I got overwhelmed. The list of buzzwords was long and unending - proof-of-work, Merkle trees, elliptic curves, smart contracts, DeFi, DAOs, NFTs, ZK-rollups. I switched gears, and started building a prototype based on what I picked up so far.</p><p id="f14dd64d-df1c-4d1f-835a-bdfb1313a084" class="">
 </p><p id="a0afa033-7815-482b-9c55-674a7f5c92fe" class="">The basic idea is to take Bitcoin core concepts and design a new cryptocurrency from scratch. We&#x27;ll build iteratively to help make clear where each component fits into the bigger picture.</p><p id="3cb8d8e7-2145-45e2-80ab-88d0f5b8476e" class=""><strong>Disclaimer: For educational purposes only.</strong></p><p id="1a12341e-2e2a-4ccd-add3-679455d923cf" class="">If you&#x27;re curious what the end result looks like, a sample run can be seen <a href="https://vimeo.com/647162882">here</a>. If you prefer a Jupyter notebook version, identical content can be read <a href="https://github.com/savarin/readcoin-content/blob/main/notebook/v1.ipynb">here</a>. The Github repo is <a href="https://github.com/savarin/readcoin">here</a>.</p><p id="912998df-aaad-4efd-b2a2-736eb7250a6e" class="">
 </p><figure id="7ac100e7-9792-4a18-b1af-4765b9497b5a" class="link-to-page"><a href="A%20minimal%20Bitcoin-inspired%20implementation%209559908f03ad4cb7a09ee60a457198e2/Blocks%207ac100e797924a18b1af4765b9497b5a.html"><span class="icon">🧊</span>Blocks</a></figure><figure id="564943cf-92ee-48c9-8da4-e51d3789d559" class="link-to-page"><a href="A%20minimal%20Bitcoin-inspired%20implementation%209559908f03ad4cb7a09ee60a457198e2/Chains%20564943cf92ee48c98da4e51d3789d559.html"><span class="icon">⛓️</span>Chains</a></figure><figure id="2faee375-971f-45e2-804f-143c8ffb1fd7" class="link-to-page"><a href="A%20minimal%20Bitcoin-inspired%20implementation%209559908f03ad4cb7a09ee60a457198e2/Nodes%202faee375971f45e2804f143c8ffb1fd7.html"><span class="icon">📶</span>Nodes</a></figure><p id="f861c4eb-054c-4797-9d72-535c88d811d3" class="">
 </p><p id="21aa061d-af71-48ee-a98a-3716ee8035de" class="">Special thanks to <a href="https://www.oreilly.com/library/view/mastering-bitcoin/9781491902639/ch08.html">Andreas Antonopoulos</a>, <a href="https://medium.com/@vanflymen/learn-blockchains-by-building-one-117428612f46">Daniel van Flymen</a>, <a href="http://karpathy.github.io/2021/06/21/blockchain/">Andrej Karpathy</a> and <a href="https://tkuriyama.github.io/crypto/2021/06/18/toycoin-part-1.html">Taro Kuriyama</a> for their posts! The Bitcoin white paper and developer guide are respectively <a href="https://bitcoin.org/bitcoin.pdf">here</a> and <a href="https://developer.bitcoin.org/devguide/">here</a>.</p></div></article></body></html>

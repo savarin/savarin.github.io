@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="f6b32f16-9eb9-468f-b1f5-e3113fded86a" class="page sans"><header><h1 class="page-title">W9 - Pass the simplicity through</h1></header><div class="page-body"><p id="98f0e0eb-a79e-41c9-8065-bc2545bc5c3b" class=""><strong>Design</strong></p><p id="81f377ff-6682-4a06-8028-3c0dcc2a5bfe" class="">This week involved interview prep, but I got to spend a bit of time thinking about design. My first day at Square involved presentations from various teams, but the message that continues to echo is the one from design director Ty Lettau.</p><blockquote id="80d2e7d8-2096-400b-98e4-7a9a053da6d4" class="">Your job is to absorb as much complexity as you can, and pass the simplicity through.</blockquote><p id="8e130b3c-9e7c-4412-bc8d-691c80e1bc51" class="">This philosophy showed its physical manifestation when I had a tour of the hardware lab. The degree of care and attention to detail ranged from the choice of materials (aesthetically pleasing yet durable), to how the product feels in the hand, to the flow from the seller to the buyer and back, to even the embedded software. The devices run on a fork of Android, which amongst other things allowed EMV payments to be fast yet secure, helping to cut down lines at Blue Bottle.</p><p id="100718fd-277b-43d7-b306-f7cc4993b1af" class="">I worked in the Risk team, covering fraud, disputes and recovery. The inner workings under the hood may be cutting-edge machine learning (with lots of arbitrary rules set by intermediaries), but all this was abstracted away from the end user. We continually looked for ways to make the process faster, cheaper, simpler.</p><p id="ead45f90-14b4-4c20-94f3-ce43e44c54ad" class="">Figma (discussed in a prior <a href="https://payments.posthaven.com/rc-w3d4-enabling-business-models-with-technology">post</a>) has a Learn Design <a href="https://www.figma.com/resources/learn-design">pilot</a>, which highlights this multi-faceted aspect of design. Naturally I had a soft spot for the section on simplicity, and in particular this excerpt.</p><blockquote id="cb34bdd4-df81-483f-b6bf-1e57f3c7db0d" class="">Often, creating something simple is more difficult than creating something complex. However, simplicity in design is not necessarily the opposite of complexity, but the revealing of the complex information in a measured and easy to digest way.</blockquote><p id="6184c8d2-4e16-4c9c-a48c-2bc35d1cc3f3" class="">Simplicity manifests itself in writing too. I love this quote by Stephen Toulmin.</p><blockquote id="2f6600c4-7b9f-4a66-9666-ff67cec8db32" class="">The effort the writer does not put into writing, the reader has to put into reading.</blockquote><p id="8189d7f6-69f2-4ee7-a591-1cf39ed86730" class="">Add perfectionism to the mix, and you&#x27;ll end up with lots of drafts and redrafts. On the flip side, that feeling of pride in the end result... priceless.</p><p id="400be3f2-8917-4d16-bcf0-ba1d996c8647" class="">
+</style></head><body><article id="f6b32f16-9eb9-468f-b1f5-e3113fded86a" class="page sans"><header><h1 class="page-title">W9 - Pass the simplicity through</h1><p class="page-description"></p></header><div class="page-body"><p id="98f0e0eb-a79e-41c9-8065-bc2545bc5c3b" class=""><strong>Design</strong></p><p id="81f377ff-6682-4a06-8028-3c0dcc2a5bfe" class="">This week involved interview prep, but I got to spend a bit of time thinking about design. My first day at Square involved presentations from various teams, but the message that continues to echo is the one from design director Ty Lettau.</p><blockquote id="80d2e7d8-2096-400b-98e4-7a9a053da6d4" class="">Your job is to absorb as much complexity as you can, and pass the simplicity through.</blockquote><p id="8e130b3c-9e7c-4412-bc8d-691c80e1bc51" class="">This philosophy showed its physical manifestation when I had a tour of the hardware lab. The degree of care and attention to detail ranged from the choice of materials (aesthetically pleasing yet durable), to how the product feels in the hand, to the flow from the seller to the buyer and back, to even the embedded software. The devices run on a fork of Android, which amongst other things allowed EMV payments to be fast yet secure, helping to cut down lines at Blue Bottle.</p><p id="100718fd-277b-43d7-b306-f7cc4993b1af" class="">I worked in the Risk team, covering fraud, disputes and recovery. The inner workings under the hood may be cutting-edge machine learning (with lots of arbitrary rules set by intermediaries), but all this was abstracted away from the end user. We continually looked for ways to make the process faster, cheaper, simpler.</p><p id="ead45f90-14b4-4c20-94f3-ce43e44c54ad" class="">Figma (discussed in a prior <a href="https://payments.posthaven.com/rc-w3d4-enabling-business-models-with-technology">post</a>) has a Learn Design <a href="https://www.figma.com/resources/learn-design">pilot</a>, which highlights this multi-faceted aspect of design. Naturally I had a soft spot for the section on simplicity, and in particular this excerpt.</p><blockquote id="cb34bdd4-df81-483f-b6bf-1e57f3c7db0d" class="">Often, creating something simple is more difficult than creating something complex. However, simplicity in design is not necessarily the opposite of complexity, but the revealing of the complex information in a measured and easy to digest way.</blockquote><p id="6184c8d2-4e16-4c9c-a48c-2bc35d1cc3f3" class="">Simplicity manifests itself in writing too. I love this quote by Stephen Toulmin.</p><blockquote id="2f6600c4-7b9f-4a66-9666-ff67cec8db32" class="">The effort the writer does not put into writing, the reader has to put into reading.</blockquote><p id="8189d7f6-69f2-4ee7-a591-1cf39ed86730" class="">Add perfectionism to the mix, and you&#x27;ll end up with lots of drafts and redrafts. On the flip side, that feeling of pride in the end result... priceless.</p><p id="400be3f2-8917-4d16-bcf0-ba1d996c8647" class="">
 </p><p id="408252d2-6ae1-41b0-bda9-2fd1cc109934" class=""><strong>Content: The Laws of Simplicity</strong></p><p id="aee83489-1244-4d3a-bd93-cb2e235d57ae" class="">Re: simplicity, there&#x27;s The Laws of Simplicity by <a href="https://twitter.com/johnmaeda">John Maeda</a> (Github profile <a href="https://github.com/johnmaeda">here</a>). The excerpt is Law No 1.</p><p id="01190fa8-1623-47ac-bb6d-6316fb7f0d29" class=""><a href="http://lawsofsimplicity.com/los/law-1-reduce.html">http://lawsofsimplicity.com/los/law-1-reduce.html</a></p><blockquote id="7a3490fe-7db7-4157-b363-ace2206639f6" class="">The simplest way to achieve simplicity is through thoughtful reduction.</blockquote><p id="d4df8ecc-ff32-4969-960b-25251338100b" class="">
 </p><p id="7969b4e2-76b8-418f-b5c9-76198f27982a" class=""><strong>Content: The Gap</strong></p><p id="f18c39e4-3f56-4534-868e-95c449512dba" class="">Re: iterations, there&#x27;s <a href="https://vimeo.com/85040589?embedded=true&amp;source=video_title&amp;owner=11562739">The Gap</a> by <a href="https://twitter.com/iraglass">Ira Glass</a>. If it&#x27;s one thing I&#x27;d take away from this blog post, it&#x27;s this one. The RC version of this is advice from <a href="https://github.com/davidbalbert">Dave</a>, &quot;when in doubt, code&quot;.</p><p id="123f8bf1-3006-4db2-b360-d525343da43e" class="">
 </p><p id="b37ffbfc-9cb4-49f6-b0ac-cb91da5fddff" class=""><strong>Content: The Flower Duet</strong></p><p id="7262efbe-aa2a-4b12-adbf-a8defbef9887" class="">In being sophisticated, one may go through a <a href="https://payments.posthaven.com/rc-w6d5-change-is-the-only-constant">phase</a> of faux sophistication. Listening to <a href="https://www.youtube.com/watch?v=8Qx2lMaMsl8">Delibes</a> on the way there... bliss.</p><p id="35d90957-acb5-48bb-9f76-c80bd34fc67c" class="">

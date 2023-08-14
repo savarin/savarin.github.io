@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="92864e9b-335d-4f7a-a0a6-6f52fc2bbf44" class="page sans"><header><h1 class="page-title">W2D5 - My first open source contribution</h1></header><div class="page-body"><p id="1df1857b-3b4e-4b12-821f-14df9cc4a712" class=""><strong>Open source</strong></p><p id="f10f4751-ea3c-48b4-9796-a1f5bdb048e9" class="">I made my first open source <a href="https://github.com/urllib3/urllib3/pull/1924">contribution</a>! I have the perfect <a href="https://twitter.com/Rainmaker1973/status/1284886928891027457">gif</a> to celebrate.</p><p id="ceb36615-be84-433b-9e23-964029b7bd82" class="">I used to think that you become a better developer primarily through work experience. I&#x27;ve since recognized a number of similarities with open source - reading through an existing (and potentially large) codebase, a collaborative review process, making the code production-grade (via suite of build, test and style checks). I imagine iteration cycles are broadly faster in a work setting, though this also varies greatly between companies.</p><p id="ba1567c9-2dd1-419e-bb33-b4168bc4b4f8" class="">While a professional role provides steady income, open source offers interesting compensation models. <a href="https://github.com/shazow">Andrey</a> focuses on work where the client would agree to publishing the code as open source. He recently completed a project for Keybase, and the code can be found <a href="https://github.com/keybase/client/tree/master/go/kbnm">here</a>.</p><p id="718a22a5-f2de-4283-9b47-59f21c8fc97e" class="">Is open source accessible? There might be a gap going from generating Fibonacci numbers to contributing to a production codebase, but perhaps the point here is that the gap is smaller than what most people imagine. It&#x27;s certainly smaller than what I initially imagined.</p><p id="8f140c59-02c3-4170-a3ba-f156c24a1ab9" class="">
+</style></head><body><article id="92864e9b-335d-4f7a-a0a6-6f52fc2bbf44" class="page sans"><header><h1 class="page-title">W2D5 - My first open source contribution</h1><p class="page-description"></p></header><div class="page-body"><p id="1df1857b-3b4e-4b12-821f-14df9cc4a712" class=""><strong>Open source</strong></p><p id="f10f4751-ea3c-48b4-9796-a1f5bdb048e9" class="">I made my first open source <a href="https://github.com/urllib3/urllib3/pull/1924">contribution</a>! I have the perfect <a href="https://twitter.com/Rainmaker1973/status/1284886928891027457">gif</a> to celebrate.</p><p id="ceb36615-be84-433b-9e23-964029b7bd82" class="">I used to think that you become a better developer primarily through work experience. I&#x27;ve since recognized a number of similarities with open source - reading through an existing (and potentially large) codebase, a collaborative review process, making the code production-grade (via suite of build, test and style checks). I imagine iteration cycles are broadly faster in a work setting, though this also varies greatly between companies.</p><p id="ba1567c9-2dd1-419e-bb33-b4168bc4b4f8" class="">While a professional role provides steady income, open source offers interesting compensation models. <a href="https://github.com/shazow">Andrey</a> focuses on work where the client would agree to publishing the code as open source. He recently completed a project for Keybase, and the code can be found <a href="https://github.com/keybase/client/tree/master/go/kbnm">here</a>.</p><p id="718a22a5-f2de-4283-9b47-59f21c8fc97e" class="">Is open source accessible? There might be a gap going from generating Fibonacci numbers to contributing to a production codebase, but perhaps the point here is that the gap is smaller than what most people imagine. It&#x27;s certainly smaller than what I initially imagined.</p><p id="8f140c59-02c3-4170-a3ba-f156c24a1ab9" class="">
 </p><p id="f2d6a9f6-7a0a-41bc-8ca5-ea52f693c79f" class=""><strong>Content: The cordon bleu kid</strong></p><p id="ef04cbb8-5cf3-4921-bf90-d8b40f1b1e32" class="">Now for the weekend content. I very much enjoyed this FT Weekend article about a 6-year old culinary connoisseur (enclosed below).</p><p id="5a3f3e39-6cf1-4804-8ca3-f8acc9548a9c" class="">
 </p><p id="108b662d-c015-40a8-a022-f39d0dbbffec" class=""><strong>Content: Ever Or Not</strong></p><p id="5b5d5be9-904d-4399-a4ae-e2b9c098e718" class="">I love how you can stroll in to your neighborhood bar/cafe in Berlin and there would be a DJ playing chill techno. A different model to getting bottle service at a Vegas EDM club with star DJs. <a href="https://www.youtube.com/watch?v=nFqFpGa1lqk">This</a> is for the former.</p><p id="3e5d5a3a-f0da-4a8a-8053-16e514a60508" class="">
 </p><p id="e70d6e35-b43b-429f-9b6c-5967b0b94f4d" class=""><strong>Content: Dr. Prajak Arunthong</strong></p><p id="b1c8f3a7-4bd9-4b5f-82b8-52e166a92754" class="">Thais make the best <a href="https://www.youtube.com/watch?v=N9TWrti5gAY">ads</a>. Try not to cry.</p><p id="e234d57d-51f1-4451-a534-fa83c133e003" class="">

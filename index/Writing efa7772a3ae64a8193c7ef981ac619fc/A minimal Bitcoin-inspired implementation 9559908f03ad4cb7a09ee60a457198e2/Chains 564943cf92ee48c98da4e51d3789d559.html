@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="564943cf-92ee-48c9-8da4-e51d3789d559" class="page sans"><header><img class="page-cover-image" src="Chains%20564943cf92ee48c98da4e51d3789d559/gold.jpeg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">⛓️</span></div><h1 class="page-title">Chains</h1></header><div class="page-body"><p id="acbb334f-a2cd-4704-a09d-f7839f61e029" class="">In the previous <a href="Blocks%207ac100e797924a18b1af4765b9497b5a.html">post</a>, we introduced mining and created the genesis block. Let&#x27;s mine more blocks and &#x27;chain&#x27; them together - we call this the <strong>blockchain</strong>.</p><p id="2b0a2ab1-5416-43ac-8f37-e6f0a5ff4d45" class="">
+</style></head><body><article id="564943cf-92ee-48c9-8da4-e51d3789d559" class="page sans"><header><img class="page-cover-image" src="Chains%20564943cf92ee48c98da4e51d3789d559/gold.jpeg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">⛓️</span></div><h1 class="page-title">Chains</h1><p class="page-description"></p></header><div class="page-body"><p id="acbb334f-a2cd-4704-a09d-f7839f61e029" class="">In the previous <a href="Blocks%207ac100e797924a18b1af4765b9497b5a.html">post</a>, we introduced mining and created the genesis block. Let&#x27;s mine more blocks and &#x27;chain&#x27; them together - we call this the <strong>blockchain</strong>.</p><p id="2b0a2ab1-5416-43ac-8f37-e6f0a5ff4d45" class="">
 </p><h3 id="b599272a-95bf-4208-9bac-40d9a9b2422c" class="">Initialization</h3><p id="220470fa-7c17-47b7-b812-4b5248e44ab0" class="">The genesis block is set as the first block in the blockchain. We also keep a running counter how many blocks have been mined. </p><pre id="b03f97da-7c09-4f3d-aed6-e41aa7678452" class="code code-wrap"><code>genesis_hash, genesis_block = init_genesis_block()
 
 blockchain = genesis_block

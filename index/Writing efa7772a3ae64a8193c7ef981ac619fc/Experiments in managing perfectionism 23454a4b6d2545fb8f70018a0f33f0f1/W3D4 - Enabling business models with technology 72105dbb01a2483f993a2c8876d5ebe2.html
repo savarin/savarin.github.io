@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="72105dbb-01a2-483f-993a-2c8876d5ebe2" class="page sans"><header><h1 class="page-title">W3D4 - Enabling business models with technology</h1></header><div class="page-body"><p id="80184bc6-eb4e-43d0-8f62-c6da827ce6f4" class=""><strong>WebAssembly</strong></p><p id="a8f31846-27fc-4c9a-9280-08f1f1c23c71" class="">Every Thursday there&#x27;s a Front End Hack and Tell - we commit to working on something front end-related at the start of the session, and circle back at the end to share what we came up with. I&#x27;ve been learning Rust to get into WebAssembly, but so far still ramping up on the Rust part. I learned MIPS Assembly a while ago, and thought a refresher might help me approach WebAssembly from a different angle.</p><p id="fe550ea3-633d-4f4d-89c8-c929d421bb7a" class="">This didn&#x27;t quite work out as planned. The notes I have from that time assumed I&#x27;d be revising the material, as opposed to picking it up practically from scratch. Plus WebAssembly is a stack machine, not a register-based one like MIPS.</p><p id="097089c0-4a47-45d5-a31e-77d618384e08" class="">
+</style></head><body><article id="72105dbb-01a2-483f-993a-2c8876d5ebe2" class="page sans"><header><h1 class="page-title">W3D4 - Enabling business models with technology</h1><p class="page-description"></p></header><div class="page-body"><p id="80184bc6-eb4e-43d0-8f62-c6da827ce6f4" class=""><strong>WebAssembly</strong></p><p id="a8f31846-27fc-4c9a-9280-08f1f1c23c71" class="">Every Thursday there&#x27;s a Front End Hack and Tell - we commit to working on something front end-related at the start of the session, and circle back at the end to share what we came up with. I&#x27;ve been learning Rust to get into WebAssembly, but so far still ramping up on the Rust part. I learned MIPS Assembly a while ago, and thought a refresher might help me approach WebAssembly from a different angle.</p><p id="fe550ea3-633d-4f4d-89c8-c929d421bb7a" class="">This didn&#x27;t quite work out as planned. The notes I have from that time assumed I&#x27;d be revising the material, as opposed to picking it up practically from scratch. Plus WebAssembly is a stack machine, not a register-based one like MIPS.</p><p id="097089c0-4a47-45d5-a31e-77d618384e08" class="">
 </p><p id="2962e08f-6396-472d-9e22-f2a5770d900b" class=""><strong>C</strong></p><p id="6ad1faba-b66b-4659-9ed9-82108496ddb1" class="">I spent the rest of the hacking time on Rust, but my refresher reminded me of the story of how C came about. Assembly can be thought of a set of instructions that the processor understands. For example, `add $t1, $t2, $t3` means add the values in $t2 and $t3 then place it in $t1. The tricky bit is each processor has its own instruction set, so you&#x27;ll need to compose one set of instructions for a MIPS processor and a different set for an Intel x86.</p><p id="ee6f052c-7469-46d3-a6cb-f9057048d587" class="">The idea behind C is a language that&#x27;s one layer up from the processor (so it works across both), but also sufficiently low level so things run fast. What did the creators of C do once they&#x27;re done? They created Unix.</p><p id="2621d102-1b8e-4e04-8ea0-b5e7efbbc7f4" class="">
 </p><p id="3ce8353c-b95e-4a12-a6b8-cdfa9f5abdb6" class=""><strong>Content: Design</strong></p><p id="efb017c9-42e4-4a14-9f84-39581cbbbd30" class="">Having featured data science and product management, let&#x27;s talk about design. First, a preamble.</p><p id="7c916822-fee8-438f-b6f9-2e401a2cd8d4" class="">Square allowed every person who had a smartphone the ability to accept credit cards. The problem was, now every fraudster could use Square to cash out stolen credit cards. Square solved this problem with machine learning. By leveraging the improved ability of ML models to flag suspicious payments, ability to accept credit cards is made accessible.</p><p id="c509250d-b73e-4e51-bbb3-00c9e982bdd3" class="">If Square is an example of a business model that becomes viable (amongst other things) on the back of machine learning, can we think about the analogue for, say, WebAssembly? Here Figma comes to mind - WebAssembly allows the functionality of the Adobe design suite to be run in the browser, but with the performance of a native app.</p><p id="a5320190-10f2-4a2d-9cab-02e2b8124dd1" class=""><a href="https://kwokchain.com/2020/06/19/why-figma-wins">https://kwokchain.com/2020/06/19/why-figma-wins</a></p><p id="13a51d72-0d4a-469d-a377-407797a54cc8" class="">What I especially loved with the post is the framing of tighter iteration cycles. Before Figma, the design process involved back-and-forth between teams via e-mail. With Figma, all design and feedback are stored centrally in the cloud, allowing more context to be retained at handoffs (analogous to the same language across teams in a previous <a href="https://payments.posthaven.com/rc-w3d3-a-tool-for-every-trade">post</a>). I must have overlooked the reference to other cool technologies deployed on the prior reading - WebGL and CRDTs.</p><p id="7b547abe-d174-4f73-b68c-f3e581000732" class="">In summary, I learned a lot working as a data scientist in a company where machine learning makes or breaks the business. I&#x27;m curious to see how new business models becomes viable with something like WebAssembly. Though first, one needs to understand WebAssembly...</p><p id="202aa56a-9744-4ba3-a400-f9ebd76e217a" class="">
 </p><div id="65e4837b-7943-47ac-aff3-5b7431af7387" class="column-list"><div id="592d5d88-cbac-42e9-9516-34d818fdc50c" style="width:50%" class="column"><p id="39125d0c-4bd9-4b70-b58b-200b878f1f6b" class=""><a href="W3D3%20-%20A%20tool%20for%20every%20trade%20b0b16cafdf3e4933bae053b2d9fd8f8f.html">Previous</a></p></div><div id="bdbfd5e7-4546-49c3-81b1-c02e17410395" style="width:50%" class="column"><p id="2d2b70c0-7f33-4428-a2c9-3160e88f479f" class=""><a href="W3D5%20-%20Reflecting%20on%20experience%20ae320ad25acf4fbda8007ebdedcfcf58.html">Next</a></p></div></div></div></article></body></html>

@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="2faee375-971f-45e2-804f-143c8ffb1fd7" class="page sans"><header><img class="page-cover-image" src="Nodes%202faee375971f45e2804f143c8ffb1fd7/node2.jpg" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📶</span></div><h1 class="page-title">Nodes</h1></header><div class="page-body"><p id="1477abe2-724f-4517-b28d-8c2ed6c75865" class="">In the previous <a href="Chains%20564943cf92ee48c98da4e51d3789d559.html">post</a>, we introduced a single miner. Now let&#x27;s set up 3 nodes that mine and broadcast to each other.</p><p id="702f97a3-b038-432d-98b0-6f6be2da8e0a" class="">
+</style></head><body><article id="2faee375-971f-45e2-804f-143c8ffb1fd7" class="page sans"><header><img class="page-cover-image" src="Nodes%202faee375971f45e2804f143c8ffb1fd7/node2.jpg" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📶</span></div><h1 class="page-title">Nodes</h1><p class="page-description"></p></header><div class="page-body"><p id="1477abe2-724f-4517-b28d-8c2ed6c75865" class="">In the previous <a href="Chains%20564943cf92ee48c98da4e51d3789d559.html">post</a>, we introduced a single miner. Now let&#x27;s set up 3 nodes that mine and broadcast to each other.</p><p id="702f97a3-b038-432d-98b0-6f6be2da8e0a" class="">
 </p><h3 id="cae88c8e-9029-41ab-8f88-71fc6bd49eb6" class="">Context</h3><p id="00e7feeb-e14c-4096-ad50-800898e06406" class="">Let&#x27;s start by sketching out what each node would do. In mining mode, the node tries 1,000 nonce values at a time and extends the blockchain if a solution is found. In listening mode, the node listens to the network and replaces its blockchain if the broadcasted blockchain is valid and longer than the existing blockchain. To keep things simple, the node would alternate between the two modes instead of running both in parallel.</p><pre id="c25d4f10-439a-4389-984d-c53740f18194" class="code code-wrap"><code>while True:
     try:
         # Listen for incoming messages.

@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="7ac100e7-9792-4a18-b1af-4765b9497b5a" class="page sans"><header><img class="page-cover-image" src="Blocks%207ac100e797924a18b1af4765b9497b5a/b3.jpeg" style="object-position:center 50.77%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🧊</span></div><h1 class="page-title">Blocks</h1></header><div class="page-body"><p id="3555d5ee-474b-4273-b09b-7506a2b9f362" class="">Bitcoin is commonly thought about as a ledger of transactions. Let&#x27;s use that as a starting point.</p><p id="17e9312f-3c7e-4ac7-b2b5-6f0d3496fbd2" class="">
+</style></head><body><article id="7ac100e7-9792-4a18-b1af-4765b9497b5a" class="page sans"><header><img class="page-cover-image" src="Blocks%207ac100e797924a18b1af4765b9497b5a/b3.jpeg" style="object-position:center 50.77%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🧊</span></div><h1 class="page-title">Blocks</h1><p class="page-description"></p></header><div class="page-body"><p id="3555d5ee-474b-4273-b09b-7506a2b9f362" class="">Bitcoin is commonly thought about as a ledger of transactions. Let&#x27;s use that as a starting point.</p><p id="17e9312f-3c7e-4ac7-b2b5-6f0d3496fbd2" class="">
 </p><h3 id="3e27b9a7-fe91-4bff-9746-f185da388931" class="">Headers</h3><p id="f2e92734-6039-4cf1-9b3d-b038746a22c1" class="">
 </p><p id="1c0db278-5cd2-4834-a219-6ff231c27f21" class="">We group the transactions into &#x27;<strong>blocks</strong>&#x27;. Each block starts with a <strong>header</strong>, with information on the block&#x27;s contents:</p><ul id="7a83cdf9-4078-4c93-af23-fc6be3fa6eb5" class="bulleted-list"><li style="list-style-type:disc">Version: The version number in use.</li></ul><ul id="1137d598-b4b9-4963-81d6-7fd69a034319" class="bulleted-list"><li style="list-style-type:disc">Previous hash: Each block has an identifier or hash. Here the 32-byte hash from the previous block is an attribute of the header of the current block.</li></ul><ul id="fd6acb44-1d5d-4ccd-8e6b-5fa57c4667fb" class="bulleted-list"><li style="list-style-type:disc">Timestamp: Unix timestamp in seconds.</li></ul><ul id="8743e552-22bd-42b6-8ece-9d399dfb075d" class="bulleted-list"><li style="list-style-type:disc">Nonce: A number that makes the hash of the header start with zeroes.</li></ul><pre id="f9ef1d87-1386-44e1-bac7-fd4f344b1c03" class="code"><code>Hash = bytes
 

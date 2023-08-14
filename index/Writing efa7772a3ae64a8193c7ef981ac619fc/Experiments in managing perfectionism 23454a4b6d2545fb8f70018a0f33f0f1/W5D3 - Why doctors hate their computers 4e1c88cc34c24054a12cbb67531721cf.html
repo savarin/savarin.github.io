@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="4e1c88cc-34c2-4054-a12c-bb67531721cf" class="page sans"><header><h1 class="page-title">W5D3 - Why doctors hate their computers</h1></header><div class="page-body"><p id="0d2a9632-b5e0-4ca2-91b9-b9d2fea4fd14" class=""><strong>WebAssembly</strong></p><p id="47ce6171-5da9-4db8-88bb-7b28813a8f82" class="">The primary use case for WebAssembly in recent discussions is to enable languages other than JavaScript to run in the browser. The .wasm format, however, could itself become the standard in portable binaries.</p><p id="1b327b66-5230-4ada-a549-c3613f1df058" class="">Suppose we wanted to speed up Python code with Rust bindings. This requires the Rust code to be compiled to a dynamic library, i.e. .dylib file on Mac, .so on Linux, or .dll on Windows, which can then be imported in Python with a standard Python import (discussion <a href="https://codeburst.io/how-to-use-rust-to-extend-python-360174ee5819">here</a>).</p><p id="52b6e328-13a6-41a4-a0c1-99038bfbc542" class="">Now suppose the Rust code was compiled to a .wasm file instead. We can similarly import the .wasm file into Python with wasmtime (example <a href="https://github.com/bytecodealliance/wasmtime-py/blob/main/examples/gcd.py">here</a>). Since the .wasm format is OS-independent, I believe we now have a portable version of the dynamic library.</p><p id="4aa5f949-b45c-4a36-80c4-3a89bd728d9a" class="">
+</style></head><body><article id="4e1c88cc-34c2-4054-a12c-bb67531721cf" class="page sans"><header><h1 class="page-title">W5D3 - Why doctors hate their computers</h1><p class="page-description"></p></header><div class="page-body"><p id="0d2a9632-b5e0-4ca2-91b9-b9d2fea4fd14" class=""><strong>WebAssembly</strong></p><p id="47ce6171-5da9-4db8-88bb-7b28813a8f82" class="">The primary use case for WebAssembly in recent discussions is to enable languages other than JavaScript to run in the browser. The .wasm format, however, could itself become the standard in portable binaries.</p><p id="1b327b66-5230-4ada-a549-c3613f1df058" class="">Suppose we wanted to speed up Python code with Rust bindings. This requires the Rust code to be compiled to a dynamic library, i.e. .dylib file on Mac, .so on Linux, or .dll on Windows, which can then be imported in Python with a standard Python import (discussion <a href="https://codeburst.io/how-to-use-rust-to-extend-python-360174ee5819">here</a>).</p><p id="52b6e328-13a6-41a4-a0c1-99038bfbc542" class="">Now suppose the Rust code was compiled to a .wasm file instead. We can similarly import the .wasm file into Python with wasmtime (example <a href="https://github.com/bytecodealliance/wasmtime-py/blob/main/examples/gcd.py">here</a>). Since the .wasm format is OS-independent, I believe we now have a portable version of the dynamic library.</p><p id="4aa5f949-b45c-4a36-80c4-3a89bd728d9a" class="">
 </p><p id="5b71f43a-7c83-448c-a427-df246f4608f8" class=""><strong>Neural networks</strong></p><p id="22e06b86-8660-4238-b418-77563d09efc4" class="">At Square, I ran workshops on machine learning and (separately) on neural networks. I presented on the latter today at RC.</p><p id="200478f1-299b-45a3-b496-15a3f9332f30" class="">Starting with the most basic representation of a neural network as matrix operations, we build it up in stages - reducing loss systematically, capturing non-linear behavior, and introducing regularization with dropout layers. We would train a convolutional neural network by the end of the session, highlighting the improved performance when the model architecture incorporates the 2-dimensional structure of image data.</p><p id="e61d087c-4328-4441-89eb-a08a90915fcc" class="">The Github <a href="https://github.com/savarin/neural-networks">repo</a> has been updated to Python 3 and the latest Keras API. Then and now, I couldn&#x27;t resist re-iterating <a href="https://github.com/karpathy">Andrej Karpathy</a>&#x27;s advice to use model training best practices i.e. &quot;don&#x27;t be a hero&quot;.</p><p id="1115be02-9c0a-49ac-8d26-0772be18268d" class="">
 </p><p id="e5f59312-f995-44d5-ad33-31db31c7e3d6" class=""><strong>Content: Why doctors hate their computers</strong></p><p id="64b227cc-d736-4753-a7fd-2aa12de7939c" class="">At the start of my coffee chat with <a href="https://github.com/tansengming">SengMing</a>, I told him I was choosing between New Yorker articles to feature and had just opened a browser tab on <a href="https://twitter.com/Atul_Gawande">Atul Gawande</a>&#x27;s article. SengMing then shared how much he loved the article; this made the decision easy.</p><p id="b167b6e4-10fc-471e-83a5-0ffbcbc053db" class="">It was published in 2018 but I enjoyed reading it so much more this time around. The references to pain points in the user experience were all too familiar - too many clicks, too difficult to find relevant information, too complicated to use. The issues pertaining to software development are universal except in this case, to use Sengming&#x27;s words, the quality &quot;literally affects life and death&quot;.</p><p id="2eac9d15-a73a-41d2-9c8d-ab8c4542afc3" class=""><a href="https://www.newyorker.com/magazine/2018/11/12/why-doctors-hate-their-computers">https://www.newyorker.com/magazine/2018/11/12/why-doctors-hate-their-computers</a></p><blockquote id="b5eb760c-b483-4be7-a5e7-ae3487b7ac38" class="">Consider that, in recent years, one of the fastest-growing occupations in health care has been medical-scribe work, a field that hardly existed before electronic medical records. Medical scribes are trained assistants who work alongside physicians to take computer-related tasks off their hands. This fix is, admittedly, a little ridiculous. We replaced paper with computers because paper was inefficient. Now computers have become inefficient, so we’re hiring more humans. And it sort of works.</blockquote><p id="35c24129-2036-460c-8291-fd63cd90497d" class="">
 </p><div id="ee1afc39-43f5-426a-8e6c-b7000bbc3e15" class="column-list"><div id="717ee711-1afa-4b2a-a6b9-f295697d783b" style="width:50%" class="column"><p id="6d0f1ecc-4b6d-48de-aa44-ddc495e885ed" class=""><a href="W5D2%20-%20Relentlessly%20resourceful%20621b45fd16df481fbefbffe19c462018.html">Previous</a></p></div><div id="e27cd21c-5bf9-4dcd-aea3-550244c11194" style="width:50%" class="column"><p id="60b5fdad-35a2-4a22-a7c7-3c0b4c8d7601" class=""><a href="W5D4%20-%20Engineers%20shouldn&#x27;t%20write%20ETLs%209dc22466248d482ab0398e2632e83bac.html">Next</a></p></div></div></div></article></body></html>

@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="0e1649e7-eb06-4f3c-b9b6-f416c24d2fb7" class="page sans"><header><h1 class="page-title">W4D2 - Let&#x27;s try something different</h1></header><div class="page-body"><p id="d481037a-156b-4936-b32b-59d16ad7ad42" class=""><strong>On writing</strong></p><p id="0e4c0103-a8f6-4631-9e03-20339c3b576b" class="">It&#x27;s September 1, let&#x27;s try something different. Problem - I&#x27;m usually wiped out at the end of the day to be articulate (or at least, articulate as I&#x27;d like to be). Solution - write notes throughout the day on what I plan to write about.</p><p id="5d0b8873-23d1-42f6-85d7-8f16ab1c5588" class="">As an aside, my blog posts are paying off already - I referred to a previous <a href="https://payments.posthaven.com/rc-w2d1-work-hard">post</a> on the simplest way to compile Rust to WebAssembly, instead of my notes.</p><p id="40ca321c-df41-423b-bd16-022150b37b5a" class="">
+</style></head><body><article id="0e1649e7-eb06-4f3c-b9b6-f416c24d2fb7" class="page sans"><header><h1 class="page-title">W4D2 - Let&#x27;s try something different</h1><p class="page-description"></p></header><div class="page-body"><p id="d481037a-156b-4936-b32b-59d16ad7ad42" class=""><strong>On writing</strong></p><p id="0e4c0103-a8f6-4631-9e03-20339c3b576b" class="">It&#x27;s September 1, let&#x27;s try something different. Problem - I&#x27;m usually wiped out at the end of the day to be articulate (or at least, articulate as I&#x27;d like to be). Solution - write notes throughout the day on what I plan to write about.</p><p id="5d0b8873-23d1-42f6-85d7-8f16ab1c5588" class="">As an aside, my blog posts are paying off already - I referred to a previous <a href="https://payments.posthaven.com/rc-w2d1-work-hard">post</a> on the simplest way to compile Rust to WebAssembly, instead of my notes.</p><p id="40ca321c-df41-423b-bd16-022150b37b5a" class="">
 </p><p id="f82ac70b-6586-4784-9aef-0195d93064c8" class=""><strong>WebAssembly</strong></p><p id="42069b13-a954-4027-9cbc-866e6fce6b69" class="">I know. I&#x27;ve been going on about WebAssembly for a while now. Part of it is accountability. It&#x27;s an incentive for me to learn something I keep going on about to avoid embarrassment. I do believe the responsiveness that WebAssembly provides would accelerate the shift of native apps to be run in the browser. Yesterday I realized it could be even more groundbreaking.</p><p id="8d331793-0cd1-43e0-bc49-4cb99c5b2b6b" class=""><a href="https://github.com/sfarqu">Sara</a> shared what&#x27;s she&#x27;s reading on her blog, it&#x27;s a fantastic <a href="https://blog.fabrefact.ca/posts/what-i-m-reading-aug-30/">list</a>. The <a href="https://stackoverflow.blog/2020/08/24/motoko-the-language-that-turns-the-web-into-a-computer">post</a> by <a href="https://github.com/rossberg">Andreas Rossberg</a> on Motoko had a link to a comprehensive discussion of WebAssembly in the Communications to the ACM (direct link <a href="https://cacm.acm.org/magazines/2018/12/232881-bringing-the-web-up-to-speed-with-webassembly/fulltext">here</a>), as well as the following quote.</p><blockquote id="4bf35a65-e63c-4dbb-9da5-c574ede77589" class="">Wasm’s main difference compared to other virtual machines is that it is not optimized for any specific programming language but merely abstracts the underlying hardware, with a byte code directly corresponding to the instructions and memory model of modern CPUs. On top of that, Wasm supports sandboxing through strong modularity and a rigid mathematical specification that ensures that execution is safe, free of undefined behaviour, and (almost) entirely deterministic. Moreover, these properties actually have a machine-verified mathematical proof!</blockquote><p id="102a4a7c-b8d0-41d4-94a6-be86f2358186" class="">This is in addition to <a href="https://github.com/shykes">Solomon Hykes</a>, the CTO of Docker, <a href="https://twitter.com/solomonstre/status/1111004913222324225">tweeting</a> how had WebAssembly existed in 2008, there would have been no need for Docker. Now I&#x27;m puzzled. Why isn&#x27;t there more hype?</p><p id="d5ae5e1c-f087-44d5-bb40-e6cecfc797d9" class="">What I can say is the learning resources seem sparse. Perhaps due to things changing quickly. I had been trying to tweak a number of Hello World examples without much success, along the way discovering the myriad of tools available. I gave up and decided to work on the Programming WebAssembly with Rust <a href="https://pragprog.com/titles/khrust/programming-webassembly-with-rust">book</a> instead. The book uses wasm-bindgen for Rust-JavaScript interoperability, but it&#x27;s not immediately clear how using wasm-pack in addition would help.</p><p id="d86abd75-87c3-4722-8c79-1d17962072d8" class="">I&#x27;ve decided I&#x27;m going to come up with my own resources. Watch this space.</p><p id="95ce9096-1407-4def-8b76-7de419dc63c6" class="">The advantage of going through a book is comprehensiveness. In the book I found the answer to a previous question <a href="https://payments.posthaven.com/rc-w2d4-the-product-minded-engineer">posed</a> - why do you need a web server to run WebAssembly? It turns out cross-scripting rules in the browser blocks reads to the file system.</p><p id="58b63297-dc63-4c8a-a4d7-f2c349757543" class="">Re: portability, when I compile Rust on my laptop, the base target is stable-x86_64-apple-darwin, i.e. version-processor-OS. For WebAssembly, it&#x27;s wasm32-unknown-unknown, i.e. it&#x27;s designed to be compile once, run everywhere!</p><p id="c9dae68d-2cc5-4615-a7c6-f1da610ca740" class="">
 </p><p id="34eac60c-517b-4934-8007-10aaf0af7f54" class=""><strong>Java</strong></p><p id="2ea61dec-eb80-4449-b8ef-e898109ad7d1" class="">Last week I briefly mentioned portability of C, let&#x27;s complete that <a href="https://payments.posthaven.com/rc-w3d4-enabling-business-models-with-technology">thread</a>. C binaries would only work for a specific OS, so C when compiled for Linux would not work on Windows. Java, however, is compiled to Java bytecode that would run on any Java VM by design. Thus Java achieves portability across operating systems, which extends to all JVM-based languages - Clojure, Groovy, Kotlin, Scala. It&#x27;s the original compile once, run everywhere.</p><p id="d3603570-b373-4226-b596-f9211a3fcf0f" class="">
 </p><p id="b7f7f919-d495-47c6-a324-a129d6c05200" class=""><strong>Content: Python interpreters</strong></p><p id="8fe31927-2fa4-4304-a2be-68fddac47109" class="">Coming across RustPython made me look up <a href="https://github.com/akaptur">Allison Kaptur</a>&#x27;s post on 500 lines or less: A Python interpreter written in Python.</p><p id="18300fef-a557-4bc2-b312-4698f1f6bbfc" class=""><a href="http://www.aosabook.org/en/500L/a-python-interpreter-written-in-python.html">http://www.aosabook.org/en/500L/a-python-interpreter-written-in-python.html</a></p><p id="c27a00c6-e106-41bd-af8d-5619dbf40da9" class="">I then discovered this is something she worked on while at RC!</p><p id="6ef47f2f-2550-47bd-a02d-2939139fc4c0" class="">

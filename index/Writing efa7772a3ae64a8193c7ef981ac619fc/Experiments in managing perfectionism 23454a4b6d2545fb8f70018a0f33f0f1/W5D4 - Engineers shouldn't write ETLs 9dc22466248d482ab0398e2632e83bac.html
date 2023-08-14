@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,6 +673,6 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="9dc22466-248d-482a-b039-8e2632e83bac" class="page sans"><header><h1 class="page-title">W5D4 - Engineers shouldn&#x27;t write ETLs</h1></header><div class="page-body"><p id="7372864b-0bb1-4fb0-bf21-951e7c5a48d3" class=""><strong>Classification of audio data</strong></p><p id="283f8598-b94e-4335-8c49-fe8a4813e2eb" class="">At yesterday&#x27;s <a href="https://payments.posthaven.com/rc-w5d3-why-doctors-hate-their-computers">workshop</a> on neural networks, we trained a convolutional neural network (CNN) on the MNIST dataset. The MNIST dataset consists of hand-drawn digits from zero to nine, 28 pixels by 28 pixels in size. A traditional ML model would treat each of the 784 pixels as simply another feature (hence agnostic to column ordering). A CNN would take &#x27;snapshots&#x27; of the image, retaining its 2-dimensional structure and (in line with intuition) outperforms the traditional ML model.</p><p id="a582b404-9e2a-40f5-b5ba-4a3ab89c3b5a" class="">There&#x27;s a team at RC participating in Kaggle&#x27;s Birdcall Recognition <a href="https://www.kaggle.com/c/birdsong-recognition">competition</a>. The competition involves identifying the name of the bird in a birdcall audio file. I learned that converting the audio format into an image and then training a CNN on the image is a common technique. The visual representation of the spectrum of frequencies over time is called a spectrogram.</p><p id="114139bf-3052-4232-8c9f-c6b1bf5538ac" class="">The question that arose was how to deal with metadata. I won&#x27;t go into too much detail since the competition is still ongoing; we explored a number of possibilities with multi-label models. The basic premise is we have a set of models that perform equally well on the main performance metric, and we use the other labels to select the best (or perhaps, the most robust) among them. Excited to see how this plays out!</p><p id="552bddfd-f73c-4cc6-8867-22982d0f4533" class="">
+</style></head><body><article id="9dc22466-248d-482a-b039-8e2632e83bac" class="page sans"><header><h1 class="page-title">W5D4 - Engineers shouldn&#x27;t write ETLs</h1><p class="page-description"></p></header><div class="page-body"><p id="7372864b-0bb1-4fb0-bf21-951e7c5a48d3" class=""><strong>Classification of audio data</strong></p><p id="283f8598-b94e-4335-8c49-fe8a4813e2eb" class="">At yesterday&#x27;s <a href="https://payments.posthaven.com/rc-w5d3-why-doctors-hate-their-computers">workshop</a> on neural networks, we trained a convolutional neural network (CNN) on the MNIST dataset. The MNIST dataset consists of hand-drawn digits from zero to nine, 28 pixels by 28 pixels in size. A traditional ML model would treat each of the 784 pixels as simply another feature (hence agnostic to column ordering). A CNN would take &#x27;snapshots&#x27; of the image, retaining its 2-dimensional structure and (in line with intuition) outperforms the traditional ML model.</p><p id="a582b404-9e2a-40f5-b5ba-4a3ab89c3b5a" class="">There&#x27;s a team at RC participating in Kaggle&#x27;s Birdcall Recognition <a href="https://www.kaggle.com/c/birdsong-recognition">competition</a>. The competition involves identifying the name of the bird in a birdcall audio file. I learned that converting the audio format into an image and then training a CNN on the image is a common technique. The visual representation of the spectrum of frequencies over time is called a spectrogram.</p><p id="114139bf-3052-4232-8c9f-c6b1bf5538ac" class="">The question that arose was how to deal with metadata. I won&#x27;t go into too much detail since the competition is still ongoing; we explored a number of possibilities with multi-label models. The basic premise is we have a set of models that perform equally well on the main performance metric, and we use the other labels to select the best (or perhaps, the most robust) among them. Excited to see how this plays out!</p><p id="552bddfd-f73c-4cc6-8867-22982d0f4533" class="">
 </p><p id="0a6f1971-3377-43eb-ac69-52a2a2e8eb64" class=""><strong>Content: Data engineering</strong></p><p id="ff0c0a09-dbd9-4d20-8501-d2d5ed29a8e4" class="">A common functional split in a company is between data producers and data consumers. Data producers tend to be engineering team(s) that create and maintain ETLs to move and transform data from one source to another. Data consumers tend to be data science team(s) that use the data for analysis and/or modeling.</p><p id="d45c9aad-928f-455e-9251-c2124e2ec1d6" class="">The problem with this setup relates to handoffs. Data consumers have more context on the data. When there are data quality issues, data consumer will raise this with data producers. There&#x27;s usually a bottleneck: data consumers care about the data but are blocked pending a fix, data producers don&#x27;t have as much insight into use cases but have to prioritize inbound requests.</p><p id="20e889c1-7438-46dc-a335-7d2ff586c1ab" class="">The following Stitch Fix post proposes a different model, reducing instances where the problem is passed &quot;over the wall&quot;. In this model, data producers create tools to make it easy for consumers to create and maintain ETLs i.e. &quot;design new Lego blocks&quot;. Data consumers owns the process end-to-end, i.e. &quot;assemble [the Lego blocks] in creative ways to create new data science&quot;.</p><p id="188404f0-0005-49dc-80ab-74052a97e25b" class=""><a href="https://multithreaded.stitchfix.com/blog/2016/03/16/engineers-shouldnt-write-etl/">https://multithreaded.stitchfix.com/blog/2016/03/16/engineers-shouldnt-write-etl/</a></p><p id="fc8507d6-1cd6-4f31-8d3b-454848e4c03b" class="">This way each team can take ownership of the things they care about, iterate autonomously and move faster together.</p><p id="6812d546-66dd-4c41-9314-d54245af7a2c" class="">
 </p><div id="c9703e7a-234d-489e-8e8d-2b62d9387dfa" class="column-list"><div id="6448d63a-e435-49a8-8fbb-9a05b87f571d" style="width:50%" class="column"><p id="ae13e8c5-158a-4f77-840e-5d05d399161a" class=""><a href="W5D3%20-%20Why%20doctors%20hate%20their%20computers%204e1c88cc34c24054a12cbb67531721cf.html">Previous</a></p></div><div id="173deb93-f87f-48fc-a827-a4decd4642cf" style="width:50%" class="column"><p id="fee6ee9c-d170-4f5b-8005-e955976462f7" class=""><a href="W5D5%20-%20Speed%20without%20wizardry%2017272d1bb5d8459ab584774f4cbdd82f.html">Next</a></p></div></div></div></article></body></html>

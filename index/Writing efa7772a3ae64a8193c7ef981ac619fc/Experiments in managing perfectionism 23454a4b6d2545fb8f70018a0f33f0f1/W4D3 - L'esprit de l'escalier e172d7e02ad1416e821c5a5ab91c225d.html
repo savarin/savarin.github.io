@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="e172d7e0-2ad1-416e-821c-5a5ab91c225d" class="page sans"><header><h1 class="page-title">W4D3 - L&#x27;esprit de l&#x27;escalier</h1></header><div class="page-body"><p id="6f76a4b6-3d49-46a3-a9d4-7e2596a7b92e" class=""><strong>On perfect replies</strong></p><p id="3533c1f7-8f27-446a-8020-d97917d9adee" class="">Today RC hosted Remotehost, a virtual technical talk series (and the remote version of <a href="https://www.recurse.com/localhost">Localhost</a>). The theme was virtual spaces, the demos were really cool. At the chat roulette session afterwards I was paired with <a href="https://github.com/mschwar1">Mai</a>. I had shared some feedback with Mai earlier in the week, and I mentioned how my feedback was even better articulated when I described it to someone else after.</p><p id="0aa50253-943c-4780-a480-fa75cf456081" class="">This is such a common occurrence that there&#x27;s a term for it - l&#x27;esprit de l&#x27;escalier. As per <a href="https://en.wikipedia.org/wiki/L%27esprit_de_l%27escalier">Wikipedia</a>, it&#x27;s the predicament of thinking of the perfect reply too late. Curiously, the opposite of touché.</p><p id="603f2a8d-9da1-4878-8197-a75fa110f4af" class="">
+</style></head><body><article id="e172d7e0-2ad1-416e-821c-5a5ab91c225d" class="page sans"><header><h1 class="page-title">W4D3 - L&#x27;esprit de l&#x27;escalier</h1><p class="page-description"></p></header><div class="page-body"><p id="6f76a4b6-3d49-46a3-a9d4-7e2596a7b92e" class=""><strong>On perfect replies</strong></p><p id="3533c1f7-8f27-446a-8020-d97917d9adee" class="">Today RC hosted Remotehost, a virtual technical talk series (and the remote version of <a href="https://www.recurse.com/localhost">Localhost</a>). The theme was virtual spaces, the demos were really cool. At the chat roulette session afterwards I was paired with <a href="https://github.com/mschwar1">Mai</a>. I had shared some feedback with Mai earlier in the week, and I mentioned how my feedback was even better articulated when I described it to someone else after.</p><p id="0aa50253-943c-4780-a480-fa75cf456081" class="">This is such a common occurrence that there&#x27;s a term for it - l&#x27;esprit de l&#x27;escalier. As per <a href="https://en.wikipedia.org/wiki/L%27esprit_de_l%27escalier">Wikipedia</a>, it&#x27;s the predicament of thinking of the perfect reply too late. Curiously, the opposite of touché.</p><p id="603f2a8d-9da1-4878-8197-a75fa110f4af" class="">
 </p><p id="06d9144f-d022-40e3-8985-66e2bf29c9fc" class=""><strong>CSS</strong></p><p id="acb1ef86-efbc-4995-8a6e-218087bc5598" class="">I was paired with <a href="https://github.com/jvns">Julia Evans</a> next, who described a recent focus on CSS and new features like Flexbox and Grid (also shared on Twitter <a href="https://twitter.com/b0rk/status/1291772638982017027">here</a>). I brought this up at the Nix OS event later in the day, to discover the latest version of CSS is Turing complete. Mind blown!</p><p id="e9f3165a-31c0-4c50-b6ee-b76b4d62c92a" class="">
 </p><p id="ad548a21-8c9b-4e92-aeff-e2c07f6e180c" class=""><strong>Swift</strong></p><p id="199a6640-1beb-4d9c-83c5-b98461c14079" class="">I&#x27;ve my hands full on new languages, but somehow keep coming across Swift and Julia (no relation) over the past week. Fun fact: Rust came out of a personal project by <a href="https://github.com/graydon">Graydon Hoare</a> when he was at Mozilla, he left the project and later on worked on Swift (both are LLVM-compiled).</p><p id="b600d576-4f6a-433a-81b8-76520278f5a7" class="">
 </p><p id="b5d2f55e-879a-4018-8989-6a9e9dc4045f" class=""><strong>Julia</strong></p><p id="69a5fb84-d1ef-4bee-a0e8-80e7044bbaa0" class="">I first came across Julia in 2015. There was optimism on how the language would take over Python for scientific computation. It&#x27;s not clear to me how much this is the case, if anything Python has grown a lot and is even taking on Excel use cases. Julia is 1-indexed; this doesn&#x27;t seem like a great choice to boost adoption (adds to context switching) but making note to self to look up why this decision was made.</p><p id="295a37e5-b138-4f38-85bf-0e9c31e7fad7" class="">

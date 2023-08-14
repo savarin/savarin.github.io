@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="a675dc70-8b09-4664-b94a-a7f249be0028" class="page sans"><header><h1 class="page-title">W2D1 - Work hard</h1></header><div class="page-body"><p id="7e1ba739-9a8c-4e52-a3b2-638c54be6717" class=""><strong>Twitter API</strong></p><p id="922187a1-dfa3-41d8-ad21-4268e45a3164" class="">It’s Open Source Week at RC! Today I attended a few events to kick off the week, and spent time closing the circle on things I started looking at last week.</p><p id="8d014c15-84db-4d66-bdf9-6a80cb7c5722" class="">First, the Twitter API. The API doesn’t have a /bookmarks endpoint, so instead I looked at the /friends <a href="https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids">endpoint</a> which returns the list of users you follow. The idea is to find new users to follow i.e. a ‘user recommender’. The algorithm I used was:</p><ol type="1" id="19b63b89-f359-4b90-b26d-d922bff0329a" class="numbered-list" start="1"><li>Find all users I follow (let’s call this group A)</li></ol><ol type="1" id="b578a39b-b540-43c0-adc6-2b976e264857" class="numbered-list" start="2"><li>Find all users these users follow (group B)</li></ol><ol type="1" id="c152f583-08a7-45aa-bf2b-17d9354d303e" class="numbered-list" start="3"><li>For every user in group B, count the number of users in group A who follow that user</li></ol><p id="e63f48d0-6aaf-4b2b-81b3-114e12288cd6" class="">I follow 291 users, so the maximum number of ‘votes’ each user in group B can get is 291. While this seems simple, there’s a rate limit of 15 API calls every 15 minutes for that endpoint i.e. 291 calls takes about 5 hours. In descending order of votes, the top 3 are:</p><ol type="1" id="2c0cb0ea-f16a-491a-ad0d-42cc65bef629" class="numbered-list" start="1"><li><a href="https://twitter.com/elonmusk">Elon Musk</a> (116 votes)</li></ol><ol type="1" id="366ee01b-fae5-4598-b160-43318d4b5f3b" class="numbered-list" start="2"><li><a href="https://twitter.com/BarackObama">Barack Obama</a> (110)</li></ol><ol type="1" id="2dbf7879-f543-4fbb-a34b-058573e77c2e" class="numbered-list" start="3"><li><a href="https://twitter.com/BillGates">Bill Gates</a> (105)</li></ol><p id="e2cff5c9-8714-4333-a7e8-25d408284b49" class="">
+</style></head><body><article id="a675dc70-8b09-4664-b94a-a7f249be0028" class="page sans"><header><h1 class="page-title">W2D1 - Work hard</h1><p class="page-description"></p></header><div class="page-body"><p id="7e1ba739-9a8c-4e52-a3b2-638c54be6717" class=""><strong>Twitter API</strong></p><p id="922187a1-dfa3-41d8-ad21-4268e45a3164" class="">It’s Open Source Week at RC! Today I attended a few events to kick off the week, and spent time closing the circle on things I started looking at last week.</p><p id="8d014c15-84db-4d66-bdf9-6a80cb7c5722" class="">First, the Twitter API. The API doesn’t have a /bookmarks endpoint, so instead I looked at the /friends <a href="https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids">endpoint</a> which returns the list of users you follow. The idea is to find new users to follow i.e. a ‘user recommender’. The algorithm I used was:</p><ol type="1" id="19b63b89-f359-4b90-b26d-d922bff0329a" class="numbered-list" start="1"><li>Find all users I follow (let’s call this group A)</li></ol><ol type="1" id="b578a39b-b540-43c0-adc6-2b976e264857" class="numbered-list" start="2"><li>Find all users these users follow (group B)</li></ol><ol type="1" id="c152f583-08a7-45aa-bf2b-17d9354d303e" class="numbered-list" start="3"><li>For every user in group B, count the number of users in group A who follow that user</li></ol><p id="e63f48d0-6aaf-4b2b-81b3-114e12288cd6" class="">I follow 291 users, so the maximum number of ‘votes’ each user in group B can get is 291. While this seems simple, there’s a rate limit of 15 API calls every 15 minutes for that endpoint i.e. 291 calls takes about 5 hours. In descending order of votes, the top 3 are:</p><ol type="1" id="2c0cb0ea-f16a-491a-ad0d-42cc65bef629" class="numbered-list" start="1"><li><a href="https://twitter.com/elonmusk">Elon Musk</a> (116 votes)</li></ol><ol type="1" id="366ee01b-fae5-4598-b160-43318d4b5f3b" class="numbered-list" start="2"><li><a href="https://twitter.com/BarackObama">Barack Obama</a> (110)</li></ol><ol type="1" id="2dbf7879-f543-4fbb-a34b-058573e77c2e" class="numbered-list" start="3"><li><a href="https://twitter.com/BillGates">Bill Gates</a> (105)</li></ol><p id="e2cff5c9-8714-4333-a7e8-25d408284b49" class="">
 </p><p id="b980a27b-1926-4ee8-b548-f733e91a2376" class=""><strong>WebAssembly</strong></p><p id="c0dd0e92-18aa-47d8-9315-d84b9413777e" class="">The second item I looked at last week was WebAssembly. I can’t help but find it amusing how this optimization looks to shave off milliseconds off a job that takes 5 hours...</p><p id="93b99e69-7bae-4849-8c78-4fbb4051ad8b" class="">The simplest way to run WebAssembly I found was actually out of the browser with <a href="https://github.com/bytecodealliance/wasmtime">Wasmtime</a> (Rust example <a href="https://github.com/bytecodealliance/wasmtime/blob/main/README.md">here</a>, Python <a href="https://github.com/bytecodealliance/wasmtime-py/tree/main/examples">here</a>). It probably makes sense to revisit running in the browser once there&#x27;s more sensible use case, or at least after the events this week.</p><p id="cf25643f-315c-4b78-87b5-dfa8aa419d22" class="">
 </p><p id="21863d0e-33d5-45f0-b3cb-b92afd123cac" class=""><strong>Content: Wisdom beyond your years</strong></p><p id="218a743f-08af-4c1b-bd4d-2a309223bcc3" class="">Re: extra content, I absolutely adore this post <a href="https://twitter.com/sama">Sam Altman</a> created when he turned 30. The wisdom here is way beyond his years.</p><p id="dfb317e0-02c4-46f2-9fc7-bd322af05a45" class=""><a href="https://blog.samaltman.com/the-days-are-long-but-the-decades-are-short">https://blog.samaltman.com/the-days-are-long-but-the-decades-are-short</a></p><blockquote id="f2b4e540-8129-49a4-8634-bcf9f341ae18" class="">On work: it’s difficult to do a great job on work you don’t care about.  And it’s hard to be totally happy/fulfilled in life if you don’t like what you do for your work.  Work very hard—a surprising number of people will be offended that you choose to work hard—but not so hard that the rest of your life passes you by.  Aim to be the best in the world at whatever you do professionally.  Even if you miss, you’ll probably end up in a pretty good place.</blockquote><p id="ca0a71ef-4c96-4bfd-a25d-5b71696ebfab" class="">
 </p><div id="a63b82dc-4a35-40f3-a3c2-a8fc7c7bad46" class="column-list"><div id="ecf05900-2b44-4dd8-ad63-78c67aaedbe6" style="width:50%" class="column"><p id="12d4e077-a7b1-4ce1-b469-1a198422f02c" class=""><a href="W1D5%20-%20Think%20clearly%20from%20first%20principles%202350813b908f4b3181fffe9a8af51935.html">Previous</a></p></div><div id="f63a41d4-87bd-48eb-af69-f430e1d2f674" style="width:50%" class="column"><p id="6e7da63c-53cf-4ce9-884a-967e23491367" class=""><a href="W2D2%20-%20Be%20a%20chef%20fc06b38543a149198435146d0f487155.html">Next</a></p></div></div></div></article></body></html>

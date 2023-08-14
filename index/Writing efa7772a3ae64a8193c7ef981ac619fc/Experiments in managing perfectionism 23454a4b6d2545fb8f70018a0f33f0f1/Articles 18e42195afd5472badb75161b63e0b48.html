@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Articles</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="18e42195-afd5-472b-adb7-5161b63e0b48" class="page sans"><header><h1 class="page-title">Articles</h1><p class="page-description"></p></header><div class="page-body"><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesTitle"><path d="M0.637695 13.1914C1.0957 13.1914 1.32812 13 1.47852 12.5215L2.24414 10.3887H6.14746L6.90625 12.5215C7.05664 13 7.2959 13.1914 7.74707 13.1914C8.22559 13.1914 8.5332 12.9043 8.5332 12.4531C8.5332 12.2891 8.50586 12.1523 8.44434 11.9678L5.41602 3.79199C5.2041 3.21777 4.82129 2.9375 4.19922 2.9375C3.60449 2.9375 3.21484 3.21777 3.0166 3.78516L-0.0322266 12.002C-0.09375 12.1797 -0.121094 12.3232 -0.121094 12.4668C-0.121094 12.918 0.166016 13.1914 0.637695 13.1914ZM2.63379 9.12402L4.17871 4.68066H4.21973L5.76465 9.12402H2.63379ZM12.2793 13.2324C13.3115 13.2324 14.2891 12.6787 14.7129 11.8037H14.7402V12.5762C14.7471 12.9863 15.0273 13.2393 15.4238 13.2393C15.834 13.2393 16.1143 12.9795 16.1143 12.5215V8.00977C16.1143 6.49902 14.9658 5.52148 13.1543 5.52148C11.7666 5.52148 10.6592 6.08887 10.2695 6.99121C10.1943 7.15527 10.1533 7.3125 10.1533 7.46289C10.1533 7.81152 10.4062 8.04395 10.7686 8.04395C11.0215 8.04395 11.2129 7.94824 11.3496 7.73633C11.7529 6.99121 12.2861 6.65625 13.1064 6.65625C14.0977 6.65625 14.6992 7.20996 14.6992 8.1123V8.67285L12.5664 8.7959C10.7686 8.8916 9.77734 9.69824 9.77734 11.0107C9.77734 12.3369 10.8096 13.2324 12.2793 13.2324ZM12.6621 12.1387C11.8008 12.1387 11.2129 11.667 11.2129 10.9561C11.2129 10.2725 11.7598 9.82129 12.7578 9.75977L14.6992 9.62988V10.3203C14.6992 11.3457 13.7969 12.1387 12.6621 12.1387Z"></path></svg></span>Author</th><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span>Title</th><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span>Publication</th></tr></thead><tbody><tr id="0be40d54-a31b-4ebe-84f0-77dc6e1274b7"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Justine%20Musk%200be40d54a31b4ebe84f077dc6e1274b7.html">Justine Musk</a></td><td class="cell-IKOU">💻 <a href="https://www.quora.com/Will-I-become-a-billionaire-if-I-am-determined-to-be-one-and-put-in-the-necessary-work-required">Will I become a billionaire if I am determined to be one and put in the necessary work required</a></td><td class="cell-y&gt;[`"></td></tr><tr id="580b613e-4d59-4ea0-9080-4ab48b5d22bc"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Rob%20Pike%20580b613e4d594ea090804ab48b5d22bc.html">Rob Pike</a></td><td class="cell-IKOU"><a href="https://go.dev/talks/2012/splash.article">Language design in the service of software engineering</a></td><td class="cell-y&gt;[`"></td></tr><tr id="d123ae0f-84ea-4c0c-a24d-69865c7a4466"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Tyler%20Cowen%20d123ae0f84ea4c0ca24d69865c7a4466.html">Tyler Cowen</a></td><td class="cell-IKOU"><a href="https://www.newyorker.com/business/currency/are-computers-making-society-more-unequal">Are computers making society more unequal?</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="a2d2e4a2-8b64-4df2-8331-7c52ada90be5"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Eric%20Colson%20et%20al%20a2d2e4a28b644df283317c52ada90be5.html">Eric Colson et al</a></td><td class="cell-IKOU">💻 <a href="https://multithreaded.stitchfix.com/blog/2015/03/31/advice-for-data-scientists/">Advice for data scientists on where to work</a></td><td class="cell-y&gt;[`"></td></tr><tr id="0d87715f-21b7-4a06-84bb-a0e1473e7802"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Jo%20Johnson%200d87715f21b74a0684bba0e1473e7802.html">Jo Johnson</a></td><td class="cell-IKOU"><a href="https://gist.github.com/savarin/aac05afe7ee68be5184d60867c055adc">Caste out</a></td><td class="cell-y&gt;[`">FT Weekend</td></tr><tr id="f0ecb109-84b3-4493-847c-c27aaed98f86"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Sam%20Altman%20f0ecb10984b34493847cc27aaed98f86.html">Sam Altman</a></td><td class="cell-IKOU">💻 <a href="https://blog.samaltman.com/the-days-are-long-but-the-decades-are-short">The days are long but the decades are short</a></td><td class="cell-y&gt;[`"></td></tr><tr id="5e6302f5-7ff0-427c-a3dc-c577ea7b1b29"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Oz%20Nova%205e6302f57ff0427ca3dcc577ea7b1b29.html">Oz Nova</a></td><td class="cell-IKOU">💻 <a href="https://blog.bradfieldcs.com/cutting-through-to-what-matters-48baf397806f">Cutting through to what matters</a></td><td class="cell-y&gt;[`"></td></tr><tr id="9f0e4b3e-b9f3-494f-8961-0d503330f043"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/DT%20Max%20on%20Jack%20Dorsey%209f0e4b3eb9f3494f89610d503330f043.html">DT Max on Jack Dorsey</a></td><td class="cell-IKOU"><a href="https://www.newyorker.com/magazine/2013/10/21/two-hit-wonder">Two-hit wonder</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="1d7092b6-5a21-4258-8702-63381a76138c"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Gergely%20Orosz%201d7092b65a214258870263381a76138c.html">Gergely Orosz</a></td><td class="cell-IKOU">💻 <a href="https://blog.pragmaticengineer.com/the-product-minded-engineer/">The product-minded software engineer</a></td><td class="cell-y&gt;[`"></td></tr><tr id="e74578c3-60c4-44c0-80f4-056e79ea47ee"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Michael%20Steinberger%20e74578c360c444c080f4056e79ea47ee.html">Michael Steinberger</a></td><td class="cell-IKOU"><a href="https://gist.github.com/savarin/a5bb1f8826012b6d9f17a1ad068d6cfa">The cordon bleu kid</a></td><td class="cell-y&gt;[`">FT Weekend</td></tr><tr id="ab62130b-3e80-4627-a885-233f4ebb4c5f"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Tim%20Urban%20ab62130b3e804627a885233f4ebb4c5f.html">Tim Urban</a></td><td class="cell-IKOU">💻 <a href="https://waitbutwhy.com/2014/06/taming-mammoth-let-peoples-opinions-run-life.html">Why you should stop caring what other people think</a></td><td class="cell-y&gt;[`"></td></tr><tr id="481079a9-c683-4c9f-bbea-443a3766291b"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Dan%20McKinley%20481079a9c6834c9fbbea443a3766291b.html">Dan McKinley</a></td><td class="cell-IKOU">💻 <a href="https://mcfunley.com/choose-boring-technology">Choose boring technology</a></td><td class="cell-y&gt;[`"></td></tr><tr id="8bf67b4c-c1e8-4fb0-8713-c2fa7c9835a7"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Jill%20Lepore%208bf67b4cc1e84fb08713c2fa7c9835a7.html">Jill Lepore</a></td><td class="cell-IKOU"><a href="https://www.newyorker.com/magazine/2014/06/23/the-disruption-machine">The disruption machine - what the gospel of innovation gets wrong</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="4c718fb3-53c4-4f9f-874f-3a57baa9cb38"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Kevin%20Kwok%204c718fb353c44f9f874f3a57baa9cb38.html">Kevin Kwok</a></td><td class="cell-IKOU"><a href="https://kwokchain.com/2020/06/19/why-figma-wins">Why Figma wins</a></td><td class="cell-y&gt;[`"></td></tr><tr id="d5b4d333-75bc-4457-88c4-53c3161aa423"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Martin%20Sandbu%20on%20Farouk%20Al-Kasim%20d5b4d33375bc445788c453c3161aa423.html">Martin Sandbu on Farouk Al-Kasim</a></td><td class="cell-IKOU"><a href="https://gist.github.com/savarin/c819b8637eba3ea5ee3b4243b88c4d01">The Iraqi who saved Norway from oil</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="246d51a9-e976-481d-a739-d33518a23c5d"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Paul%20Buchheit%20246d51a9e976481da739d33518a23c5d.html">Paul Buchheit</a></td><td class="cell-IKOU">💻 <a href="https://web.archive.org/web/20230105042801/https://triplebyte.com/blog/interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit">On joining Google, how to become a great engineer and happiness</a></td><td class="cell-y&gt;[`"></td></tr><tr id="b3045034-2aa0-4329-b659-01eafc96d3fc"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Allison%20Kaptur%20b30450342aa04329b65901eafc96d3fc.html">Allison Kaptur</a></td><td class="cell-IKOU"><a href="http://www.aosabook.org/en/500L/a-python-interpreter-written-in-python.html">500 lines or less - a Python interpreter written in Python</a></td><td class="cell-y&gt;[`"></td></tr><tr id="b166ae26-8681-4146-8baa-3240c6dde0b4"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/James%20Somers%20on%20Jeff%20Dean%20et%20al%20b166ae26868141468baa3240c6dde0b4.html">James Somers on Jeff Dean et al</a></td><td class="cell-IKOU">💻 <a href="https://www.newyorker.com/magazine/2018/12/10/the-friendship-that-made-google-huge">The friendship that made Google huge</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="0d0cedb5-35f4-43c8-9796-a80b70ee4b11"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Chris%20Stokel-Wlaker%200d0cedb535f443c89796a80b70ee4b11.html">Chris Stokel-Wlaker</a></td><td class="cell-IKOU"><a href="https://increment.com/cloud/case-studies-in-cloud-migration/">Case studies in cloud migration - Netflix, Pinterest and Symantec</a></td><td class="cell-y&gt;[`"></td></tr><tr id="22229388-d250-463a-9d13-433b6a42ea4f"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Caroline%20Moorehead%2022229388d250463a9d13433b6a42ea4f.html">Caroline Moorehead</a></td><td class="cell-IKOU"><a href="https://gist.github.com/savarin/6dd40d679333fd49dc62f42ffe0bb1c8">Crisis of confidence</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="7907b0ae-c711-49d4-9ff3-426d0b54d70e"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Larry%20Gordon%20on%20Terence%20Tao%207907b0aec71149d49ff3426d0b54d70e.html">Larry Gordon on Terence Tao</a></td><td class="cell-IKOU">💻 <a href="https://www.latimes.com/local/lanow/la-me-ln-ucla-math-prize-20140626-story.html">UCLA math star Terence Tao wins $3-million prize</a></td><td class="cell-y&gt;[`">LA Times</td></tr><tr id="ce9a2c3d-a5b0-4d74-880e-aba5ac70813c"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Murtaza%20Hussain%20ce9a2c3da5b04d74880eaba5ac70813c.html">Murtaza Hussain</a></td><td class="cell-IKOU">💻 <a href="https://mecolalu.medium.com/how-we-did-15-startups-in-21-months-a7008c8f2c97">How I did 15 startups in 21 months</a></td><td class="cell-y&gt;[`"></td></tr><tr id="ea1bbd84-054a-4253-9d56-37e74f624adb"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Atul%20Gawande%20ea1bbd84054a42539d5637e74f624adb.html">Atul Gawande</a></td><td class="cell-IKOU"><a href="https://www.newyorker.com/magazine/2018/11/12/why-doctors-hate-their-computers">Why doctors hate their computers</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="31a4f029-0cb7-4063-9e97-0aa9d9cc330e"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Jeff%20Magnusson%2031a4f0290cb740639e970aa9d9cc330e.html">Jeff Magnusson</a></td><td class="cell-IKOU">💻 <a href="https://multithreaded.stitchfix.com/blog/2016/03/16/engineers-shouldnt-write-etl/">Engineers shouldn’t write ETL - a guide to building a high functioning data science department</a></td><td class="cell-y&gt;[`"></td></tr><tr id="2142a7a0-50ad-4c52-bc91-18f7dbbe03f2"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/David%20Atkinson%202142a7a050ad4c52bc9118f7dbbe03f2.html">David Atkinson</a></td><td class="cell-IKOU"><a href="https://gist.github.com/savarin/41c54cbe779adebf89e29454de3cba7a">Custodians of the custard</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="f790052b-c4ee-4eac-b0c8-81a078230136"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Jessica%20Livingston%20f790052bc4ee4eacb0c881a078230136.html">Jessica Livingston</a></td><td class="cell-IKOU">💻 <a href="http://foundersatwork.posthaven.com/grow-the-puzzle-around-you">Grow the puzzle around you</a></td><td class="cell-y&gt;[`"></td></tr><tr id="1d717d2b-499e-40ec-bb9d-446304466e66"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Paul%20Graham%201d717d2b499e40ecbb9d446304466e66.html">Paul Graham</a></td><td class="cell-IKOU"><a href="http://www.paulgraham.com/re.html">The refragmentation</a></td><td class="cell-y&gt;[`"></td></tr><tr id="5a4d3a5a-2950-4afe-a8a6-b1307011eebe"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Tad%20Friend%20on%20Sam%20Altman%205a4d3a5a29504afea8a6b1307011eebe.html">Tad Friend on Sam Altman</a></td><td class="cell-IKOU"><a href="https://www.newyorker.com/magazine/2016/10/10/sam-altmans-manifest-destiny">Sam Altman’s manifest destiny</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="772ce608-209f-4826-908e-6bc207c57e7c"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Raylene%20Yung%20772ce608209f4826908e6bc207c57e7c.html">Raylene Yung</a></td><td class="cell-IKOU">💻 <a href="https://firstround.com/review/the-engineers-guide-to-career-growth-advice-from-my-time-at-stripe-and-facebook">The engineer’s guide to career growth - advice from my time at Stripe and Facebook</a></td><td class="cell-y&gt;[`"></td></tr><tr id="8c18fdb6-8627-44a1-b7c0-c762646d707c"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/John%20Lanchester%208c18fdb6862744a1b7c0c762646d707c.html">John Lanchester</a></td><td class="cell-IKOU">💻 <a href="https://gist.github.com/savarin/77449f22e0977b094bf4906b9f9caa89">Can money set you free?</a></td><td class="cell-y&gt;[`">FT Weekend</td></tr><tr id="b491190f-ead2-4dc2-8c9f-989a54281f4a"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Nicholas%20Chirls%20b491190fead24dc28c9f989a54281f4a.html">Nicholas Chirls</a></td><td class="cell-IKOU">💻 <a href="https://nchirls.svbtle.com/my-time-at-lehman">My time at Lehman</a></td><td class="cell-y&gt;[`"></td></tr><tr id="f32e3fd7-b139-44e9-a255-acc4464cf631"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Nick%20Paumgarten%20f32e3fd7b13944e9a255acc4464cf631.html">Nick Paumgarten</a></td><td class="cell-IKOU"><a href="https://www.newyorker.com/magazine/2012/03/05/magic-mountain-davos">Magic mountain - what happens at Davos?</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="9529b420-caf4-4d6c-bb24-82f9843bdcaf"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Paul%20Graham%209529b420caf44d6cbb2482f9843bdcaf.html">Paul Graham</a></td><td class="cell-IKOU">💻 <a href="http://www.paulgraham.com/hs.html">What you’ll wish you’d known</a></td><td class="cell-y&gt;[`"></td></tr><tr id="dcf4f2ec-7859-4d74-a48e-277fdf477c5e"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Jan%20Overgoor%20dcf4f2ec78594d74a48e277fdf477c5e.html">Jan Overgoor</a></td><td class="cell-IKOU"><a href="https://medium.com/airbnb-engineering/experiments-at-airbnb-e2db3abf39e7">Experiments at Airbnb</a></td><td class="cell-y&gt;[`"></td></tr><tr id="c08f8a56-aaf9-4bde-bd72-fddbf4ef9abd"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Witold%20Rybczynski%20on%20Renzo%20Piano%20c08f8a56aaf94bdebd72fddbf4ef9abd.html">Witold Rybczynski on Renzo Piano</a></td><td class="cell-IKOU">💻 <a href="https://slate.com/culture/2011/03/have-computers-made-architects-less-disciplined.html">Think before you build</a></td><td class="cell-y&gt;[`">Slate</td></tr><tr id="670e1b40-3dc0-4e22-bb87-a5c3daed1a9a"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Antonia%20Macaro%20et%20al%20670e1b403dc04e22bb87a5c3daed1a9a.html">Antonia Macaro et al</a></td><td class="cell-IKOU">💻 <a href="https://www.ft.com/content/0dc70fac-4c86-11e1-b1b5-00144feabdc0">Do we need to have a passion?</a></td><td class="cell-y&gt;[`">FT Weekend</td></tr><tr id="76d7cc91-53bb-451f-b87c-46d75c409a4b"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Ian%20Parker%20on%20Bjarke%20Ingels%2076d7cc9153bb451fb87c46d75c409a4b.html">Ian Parker on Bjarke Ingels</a></td><td class="cell-IKOU"><a href="https://www.newyorker.com/magazine/2012/09/10/high-rise">High rise - a bold Danish architect charms his way to the top</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="b404a081-bbff-43aa-ba20-499f8e5ccaed"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Aline%20Lerner%20b404a081bbff43aaba20499f8e5ccaed.html">Aline Lerner</a></td><td class="cell-IKOU">💻 <a href="https://blog.alinelerner.com/how-to-interview-your-interviewers/">How to interview your interviewers</a></td><td class="cell-y&gt;[`"></td></tr><tr id="f6b56d59-df87-451e-abe4-5dc2009c6c2a"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/David%20Brooks%20f6b56d59df87451eabe45dc2009c6c2a.html">David Brooks</a></td><td class="cell-IKOU">💻 <a href="https://www.nytimes.com/2015/04/12/opinion/sunday/david-brooks-the-moral-bucket-list.html">The moral bucket list</a></td><td class="cell-y&gt;[`">NY Times</td></tr><tr id="de55b3e1-c48a-4103-b56c-66bc919615b3"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/John%20Lanchester%20de55b3e1c48a4103b56c66bc919615b3.html">John Lanchester</a></td><td class="cell-IKOU"><a href="https://www.newyorker.com/magazine/2008/11/10/melting-into-air">Melting into air - before the financial system went bust, it went postmodern</a></td><td class="cell-y&gt;[`">New Yorker</td></tr><tr id="6f0a3c58-8d24-47ba-8deb-d6139b1a4831"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Peter%20Norvig%206f0a3c588d2447ba8debd6139b1a4831.html">Peter Norvig</a></td><td class="cell-IKOU">💻 <a href="https://norvig.com/21-days.html">Teach yourself programming in ten years</a></td><td class="cell-y&gt;[`"></td></tr><tr id="ca93d063-983c-44f9-bd97-eed48a05d7f5"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Richard%20Artoul%20ca93d063983c44f9bd97eed48a05d7f5.html">Richard Artoul</a></td><td class="cell-IKOU">💻 <a href="https://medium.com/swlh/from-coding-bootcamp-graduate-to-building-distributed-databases-29acbb723d8">From coding bootcamp graduate to building distributed databases</a></td><td class="cell-y&gt;[`"></td></tr><tr id="6f919a99-aefd-49cf-b752-1528c2b9377c"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Reid%20Hoffman%20on%20Sam%20Altman%206f919a99aefd49cfb7521528c2b9377c.html">Reid Hoffman on Sam Altman</a></td><td class="cell-IKOU"><a href="https://greylock.com/greymatter/sam-altman-ai-for-the-next-era/">AI for the next era</a></td><td class="cell-y&gt;[`"></td></tr><tr id="4a129688-5376-4c12-adb2-32c55dbc38df"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Patrick%20O%E2%80%99Shaughnessy%204a12968853764c12adb232c55dbc38df.html">Patrick O’Shaughnessy</a></td><td class="cell-IKOU">💻 <a href="https://www.joincolossus.com/editorials/posts/trail-magic">Trail magic</a></td><td class="cell-y&gt;[`"></td></tr><tr id="9a9fa668-5d60-4201-af29-0cbdeed349a9"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Ben%20Kuhn%209a9fa6685d604201af290cbdeed349a9.html">Ben Kuhn</a></td><td class="cell-IKOU">💻 <a href="https://www.benkuhn.net/blub/">In defense of blub studies</a></td><td class="cell-y&gt;[`"></td></tr><tr id="c8be47b0-b4c0-428a-bdb6-2c24adc57bb9"><td class="cell-title"><a href="Articles%2018e42195afd5472badb75161b63e0b48/Erik%20Bernhardsson%20c8be47b0b4c0428abdb62c24adc57bb9.html">Erik Bernhardsson</a></td><td class="cell-IKOU"><a href="https://erikbern.com/2021/07/07/the-data-team-a-short-story.html">Building a data team at a mid-stage startup: a short story</a></td><td class="cell-y&gt;[`"></td></tr></tbody></table><br/><br/></div></article></body></html>

@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,8 +673,8 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="4c440389-cf1e-43f4-8fe6-7c969967f655" class="page sans"><header><img class="page-cover-image" src="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655/sicp.jpg" style="object-position:center 11.750000000000005%"/><h1 class="page-title">1 week with David Beazley and SICP</h1></header><div class="page-body"><p id="efc51075-24f6-4632-9681-3ab2237f4091" class="">I had the chance to do David Beazley’s <a href="https://www.dabeaz.com/sicp.html">SICP course</a> towards the end of 2022. I have only good things to say.</p><p id="1999a836-b069-4911-b6a2-980baab87409" class="">
-</p><p id="1d920363-c4fb-4c5e-ab8a-37ef1cd34238" class="">There are a lot of free resources out there <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[1]</a>. Having Dave as a guide, I was amazed at how much we covered in a week. I loved how he cherry-picked topics for the high-level overview, but takes the time to hone in on critical sections. In some cases, Dave even comes up with his own examples to more cleanly illustrate concepts being discussed.</p><p id="e4cb229c-1923-46b5-be5c-99cbcf5b3258" class="">
+</style></head><body><article id="4c440389-cf1e-43f4-8fe6-7c969967f655" class="page sans"><header><img class="page-cover-image" src="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655/sicp.jpg" style="object-position:center 11.750000000000005%"/><h1 class="page-title">1 week with David Beazley and SICP</h1><p class="page-description"></p></header><div class="page-body"><p id="efc51075-24f6-4632-9681-3ab2237f4091" class="">I had the chance to do David Beazley’s <a href="https://www.dabeaz.com/sicp.html">SICP course</a> towards the end of 2022. I have only good things to say.</p><p id="1999a836-b069-4911-b6a2-980baab87409" class="">
+</p><p id="1d920363-c4fb-4c5e-ab8a-37ef1cd34238" class="">There are a lot of free resources out there <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[1]</a>. Having Dave as a guide, I was amazed at how much we covered in a week. I loved how he cherry-picked topics for the high-level overview, but takes the time to hone in on critical sections. In some cases, Dave even comes up with his own examples to more clearly illustrate concepts being discussed.</p><p id="e4cb229c-1923-46b5-be5c-99cbcf5b3258" class="">
 </p><p id="6747fc3c-0961-4d4c-b048-e0f0ea3875ef" class="">What did I learn? It’s hard to describe. I’ll explain by analogy. When I learned about compilers, I discovered that languages have much more in common than I realized; I now see the big picture <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[2]</a>. With SICP it’s a bit like that, but with the idea of computation more generally.</p><p id="135f728c-4193-4413-92ae-d5de7c0fa454" class="">
 </p><p id="be7b0024-915f-48c5-a7a5-0694b46bb114" class="">Let’s review a few key concepts, and then go into what I found especially mind-blowing.</p><h1 id="f27bc090-2eb7-4483-8186-487a2b09f915" class="">Starting point</h1><p id="aa820f83-691e-44ca-94b4-3213131aa896" class="">In this section, we build a simple model of computation through the process of substitution. We start with a quick review of Scheme (the language used in SICP), next build a Scheme interpreter in Python, and then take a closer look at substitution.</p><h3 id="926c8719-01d6-42ac-bac9-d14cdfdad3c0" class="">Scheme</h3><p id="8a9b57d1-149e-419d-8ea7-ccdae469cb9a" class=""><a href="https://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a> is a dialect of <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a>. For the course we actually used <a href="https://en.wikipedia.org/wiki/Racket_(programming_language)">Racket</a>, which is similar but easier to set up <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[3]</a>. For our purposes we only need a small part of the language; here Scheme and Racket coincide. The <code>&gt;</code> in this subsection represents the Scheme REPL.</p><p id="83ebc154-bfd9-4a2e-b34d-c985b705eebf" class="">
 </p><p id="6e466513-fd82-42fc-8f16-7594c2d5dc95" class="">Primitives are the simplest entities in the language. We only need integers. When evaluated we simply get it back.</p><pre id="74e7d259-7045-4578-b5aa-6e6bac93463a" class="code"><code>&gt; 1
@@ -688,7 +695,7 @@ blockquote {
 </p><p id="68130016-abe9-486f-9d26-cd460f7b1a9a" class="">By combining <code>define</code> and <code>lambda</code>, we can create user-defined functions. Here we bind the operation in the previous example to <code>square</code>.</p><pre id="51a31ccc-87e3-4a30-be13-c4a6cb796f0f" class="code"><code>&gt; (define square (lambda (x) (* x x)))
 
 &gt; (square 3)
-9</code></pre><p id="ae98c898-035c-48f2-bf89-5533e032d336" class=""> </p><p id="529c2a7b-c414-4623-bdde-e5c0749f5dbe" class="">We introduce these here for use in later sections. The special form <code>cons</code> lets you create data pairs. The first item in the pair is accessed with <code>car</code>, the remainder with <code>cdr</code> <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[4]</a>.</p><pre id="2d891ea2-4be9-4b1f-996b-3dbd4322725a" class="code"><code>&gt; (define pair (cons 1 2))
+9</code></pre><p id="ae98c898-035c-48f2-bf89-5533e032d336" class=""> </p><p id="529c2a7b-c414-4623-bdde-e5c0749f5dbe" class="">We present these here for use in later sections. The special form <code>cons</code> lets you create data pairs. The first item in the pair is accessed with <code>car</code>, the remainder with <code>cdr</code> <a href="1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">[4]</a>.</p><pre id="2d891ea2-4be9-4b1f-996b-3dbd4322725a" class="code"><code>&gt; (define pair (cons 1 2))
 
 &gt; (car pair)
 1
@@ -696,12 +703,12 @@ blockquote {
 &gt; (cdr pair)
 2</code></pre><p id="e5676316-be07-43c4-b934-8ed66c72ca9a" class="">
 </p><h3 id="5c64d6da-99d8-44e8-89cc-09c6fd893043" class="">Scheme interpreter in Python</h3><p id="fb3499ef-446a-47fb-a5b5-489ef93d6ac5" class="">How do we write a Python function that takes in Scheme source code and returns what Scheme would return? The <code>&gt;</code> in this subsection represents the Python REPL.</p><p id="8402fc89-1833-4601-b66c-d497d7fe79f2" class="">
-</p><p id="d97ae2cc-1d0a-4de0-a356-083f3e3b340a" class="">For primitives, we return as is.</p><pre id="dce37738-99f1-4855-a58a-e3e7a74bdcba" class="code"><code>def evaluate(expression):
+</p><p id="d97ae2cc-1d0a-4de0-a356-083f3e3b340a" class="">For primitives, we return as-is.</p><pre id="dce37738-99f1-4855-a58a-e3e7a74bdcba" class="code"><code>def evaluate(expression):
     if isinstance(expression, int):
         return expression</code></pre><p id="687035dd-77c9-43c2-a431-65975b2d9107" class="">
 </p><p id="426632ff-9e31-4df6-9fbc-a4b10e69f6c7" class="">Ditto.</p><pre id="532e3d16-f4c7-46c7-a27b-b78ea094b9f1" class="code"><code>&gt; evaluate(1)
 1</code></pre><p id="004d2eb7-5fab-4eba-96d7-e452e0d04040" class="">
-</p><p id="6aa40012-7d53-4a93-86cc-8ac4fcfd4fe4" class="">To keep things simple, we represent Scheme source in parenthesis with Python tuples. </p><p id="48fb0c43-07f0-48d5-b4cc-d4aff837198f" class="">
+</p><p id="6aa40012-7d53-4a93-86cc-8ac4fcfd4fe4" class="">To keep things simple, we represent Scheme source in parentheses with Python tuples. </p><p id="48fb0c43-07f0-48d5-b4cc-d4aff837198f" class="">
 </p><p id="0294aaa2-2b0f-4335-b8c3-20e1f70ec9f3" class="">Now let’s do built-in operations. The first item in the tuple is the operator (as a string); we do a look up in <code>definitions</code> and substitute. Next we evaluate all arguments before applying the operator (in function form).</p><pre id="f5755ae6-6b03-4c9d-b762-3047a08193e2" class="code"><code>definitions = {
     &quot;+&quot;: lambda x, y: x + y,
     &quot;*&quot;: lambda x, y: x * y,
@@ -1008,4 +1015,5 @@ None
 </p><p id="38d1dfe7-6bf6-4e88-8f56-6c8a31d46c7e" class="">[9] <a href="http://sarabander.github.io/sicp/html/3_002e1.xhtml#Exercise-3_002e8">Exercise 3.8</a> involves coming up with a procedure <code>f</code> such that evaluating <code>(+ (f 0) (f 1))</code> returns <code>0</code> but <code>(+ (f 1) (f 0))</code> returns <code>1</code>.</p><p id="0d5548e4-78da-4003-89a5-eb1707a21be1" class="">
 </p><p id="046123bb-c3d7-48a8-af55-f5792849cb73" class="">[10] Bartosz Milewski calls for a return to functional programming in the multicore world, in the preface of his book <a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface">here</a>.</p><p id="249e8c05-9e65-4150-b91f-0f2460160330" class="">
 </p><p id="23f656a5-4ea9-406c-b742-c6bb1927bfb6" class="">[11] This subsection is actually set up as <a href="http://sarabander.github.io/sicp/html/2_002e1.xhtml#Exercise-2_002e6">Exercise 2.6</a> in the book.</p><p id="855ab54e-4aff-4e24-a6fe-f43bf7fd3ee6" class="">
-</p><p id="f4fe35e5-8f8d-42cc-a3d9-7012ab370156" class="">[12] Another way to think about special forms is as procedures where ‘normal rules do not apply’. In the case of <code>if</code>, the <code>else</code> clause can lead to an infinite loop if evaluated but is short-circuited to the <code>then</code> clause when the <code>predicate</code> is true.</p></div></article></body></html>
+</p><p id="f4fe35e5-8f8d-42cc-a3d9-7012ab370156" class="">[12] Another way to think about special forms is as procedures where ‘normal rules do not apply’. In the case of <code>if</code>, the <code>else</code> clause can lead to an infinite loop if evaluated but is short-circuited to the <code>then</code> clause when the <code>predicate</code> is true.</p><p id="c75196d2-aa13-458b-a843-161e5e147a76" class="">
+</p></div></article></body></html>

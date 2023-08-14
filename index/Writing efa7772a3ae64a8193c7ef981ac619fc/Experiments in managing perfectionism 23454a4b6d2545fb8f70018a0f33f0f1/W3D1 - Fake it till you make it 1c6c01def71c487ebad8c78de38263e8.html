@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="1c6c01de-f71c-487e-bad8-c78de38263e8" class="page sans"><header><h1 class="page-title">W3D1 - Fake it till you make it</h1></header><div class="page-body"><p id="12f5bfed-5bf4-4d65-a1ad-377171a68912" class=""><strong>On faking it</strong></p><p id="b0e5f830-feae-45f6-a893-253de073ce65" class="">According to my Github profile, I&#x27;m an Arctic Code Contributor. Github has decided that one of my repositories is worthy of preserving for future generations, alongside the illustrious source code for Python, Go, Rust, Linux and React. My code will <a href="https://archiveprogram.github.com/">live</a> in a &quot;very-long-term archive designed to last at least 1,000 years&quot;.</p><p id="b80d55c3-0235-4ded-a4a1-2da43c703da3" class="">The <a href="https://github.com/savarin/pyconuk-introtutorial">repo</a> in question is a set of notebooks created to help people get started with pandas and scikit-learn, i.e. Python libraries for data manipulation and machine learning. I&#x27;ve come across references to it in <a href="http://dac.lip6.fr/master/fdms-2016-2017">French</a>, <a href="http://tech.163.com/17/0422/09/CIK7NFC500098GJ5.html">Chinese</a> and <a href="https://github.com/edte1020/Pycon-UK-Introductory-Tutorial">Korean</a>.</p><p id="7d552a6e-9a2d-4e9f-8cd3-875cd030cfc4" class="">At this point you might think I&#x27;m bragging. The funny thing is it all started as a bit of a ruse.</p><p id="546e073b-ca4f-41e5-bf0e-aa19415eeec7" class="">I wanted to get a job in data science. I thought presenting at a conference would be a selling point. I created a Meetup group. I hosted a social to get members. I got the members to attend my presentations. I used the presentations to get a speaker&#x27;s slot at PyCon UK.</p><p id="0e58c9e5-cb1d-445a-bf26-8bccb7141b41" class="">Hence the title for today&#x27;s blog post. We all had a start somewhere, I&#x27;m not sure how I feel that&#x27;s what&#x27;s being remembered. I guess I have to work even harder now...</p><p id="f1b57cbe-50fc-4130-b68a-250af74494c3" class="">
+</style></head><body><article id="1c6c01de-f71c-487e-bad8-c78de38263e8" class="page sans"><header><h1 class="page-title">W3D1 - Fake it till you make it</h1><p class="page-description"></p></header><div class="page-body"><p id="12f5bfed-5bf4-4d65-a1ad-377171a68912" class=""><strong>On faking it</strong></p><p id="b0e5f830-feae-45f6-a893-253de073ce65" class="">According to my Github profile, I&#x27;m an Arctic Code Contributor. Github has decided that one of my repositories is worthy of preserving for future generations, alongside the illustrious source code for Python, Go, Rust, Linux and React. My code will <a href="https://archiveprogram.github.com/">live</a> in a &quot;very-long-term archive designed to last at least 1,000 years&quot;.</p><p id="b80d55c3-0235-4ded-a4a1-2da43c703da3" class="">The <a href="https://github.com/savarin/pyconuk-introtutorial">repo</a> in question is a set of notebooks created to help people get started with pandas and scikit-learn, i.e. Python libraries for data manipulation and machine learning. I&#x27;ve come across references to it in <a href="http://dac.lip6.fr/master/fdms-2016-2017">French</a>, <a href="http://tech.163.com/17/0422/09/CIK7NFC500098GJ5.html">Chinese</a> and <a href="https://github.com/edte1020/Pycon-UK-Introductory-Tutorial">Korean</a>.</p><p id="7d552a6e-9a2d-4e9f-8cd3-875cd030cfc4" class="">At this point you might think I&#x27;m bragging. The funny thing is it all started as a bit of a ruse.</p><p id="546e073b-ca4f-41e5-bf0e-aa19415eeec7" class="">I wanted to get a job in data science. I thought presenting at a conference would be a selling point. I created a Meetup group. I hosted a social to get members. I got the members to attend my presentations. I used the presentations to get a speaker&#x27;s slot at PyCon UK.</p><p id="0e58c9e5-cb1d-445a-bf26-8bccb7141b41" class="">Hence the title for today&#x27;s blog post. We all had a start somewhere, I&#x27;m not sure how I feel that&#x27;s what&#x27;s being remembered. I guess I have to work even harder now...</p><p id="f1b57cbe-50fc-4130-b68a-250af74494c3" class="">
 </p><p id="d067e124-5260-41ff-8efd-86ea887ac617" class=""><strong>Open source</strong></p><p id="41a6729c-613a-4cd1-b38a-15ce64b0e2c4" class="">A thought that did not sit well over the weekend was my previous <a href="https://payments.posthaven.com/rc-w2d5-my-first-open-source-contribution">claim</a> that open source is not as inaccessible as I initially thought. This holds true, but incomplete. My reference to the gap between generating Fibonacci and production-grade code alludes to this, but I hesitated to publish what I initially drafted. I was worried what I said would be seen as a discouragement.</p><p id="ef19ee0b-a52f-482f-aac2-744ae6299b42" class="">It helps having worked in a production environment; some may need a bit of hand-holding to feel more comfortable with, say, the build-test-style suite. That said, I think this hand-holding process can be a helpful how-to guide. I&#x27;ll ponder on this in the coming weeks.</p><p id="720bcf39-d795-4a92-9a0a-4725eb0ff5bb" class="">
 </p><p id="1f4d9798-5dd3-44db-956c-daef7a23c7b4" class=""><strong>Content: External validation</strong></p><p id="a75793a6-7355-495f-a0fb-a7984f9adc4f" class="">In that same post I also mentioned my fear of exposure, when in reality people tend to care too little than too much. The content for today, a <a href="https://twitter.com/waitbutwhy">Tim Urban</a> post titled Taming the Mammoth, illustrates this beautifully.</p><p id="8e347c5b-141e-432f-882e-38544731fa21" class=""><a href="https://waitbutwhy.com/2014/06/taming-mammoth-let-peoples-opinions-run-life.html">https://waitbutwhy.com/2014/06/taming-mammoth-let-peoples-opinions-run-life.html</a></p><blockquote id="a33176e1-0a4c-44ed-a8e3-b576d97b421b" class="">Being approved of by one type of person means turning another off. So obsessing over fitting in with any one group is illogical, especially if that group isn’t really who you are. You’ll do all that work, and meanwhile, your actual favorite people are off being friends with each other somewhere else.</blockquote><p id="0cd4de56-899d-410a-aa62-56cd257eca11" class="">
 </p><div id="770c30ca-9e69-4d6f-9bb9-38510370ef8c" class="column-list"><div id="013db644-8b62-41c5-a296-d6650da53d03" style="width:50%" class="column"><p id="130d9099-fb05-42da-a2dd-6fed327fc438" class=""><a href="W2D5%20-%20My%20first%20open%20source%20contribution%2092864e9b335d4f7aa0a66f52fc2bbf44.html">Previous</a></p></div><div id="ba1cf2b8-b8fa-49f1-8019-f84d4ade9e4e" style="width:50%" class="column"><p id="350530ba-0f2c-4793-be1f-5793afb98188" class=""><a href="W3D2%20-%20Choose%20boring%20technology%203adebc0c6bb749a3807503bac8c998cc.html">Next</a></p></div></div></div></article></body></html>

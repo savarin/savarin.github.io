@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="697a79a6-7149-40b2-b08a-6f85bcefabed" class="page sans"><header><h1 class="page-title">Intro to WebAssembly</h1></header><div class="page-body"><p id="647943d2-f540-465d-a769-7a02945736e2" class=""><em>Author&#x27;s note: Recurse Center blog posts condensed into a writing sample.</em></p><p id="33be292b-76b5-45f4-83ff-2cf21c957f46" class="">
+</style></head><body><article id="697a79a6-7149-40b2-b08a-6f85bcefabed" class="page sans"><header><h1 class="page-title">Intro to WebAssembly</h1><p class="page-description"></p></header><div class="page-body"><p id="647943d2-f540-465d-a769-7a02945736e2" class=""><em>Author&#x27;s note: Recurse Center blog posts condensed into a writing sample.</em></p><p id="33be292b-76b5-45f4-83ff-2cf21c957f46" class="">
 </p><p id="10ced1ce-6ba3-4143-9be5-7fa72ba8f14e" class="">To quote Lin Clark, WebAssembly is a way of taking code written in programming languages other than JavaScript and running that code in the browser. While this breaks JavaScript&#x27;s &#x27;monopoly&#x27;, we expect developers to use both WebAssembly and JavaScript in the same application.</p><p id="afe4d3a0-cb5c-4a6c-9629-55f57ae53620" class="">WebAssembly fulfils Java&#x27;s founding promise of &quot;write once run anywhere&quot;, with the JVM swapped out by the browser. Running the code in the browser effectively means the compiled .wasm binary is agnostic to the choice of processor and OS.</p><p id="fc178b52-88b2-4b3e-be1a-2d2c303c298a" class="">
 </p><p id="4716f915-5307-4961-8738-fd2c9e0e0c8c" class=""><strong>Why bother?</strong></p><p id="9a453427-1066-4e3f-b1f0-b673a55b3809" class="">The first advantage is portability. Existing codebases can be compiled to WebAssembly to be run in the browser. The compiler tool chain with the most support for WebAssembly is LLVM; this benefits languages like C/C++ and Rust. In addition, these &#x27;system languages&#x27; have smaller runtimes which in turn compile to smaller .wasm binaries.</p><p id="3de62fa4-02f3-47ab-aa7a-1e2fd030aaf5" class="">The second advantage is speed. Compared to JavaScript, WebAssembly is closer to machine code and has gone through an optimization stage. Furthermore, there is no need for type inference reoptimization since WebAssembly has types. Fetching WebAssembly takes less time because it is more compact than JavaScript, as noted by Figma in a real-world use case.</p><p id="2f91e6f8-8e40-4199-a5e7-8db2a70088d4" class="">
 </p><p id="445f4ac3-3339-450c-86c8-a36d123abff3" class=""><strong>Cool! What&#x27;s the catch?</strong></p><p id="5c8b0800-363d-4cfe-8db0-ef972354f6c6" class="">Like all new technologies, WebAssembly can be rough around the edges. WebAssembly supports only ints and floats natively, so relies on JavaScript for string support. For the moment WebAssembly also has no direct access to the DOM. The back-and-forth overhead between WebAssembly and JavaScript can add up, to varying degrees depending on the browser.</p><p id="2f222cb0-3695-44b7-a214-78a5f6897a99" class="">It&#x27;s worth noting how loading .wasm binaries has to be done via JavaScript since cross-scripting rules in the browser blocks reads to the file system. Changes to allow direct loading are in the works, which would make WebAssembly interop more seamless.</p><p id="9568f4dd-de86-493b-a503-c601829402e5" class="">Finally, WebAssembly doesn&#x27;t know how to interact with garbage collectors. Once work to expose bindings to the JavaScript garbage collector is complete, garbage-collected languages can more readily be cross-compiled to .wasm binaries.</p><p id="4e00767f-55b5-4b64-8d28-f0cabdbc780c" class="">

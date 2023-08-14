@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -426,7 +430,7 @@ code {
 }
 
 blockquote {
-	font-size: 1.25em;
+	font-size: 1em;
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="9a130f22-5666-4884-91ba-497004821fbb" class="page sans"><header><img class="page-cover-image" src="Rewriting%20my%20toy%20blockchain%20in%20Rust%209a130f225666488491ba497004821fbb/blocks.jpeg" style="object-position:center 50%"/><h1 class="page-title">Rewriting my toy blockchain in Rust</h1></header><div class="page-body"><p id="205c9989-a601-4e2a-acec-3e25c166f73a" class="">I started 2022 with a <a href="https://www.recurse.com/mini-retreats">mini batch</a> at the <a href="https://www.recurse.com">Recurse Center</a>. I did a <a href="https://payments.posthaven.com">full batch</a> in Fall 2020, and hanging out with people working on their side projects full time seems like a fun way to kick off the year.</p><p id="48ca6790-77a3-4f9d-9f1e-bdd776e3101e" class="">
+</style></head><body><article id="9a130f22-5666-4884-91ba-497004821fbb" class="page sans"><header><img class="page-cover-image" src="Rewriting%20my%20toy%20blockchain%20in%20Rust%209a130f225666488491ba497004821fbb/blocks.jpeg" style="object-position:center 50%"/><h1 class="page-title">Rewriting my toy blockchain in Rust</h1><p class="page-description"></p></header><div class="page-body"><p id="205c9989-a601-4e2a-acec-3e25c166f73a" class="">I started 2022 with a <a href="https://www.recurse.com/mini-retreats">mini batch</a> at the <a href="https://www.recurse.com">Recurse Center</a>. I did a <a href="https://payments.posthaven.com">full batch</a> in Fall 2020, and hanging out with people working on their side projects full time seems like a fun way to kick off the year.</p><p id="48ca6790-77a3-4f9d-9f1e-bdd776e3101e" class="">
 </p><p id="b05afb73-2d92-4166-9479-13f9c4702018" class="">My plan was to port my toy blockchain from Python to Rust (repo <a href="https://github.com/savarin/readcoin">here</a>, write-up <a href="A%20minimal%20Bitcoin-inspired%20implementation%209559908f03ad4cb7a09ee60a457198e2.html">here</a>). The initial project had multiple iterations, starting with proof-of-work and later Merkle trees and elliptic curve cryptography - a suitable candidate for a 1-week rewrite.</p><p id="24eb1e45-f031-4a3b-b3fe-2304ae09e387" class="">
 </p><p id="abd9da69-22cd-44db-8e0b-6a46d394f0d2" class="">As with a lot of RC projects (for me anyway), things rarely play out as planned. I had moments of confusion with the Rust compiler, moved past that to contemplate working on speedups, but ended up compiling to WebAssembly to enable mining in the browser.</p><p id="0ef9ac03-a692-4262-b0e9-ed02b80adc88" class="">
 </p><p id="d8a22251-e9f5-439c-a7b5-e9ffa86a1e46" class="">What I thought made for a nice ending was being able to connect the mini batch project with what I had previously worked on at RC.</p><h1 id="3da4a9dd-f0aa-481d-a574-0b842fc6167b" class="">Blockchain 101</h1><p id="b7e4266c-3d3b-4ea4-a3da-708311a6c9f1" class="">For our purposes, a blockchain is a distributed database where records are divided into &#x27;blocks&#x27; and the blocks form a &#x27;chain&#x27;.</p><p id="55be78ae-c0f5-48e1-86ac-89e94e14060b" class="">

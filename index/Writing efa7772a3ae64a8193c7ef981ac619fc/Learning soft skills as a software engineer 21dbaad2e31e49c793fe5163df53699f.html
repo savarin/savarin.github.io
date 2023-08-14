@@ -1,0 +1,701 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Learning soft skills as a software engineer</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="21dbaad2-e31e-49c7-93fe-5163df53699f" class="page sans"><header><h1 class="page-title">Learning soft skills as a software engineer</h1><p class="page-description"></p></header><div class="page-body"><p id="1e57ae56-4ff8-4dfc-b6ca-a73bc82676ca" class="">As a self-taught programmer, my focus for many years was learning hard skills. I recently decided to switch gears to pay more attention to soft skills.</p><h1 id="4e533231-e110-4937-b30b-0e9368a79818" class="">Why learn soft skills?</h1><p id="62f028ec-4c0f-412e-b7fc-4058357b24fc" class="">The simple answer is ’to be effective’.</p><p id="35272ef9-1370-448d-8570-a5ba4618a8c5" class="">
+</p><p id="b7c28f22-5b74-431d-b75d-dc22b1909074" class="">As you grow in seniority, you deal with more complexity. This can be technical, organizational, or both. Even if it’s technical, a complex project with multiple stakeholders likely involves putting together a design doc, coordinating with other teams, and getting customer feedback to know you’re on the right track.</p><p id="812c6ab2-e171-4b97-a0ae-92c293db0ea2" class="">
+</p><p id="839a7c65-0e39-40ee-ae49-263cff0ac773" class="">In a nutshell, success often requires going beyond writing code.</p><h1 id="e39e9d16-4b61-48c6-9207-610885e07494" class="">Why is it hard to learn soft skills?</h1><p id="d22e995a-a4b5-43e2-b404-897408c4a4ab" class="">My sense is less that it’s hard to learn soft skills, but it’s hard to give importance to soft skills when you’re used to being able to tell what the right answer is. It’s like wanting to solve more simultaneous equations when you can check against the answer in the back, rather than doing a closed reading of a poem.</p><p id="ea789d14-02d5-4444-8105-035122bc9994" class="">
+</p><p id="031cb13e-b18c-4fcb-a6e4-a4766b76d651" class="">The fact is, as per <a href="https://twitter.com/mattklein123/status/1130206809308901376">Matt Klein</a>, both are hard.</p><blockquote id="4e53b31a-ad8f-43b7-99b0-37ea0ed8f23c" class="">One last thing: don&#x27;t let anyone tell you that the tech/engineering is the easy part. It&#x27;s not. It&#x27;s hard. Soft skills are also hard. It&#x27;s ALL hard, and both are required to succeed.</blockquote><p id="b3b2a17a-2734-47aa-966b-dbc70502aefe" class="">
+</p><p id="f07b0c22-e67c-4368-a2df-817c1b983a4e" class="">I’ve spent a long time learning how things work under the hood; now simply changing the subject of interest from computers to humans.</p><p id="dc1faf91-799c-4b52-8897-9ed302f285b6" class="">
+</p><p id="5b0e9ba4-7a6b-48a5-b08f-df0662eb88a9" class="">The other thing that makes it hard is it’s often less clear if the lesson translates well to your situation. It’s a bit like reading case studies on leadership at business school. If you’re at a Series A startup, is it that helpful to read Jack Welch? Probably not. On the flip side, it’s a missed opportunity to not spend any time on it at all.</p><h1 id="adba30d2-d734-4790-9de6-0de03a30e762" class="">What have I learned?</h1><p id="7742bf39-7a6c-475a-9618-0441ef64f22e" class="">My learning has been rather circuitous. It started with being deliberate in recognizing the need to develop soft skills, rather than picking up another programming language. Like learning via case studies, I hope to illuminate these with quotes from podcasts.</p><p id="60df57c4-9ad9-4560-bee8-63cfed78de90" class="">
+</p><h3 id="a608cbcf-43c4-4dc4-8ec9-4b7eaf08f3d9" class="">1. Stay calm</h3><p id="4857c07d-2682-4bdd-8285-e860b47f2608" class="">When <a href="https://tim.blog/2020/10/14/naval/">Naval Ravikant</a> was asked about his tweet “imagine how effective you would be if you weren’t anxious all the time”, he shared his experience working through a crisis initially in panic mode, and then later with composure.</p><blockquote id="10bec571-78cf-4fc4-9c2e-07e30a0dc2e1" class="">I just think we waste so much energy through anxiety that if you can be calm and still go about your business, it’s a superpower. And I realized this myself recently, where I was in a conflict situation … And I remember how much I was sweating it and how nervous I was and how I went through bouts of fear and anger and how kind of worked up I was the entire time, intense and didn’t get much sleep.
+
+But this time I was incredibly calm and I was almost enjoying it because it was like practicing my craft. ... I can be very effective about it while doing lots and lots of other things. My mind wasn’t constantly spinning in a whirlpool taking on 10 different problems and just fear-based scenario planning all the time. …
+
+So I do believe that being calm and still going about your business is the superpower. Now yes, if anxiety is your only motivator, then you have a problem. But I would argue the pure motivations don’t come out of anxiety.</blockquote><p id="00461b80-dacd-4a29-b5f7-0099c9be8f14" class="">
+</p><p id="5fbc308f-4165-464a-872a-912157aa7add" class="">As a software engineer, it’s satisfying to get your code to run faster. It’s tempting to view this as the primary thing to optimize. Comments on your pull request, however, can help highlight other areas for improvement. These areas may not be immediately evident, and even if that’s not the case, it’s not a reason to get angry.</p><p id="f95de667-ecad-4cf7-b5c1-5de5356e41bd" class="">
+</p><p id="30ca2289-f393-45e0-91d0-b53bc70ecb0e" class="">Motivations can vary widely; the commenter may be inexperienced, insecure, or even hostile. At the end of the day, being right doesn’t necessarily equate to being effective. Try to approach it as another issue to deal with among many. Maybe take a step back for some perspective, maybe sleep on it and revisit the next day.</p><p id="78801820-0b44-4bba-a38b-eadaa96add2c" class="">
+</p><p id="c6256a3c-f4c7-4e4e-a3fb-97aaaed540aa" class="">The range and complexity of issues will only grow from here, so you might as well develop the ‘meta tool&#x27; that helps you stay calm and navigate through them skillfully.</p><p id="9d8f2828-9404-4e6c-89ad-c345aa057cb1" class="">
+</p><h3 id="cb56f12f-310b-46d0-b613-ee413d02c907" class="">2. Understand oneself</h3><p id="4fa5c467-fee7-478f-a5bc-30bf74853ea5" class="">I very much enjoyed listening to <a href="https://www.lennyspodcast.com/lessons-from-scaling-stripe/">Claire Hughes Johnson</a> sharing tactical advice on dealing with organizational issues. That being said, my favorite excerpt involves being introspective.</p><blockquote id="3adb8868-0ca1-4f4c-ba7d-659e5d427417" class="">I tell a story in the book about a manager I worked with where transparency was a very important value to him. ... And the transparency value actually was a little bit problematic to manage because Eli would tell everyone everything, including his team, even when we weren&#x27;t finished with the plan, right?
+
+But Eli got up and told a story of being younger, like seven or eight, and realizing his mother was very sick, and no one really told him what was going on. And then unfortunately watching the process of her dying and then being taken out to lunch by his stepfather and told, &quot;Your mother is gone.” …
+
+This was a formative experience for him and it has changed how he operates, and it will probably have changed it for his whole life. And if you can get to that point on your own, of telling yourself, what was the story? What was the thing that made this so important to me? Then you&#x27;re starting to be in a mode of self-discovery and then you&#x27;re starting to document, okay, if these are my three top values, and here&#x27;s why.</blockquote><p id="37452a8b-7a96-4a7a-b95e-bfe03e9fab7b" class="">
+</p><p id="dee1d4a7-c292-447c-ab21-b42d09a8a202" class="">I’ll caveat that my example is not as hard-hitting. In a previous role, I worked on infrastructure that makes sure data gets shipped across our system timely and accurately. The role had its own set of challenges, but over time I realized that I enjoyed knowing what the bytes mean much more than dealing with scaling issues.</p><p id="64c2f26c-3db6-497e-b932-c1c870535f63" class="">
+</p><p id="0f12a417-2942-4f4c-ba23-242be5b1d692" class="">I had the chance at Recurse Center to present on and write about <a href="Applying%20ML%20to%20flag%20risky%20payments%20bb3a7563aadd4d8788181c7818eab735.html">payments and risk</a>, an area I worked on even earlier. I decided that my focus moving forward is not just the software in itself, but how software can make specific domains like payments and risk 10x better. It may not be on the front page of Hacker News, but it’s the one for me.</p><p id="975c0cb2-d0af-4b5d-bbbd-36a1ef305380" class="">
+</p><h3 id="30f826f9-01d7-4493-80b0-07a8e65be1c2" class="">3. Understand others</h3><p id="c76502a6-9fd1-453c-a739-e5ef099eca19" class="">To the question “what have you changed your mind on recently?”, <a href="https://coachingforleaders.com/podcast/starting-point-for-repairing-trust-henry-cloud/">Henry Cloud</a> shared the following answer.</p><blockquote id="bcafc4bd-2cfb-478b-82a8-ff51961a2756" class="">I’ve changed my mind that I don’t always totally trust my certainty as much as I used to, because I’m learning that sometimes the people that I think are maybe extreme or crazy, that they&#x27;re not totally crazy. You learn to kind of understand that somebody is holding on to something for a reason, and while their position might not be valid, the reason that they hold to it is valid.
+
+I find that I’ve changed my mind a lot in my judgment, or judging someone for why they believe a certain way or why they think a certain way, because I’ve seen enough situations where I’m the facilitator of getting opposing sides together and seen so many times where they don’t change their mind on their position, but they change their mind on their level of understanding why the other side feels the way they do, and that really helps and I think that’s really important.</blockquote><p id="cf27ff3d-bdf3-4009-82b9-6a0a6a6decd7" class="">
+I recall having to deal with a colleague who I thought was being unreasonable. Initially I felt frustrated and found it difficult to concentrate for the rest of the day. Then I came across Henry’s advice. I spent time thinking about why my colleague behaved the way that he did; that helped me let go of my anger and move on to other things.</p><p id="f3594b19-ca1a-4280-ace8-9f71c6d76ac2" class="">
+</p><p id="62fa2045-543c-43bd-b227-882103ac8422" class="">Later on, I realized why my colleague’s behavior felt familiar. It was because the last time it happened, I was the one being unreasonable.</p></div></article></body></html>
