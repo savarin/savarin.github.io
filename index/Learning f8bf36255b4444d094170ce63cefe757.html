@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -637,16 +641,19 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
 .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
 .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
 .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,9 +673,12 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="f8bf3625-5b44-44d0-9417-0ce63cefe757" class="page sans"><header><h1 class="page-title">Learning</h1></header><div class="page-body"><p id="aa64fb61-bd22-4976-b286-82a717443e61" class="">I did math in college, had my first job in finance, went to law school, and moved into software / data in the mid-2010s. I believe in lifelong learning. I believe that the job offer is the start of the journey, not the end (cue <a href="https://norvig.com/21-days.html">Peter Norvig</a>). I believe <a href="https://www.ft.com/content/740d3986-0c63-11df-a941-00144feabdc0">anxiety is freedom</a>.</p><p id="290527a3-6b10-4847-9466-c10bbe9794c9" class="">
+</style></head><body><article id="f8bf3625-5b44-44d0-9417-0ce63cefe757" class="page sans"><header><h1 class="page-title">Learning</h1><p class="page-description"></p></header><div class="page-body"><p id="aa64fb61-bd22-4976-b286-82a717443e61" class="">I did math in college, had my first job in finance, went to law school, and moved into software / data in the mid-2010s. I believe in lifelong learning. I believe that the job offer is the start of the journey, not the end (cue <a href="https://norvig.com/21-days.html">Peter Norvig</a>). I believe <a href="https://www.ft.com/content/740d3986-0c63-11df-a941-00144feabdc0">anxiety is freedom</a>.</p><p id="290527a3-6b10-4847-9466-c10bbe9794c9" class="">
 </p><h3 id="44f0cbdd-52dd-4e4f-9081-9d623cdaa5dd" class="">Zipfian Academy</h3><p id="2c1a234b-96af-44d7-aea2-12df2f65528b" class="">My <a href="https://github.com/savarin/rateflask">capstone project</a> at data science bootcamp involved building a model to run active selection on Lending Club loans. Lending Club buckets loans into risk grades. My hypothesis is it&#x27;s possible to &#x27;cherry pick&#x27; loans to outperform average returns; the model consistently achieved a 1-2% uplift to returns across the board. It turns out Theorem LP (YC 2014) does exactly this as a business. I joined Square post-Zipfian, and joined Theorem post-Square.</p><p id="38521b8d-fb22-46f1-81f5-271b237309d9" class="">
 </p><h3 id="912c3c98-8eee-45fb-8d00-01a9eeccac17" class="">UC Berkeley Extension</h3><p id="49801d77-56e5-4267-aeb4-db3fd545b5d2" class="">My <a href="https://github.com/savarin/deep-matrix-java">capstone project</a> for Berkeley&#x27;s Java: Discovering its Power <a href="https://extension.berkeley.edu/search/publicCourseSearchDetails.do?method=load&amp;courseId=40962">course</a> was building a neural network predictive model from scratch. I later <a href="https://github.com/savarin/deep-matrix-clojure">ported</a> the repo to Clojure.</p><p id="a7e6fa99-868e-45df-bf1f-d95e7688edd7" class="">
 </p><h3 id="d4c6e253-06a7-4841-b9d7-74c62b16d1d5" class="">Recurse Center</h3><p id="3b19c9b7-b3c4-44ed-9b92-2364ca5b124b" class=""><a href="https://www.recurse.com">RC</a> is like a writers&#x27; retreat for programmers. I spent time on WebAssembly (repos <a href="https://github.com/savarin/minimal">here</a> and <a href="https://github.com/savarin/bridge">here</a>), compilers and functional programming. I contributed to the open source Python HTTP client <a href="https://github.com/urllib3/urllib3">urrlib3</a>. I wrote a <a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Experiments%20in%20managing%20perfectionism%2023454a4b6d2545fb8f70018a0f33f0f1.html">blog</a> about the experience. I returned for a mini-batch at the start of 2022; my <a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Rewriting%20my%20toy%20blockchain%20in%20Rust%209a130f225666488491ba497004821fbb.html">post</a> on the experience reached top 10 of Hacker News.</p><p id="f2570a17-872e-4c25-bc3a-f14f40e38b26" class="">
 </p><h3 id="d19f2493-ca7a-46f8-b30b-f353e6bc1526" class="">Bradfield School of CS</h3><p id="b77d220e-a33e-444e-9020-0297405a3ddb" class="">I love <a href="https://bradfieldcs.com">Bradfield</a>, perhaps best known for their Teach Yourself CS <a href="https://teachyourselfcs.com/">guide</a>. I completed the set of <a href="https://bradfieldcs.com/courses/">courses</a> that make up the CS undergrad curriculum, particularly memorable were projects for <a href="https://github.com/savarin/minimal-lox">compilers</a>, <a href="https://github.com/savarin/sql">databases</a> and <a href="https://github.com/savarin/tost">APIs</a>. I&#x27;m currently in Cohort 3 of Bradfield&#x27;s Computer Science Intensive <a href="https://bradfieldcs.com/csi/">program</a>.</p><p id="a7ab3e06-3508-4c11-95ab-d72e6ee16932" class="">
-</p></div></article></body></html>
+</p><h3 id="c0e332ae-ecda-4879-ba62-e640883759b8" class="">ChatGPT</h3><p id="c105351a-cb79-4247-a2c6-c02100040dde" class="">ChatGPT is an absolute gift when I get into curious mode. I started keeping track of questions and answers below.</p><figure id="69ce2379-b671-4ea2-87d7-228dedbecb48" class="link-to-page"><a href="Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48.html">ChatGPT</a></figure><p id="34207dde-aa22-406c-b61a-bd8b50cdadaa" class="">
+</p><p id="1e0ed718-e62f-410b-a268-c036587f8ecd" class="">
+</p><p id="6ea79e72-a865-4880-878b-cfbe0f4b297d" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

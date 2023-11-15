@@ -1,0 +1,705 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Kotlin</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7eb102e2-5407-4ad2-b9cc-bcbd965546c2" class="page sans"><header><h1 class="page-title">Kotlin</h1><p class="page-description"></p></header><div class="page-body"><p id="5028ef2d-95cf-47d1-852e-10c65993c79d" class="">
+</p><ul id="869fcade-2d35-4806-a205-270a5083aa27" class="toggle"><li><details open=""><summary><strong>Tell me about the pain points of Java that inspired Kotlin to be developed as a new programming language.</strong></summary><p id="daa54e90-36dd-45bb-8919-fd3f44515214" class="">
+</p><p id="a6a602a4-caf2-47e8-890e-bce3e6c731f3" class="">Kotlin was developed by JetBrains, a company known for creating integrated development environments (IDEs) for various programming languages. The main inspiration behind the development of Kotlin was to address various pain points and limitations that developers encountered while working with Java, particularly in the Android development environment. Some of these pain points include:</p><ol type="1" id="b8c81a21-e2ab-413e-aca8-b2e81e88fa04" class="numbered-list" start="1"><li><strong>Verbosity</strong>: Java is known for its verbosity. Writing even simple constructs can require a lot of boilerplate code, which makes the codebase larger and less readable. Kotlin, on the other hand, offers a much more concise syntax, reducing the amount of boilerplate code significantly.</li></ol><ol type="1" id="c20318f6-b715-4bfe-8fb3-14fcc1399c78" class="numbered-list" start="2"><li><strong>Null Safety</strong>: Null pointer exceptions are a major source of runtime errors in Java. Kotlin addresses this by incorporating null safety into its type system, making it impossible to assign or return null by default unless explicitly allowed by the programmer.</li></ol><ol type="1" id="5a8ae490-8e40-4c29-9265-7ceaca069f7f" class="numbered-list" start="3"><li><strong>Functional Programming Support</strong>: While Java has introduced functional programming features in recent versions (Java 8 and beyond), Kotlin was designed with first-class support for functional programming constructs like lambdas, higher-order functions, and lazy evaluation, making it a more versatile language for modern software development.</li></ol><ol type="1" id="da3ed119-116f-4312-bd03-cf9bfcc87a74" class="numbered-list" start="4"><li><strong>Extension Functions</strong>: In Java, extending existing classes often requires creating a new derived class or using design patterns like decorator. Kotlin introduced extension functions, allowing developers to add new functions to existing classes without inheritance.</li></ol><ol type="1" id="3586ef8e-f410-4b44-bf37-9efa46312d31" class="numbered-list" start="5"><li><strong>Smart Casts</strong>: Java requires explicit casting even when it&#x27;s clear what the type is. Kotlin has smart casts that automatically handle casting if the type is already checked, reducing the need for explicit casting and making the code cleaner and safer.</li></ol><ol type="1" id="859f93fd-228a-4a5b-853b-4c070a0a8265" class="numbered-list" start="6"><li><strong>Coroutines for Asynchronous Programming</strong>: Kotlin introduces coroutines as a more efficient and straightforward way to handle asynchronous programming, a task that is often more cumbersome in Java due to its reliance on complex concurrency frameworks and APIs.</li></ol><ol type="1" id="9c8c6686-20e4-4fd8-8e79-383c352e39eb" class="numbered-list" start="7"><li><strong>No Checked Exceptions</strong>: Checked exceptions in Java force error handling, which can lead to verbose code with many try-catch blocks. Kotlin does away with checked exceptions, which many developers see as an improvement for code clarity.</li></ol><ol type="1" id="a22ffadd-dbf6-4ff5-8d19-8103ebd39f61" class="numbered-list" start="8"><li><strong>Primary Constructors</strong>: Java requires constructors to be defined explicitly. Kotlin allows for primary constructors to be defined in the class header, simplifying class definitions.</li></ol><ol type="1" id="a18dd6db-2217-4ed3-ae87-6cb3809268e8" class="numbered-list" start="9"><li><strong>Data Classes</strong>: Kotlin has data classes, which automatically generate boilerplate code like equals(), hashCode(), toString(), and others for classes that are intended to hold data. This feature is particularly useful for model classes, which are prevalent in Android development.</li></ol><ol type="1" id="f08cae51-7175-4b8e-9684-9914840756e0" class="numbered-list" start="10"><li><strong>Interoperability with Java</strong>: Despite all the improvements, Kotlin was designed to be fully interoperable with Java, meaning that developers can use Kotlin in their existing Java projects and leverage all the existing Java libraries and frameworks.</li></ol><p id="f99e78ae-e2d7-4f78-9f94-952358c6ca09" class="">The combination of these features and improvements made Kotlin an attractive alternative to Java, especially for Android development. In 2017, Google announced first-class support for Kotlin on Android, which significantly boosted its popularity among Android developers.</p></details></li></ul><p id="8baf8109-8c2a-4761-9281-2603bf7d51af" class="">
+</p><ul id="d47d958f-516c-4062-ba45-7ededf70ae83" class="toggle"><li><details open=""><summary><strong>Tell me more about the other languages that inspired Kotlin, and in what way inspired Kotlin.</strong></summary><p id="9833e406-37f7-40bc-89f5-0077c783e6f9" class="">
+</p><p id="0a67ff91-601d-45cc-a293-3485d4496c94" class="">Kotlin is not just inspired by Java or designed to improve upon it; it also draws inspiration from several other programming languages, each contributing certain features and philosophies that shape Kotlin&#x27;s design and capabilities. Here are some of the languages that inspired Kotlin and how they influenced its development:</p><ol type="1" id="cfa9049f-611a-47a5-ada1-f8b805cfffd9" class="numbered-list" start="1"><li><strong>Scala</strong>: Scala, another JVM language, is known for blending object-oriented and functional programming paradigms. Kotlin borrows several ideas from Scala, such as higher-order functions, extension functions, and pattern matching. However, Kotlin aims to be simpler and more approachable than Scala, avoiding some of the more complex features Scala offers.</li></ol><ol type="1" id="322677f6-a44c-4437-a8ce-3ddc5b95cdf9" class="numbered-list" start="2"><li><strong>Groovy</strong>: Groovy is a dynamically typed language for the JVM known for its concise syntax. Kotlin takes cues from Groovy&#x27;s expressiveness and syntactic flexibility but remains statically typed, providing better performance and reliability.</li></ol><ol type="1" id="426d2538-b998-4f99-ba53-3e36f765cfc5" class="numbered-list" start="3"><li><strong>C#</strong>: From C#, Kotlin inherits features like properties (getters and setters), events, and operator overloading. C#’s influence can also be seen in Kotlin&#x27;s null-safety and extension functions, which are similar to C#&#x27;s nullable types and extension methods, respectively.</li></ol><ol type="1" id="482ba0a4-d607-49b3-abd4-c0f8863d2654" class="numbered-list" start="4"><li><strong>Python &amp; Ruby</strong>: Kotlin&#x27;s goal to have a clean and concise syntax is inspired by languages like Python and Ruby. These languages are renowned for their readability and ease of use, and Kotlin tries to emulate that by reducing boilerplate code and making the syntax intuitive.</li></ol><ol type="1" id="28620ba1-e5bb-4a68-8672-966033d56035" class="numbered-list" start="5"><li><strong>JavaScript</strong>: Kotlin can be transpiled to JavaScript, allowing it to be used for front-end web development. Kotlin&#x27;s design takes into account the needs of JavaScript developers, offering them a more robust and type-safe language while retaining JavaScript&#x27;s flexibility and ecosystem.</li></ol><ol type="1" id="5faeeadf-f8b3-4627-a49f-c2b82b9b78ff" class="numbered-list" start="6"><li><strong>Swift</strong>: Although Swift and Kotlin were developed around the same time, they share a common goal of being modern alternatives to legacy languages (Objective-C for Swift and Java for Kotlin). Both emphasize safety, conciseness, and interoperability, and they share similar syntax and features, such as optionals/null-safety, extension functions, and a strong type inference system.</li></ol><ol type="1" id="ffecdcd3-e79b-488c-9b52-2ab98bfe94fb" class="numbered-list" start="7"><li><strong>ML Languages (like Haskell)</strong>: From ML-family languages, Kotlin takes inspiration for its functional programming features. For instance, Kotlin&#x27;s collection processing is influenced by the functional style of operations found in languages like Haskell.</li></ol><p id="4dabd1ca-9b0c-4052-98bd-4eca2b9262a3" class="">By combining the best features of these languages and addressing the shortcomings of Java, Kotlin provides a modern, concise, safe, and expressive language. Its design principles focus on interoperability, safety (null-safety, immutability), clarity (no raw types, clear syntax), and tooling support, making it a versatile language suitable for various programming paradigms and platforms.</p></details></li></ul><p id="065332b7-ee37-43fd-bdbd-e9cffd3a914d" class="">
+</p><ul id="c9ca0f6c-a986-477f-b1a3-a165460e9598" class="toggle"><li><details open=""><summary><strong>Is Kotlin closer to the Perl/PHP/Ruby school of thought (&quot;there&#x27;s more than one way to do it&quot;) or the Python/Go school of thought (&quot;there should be one obvious way to do it&quot;)?</strong></summary><p id="0f7d833c-5020-43f7-a8d0-0e16fbd12390" class="">
+</p><p id="ffdfe2cb-180f-412f-aead-e2585b478c38" class="">Kotlin leans more towards the Python/Go philosophy of &quot;there should be one obvious way to do it,&quot; although it doesn&#x27;t follow this principle as strictly as Python or Go. Kotlin&#x27;s design favors clarity, conciseness, and pragmatism, aiming to reduce the cognitive load on developers by providing clear conventions and reducing the number of equally viable alternatives for accomplishing the same task.</p><p id="9d9f08eb-8697-4bcf-90d3-461e87da9d2a" class="">Here are a few reasons why Kotlin aligns more with the Python/Go philosophy:</p><ol type="1" id="de3278eb-d588-429c-9233-b0bb1a4bdc89" class="numbered-list" start="1"><li><strong>Concise Syntax</strong>: Kotlin aims to reduce boilerplate code and offers concise syntax for common programming patterns. This reduces the number of ways to express the same thing, thereby simplifying the language.</li></ol><ol type="1" id="89ab10ed-d254-4970-8627-d94e5847e756" class="numbered-list" start="2"><li><strong>Strong Type System</strong>: Kotlin&#x27;s strong and expressive type system, along with smart casts and powerful type inference, guides developers towards a more uniform and type-safe style of programming.</li></ol><ol type="1" id="6472e24c-52dd-40c2-bc35-2324c68cad0f" class="numbered-list" start="3"><li><strong>Null Safety</strong>: Kotlin&#x27;s approach to nullability is designed to be explicit and consistent, reducing the number of ways null-related issues can be handled and thus making the &quot;right way&quot; to deal with null more obvious.</li></ol><ol type="1" id="8bd52729-04a0-484a-9f40-37ce63cc5e9a" class="numbered-list" start="4"><li><strong>Extension Functions</strong>: While these could theoretically allow for multiple ways to extend classes, in practice, they often lead to a common set of extensions used across the community, fostering a more uniform style.</li></ol><ol type="1" id="7874b0b1-ed6e-4830-9b5c-4fdcec814907" class="numbered-list" start="5"><li><strong>Coroutines</strong>: Kotlin’s coroutines provide a structured and idiomatic way to handle asynchronous programming, steering the community towards a unified approach rather than a plethora of different async paradigms.</li></ol><ol type="1" id="c24b5018-d67b-4fbe-89f1-5b99fe97f2ba" class="numbered-list" start="6"><li><strong>Coding Conventions</strong>: The Kotlin team provides official coding conventions, and the language is designed to encourage their use. This helps in maintaining a consistent style across different codebases.</li></ol><p id="eb103441-5f51-4798-9334-b1a5e21c01f0" class="">However, it&#x27;s important to note that while Kotlin encourages a more uniform approach to coding, it is still a flexible language. It supports multiple paradigms (object-oriented, functional, imperative), and within those paradigms, developers do have choices. For example, Kotlin doesn&#x27;t enforce functional programming but provides first-class support for it, allowing developers to mix paradigms based on what suits their needs best.</p><p id="79ec541a-1a5d-4c81-bc05-36a9907d3ae3" class="">In summary, Kotlin aims to provide clear and pragmatic ways to accomplish tasks while still offering flexibility and supporting multiple programming paradigms. It encourages a uniform style of coding but is less strict about it compared to languages like Python or Go.</p></details></li></ul><p id="e1bb1207-ce39-47ad-9a18-87f30c6cb552" class="">
+</p><ul id="2a8b7cd6-c43c-4128-a5ca-a8649c4b9a0c" class="toggle"><li><details open=""><summary><strong>Tell me more about Kotlin based on these dimensions: functional vs imperative vs declarative, lazy vs eager, static vs dynamic, strong vs weak typing, garbage collected vs non-garbage collected.</strong></summary><p id="bb704db0-9a95-4f8f-92c4-c43e4e96cdc5" class="">
+</p><p id="a413a3a2-bf78-4aa1-8d0f-0b1e3d8108cb" class="">Certainly! Let&#x27;s explore Kotlin based on the dimensions you&#x27;ve mentioned:</p><ol type="1" id="01cab0de-a7c9-4351-b835-03671ed23a27" class="numbered-list" start="1"><li><strong>Functional vs. Imperative vs. Declarative</strong>:<ul id="be44a4c9-db29-46da-b2c2-4e701412457a" class="bulleted-list"><li style="list-style-type:disc">Kotlin is a multi-paradigm language that supports both imperative and functional programming styles. Imperative programming is supported in a traditional sense, where you write code that describes the step-by-step instructions for the computer to follow.</li></ul><ul id="ad0d58e1-fd1f-4efb-ac51-54984d3857a1" class="bulleted-list"><li style="list-style-type:disc">Kotlin also has strong support for functional programming. It offers features like higher-order functions, lambdas, immutable collections, and a rich standard library for functional manipulations.</li></ul><ul id="a800a320-3e71-47bf-b54a-0f1c5c3a2d11" class="bulleted-list"><li style="list-style-type:disc">As for declarative programming, Kotlin can be used in a declarative style, especially in the context of Android development with Jetpack Compose, which is a modern toolkit for building native UIs in a declarative way.</li></ul></li></ol><ol type="1" id="22816167-28bc-4ea4-b2c8-21087a942650" class="numbered-list" start="2"><li><strong>Lazy vs. Eager</strong>:<ul id="56039838-c1e8-44d9-b332-3e3fe84623e3" class="bulleted-list"><li style="list-style-type:disc">Kotlin supports both lazy and eager evaluation. By default, collections operations and computations are eager. However, Kotlin provides a <code>lazy</code> function that can be used to implement lazy evaluation (where computations are deferred until their results are needed).</li></ul><ul id="d1d688cc-6d1b-462b-864e-21ebb7bca57d" class="bulleted-list"><li style="list-style-type:disc">Sequences in Kotlin are an example of lazy collections. Operations on sequences are computed lazily, only when the result is required, which can be more efficient for larger datasets.</li></ul></li></ol><ol type="1" id="caeec81b-4627-41cb-b294-3e32c09561dc" class="numbered-list" start="3"><li><strong>Static vs. Dynamic</strong>:<ul id="33db67f4-2f68-44b4-b034-9e40622903d5" class="bulleted-list"><li style="list-style-type:disc">Kotlin is predominantly a statically typed language, meaning that the types are known at compile time. This allows for features like type inference, compile-time type checking, and performance optimizations.</li></ul><ul id="0bb5db4a-06d5-4b45-925c-c79dab164a67" class="bulleted-list"><li style="list-style-type:disc">While Kotlin is not dynamically typed, it does offer certain features that provide some of the flexibility often found in dynamic languages, such as smart casts and type-safe builders.</li></ul></li></ol><ol type="1" id="6c23439c-b738-43e6-8334-a38a2b42a02a" class="numbered-list" start="4"><li><strong>Strong vs. Weak Typing</strong>:<ul id="8b235ae3-b101-4ef1-97d7-d789eb87c388" class="bulleted-list"><li style="list-style-type:disc">Kotlin is strongly typed. Variables and expressions have a specific type, and conversions between different types are not done implicitly to avoid unexpected behavior or errors.</li></ul><ul id="39e917e7-e37a-46e7-bb42-7c145c6c1b65" class="bulleted-list"><li style="list-style-type:disc">Kotlin provides explicit ways to convert types (e.g., <code>toInt()</code>, <code>toString()</code> methods), ensuring that developers are aware of type conversions in their code.</li></ul></li></ol><ol type="1" id="43911765-6da8-4426-a7c8-4a6ce634ea8a" class="numbered-list" start="5"><li><strong>Garbage Collected vs. Non-Garbage Collected</strong>:<ul id="3810ab7c-6e99-41ae-9308-d2ae7a714dde" class="bulleted-list"><li style="list-style-type:disc">Kotlin, when used on the JVM (Java Virtual Machine), is garbage collected. The JVM takes care of memory management and deallocates objects that are no longer in use, preventing memory leaks.</li></ul><ul id="9e9432f1-bf52-4161-8fd7-6b20c0b1781b" class="bulleted-list"><li style="list-style-type:disc">Kotlin/Native, which is used for compiling Kotlin code to native binaries, uses a different memory management approach called Automatic Reference Counting (ARC) along with a cyclic garbage collector to handle more complex cases.</li></ul></li></ol><p id="05d554c6-ecdf-441b-9ea0-ed7357fcbb61" class="">In summary, Kotlin is a versatile language that supports multiple paradigms and is designed to provide developers with modern features while ensuring type safety and offering efficient memory management through garbage collection on the JVM or ARC in native binaries.</p></details></li></ul><p id="bcaa4d36-0a76-4b36-9ad0-9782a429603b" class="">
+</p><ul id="b860987c-08b8-4fa2-9b38-94a60ce13a43" class="toggle"><li><details open=""><summary><strong>Besides these dimensions, what other dimensions would you highlight in describing Kotlin and where it stands? functional vs imperative vs declarative, lazy vs eager, static vs dynamic, strong vs weak typing, garbage collected vs non-garbage collected.</strong></summary><p id="29f2d863-f117-4a26-98b8-317e6b91160b" class="">
+</p><p id="bb3aa88e-4270-48ab-bba6-1e1e2b392178" class="">Beyond the dimensions you&#x27;ve already mentioned, there are several other dimensions that are worth considering when describing Kotlin and its place in the programming language ecosystem:</p><ol type="1" id="cb62d577-dd71-4875-91fe-18f0222f44b2" class="numbered-list" start="1"><li><strong>Interoperability</strong>:<ul id="fcb85259-9bf8-4fa0-ba3c-c4b0edcb570f" class="bulleted-list"><li style="list-style-type:disc">Kotlin is highly interoperable with Java, meaning that Kotlin code can easily call Java code and vice versa. This is a critical feature that has facilitated Kotlin&#x27;s adoption, especially in the Android ecosystem where Java was the dominant language.</li></ul></li></ol><ol type="1" id="bb6ec640-e82e-4d6f-afb5-3be596ed0751" class="numbered-list" start="2"><li><strong>Conciseness vs. Verbosity</strong>:<ul id="e158c19f-328a-4686-a42e-eded03c1b1ca" class="bulleted-list"><li style="list-style-type:disc">Kotlin is designed to be concise, reducing the amount of boilerplate code needed to express concepts. This contrasts with more verbose languages where more lines of code might be needed to accomplish the same task.</li></ul></li></ol><ol type="1" id="2b6696f2-5ed7-4437-9b30-d0a29d7881c5" class="numbered-list" start="3"><li><strong>Tooling and IDE Support</strong>:<ul id="cb8c24f6-0003-4582-9d43-c1cb4599517e" class="bulleted-list"><li style="list-style-type:disc">Kotlin benefits from strong tooling support, largely because it was developed by JetBrains, a company known for creating sophisticated Integrated Development Environments (IDEs). Kotlin has first-class support in IntelliJ IDEA and Android Studio, which includes code completion, debugging, refactoring tools, and more.</li></ul></li></ol><ol type="1" id="3f489cc0-6813-45f3-96e6-08a4a76065bf" class="numbered-list" start="4"><li><strong>Safety: Null Safety and Immutability</strong>:<ul id="20e3ffe8-cd57-4b6e-9d2e-e4278f79bc0d" class="bulleted-list"><li style="list-style-type:disc">Kotlin places a strong emphasis on safety. Its type system is designed to eliminate the danger of null pointer exceptions through its null safety feature. Kotlin also encourages the use of immutable variables (via the <code>val</code> keyword) to prevent accidental changes to objects.</li></ul></li></ol><ol type="1" id="934a9167-1fa8-44dc-b2a0-1300fbda0fc1" class="numbered-list" start="5"><li><strong>Platform Versatility (JVM, JS, Native)</strong>:<ul id="8edaea89-209d-46fb-a3c2-575a09a0a7bd" class="bulleted-list"><li style="list-style-type:disc">Kotlin is a versatile language that can target multiple platforms. It can be compiled to JVM bytecode, JavaScript, or native binaries (via Kotlin/Native). This makes Kotlin suitable for a wide range of applications, from server-side to web development, and from desktop applications to mobile apps (both Android and iOS).</li></ul></li></ol><ol type="1" id="9a3d8a65-2d6d-4b1a-987a-368331ef0993" class="numbered-list" start="6"><li><strong>Modern Language Features</strong>:<ul id="c4b821fd-ba09-43e0-8b27-2fda633848a1" class="bulleted-list"><li style="list-style-type:disc">Kotlin incorporates many modern language features that are not present in older languages like Java. These include coroutines for asynchronous programming, data classes for concise and effective modeling of immutable data, extension functions for extending existing classes without inheritance, and type aliases for more readable and maintainable code.</li></ul></li></ol><ol type="1" id="83dc40d7-f34c-4d3e-aa34-1285d4c4cea1" class="numbered-list" start="7"><li><strong>Community and Ecosystem</strong>:<ul id="ad65bbd1-a808-433c-b59f-2247f3db9b9f" class="bulleted-list"><li style="list-style-type:disc">Kotlin has a rapidly growing community and ecosystem. Since its adoption as a first-class language for Android development by Google, the number of libraries, frameworks, and tools available for Kotlin has grown significantly, making it an increasingly attractive choice for developers.</li></ul></li></ol><ol type="1" id="3825fc89-67d4-473a-afbc-9693dc56107c" class="numbered-list" start="8"><li><strong>Performance</strong>:<ul id="6afe7052-ae95-4660-b166-69c49f3d1250" class="bulleted-list"><li style="list-style-type:disc">Kotlin generally offers performance similar to Java, as it compiles to the same bytecode when targeting the JVM. However, certain language features and idiomatic usage can lead to performance differences. For example, inline functions and reified type parameters can improve performance by avoiding certain runtime overheads.</li></ul></li></ol><p id="21fcb79c-07d4-4bc8-a7ca-fc8dfaddf53b" class="">By considering these additional dimensions, one can gain a more comprehensive understanding of Kotlin&#x27;s strengths, design choices, and suitability for different types of development projects.</p></details></li></ul><p id="1cf0a849-ddaf-4692-9baf-a8b9c2e25dfc" class="">
+</p><ul id="513df6a3-6b22-4b2d-ac13-2b09146b3809" class="toggle"><li><details open=""><summary><strong>Can I compile Kotlin to WebAssembly?</strong></summary><p id="600c0050-9f95-48b8-91be-18c0d2c69764" class="">
+</p><p id="aecde046-fa04-480e-8f4c-3b6bb9ae77c6" class="">As of my last update in April 2023, Kotlin does not directly compile to WebAssembly (Wasm). Kotlin can be compiled to JavaScript, which can run in web browsers, but there&#x27;s no official direct support for compiling Kotlin to WebAssembly.</p><p id="edfc6d92-48c4-4ccb-86c4-1d6c5e6ab34f" class="">However, there are some community-driven projects and discussions around enabling Kotlin to target WebAssembly. For instance, the Kotlin/Native compiler, which allows Kotlin code to be compiled to native binaries, is based on LLVM, and LLVM has support for WebAssembly as a target. This opens up potential avenues for community or future official support for Kotlin to WebAssembly compilation.</p><p id="aaf0af02-f0e2-4f49-82f3-8dab83cfa36a" class="">For now, if you want to work with WebAssembly, you would typically use languages like Rust, C, or C++, which have more mature toolchains for compiling to WebAssembly. If your goal is to write Kotlin code for web applications, you can use Kotlin/JS to compile Kotlin code to JavaScript, which can then be run in web browsers.</p></details></li></ul><p id="d9ddb97c-fabc-4c4f-a3d8-9013777c7a87" class="">
+</p><ul id="51fce8bb-35e0-40e8-835f-18bbbeadfc87" class="toggle"><li><details open=""><summary><strong>Is Kotlin&#x27;s concurrency model closer to Node.js&#x27;s async/await or Go&#x27;s goroutines?</strong></summary><p id="8777b1fd-93a6-4e2f-b0b6-ab6c67caa42a" class="">
+</p><p id="981b9899-d0b9-4530-ae1b-cd93a5fd5b80" class="">Kotlin&#x27;s concurrency model is more similar to Node.js&#x27;s async/await pattern than to Go&#x27;s goroutines, primarily because Kotlin makes use of coroutines for asynchronous programming.</p><p id="e7bbb042-8b2d-4885-8f61-69a831d35647" class="">Here&#x27;s a breakdown of the similarities and differences:</p><p id="b2ab6106-3e7a-4663-a1d8-c47b98600702" class=""><strong>Kotlin Coroutines</strong>:</p><ul id="439f3374-8dac-49ad-80f7-a56f10bec807" class="bulleted-list"><li style="list-style-type:disc">Kotlin&#x27;s coroutines are based on the concept of suspending functions. A coroutine can suspend its execution at certain points without blocking a thread, and it can resume later on potentially a different thread.</li></ul><ul id="3e949f61-deae-4fa9-96a9-5826cabd553a" class="bulleted-list"><li style="list-style-type:disc">Just like Node.js&#x27;s async/await, coroutines in Kotlin allow you to write asynchronous code in a sequential manner. This makes the code look synchronous while it operates asynchronously under the hood.</li></ul><ul id="7f73296c-0735-433d-9cc8-44671d0c692e" class="bulleted-list"><li style="list-style-type:disc">Kotlin&#x27;s coroutine model is very flexible and allows you to define your own context for coroutine execution. It also has built-in contexts for common use cases, like the <code>Dispatchers.Main</code> for UI operations in Android.</li></ul><p id="834bfa6a-e047-40d9-9c14-4773d1bdb364" class=""><strong>Node.js Async/Await</strong>:</p><ul id="29127bec-02c5-451c-ba97-7a59404860e2" class="bulleted-list"><li style="list-style-type:disc">Node.js introduced async/await to handle asynchronous operations, building on top of its existing event-driven, non-blocking I/O model.</li></ul><ul id="53fe7aec-6749-474a-937c-23684c9b3d45" class="bulleted-list"><li style="list-style-type:disc"><code>async</code> functions return a <code>Promise</code>, and <code>await</code> is used to pause the function execution until the <code>Promise</code> is resolved, without blocking the event loop.</li></ul><ul id="62ec13e8-0e93-4a18-90cf-7e98974c03b6" class="bulleted-list"><li style="list-style-type:disc">Node.js&#x27;s model is single-threaded, relying on an event loop to handle concurrency. It&#x27;s well-suited for I/O-bound tasks but not for CPU-intensive operations.</li></ul><p id="991ef4e6-8234-48c8-b96c-9232150fc4d6" class=""><strong>Go Goroutines</strong>:</p><ul id="f16990b9-c92f-4a7e-b95e-5ba050ad9946" class="bulleted-list"><li style="list-style-type:disc">Goroutines are lightweight threads managed by the Go runtime. They are more akin to threads than the event-driven model of Node.js or the coroutines of Kotlin.</li></ul><ul id="5b97a418-8511-41a5-bbcf-42b684bdc8c6" class="bulleted-list"><li style="list-style-type:disc">Concurrency in Go is based on the principle of &quot;Do not communicate by sharing memory; instead, share memory by communicating,&quot; leading to the use of channels for goroutines to communicate with each other.</li></ul><ul id="766fd40b-0f8a-4862-b74f-10dc5960d64b" class="bulleted-list"><li style="list-style-type:disc">Go&#x27;s model is more about true parallelism and can handle both I/O-bound and CPU-bound tasks efficiently.</li></ul><p id="07389f62-e633-452e-80f4-1613e14a1b8f" class="">In summary, Kotlin&#x27;s coroutines are more aligned with Node.js&#x27;s async/await pattern in terms of providing an easy-to-use abstraction over asynchronous operations, allowing developers to write code that looks synchronous. Go&#x27;s concurrency model, while powerful and efficient, is based on a different philosophy and implementation.</p></details></li></ul><p id="f8884bf0-3ca1-4075-b767-b199828e1347" class="">
+</p><ul id="5c73abbf-9b04-44f8-ba28-078d1e8303c7" class="toggle"><li><details open=""><summary><strong>Does Kotlin support expressive types such as algebraic data types?</strong></summary><p id="1b2e9d13-1c00-47bb-ab0a-ad345f21461c" class="">
+</p><p id="c23886be-93b9-497f-9059-cba8691a20f9" class="">Yes, Kotlin supports a form of algebraic data types (ADTs) through its sealed classes and data classes. These features enable expressive and safe type definitions that are useful in many programming scenarios, especially when dealing with a fixed set of types.</p><p id="59f39cdf-6d8c-4e76-9737-c9c29c727f4d" class=""><strong>Sealed Classes:</strong></p><ul id="9c22f8ef-3499-4c00-a314-f368cb457bd7" class="bulleted-list"><li style="list-style-type:disc">Sealed classes in Kotlin are used to represent restricted class hierarchies, where a value can be one of a limited set of types (a form of sum types). They are similar to enums in other languages but more powerful because each subtype can hold its own state.</li></ul><ul id="f6f335ec-154c-4d1c-8771-dc18b9411ee2" class="bulleted-list"><li style="list-style-type:disc">Sealed classes are useful for modeling state machines, representing success/failure scenarios, and other cases where you have a closed set of types.</li></ul><ul id="0a28b141-d968-48a2-8b10-33311296beff" class="bulleted-list"><li style="list-style-type:disc">When used with when expressions, sealed classes provide exhaustive type checking, meaning the compiler will enforce that every possible subtype is handled, leading to safer code.</li></ul><p id="a087c2de-636e-433e-ba37-4af95c5a069f" class="">Example of a sealed class:</p><pre id="d3db10af-3435-406e-bb6c-76c5fb97e6da" class="code code-wrap"><code>sealed class Result {
+    data class Success(val data: String): Result()
+    data class Error(val error: Throwable): Result()
+}</code></pre><p id="9dc9f2f7-8cb3-4e54-b6dd-16f16c5a96b6" class=""><strong>Data Classes:</strong></p><ul id="a8c9587f-ad09-493f-b3ab-e0d8a769eef9" class="bulleted-list"><li style="list-style-type:disc">Data classes in Kotlin are a convenient way to create classes that are primarily used to hold data (similar to record types in other languages). They automatically provide implementations of useful methods like <code>equals()</code>, <code>hashCode()</code>, and <code>toString()</code>.</li></ul><ul id="70e42ca6-6087-47af-a678-a7bc4839201d" class="bulleted-list"><li style="list-style-type:disc">While data classes themselves aren&#x27;t algebraic data types, they are often used in conjunction with sealed classes to create robust and type-safe data structures.</li></ul><p id="ef5b29be-0483-4163-8f21-6994dc1a3da0" class="">Example of a data class:</p><pre id="19da9d9d-c28f-4751-b5e0-76faa14c6475" class="code code-wrap"><code>data class User(val name: String, val age: Int)
+</code></pre><p id="6bf741aa-0da1-4e23-b6b4-f6071a38a463" class="">By combining sealed classes with data classes, Kotlin developers can create expressive type hierarchies that offer many of the benefits of algebraic data types found in functional programming languages. This makes it easier to reason about code and helps to prevent certain types of errors.</p></details></li></ul><p id="05fce2c3-12f7-4903-9605-fd193750578a" class="">
+</p><ul id="f13524aa-b342-4ebb-9853-1258dcb4bd67" class="toggle"><li><details open=""><summary><strong>Can you describe the history of Kotlin and highlight time points of specific changes in direction of the philosophy behind the language?</strong></summary><p id="0bcf1171-f2a4-4f99-a889-e80f961cfaba" class="">
+</p><p id="2a5d9f75-57f0-4bf1-8e15-1ff4e048d639" class="">Kotlin, developed by JetBrains, has had an interesting history characterized by key milestones and decisions that shaped the language&#x27;s philosophy and direction. Here&#x27;s a brief overview:</p><p id="4fb4380f-2aba-4885-af52-731b1c30ddd2" class=""><strong>2011: Kotlin Announced</strong></p><ul id="6badddd0-8926-4217-b501-92deba145e0c" class="bulleted-list"><li style="list-style-type:disc">JetBrains, the company behind the IntelliJ IDEA IDE, announced the development of Kotlin in July 2011. The goal was to create a modern language for the JVM that could address some of Java&#x27;s shortcomings, such as verbosity and lack of certain modern features.</li></ul><p id="6f030847-b30b-4680-9ca3-7ce8523e3c29" class=""><strong>2012: Kotlin Open Sourced</strong></p><ul id="57746936-97f3-4cde-884c-7cd8f1dda38b" class="bulleted-list"><li style="list-style-type:disc">In February 2012, Kotlin was open-sourced under the Apache 2 license. This decision was crucial for fostering community engagement and contributions.</li></ul><p id="bddf33b8-16e6-4c77-b5ab-37a1b2e69dbc" class=""><strong>2016: Kotlin 1.0 Released</strong></p><ul id="25cf524b-0d24-419e-a71a-df4270acad45" class="bulleted-list"><li style="list-style-type:disc">After several years in development, Kotlin 1.0 was officially released in February 2016. This marked Kotlin&#x27;s readiness for production use. The focus at this time was on interoperability with Java, null safety, extension functions, and improving developer productivity and safety.</li></ul><p id="6232ad34-e97d-4695-a859-dc09384db8eb" class=""><strong>2017: Official Android Support</strong></p><ul id="7706bc98-58c2-4aab-84fe-33874f16b92f" class="bulleted-list"><li style="list-style-type:disc">In May 2017, during the Google I/O keynote, Google announced first-class support for Kotlin on Android. This was a significant milestone that boosted Kotlin&#x27;s popularity and adoption, as Android developers now had a modern alternative to Java.</li></ul><p id="72f94af2-c8e3-4a7a-9b14-c6bd24a654b2" class=""><strong>2018: Kotlin/Native and Multiplatform</strong></p><ul id="121b0538-7dc0-4f41-9d9f-1428181247f0" class="bulleted-list"><li style="list-style-type:disc">Kotlin/Native was introduced, which compiles Kotlin code to native binaries. This expanded Kotlin&#x27;s reach beyond the JVM and Android.</li></ul><ul id="4a158e05-e125-42b3-9004-d1f85d321fbc" class="bulleted-list"><li style="list-style-type:disc">Kotlin Multiplatform, also introduced around this time, aimed to share code between different platforms (JVM, JS, Native). This decision reflected a shift towards making Kotlin a versatile language not confined to the JVM ecosystem.</li></ul><p id="5244c83b-48e9-44dd-ab4b-a145ddf03fc5" class=""><strong>2019: Kotlin Coroutines Stabilized</strong></p><ul id="74e0dcfb-2f61-4482-819a-954dcb390744" class="bulleted-list"><li style="list-style-type:disc">Kotlin 1.3, released in 2019, brought coroutines out of experimental status. This was a significant addition to the language, providing a powerful and flexible tool for asynchronous programming, reflecting a philosophy of modernity and practicality.</li></ul><p id="c62b3f99-378c-4921-8c62-7a81dc1b2875" class=""><strong>2020: Kotlin 1.4 and New Compiler</strong></p><ul id="00f1570d-e711-4fb1-949f-44f837b98f12" class="bulleted-list"><li style="list-style-type:disc">Kotlin 1.4 was released, focusing on performance improvements and paving the way for a new, more powerful compiler. This highlighted an ongoing commitment to performance and tooling.</li></ul><p id="6326ec9a-aafe-4aa6-bf15-0de26ee4306c" class=""><strong>2021: Kotlin 1.5 and JVM IR Compiler</strong></p><ul id="04b4c462-21bf-42c2-9994-1c46c6863914" class="bulleted-list"><li style="list-style-type:disc">Kotlin 1.5 introduced the new JVM IR (Intermediate Representation) compiler backend as stable, aiming to make the compiler more consistent and provide a foundation for future features.</li></ul><p id="1c253378-0b60-4767-8c03-84bc9d88c23f" class=""><strong>2022: Kotlin 1.6 and 1.7</strong></p><ul id="99188ed6-4ef2-419b-97e4-a524773fd63a" class="bulleted-list"><li style="list-style-type:disc">These releases continued to improve the language features, stabilize experimental features like Sealed When, and improve the multiplatform capabilities. The focus remained on making Kotlin a more productive and versatile language for developers.</li></ul><p id="7583080f-ce02-4e08-b930-4c6e2ef7e168" class="">Throughout its history, Kotlin&#x27;s philosophy has been shaped by a desire to be a modern, concise, safe, and pragmatic language. It has aimed to improve developer productivity while ensuring interoperability with existing Java codebases. The language&#x27;s evolution towards supporting multiple platforms and its strong tooling reflect a pragmatic approach to language design, aiming to meet the needs of a diverse developer community.</p><p id="ba1b0e4a-d18e-4327-a3d1-b1dd98ab95ef" class="">Kotlin&#x27;s journey demonstrates a responsive and iterative approach to language design, where feedback from the community and the changing landscape of software development have continually influenced its direction.</p></details></li></ul><p id="5de9fb76-e7cd-41cc-8d6e-8b6202ffff28" class="">
+</p><ul id="663b1de2-944d-4178-9bf8-aab55d7fdcf2" class="toggle"><li><details open=""><summary><strong>Does Kotlin support algebraic effects?</strong></summary><p id="e044619a-a8ef-4fc3-bb10-275aed783964" class="">
+</p><p id="453ecf6a-6591-4dd9-8233-dc0c7afee608" class="">As of my last update in April 2023, Kotlin does not natively support algebraic effects as a language feature. Algebraic effects are an advanced feature found in some functional programming languages that allow side effects to be treated algebraically, making them easier to manage, compose, and reason about.</p><p id="fa790892-cb45-4f2f-8c87-c6d5cea81b1d" class="">However, Kotlin&#x27;s coroutines provide some of the benefits that algebraic effects offer, such as structured concurrency and the ability to abstract over different kinds of computations and side effects. With coroutines, you can write code that appears synchronous while it&#x27;s actually asynchronous, and you can manage effects like delays, cancellations, and timeouts in a structured way.</p><p id="e055fb01-1162-47fd-9e65-19ad802af79c" class="">While this isn&#x27;t the same as full algebraic effects support found in some other languages (like Eff or Koka), it does offer Kotlin developers a powerful toolset for managing side effects and asynchronous operations.</p><p id="219b8dc1-7306-4214-8aa4-65d31a1db59f" class="">For true algebraic effects, you would typically look into more functionally oriented languages or language extensions that support this feature. However, the Kotlin community is active and constantly evolving, and it&#x27;s possible that more advanced effect management features could be introduced in the future, either as part of the language itself or through third-party libraries.</p></details></li></ul><p id="1b0fbf10-44fb-4043-ac82-49a14bc40af8" class="">
+</p><ul id="de8066ce-d788-47b9-8e95-4926c0446699" class="toggle"><li><details open=""><summary><strong>Tell me more about Kotlin&#x27;s compiler.</strong></summary><p id="013c7a41-a0ca-4d61-90f2-d6c811d6e877" class="">
+</p><p id="a4bdbdf8-5068-4f88-9492-4a7d347e0974" class="">Kotlin&#x27;s compiler plays a crucial role in the language&#x27;s ecosystem, translating Kotlin code into executable formats for various platforms. Here&#x27;s an overview of Kotlin&#x27;s compiler and its key components:</p><p id="54a39277-bccb-4c51-8836-fdf8dcc86e19" class=""><strong>1. Kotlin/JVM Compiler:</strong></p><ul id="313ebd47-f6d4-4a6e-9df4-77530f2635e7" class="bulleted-list"><li style="list-style-type:disc">The most commonly used Kotlin compiler is the one targeting the Java Virtual Machine (JVM). It compiles Kotlin code into Java bytecode, which can then be executed on any JVM.</li></ul><ul id="ac3aea75-8f87-4c8b-b8be-a5ab78684c58" class="bulleted-list"><li style="list-style-type:disc">This allows for seamless interoperability with Java, as the resulting bytecode is indistinguishable from that produced by Java&#x27;s compiler.</li></ul><p id="82a82a7f-48e1-4fc5-a4e0-0e2cdf390d43" class=""><strong>2. Kotlin/JS Compiler:</strong></p><ul id="aa48689d-1458-4a4e-b429-e4d4f142b061" class="bulleted-list"><li style="list-style-type:disc">Kotlin/JS compiles Kotlin code to JavaScript, enabling developers to write frontend web applications or Node.js applications using Kotlin.</li></ul><ul id="18375e3e-272b-4380-b6d3-79b5a11fcca6" class="bulleted-list"><li style="list-style-type:disc">It provides the ability to use Kotlin for full-stack development, sharing code between the server (JVM) and the client (JavaScript).</li></ul><p id="a2c542cd-cea0-42bd-a8e4-515c51c096ae" class=""><strong>3. Kotlin/Native Compiler:</strong></p><ul id="caf41526-44f1-4695-8e74-d03b990d673d" class="bulleted-list"><li style="list-style-type:disc">Kotlin/Native uses LLVM to compile Kotlin code to native binaries. This allows Kotlin to target platforms where a JVM is not available or desirable, such as iOS, macOS, Windows, Linux, and even WebAssembly (through experimental community projects).</li></ul><ul id="5272a6ae-d9ff-4cf5-b6d1-2b97ac041f6c" class="bulleted-list"><li style="list-style-type:disc">Kotlin/Native is a crucial part of the Kotlin Multiplatform ecosystem, enabling the sharing of code across different platforms.</li></ul><p id="b4e84ea4-1c9b-4c88-af07-ab52026caabf" class=""><strong>4. Intermediate Representation (IR):</strong></p><ul id="a8314623-f1f7-4276-b935-e780bbee93d6" class="bulleted-list"><li style="list-style-type:disc">Starting with Kotlin 1.4, the team at JetBrains began introducing a new Intermediate Representation (IR) for the Kotlin compiler.</li></ul><ul id="74ae6640-74af-4601-adb7-01d9ee9e0581" class="bulleted-list"><li style="list-style-type:disc">IR is a lower-level representation of Kotlin code that serves as a common backend for all Kotlin compilers (JVM, JS, Native). This means that language features only need to be implemented once in the IR, simplifying the compiler architecture and enabling consistent behavior across platforms.</li></ul><ul id="e4e4f558-930c-46b3-b7e3-dbedad7d37c8" class="bulleted-list"><li style="list-style-type:disc">The transition to the new IR-based backend has been gradual, with the aim of making the compiler more consistent and paving the way for future features and optimizations.</li></ul><p id="d74a0224-ac0b-4f0b-a689-16aace025354" class=""><strong>5. Compiler Plugins:</strong></p><ul id="6dfd47db-ab5d-4a6e-92c7-f212e48e6609" class="bulleted-list"><li style="list-style-type:disc">Kotlin supports the use of compiler plugins, which can extend the capabilities of the compiler. For example, the kotlinx.serialization plugin adds support for serialization and deserialization of data classes, and the Jetpack Compose compiler plugin adds support for Kotlin&#x27;s declarative UI toolkit for Android.</li></ul><p id="a779da6c-7861-40d4-82e1-67848bee0f8e" class=""><strong>6. Tooling and IDE Integration:</strong></p><ul id="3034305a-f5f9-4e85-a69b-c7bd2c39f784" class="bulleted-list"><li style="list-style-type:disc">JetBrains, being a company known for its development tools, has put significant effort into integrating the Kotlin compiler with its IDEs, particularly IntelliJ IDEA and Android Studio. This integration provides features like code completion, refactoring tools, debugging, and more.</li></ul><p id="84f11385-43c9-46c8-b0f7-1cc45713e7cb" class=""><strong>7. Performance and Incremental Compilation:</strong></p><ul id="698aaa35-ddbf-41ec-a957-c1d65d732900" class="bulleted-list"><li style="list-style-type:disc">Kotlin&#x27;s compiler is designed with performance in mind. It supports incremental compilation, meaning that only the parts of the code that have changed are recompiled, speeding up the build process.</li></ul><p id="1cbb441d-4409-4220-8870-de0737a86fcc" class=""><strong>8. kapt (Kotlin Annotation Processing Tool):</strong></p><ul id="11ca58b0-2a65-4cca-b263-01ce2ce465c7" class="bulleted-list"><li style="list-style-type:disc">kapt is a tool for annotation processing in Kotlin. It allows the use of existing Java annotation processors with Kotlin code, ensuring interoperability with a wide range of tools and libraries that rely on annotation processing.</li></ul><p id="dbd0a804-bd8a-4ab6-bade-dfff71448f72" class="">In summary, Kotlin&#x27;s compiler is a sophisticated piece of software that supports multiple targets, ensuring that Kotlin can be used in a wide range of environments, from servers to web browsers to native applications. The introduction of the IR backend is a significant step in the evolution of the Kotlin compiler, making it more consistent and paving the way for future enhancements.</p></details></li></ul><p id="fe095e51-34b4-4e72-bb29-652ce7065053" class="">
+</p><ul id="a4670a71-20bc-4e92-ba5d-b31cad761dbb" class="toggle"><li><details open=""><summary><strong>In which use cases would you encourage the use of Kotlin, and in which use cases would you discourage?</strong></summary><p id="a8a9e306-a227-4af4-8884-ce21d1597360" class="">
+</p><p id="55290436-ae44-4b13-b00e-682c0cde4221" class="">Kotlin is a versatile language that fits well in a variety of programming scenarios. However, like any tool, it has its strengths and weaknesses. Here’s where Kotlin shines and where it might not be the best choice:</p><p id="d8933b01-a157-4ceb-8456-67f077a4ea67" class=""><strong>Encouraged Use Cases for Kotlin:</strong></p><ol type="1" id="a864cf28-e0a1-4ceb-bed2-bdf26b884191" class="numbered-list" start="1"><li><strong>Android Development:</strong><ul id="44a8e5f6-99d0-4f84-aec2-4bfb71ba72c8" class="bulleted-list"><li style="list-style-type:disc">Kotlin is officially supported by Google for Android development and is preferred over Java for new Android projects due to its conciseness, null-safety, and modern features.</li></ul></li></ol><ol type="1" id="c321c69b-aec8-42b6-ba9b-035d85ba96eb" class="numbered-list" start="2"><li><strong>Server-Side Development (JVM):</strong><ul id="b16f98fd-1cad-4479-83a1-0da53ae0ef92" class="bulleted-list"><li style="list-style-type:disc">For backend development, especially in environments where the JVM is already prevalent, Kotlin offers improved syntax, functional programming features, and seamless interoperability with existing Java codebases.</li></ul></li></ol><ol type="1" id="081654f3-9d9d-4662-b97d-c4ca76a05a76" class="numbered-list" start="3"><li><strong>Full-Stack Web Development:</strong><ul id="af620c50-6a81-4a6a-a263-fb4033c21154" class="bulleted-list"><li style="list-style-type:disc">Kotlin/JS enables you to use Kotlin for frontend web development, allowing for code sharing and consistency when used in conjunction with Kotlin/JVM for backend development.</li></ul></li></ol><ol type="1" id="ade25496-df25-45a2-a22a-352fc209c29c" class="numbered-list" start="4"><li><strong>Cross-Platform Development:</strong><ul id="9b655189-f3c1-45ba-b857-0b6ea32fd2cf" class="bulleted-list"><li style="list-style-type:disc">Kotlin Multiplatform can be a good choice for sharing business logic across iOS, Android, web, and desktop platforms, reducing the amount of duplicated code.</li></ul></li></ol><ol type="1" id="c996bde5-d545-45fa-8cb9-6593eb5dad50" class="numbered-list" start="5"><li><strong>Gradle Build Scripts:</strong><ul id="65bc528e-bc77-4e32-b053-1d1ca3e6bc53" class="bulleted-list"><li style="list-style-type:disc">Kotlin&#x27;s DSL is used in Gradle build scripts, providing a type-safe and expressive way to define builds.</li></ul></li></ol><ol type="1" id="12167a2a-f16b-41b6-b520-578c14e0d8b7" class="numbered-list" start="6"><li><strong>Learning and Teaching:</strong><ul id="f365d7b6-8a00-4748-8ff4-088673bf49fa" class="bulleted-list"><li style="list-style-type:disc">Kotlin’s syntax is clean and approachable, making it a good language for beginners, and it&#x27;s increasingly being used in education, particularly for teaching object-oriented and functional programming concepts.</li></ul></li></ol><p id="0d38b7b5-3d2a-4bb1-a32b-83d1c253709e" class=""><strong>Discouraged Use Cases for Kotlin:</strong></p><ol type="1" id="abaa4960-728d-4db8-99a5-d09c89a16d52" class="numbered-list" start="1"><li><strong>Low-Level Systems Programming:</strong><ul id="c0dcf365-a0bb-419d-b65b-953ea0ed9544" class="bulleted-list"><li style="list-style-type:disc">While Kotlin/Native allows compilation to native binaries, Kotlin is not as well-suited for low-level systems programming as languages like C or Rust, which offer more fine-grained control over memory and hardware.</li></ul></li></ol><ol type="1" id="1bb6a056-4092-4170-b7bd-f9c7e7ccc1e7" class="numbered-list" start="2"><li><strong>High-Performance Computing:</strong><ul id="a47d5907-806c-4269-937c-37710579f1cc" class="bulleted-list"><li style="list-style-type:disc">For CPU-bound tasks where performance is critical, languages like C++, Fortran, or even Java (due to its mature ecosystem) might be preferred over Kotlin.</li></ul></li></ol><ol type="1" id="65880052-2a4b-420d-ab0d-fac89e3f1edb" class="numbered-list" start="3"><li><strong>Real-Time Systems:</strong><ul id="1dc2a30b-63f5-4b09-bdf3-357c6358c286" class="bulleted-list"><li style="list-style-type:disc">Kotlin runs on the JVM and doesn’t offer real-time guarantees, making it less suitable for real-time systems like embedded controllers or flight navigation systems.</li></ul></li></ol><ol type="1" id="179f2f85-0161-444d-80ec-a0e0d500026b" class="numbered-list" start="4"><li><strong>Large-Scale Frontend Web Development (Without Kotlin/JS):</strong><ul id="16c5e7fe-a755-45e4-bca9-2451e6be490f" class="bulleted-list"><li style="list-style-type:disc">If you are not using Kotlin/JS, it’s generally better to stick with JavaScript, TypeScript, or other languages more natively suited to the browser environment for large-scale frontend development.</li></ul></li></ol><ol type="1" id="a6dbffcb-fd16-4792-94b8-10d8acc70cd9" class="numbered-list" start="5"><li><strong>Projects with Non-JVM Legacy Codebases:</strong><ul id="d73c8207-e596-4197-8976-800c2ab3ae46" class="bulleted-list"><li style="list-style-type:disc">If you have a large legacy codebase in a language other than Java (like PHP, Ruby, or Python), introducing Kotlin might not provide enough benefits to justify the complexity of a multi-language codebase.</li></ul></li></ol><p id="b9dbf431-8670-4879-8774-2dd007202cfb" class="">In summary, Kotlin is an excellent choice for modern software development, especially when targeting the JVM or Android. It provides many modern language features that can improve productivity and code quality. However, it&#x27;s not the best fit for every scenario, particularly in environments where JVM is not an ideal choice or where other languages have a more established ecosystem and better performance characteristics.</p></details></li></ul><p id="9e095292-968a-400b-9541-ed977e47e6d4" class="">
+</p><p id="427cc4d2-dafb-490e-80ff-bc086ba2677a" class=""><a href="https://chat.openai.com/share/6b489531-c210-4b71-b3d9-14aef9787910">Source</a></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

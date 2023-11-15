@@ -1,0 +1,823 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Writing clean code with ChatGPT</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="73c4d45c-22ad-4ec7-aeca-49118f958790" class="page sans"><header><h1 class="page-title">Writing clean code with ChatGPT</h1><p class="page-description"></p></header><div class="page-body"><p id="15522571-8a3e-47bd-8685-d1dd7ab147a1" class=""><em>Author’s note: For ChatGPT tips, click </em><a href="Writing%20clean%20code%20with%20ChatGPT%2073c4d45c22ad4ec7aeca49118f958790.html"><em>here</em></a><em>. The ChatGPT transcript is </em><a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html"><em>here</em></a><em>.</em></p><p id="4fd10379-ffa0-46c7-b1c0-f5ed313e0666" class="">
+</p><p id="12a8025d-1e6f-49dd-91ef-d9942c98203c" class="">I love <a href="https://craftinginterpreters.com">Crafting Interpreters</a>. I first worked through the book at <a href="https://www.recurse.com">Recurse Center</a>, next at <a href="https://bradfieldcs.com">Bradfield</a> and most recently with <a href="https://www.dabeaz.com">David Beazley</a> (repos <a href="https://github.com/savarin/lox-v2">here</a>, <a href="https://github.com/savarin/lox-v4">here</a> and <a href="https://github.com/savarin/minimal-lox">here</a>) <a href="Writing%20clean%20code%20with%20ChatGPT%2073c4d45c22ad4ec7aeca49118f958790.html">[1]</a>.</p><p id="10e32c89-d0ed-4766-9b9e-3647370e7ed9" class="">
+</p><p id="32fbf061-47c9-4369-8e21-a5f192928554" class="">The book teaches you how to implement a programming language from scratch. I worked through most of the chapters, but what I enjoy re-implementing is the ‘minimal’ set of features to to generate Fibonacci numbers. It’s a nice use case, requiring built-in operations, control flow and recursive function calls.</p><p id="273f4fa8-fe55-49e0-aa3b-c292cb2c11ee" class="">
+</p><p id="df00a6c7-b674-4333-85c6-60e09d0e9bd6" class="">Since the code has gone through a couple of iterations, I was curious to see how ChatGPT could help me improve code quality further.</p><h1 id="be64481d-50b0-486b-8cfb-2f155d6e271f" class="">Prelude</h1><h3 id="94db41b2-d1c0-4f52-a0a5-baab6af8fcc0" class="">Source code to output</h3><p id="8725d6e0-31f7-4fe6-b325-ff80eb90e1c2" class="">The scanner (or lexer) converts the source code into tokens (truncated to ease viewing).</p><pre id="7192ecc0-0f62-43d3-8c71-d918b2702de3" class="code"><code>&gt; source_code = &quot;&quot;&quot;\
+func fibonacci(n) {
+    if (n &lt; 2) {
+        return 1;
+    }
+
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+fibonacci(9);&quot;&quot;&quot;
+
+&gt; tokens = scanner.scan(source_code)
+
+&gt; for token in tokens: print(token)
+Token(token_type=&lt;TokenType.FUNC: &#x27;FUNC&#x27;&gt;, value=&#x27;func&#x27;, line=1)
+Token(token_type=&lt;TokenType.NAME: &#x27;NAME&#x27;&gt;, value=&#x27;fibonacci&#x27;, line=1)
+Token(token_type=&lt;TokenType.PAREN_LEFT: &#x27;PAREN_LEFT&#x27;&gt;, value=&#x27;(&#x27;, line=1)
+Token(token_type=&lt;TokenType.NAME: &#x27;NAME&#x27;&gt;, value=&#x27;n&#x27;, line=1)
+Token(token_type=&lt;TokenType.PAREN_RIGHT: &#x27;PAREN_RIGHT&#x27;&gt;, value=&#x27;)&#x27;, line=1)
+...
+Token(token_type=&lt;TokenType.NAME: &#x27;NAME&#x27;&gt;, value=&#x27;fibonacci&#x27;, line=8)
+Token(token_type=&lt;TokenType.PAREN_LEFT: &#x27;PAREN_LEFT&#x27;&gt;, value=&#x27;(&#x27;, line=8)
+Token(token_type=&lt;TokenType.INTEGER: &#x27;INTEGER&#x27;&gt;, value=&#x27;9&#x27;, line=8)
+Token(token_type=&lt;TokenType.PAREN_RIGHT: &#x27;PAREN_RIGHT&#x27;&gt;, value=&#x27;)&#x27;, line=8)
+Token(token_type=&lt;TokenType.SEMICOLON: &#x27;SEMICOLON&#x27;&gt;, value=&#x27;;&#x27;, line=8)
+Token(token_type=&lt;TokenType.EOF: &#x27;EOF&#x27;&gt;, value=&#x27;EOF&#x27;, line=8)</code></pre><p id="fa7afcd3-6a29-487e-8f86-0bc985a6d08e" class="">
+</p><p id="3b70db53-938e-420a-b05d-22332b83e5d2" class="">Next the parser converts the tokens into abstract syntax trees (hereafter, ASTs).</p><pre id="87f9b61c-e57d-4935-a30b-ef7a16f10ce8" class="code"><code>&gt; statements = parser.parse(tokens)
+
+&gt; for statement in statements: print(statement)
+Function(
+    name=Name(text=&#x27;fibonacci&#x27;),
+    parameters=[Name(text=&#x27;n&#x27;)],
+    body=Block(
+			statements=[
+					...
+			]
+		)
+)
+Expression(
+    expression=Call(
+        callee=Name(text=&#x27;fibonacci&#x27;),
+        arguments=[Integer(value=&#x27;9&#x27;)]
+    )
+)</code></pre><p id="8a9da33d-9bae-4105-ae3f-7426285d6c93" class="">
+</p><p id="bc780c53-8388-4d55-9551-bc434b44b826" class="">Finally the interpreter ‘executes’ the ASTs to generate the desired output.</p><pre id="f7a67b49-fb30-4f06-b9e3-c09b3c5638f8" class="code"><code>&gt; results = interpreter.interpret(statements)
+
+&gt; for result in results: print(result)
+None
+55</code></pre><p id="a25756cf-692b-4450-be93-2e1380fbc1c0" class="">
+</p><h3 id="ac88a8b3-a891-4662-bef6-242e45007ead" class="">Project setup</h3><p id="d9fc4f89-7583-4531-b658-1b7bb7224965" class="">To separate the ChatGPT changes from my own implementation, I copied over the <a href="https://github.com/savarin/minimal-lox/tree/cae8c08d9cd7ef171c1028bc66001a98801b786d">latest version</a> of <code>minimal-lox</code> into a <a href="https://github.com/savarin/simple-lox">new repo</a> <code>simple-lox</code>. Naturally I got ChatGPT to <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">suggest the name</a>.</p><p id="fb542d9c-3278-44f9-8011-d48c10c32a0d" class="">
+</p><p id="56b85bee-5fb7-4654-b3af-147282c724eb" class="">The source code is small enough to fit within the maximum tokens allowed, so next I asked ChatGPT to <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">create a source code consolidator </a>that pulls everything into a single file <a href="Writing%20clean%20code%20with%20ChatGPT%2073c4d45c22ad4ec7aeca49118f958790.html">[2]</a>.</p><p id="7524d40d-4972-42a0-93f2-73eff45644b4" class="">
+</p><p id="9c94659c-e6dc-4b9b-af7a-8d68e4f81fac" class="">Let’s <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">create a test runner</a> to ensure the code passes all the tests, and <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">set up Github Actions</a>.</p><p id="3059edcd-2534-460a-afdd-026e4948abeb" class="">
+</p><p id="c5a26ec4-1083-41ad-8fc4-9f036f917f9c" class="">OK we’re good to go! We can finally ask ChatGPT how to <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">improve code quality</a>. Since there’s no cost in asking for an egregious number of suggestions, let’s go for broke and sort the recommendations in descending order of impact.</p><h1 id="36d32fc0-d3e5-48f0-9833-6e173a9def92" class="">Changes implemented</h1><h3 id="9f95d8b9-651e-405d-b0cb-870879dc8b1c" class="">Documentation</h3><p id="ffe12664-c3fb-435c-b58c-28d9088a8f68" class="">ChatGPT is excellent at generating documentation, which was the main thing my code lacked. These were docstrings across <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">modules</a> (suggestion #1), <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">functions</a> (#2) and <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">classes</a> (#3). Even if I wasn’t happy with the result, it’s much faster to edit than to write from scratch.</p><pre id="b9b1cb18-b683-4775-b20f-4c24964dea55" class="code"><code>&quot;&quot;&quot;
+The parser.py module is responsible for converting a sequence of tokens,
+provided by the scanner.py module, into an abstract syntax tree (AST). This
+AST represents the structure and syntax of the programming language being
+interpreted. The parser handles constructs like variable declarations,
+function definitions, and control flow statements.
+&quot;&quot;&quot;</code></pre><p id="23de27b1-c4af-4337-845e-4a8f6734547e" class="">
+</p><p id="fdbb92a1-4205-4e65-b11f-120f0c56de52" class="">I was surprised ChatGPT didn’t suggest a <code>README.md</code>. In any case, this is easy to <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">generate</a>.</p><p id="16b2ddc9-03f3-47d3-8b75-d334869c7432" class="">
+</p><h3 id="646adef8-ec10-4c1f-9a05-31b9912a684a" class="">Specificity</h3><p id="dbc39bbe-72f7-4463-9499-aa18d77c5f06" class="">I only had generic exceptions, so ChatGPT suggested <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">specific errors</a> with more descriptive error messages. In other words, changing from <code>Exception</code> to <code>ValueError</code> , <code>TypeError</code> etc and adding more details like line numbers.</p><pre id="ed545470-c249-49f9-ba22-602de5c96f23" class="code"><code># before
+raise Exception(
+		f&quot;Expected {token_type}, got {token.token_type}.&quot;
+)
+
+# after
+raise ValueError(
+		f&quot;Expected {token_type}, got {token.token_type} at line {token.line}.&quot;
+)</code></pre><p id="9dcddf76-7d65-4f6a-8aaf-67a6b37b4c19" class="">
+</p><p id="b4199e7b-b0eb-440a-942d-4ec22ca79c28" class="">ChatGPT made a later suggestion to also create <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">custom exceptions</a>, which allows for more specific error handling. Perhaps this would have been a bit cleaner had ChatGPT included both in the same suggestion.</p><p id="638098fe-3781-43cb-bffa-864ce933f46b" class="">
+</p><h3 id="f360fb7a-211c-4ff0-8648-898169b79d3f" class="">Conventions</h3><p id="7144b8c9-bcb5-483c-886f-8d33dbc76cdd" class="">I had my constants (or globals) in lowercase, so ChatGPT recommended the convention that <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">constants</a> be capitalized.</p><pre id="2dd8658a-2176-4c46-b8f9-6cb7e4f1eeb8" class="code"><code># before
+literals: Dict[str, TokenType] = {
+    &quot;{&quot;: TokenType.BRACE_LEFT,
+		...
+}
+
+# after
+LITERALS: Dict[str, TokenType] = {
+    &quot;{&quot;: TokenType.BRACE_LEFT,
+    ...
+}</code></pre><p id="d8ee0ae2-7987-4b27-b24e-186f34c69ea0" class="">
+</p><p id="fe24ebbc-d02a-4127-a1d5-dba83552f244" class="">This concept I like; I can see extending the ask towards higher consistency more broadly (say in ‘harmonizing’ different styles).</p><h1 id="f8f580ca-5693-4c5e-b566-7641bf4456b1" class="">Changes not implemented</h1><h3 id="1b0037b3-bddf-4122-8320-5bcb82d07044" class="">Tests</h3><p id="a4e287fd-7915-4c08-8074-ed6b1c34e486" class="">ChatGPT is very good at creating <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">tests</a>, which I often use on other occasions. However my test coverage here is pretty good. It’s hard implementing new language features without breaking existing ones, and it’s easy to know if you’re breaking existing features with tests.</p><p id="e5df4708-d024-4504-9e38-05f1b262c53d" class="">
+</p><p id="4edc315c-3202-46c8-9911-9102ff6d2773" class="">Related to the idea of ‘tests as guardrails’ is the use of types. I like types, so I already had my code passing <code>mypy</code>. It was amusing, however, to see ChatGPT conveniently ignore existing type annotations in making the suggestion to add <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">types</a>.</p><p id="9229ece8-d440-44b1-82e0-54baaa127907" class="">
+</p><h3 id="2d198310-ca5d-4f27-b7f3-7f76162b347f" class="">Naming</h3><p id="3785328b-7ab0-4481-8aa0-074b8728a7fe" class="">I struggle with names, and ChatGPT makes naming so much easier. That said I’m guessing my naming here is OK. ChatGPT proposed I <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">rename</a> <code>tokens</code> to <code>token_list</code> but on a later prompt proposed I rename <code>token_list</code> back to <code>tokens</code>... </p><p id="e9d03daf-de75-47b8-aca0-f750fc4655ee" class="">
+</p><h3 id="d7407548-f08c-4e68-afec-f9aebb9a4eb1" class="">Modularity</h3><p id="feafa15a-502b-4e1a-950d-796ae80cae8c" class="">ChatGPT recommends I <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">refactor</a> a number of functions into smaller ones, especially where there’s branching. Since each branch is not that long, I decided to keep the code as is. It’s easier to compare the different sections when you can see them side-by-side.</p><h1 id="0bf0d577-19f7-4c1a-8cd7-bb76248d5249" class="">Changes less expected</h1><h3 id="7edc1cea-bdca-457f-99b5-aa4a287fc040" class="">Runtime validation</h3><p id="eaefe181-f6ee-428f-932c-a63751a35857" class="">I had assertions in a number of places, mainly to keep <code>mypy</code> happy. For example, if I had a function that returns only specific types of a union type, the ‘narrowing’ of the union type would confirmed with an <code>assert</code>.</p><pre id="df5f9a80-78f3-4122-beda-2153e98763f6" class="code"><code>Environment = Dict[str, Union[int, statem.Function, &quot;Environment&quot;]]
+
+value = environment[name]
+assert isinstance(value, int) or isinstance(value, statem.Function)</code></pre><p id="9e633293-4a59-4c92-a821-aec06166faca" class="">
+</p><p id="5886038a-2e4c-4179-a0de-f0dc6c935bfa" class="">ChatGPT suggested I go even further and implement <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">runtime validation</a> for my functions, similarly through the use of assertions.</p><pre id="13ae2eaf-2653-417a-97fc-88e0fd4e04a2" class="code"><code>def execute(statement: Statem, environment: Environment) -&gt; List[Optional[int]]:
+    if not isinstance(statement, Statem):
+        raise TypeError(&quot;&#x27;statement&#x27; must be an instance of Statem&quot;)
+
+    if not isinstance(environment, dict):
+        raise TypeError(&quot;&#x27;environment&#x27; must be a dictionary&quot;)</code></pre><p id="a398c5ab-60aa-42ed-aff5-b2390fa5b964" class="">
+</p><p id="531c1485-7425-45e5-ae5c-de55b5835e09" class="">I always wanted to try out <code>pydantic</code> and prodded ChatGPT a bit in this direction. ChatGPT suggested creating a <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">data model</a> from <code>BaseModel</code>, but this feels a  too much ceremony. I looked around the <a href="https://docs.pydantic.dev/latest/concepts/validation_decorator/">documentation</a> to happily discover the <code>validate_call</code> decorator.</p><pre id="368ef1eb-882b-4424-9af0-955930e93028" class="code"><code>@pydantic.validate_call
+def execute(statement: Statem, environment: Environment) -&gt; List[Optional[int]]:
+    ...</code></pre><p id="35dbe116-6cf8-4da3-8d3d-4362736c734b" class="">
+</p><h3 id="2a2ed7da-c08b-4b9f-b622-2bd6daf51fae" class="">Immutability</h3><p id="7fe605bd-eb64-4be3-8216-41bcc23f9a52" class="">In the past, I would enforce read-only data structures through static checks. In particular, instead of <code>List</code> and <code>Dict</code>, I would use <code>Sequence</code> and <code>Map</code> respectively. ChatGPT suggested this be enforced at runtime with a <code>dataclass</code> decorator to make attributes <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">read-only</a> <a href="Writing%20clean%20code%20with%20ChatGPT%2073c4d45c22ad4ec7aeca49118f958790.html">[3]</a>. Nice!</p><pre id="10ee2c71-b2e1-46c4-9d4a-eb404e36e004" class="code"><code># before
+@dataclasses.dataclass
+class Name(Expr):
+    text: str
+
+# after
+@dataclasses.dataclass(frozen=True)
+class Name(Expr):
+    text: str</code></pre><p id="2b462466-39fd-40b5-85fe-573adfe4e3fc" class="">
+</p><h3 id="a4ebb1b8-4292-4d6c-b7e7-69d0b9da83cc" class="">Version upgrades</h3><p id="286719e5-0222-490d-9595-390985d6b687" class="">This didn’t come up in the list of suggestions, but I realized ChatGPT could easily assist with <a href="../Learning%20f8bf36255b4444d094170ce63cefe757/ChatGPT%2069ce2379b6714ea287d7228dedbecb48/Python%202e9b61287db44c7491b9bac01653ea94.html">upgrading</a> the code to a later Python version. I have always been impressed by the Go toolchain, now it seems ChatGPT helps fill that gap for Python.</p><h1 id="20a25fcd-5b86-4168-949d-3464342c971b" class="">Conclusion</h1><p id="6904bc21-83dd-43cd-85ce-6b9b0f09d705" class="">If I haven’t made it clear, I’m very much a fan of ChatGPT.</p><p id="840869fd-0b72-40e3-a07d-0b18400c8bad" class="">
+</p><p id="8938b48e-8328-4dbc-8a14-0f5c3eba826e" class="">Less fun aspects such as documentation and tests are practically done for you. Even if you feel the quality is lacking, it’s usually a good starting point. I also like how ChatGPT makes it much easier to improve consistency, whether it be naming or style.</p><p id="e8819130-85ea-43c5-934f-708993c30423" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fbd66d8d-2135-433d-be4e-b46de60ba1fd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">ChatGPT does have a few quirks, here are some workarounds:
+
+▪️ “Please don&#x27;t make things up, only suggest changes to code that actually exist.”
+
+▪️“Please provide suggested changes to the maximum output token allowable, and sort     
+      in descending order of importance.”
+
+▪️ Create a new chat window when ChatGPT slows down from large amounts of text. To 
+      avoid pasting code repeatedly, consider creating a <a href="https://openai.com/blog/introducing-gpts">custom GPT version</a>.</div></figure><p id="1bad669a-f61a-459c-85ec-20f27de45787" class="">
+</p><p id="0e5a7762-a264-4372-9ed1-5a017681963a" class="">
+</p><p id="1955310b-53b4-41d6-ae80-c583e9f033cd" class="">
+</p><p id="c2080eb5-c5ab-4fb1-988d-e3c869ccf49c" class=""><strong>[1]</strong> David Beazley has ~30 years experience with Python, and there’s something magical about hearing how he had his mind blown working on a <a href="https://github.com/dabeaz/blog/blob/main/2023/three-problems.md">parser combinator in Haskell</a>.</p><blockquote id="afbb6015-e2c0-4d53-bc81-9533381feccd" class="">As an aside, sometimes people ask me &quot;what can I do to improve my Python skills?&quot;. Much to their surprise, I often suggest doing a project in a completely different language or outside of their area of expertise. I think the main benefit of doing this is that you&#x27;ll often see a completely different way of thinking about a problem that you can bring home to your own projects.</blockquote><p id="0d05930e-bd6a-4f41-987b-814d91bcf920" class="">
+</p><p id="4e594b6f-7044-481c-90ac-331ae17069b8" class=""><strong>[2]</strong> For larger codebases, it’s possible to compress and upload into a custom GPT version like for LangChain <a href="https://x.com/pwang_szn/status/1722932229436014772">here</a>.</p><p id="eb084847-9c2d-45e4-a2fa-6eb61a5a1ccc" class="">
+</p><p id="9638685e-ebbc-4e5e-98ac-f0b9fcc72246" class=""><strong>[3]</strong> The generic type <code>Sequence</code> will raise a <code>mypy</code> error on an append (since it’s read-only), but no error is raised at runtime.</p><pre id="6be50150-6696-4711-9d86-dff74b7b9745" class="code"><code>sequence: Sequence[str] = [&quot;a&quot;]
+print(sequence)
+
+sequence.append(&quot;b&quot;)
+print(sequence)</code></pre><pre id="426cdeff-1d32-4116-803e-aeaba2998abb" class="code"><code>&gt; mypy sequence.py
+sequence.py: error: &quot;Sequence[str]&quot; has no attribute &quot;append&quot;  [attr-defined]
+
+&gt; python sequence.py
+[&#x27;a&#x27;]
+[&#x27;a&#x27;, &#x27;b&#x27;]</code></pre><p id="5d468727-880c-4e95-a9ef-ad2adfe97f99" class="">
+</p><p id="a755331b-8239-41cd-b3b1-82552cc071b1" class="">The <code>dataclass</code> decorator enforcement of read-only occurs both statically and at runtime.</p><pre id="8fe3f80f-c26f-4ac9-a246-969ac34c3db2" class="code"><code>@dataclass(frozen=True)
+class Name:
+    text: str
+
+name = Name(text=&quot;a&quot;)
+name.text = &quot;b&quot;</code></pre><pre id="5493723d-6e88-47ce-9360-062ea5ec4f1f" class="code"><code>&gt; mypy name.py
+run.py:55: error: Property &quot;text&quot; defined in &quot;Name&quot; is read-only  [misc]
+
+&gt; python name.py
+Traceback (most recent call last):
+  File &quot;name.py&quot;, line 6, in &lt;module&gt;
+    name.text = &quot;b&quot;
+    ^^^^^^^^^
+  File &quot;&lt;string&gt;&quot;, line 2, in __setattr__
+dataclasses.FrozenInstanceError: cannot assign to field &#x27;text&#x27;</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
