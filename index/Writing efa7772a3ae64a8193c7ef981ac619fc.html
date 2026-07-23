@@ -47,6 +47,13 @@ h3 {
 	margin-bottom: 0;
 }
 
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
 .page-title {
 	font-size: 2.5rem;
 	font-weight: 700;
@@ -77,11 +84,18 @@ h3 {
 }
 
 .callout {
-	border-radius: 3px;
+	border-radius: 10px;
 	padding: 1rem;
 }
 
-figure {
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure,
+aside,
+details {
 	margin: 1.25em 0;
 	page-break-inside: avoid;
 }
@@ -119,38 +133,66 @@ img {
 		max-height: 100vh;
 		object-fit: contain;
 	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
 }
 
 @page {
 	margin: 1in;
 }
 
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
 .collection-content {
 	font-size: 0.875rem;
 }
 
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
 .column-list {
 	display: flex;
-	justify-content: space-between;
+	gap: 46px;
 }
 
 .column {
-	padding: 0 1em;
+	min-width: 0;
+	overflow: hidden;
 }
 
-.column:first-child {
-	padding-left: 0;
-}
-
-.column:last-child {
-	padding-right: 0;
+.column > *:first-child {
+	margin-top: 0;
 }
 
 .table_of_contents-item {
 	display: block;
 	font-size: 0.875rem;
 	line-height: 1.3;
-	padding: 0.125rem;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
 }
 
 .table_of_contents-indent-1 {
@@ -175,10 +217,10 @@ table,
 th,
 td {
 	border: 1px solid rgba(55, 53, 47, 0.09);
-	border-collapse: collapse;
 }
 
 table {
+	border-collapse: collapse;
 	border-left: none;
 	border-right: none;
 }
@@ -241,6 +283,14 @@ ol {
 	padding-inline-start: 1.6em;
 }
 
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
 ol > li {
 	padding-left: 0.2em;
 }
@@ -284,7 +334,7 @@ ol > li {
 }
 
 .page-description {
-    margin-bottom: 2em;
+	margin-bottom: 2em;
 }
 
 .simple-table {
@@ -315,7 +365,9 @@ time {
 }
 
 .icon {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	max-width: 1.2em;
 	max-height: 1.2em;
 	text-decoration: none;
@@ -323,8 +375,34 @@ time {
 	margin-right: 0.5em;
 }
 
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
 img.icon {
 	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
 }
 
 .user-icon {
@@ -381,8 +459,7 @@ td > time {
 }
 
 input[type="checkbox"] {
-	transform: scale(1.5);
-	margin-right: 0.6em;
+	margin-right: 0.4em;
 	vertical-align: middle;
 }
 
@@ -434,6 +511,10 @@ blockquote {
 	margin: 1em 0;
 	padding-left: 1em;
 	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
 }
 
 .bookmark {
@@ -488,14 +569,20 @@ blockquote {
 	margin-top: 0.25em;
 }
 
-.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
 .code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
 .serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
 .mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
-.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
-.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
-.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
-.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
 .pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
 .pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
 .pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
@@ -509,151 +596,155 @@ blockquote {
 .pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
 .pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
 .highlight-default {
-	color: rgba(55, 53, 47, 1);
+	color: rgba(44, 44, 43, 1);
 }
 .highlight-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
 }
 .highlight-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
 }
 .highlight-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
 }
 .highlight-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
 }
 .highlight-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
 }
 .highlight-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
 }
 .highlight-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
 }
 .highlight-pink {
 	color: rgba(193, 76, 138, 1);
 	fill: rgba(193, 76, 138, 1);
 }
 .highlight-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
 }
 .highlight-gray_background {
-	background: rgba(241, 241, 239, 1);
+	background: rgba(42, 28, 0, 0.07);
 }
 .highlight-brown_background {
-	background: rgba(244, 238, 238, 1);
+	background: rgba(139, 46, 0, 0.086);
 }
 .highlight-orange_background {
-	background: rgba(251, 236, 221, 1);
+	background: rgba(224, 101, 1, 0.129);
 }
 .highlight-yellow_background {
-	background: rgba(251, 243, 219, 1);
+	background: rgba(211, 168, 0, 0.137);
 }
 .highlight-teal_background {
-	background: rgba(237, 243, 236, 1);
+	background: rgba(0, 100, 45, 0.09);
 }
 .highlight-blue_background {
-	background: rgba(231, 243, 248, 1);
+	background: rgba(0, 124, 215, 0.094);
 }
 .highlight-purple_background {
-	background: rgba(244, 240, 247, 0.8);
+	background: rgba(102, 0, 178, 0.078);
 }
 .highlight-pink_background {
-	background: rgba(249, 238, 243, 0.8);
+	background: rgba(197, 0, 93, 0.086);
 }
 .highlight-red_background {
-	background: rgba(253, 235, 236, 1);
+	background: rgba(223, 22, 0, 0.094);
 }
 .block-color-default {
 	color: inherit;
 	fill: inherit;
 }
 .block-color-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
 }
 .block-color-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
 }
 .block-color-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
 }
 .block-color-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
 }
 .block-color-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
 }
 .block-color-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
 }
 .block-color-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
 }
 .block-color-pink {
 	color: rgba(193, 76, 138, 1);
 	fill: rgba(193, 76, 138, 1);
 }
 .block-color-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
 }
 .block-color-gray_background {
-	background: rgba(241, 241, 239, 1);
+	background: rgba(240, 239, 237, 1);
 }
 .block-color-brown_background {
-	background: rgba(244, 238, 238, 1);
+	background: rgba(245, 237, 233, 1);
 }
 .block-color-orange_background {
-	background: rgba(251, 236, 221, 1);
+	background: rgba(251, 235, 222, 1);
 }
 .block-color-yellow_background {
-	background: rgba(251, 243, 219, 1);
+	background: rgba(249, 243, 220, 1);
 }
 .block-color-teal_background {
-	background: rgba(237, 243, 236, 1);
+	background: rgba(232, 241, 236, 1);
 }
 .block-color-blue_background {
-	background: rgba(231, 243, 248, 1);
+	background: rgba(229, 242, 252, 1);
 }
 .block-color-purple_background {
-	background: rgba(244, 240, 247, 0.8);
+	background: rgba(243, 235, 249, 1);
 }
 .block-color-pink_background {
-	background: rgba(249, 238, 243, 0.8);
+	background: rgba(250, 233, 241, 1);
 }
 .block-color-red_background {
-	background: rgba(253, 235, 236, 1);
+	background: rgba(252, 233, 231, 1);
 }
-.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
-.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
-.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
-.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
-.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
-.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
-.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
-.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
-.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
-.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
-.select-value-color-pageGlass { background-color: undefined; }
-.select-value-color-washGlass { background-color: undefined; }
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
 
 .checkbox {
 	display: inline-flex;
@@ -673,15 +764,121 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="efa7772a-3ae6-4a81-93c7-ef981ac619fc" class="page sans"><header><h1 class="page-title">Writing</h1><p class="page-description"></p></header><div class="page-body"><p id="939f1eaf-1544-4a03-98ce-69d3ddf519c0" class=""><em>Author’s note: Hacker News front-pagers tagged with </em>🟧</p><p id="f352283d-6ecb-4ed0-96b9-cb973c351481" class="">
-</p><h3 id="51759fdc-433d-4cbb-a6d0-fd85d1c4e74a" class="">Fall 2023</h3><figure id="73c4d45c-22ad-4ec7-aeca-49118f958790" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Writing%20clean%20code%20with%20ChatGPT%2073c4d45c22ad4ec7aeca49118f958790.html">Writing clean code with ChatGPT</a></figure><p id="b01b6055-14d0-42cb-8ab2-e99f0eb9f359" class="">
-</p><h3 id="ae306242-3eb8-4a50-9800-372200c08100" class="">Summer 2023</h3><figure id="800b616f-ff05-4daf-96dc-e49b02c12866" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Therapy%20as%20personal%20coaching%20800b616fff054daf96dce49b02c12866.html">Therapy as personal coaching</a></figure><figure id="41d7d1cc-4825-4a65-82f2-b32708555d1b" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Be%20the%203x%20personable%20engineer%20not%20the%2010x%20a%20hole%2041d7d1cc48254a6582f2b32708555d1b.html">Be the 3x personable engineer not the 10x a**hole</a></figure><figure id="21dbaad2-e31e-49c7-93fe-5163df53699f" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Learning%20soft%20skills%20as%20a%20software%20engineer%2021dbaad2e31e49c793fe5163df53699f.html">Learning soft skills as a software engineer</a></figure><p id="fd9579fe-3e8e-468d-bb10-621a10b1b033" class="">
-</p><h3 id="57d43842-c54d-4442-9cd4-5bae18260b4b" class="">Spring 2023</h3><figure id="bb3a7563-aadd-4d87-8818-1c7818eab735" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Applying%20ML%20to%20flag%20risky%20payments%20bb3a7563aadd4d8788181c7818eab735.html">Applying ML to flag risky payments</a></figure><p id="2aa22008-a6d2-4eed-bb9b-ffe6b946ff1b" class="">
-</p><h3 id="83e9a76b-2eef-4a6d-960c-09b674b995b0" class="">Winter 2023</h3><figure id="4c440389-cf1e-43f4-8fe6-7c969967f655" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html">1 week with David Beazley and SICP</a></figure><figure id="d54621eb-95b3-4eee-b049-a0764587be13" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Writing%20a%20blog%20post%20on%20SICP%20with%20ChatGPT%20d54621eb95b34eeeb049a0764587be13.html">Writing a blog post on SICP with ChatGPT</a></figure><p id="1910f571-9325-4b29-9523-0c31ca8c070e" class="">
-</p><h3 id="3753e513-49e7-4566-b988-8a1da6dbff66" class="">Fall 2022</h3><figure id="df1fdb53-64eb-42fd-ac11-eb23b25e9605" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/How%20to%20store%20a%20chess%20position%20in%2026%20bytes%20using%20bi%20df1fdb5364eb42fdac11eb23b25e9605.html"><span class="icon">🟧</span>How to store a chess position in 26 bytes using bit-level magic</a></figure><p id="5bb60bab-e741-41e3-8e81-02b048e7fde2" class="">
-</p><h3 id="04a0791d-6007-491b-9b37-a2c692d01b5f" class="">Spring 2022</h3><figure id="1547eaa9-a46f-4b2d-a04a-4dfbb204f0c3" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Paradigm%20shifts%201547eaa9a46f4b2da04a4dfbb204f0c3.html">Paradigm shifts</a></figure><figure id="09879883-5865-4751-a853-8a05bde18f96" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/How%20to%20level%20up%20beyond%20ETLs%200987988358654751a8538a05bde18f96.html"><span class="icon">🟧</span>How to level up beyond ETLs</a></figure><p id="d1c88292-fe03-474b-8d5a-9fcd49eb7270" class="">
-</p><h3 id="4c617d04-cf02-45de-94b8-516dcaf367c2" class="">Winter 2022</h3><figure id="bc768cb1-8671-4b57-9547-b7b8681ee32f" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/The%20many%20meanings%20of%20%E2%80%9Cstack%E2%80%9D%20bc768cb186714b579547b7b8681ee32f.html"><span class="icon">🟧</span>The many meanings of “stack”</a></figure><figure id="9a130f22-5666-4884-91ba-497004821fbb" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Rewriting%20my%20toy%20blockchain%20in%20Rust%209a130f225666488491ba497004821fbb.html"><span class="icon">🟧</span>Rewriting my toy blockchain in Rust</a></figure><p id="b0cb303e-74dc-4cfb-8c53-1d8c0fd754b1" class="">
-</p><h3 id="8fef1d05-b272-48fe-beae-db0fa47f0dc8" class="">Fall 2021</h3><figure id="9559908f-03ad-4cb7-a09e-e60a457198e2" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/A%20minimal%20Bitcoin-inspired%20implementation%209559908f03ad4cb7a09ee60a457198e2.html">A minimal Bitcoin-inspired implementation</a></figure><p id="ccc2bd02-e0ab-4d6b-9e85-50577070e89d" class="">
-</p><h3 id="d7bee9ac-6946-4469-a450-b0912c216619" class="">Fall 2020</h3><figure id="697a79a6-7149-40b2-b08a-6f85bcefabed" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Intro%20to%20WebAssembly%20697a79a6714940b2b08a6f85bcefabed.html">Intro to WebAssembly</a></figure><figure id="23454a4b-6d25-45fb-8f70-018a0f33f0f1" class="link-to-page"><a href="Writing%20efa7772a3ae64a8193c7ef981ac619fc/Experiments%20in%20managing%20perfectionism%2023454a4b6d2545fb8f70018a0f33f0f1.html">Experiments in managing perfectionism</a></figure><p id="f912120c-7b4a-4560-9067-bc9d39610a20" class="">
-</p><p id="6bc76c48-8ae6-49a3-b129-2970f9200829" class="">
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><!--nfy-head--><meta name="viewport" content="width=device-width, initial-scale=1"/><style id="notionify">
+html { color-scheme: dark; }
+@media only screen { body { margin: 0; max-width: none; color: rgba(255,255,255,0.81); } }
+body { background: #191919; -webkit-font-smoothing: antialiased; }
+article.page { width: 100%; }
+
+/* ---- page header: full-bleed cover, overlapping icon, 40px title ---- */
+article > header > .page-cover-image { width: 100%; height: 30vh; max-height: 30vh; }
+article > header > *:not(.page-cover-image), .page-body {
+  width: 100%; max-width: calc(708px + 192px);
+  margin-left: auto; margin-right: auto;
+  padding-left: 96px; padding-right: 96px;
+}
+@media (max-width: 640px) {
+  article > header > *:not(.page-cover-image), .page-body { padding-left: 24px; padding-right: 24px; }
+}
+.page-header-icon { font-size: 78px; line-height: 1; margin-bottom: 0; }
+.page-header-icon-with-cover { margin-top: -44px; }
+.page-header-icon:not(.page-header-icon-with-cover) { margin-top: 72px; }
+article > header > .page-title:first-child { margin-top: 110px; }
+.page-title { font-size: 40px; font-weight: 700; line-height: 1.2; margin-top: 22px; margin-bottom: 26px; }
+.page-description:empty { display: none; }
+
+/* ---- block rhythm: Notion blocks are margin 0 + 3px vertical padding ---- */
+.page-body p { margin: 0; padding: 3px 2px; }
+.page-body h1, .page-body h2, .page-body h3 { padding: 3px 2px; margin-bottom: 0; }
+.page-body h1 { font-size: 1.875em; margin-top: 1em; }
+.page-body h2 { font-size: 1.5em; margin-top: 1.1em; }
+.page-body h3 { font-size: 1.25em; margin-top: 1em; }
+strong { font-weight: 600; }
+
+a, a.visited { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.35); text-underline-offset: 2.5px; }
+a:hover { text-decoration-color: rgba(255,255,255,0.6); }
+
+/* ---- code ---- */
+/* [class*="language-"] variants outrank the Prism light theme the export loads late in the document */
+code { color: #ff7369; background: rgba(135,131,120,0.15); border-radius: 4px; font-size: 85%; padding: 0.2em 0.4em; }
+pre.code, pre.code[class*="language-"] { background: #202020; border: 1px solid rgba(255,255,255,0.051); border-radius: 4px; padding: 32px 16px 32px 32px; margin: 6px 0; overflow-x: auto; }
+pre.code code, pre.code code[class*="language-"] { color: rgba(255,255,255,0.81); background: none; border-radius: 0; padding: 0; font-size: 85%; line-height: 1.5; tab-size: 2; text-shadow: none; }
+pre.code .token.comment, pre.code .token.block-comment, pre.code .token.prolog, pre.code .token.doctype, pre.code .token.cdata { color: #8a8f98; }
+pre.code .token.punctuation { color: rgba(255,255,255,0.55); }
+pre.code .token.keyword, pre.code .token.atrule { color: #cc99cd; }
+pre.code .token.boolean, pre.code .token.number, pre.code .token.function { color: #f08d49; }
+pre.code .token.string, pre.code .token.char, pre.code .token.attr-value { color: #7ec699; }
+pre.code .token.operator, pre.code .token.entity, pre.code .token.url { color: #67cdcc; }
+pre.code .token.class-name, pre.code .token.property, pre.code .token.symbol { color: #f8c555; }
+
+/* ---- other blocks ---- */
+.callout { background: #202020; border: none; border-radius: 8px; padding: 16px 16px 16px 12px; margin: 6px 0; }
+blockquote { font-size: 1em; margin: 6px 0; padding-left: 14px; border-left: 3px solid currentcolor; }
+hr { border-bottom: 1px solid rgba(255,255,255,0.13); margin: 13px 0; }
+figcaption { color: rgba(255,255,255,0.46); opacity: 1; }
+th, td { border: 1px solid rgba(255,255,255,0.094); }
+th { color: rgba(255,255,255,0.66); }
+.simple-table-header-color { background: #252525; color: inherit; }
+a.bookmark { border: 1px solid rgba(255,255,255,0.13); border-radius: 4px; color: inherit; }
+.table_of_contents-link { color: rgba(255,255,255,0.46); }
+::selection { background: rgba(46,170,220,0.35); }
+
+/* ---- Notion dark-mode block colors ---- */
+.block-color-gray, .highlight-gray { color: rgb(155,155,155); }
+.block-color-brown, .highlight-brown { color: rgb(186,133,111); }
+.block-color-orange, .highlight-orange { color: rgb(217,133,56); }
+.block-color-yellow, .highlight-yellow { color: rgb(203,148,51); }
+.block-color-green, .block-color-teal, .highlight-green, .highlight-teal { color: rgb(82,158,114); }
+.block-color-blue, .highlight-blue { color: rgb(82,156,202); }
+.block-color-purple, .highlight-purple { color: rgb(154,109,215); }
+.block-color-pink, .highlight-pink { color: rgb(209,87,150); }
+.block-color-red, .highlight-red { color: rgb(223,84,82); }
+.block-color-gray_background, .highlight-gray_background { background: rgb(47,47,47); }
+.block-color-brown_background, .highlight-brown_background { background: rgb(74,50,40); }
+.block-color-orange_background, .highlight-orange_background { background: rgb(92,59,35); }
+.block-color-yellow_background, .highlight-yellow_background { background: rgb(86,67,40); }
+.block-color-green_background, .block-color-teal_background, .highlight-green_background, .highlight-teal_background { background: rgb(36,61,48); }
+.block-color-blue_background, .highlight-blue_background { background: rgb(20,58,78); }
+.block-color-purple_background, .highlight-purple_background { background: rgb(60,45,86); }
+.block-color-pink_background, .highlight-pink_background { background: rgb(78,44,60); }
+.block-color-red_background, .highlight-red_background { background: rgb(82,46,42); }
+
+/* ---- topbar ---- */
+.nfy-topbar {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  position: sticky; top: 0; z-index: 99; white-space: normal;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  height: 44px; padding: 0 12px; background: #191919; font-size: 14px; line-height: 1.2;
+}
+.nfy-crumbs { display: flex; align-items: center; gap: 2px; min-width: 0; overflow: hidden; }
+.nfy-crumb { display: flex; align-items: center; gap: 6px; padding: 2px 6px; border-radius: 6px; color: rgba(255,255,255,0.81); max-width: 300px; text-decoration: none; }
+a.nfy-crumb:hover { background: rgba(255,255,255,0.055); }
+.nfy-crumb-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nfy-sep { color: rgba(255,255,255,0.32); margin: 0 1px; }
+.nfy-actions { display: flex; align-items: center; gap: 2px; flex: none; }
+.nfy-actions svg { display: block; width: 20px; height: 20px; padding: 4px; border-radius: 6px; color: rgba(255,255,255,0.66); box-sizing: content-box; }
+.nfy-actions svg:hover { background: rgba(255,255,255,0.055); }
+.nfy-cta { margin-left: 6px; height: 30px; display: flex; align-items: center; padding: 0 12px; border-radius: 8px; background: rgba(255,255,255,0.13); color: rgba(255,255,255,0.94); font-weight: 500; text-decoration: none; white-space: nowrap; }
+.nfy-cta:hover { background: rgba(255,255,255,0.18); }
+
+/* ---- right-hand outline rail ---- */
+.nfy-outline { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 14px; align-items: flex-end; z-index: 50; white-space: normal; }
+.nfy-ol { height: 2px; border-radius: 1px; background: rgba(255,255,255,0.30); }
+.nfy-l1 { width: 16px; }
+.nfy-l2 { width: 11px; }
+.nfy-l3 { width: 7px; }
+@media (max-width: 700px) { .nfy-outline { display: none; } }
+</style><!--/nfy-head--></head><body><!--nfy-body--><div class="nfy-topbar"><div class="nfy-crumbs"><a class="nfy-crumb" href="../index.html"><span class="nfy-crumb-label">🌉❄️📝</span></a><span class="nfy-sep">/</span><span class="nfy-crumb"><span class="nfy-crumb-label">Writing</span></span></div><div class="nfy-actions"><svg viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.75" stroke="currentColor" stroke-width="1.5"/><line x1="13" y1="13" x2="17.25" y2="17.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7.5H5.2A1.7 1.7 0 0 0 3.5 9.2v6.1A1.7 1.7 0 0 0 5.2 17h9.6a1.7 1.7 0 0 0 1.7-1.7V9.2a1.7 1.7 0 0 0-1.7-1.7h-1.3"/><line x1="10" y1="2.75" x2="10" y2="11.5"/><polyline points="6.9,5.4 10,2.4 13.1,5.4"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><circle cx="4.5" cy="10" r="1.4"/><circle cx="10" cy="10" r="1.4"/><circle cx="15.5" cy="10" r="1.4"/></svg><a class="nfy-cta" href="https://www.notion.com">Get Notion free</a></div></div><aside class="nfy-outline"><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div></aside><!--/nfy-body--><article id="efa7772a-3ae6-4a81-93c7-ef981ac619fc" class="page sans"><header><h1 class="page-title" dir="auto">Writing</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><p id="939f1eaf-1544-4a03-98ce-69d3ddf519c0" class="" dir="auto"><em>Author’s note: Hacker News front-pagers tagged with </em>🟧</p><h3 id="3231308b-4204-80ca-bfa4-da3030da8229" class="" dir="auto">Spring 2026</h3><figure id="3281308b-4204-809c-aca4-f6182270ff29" class="link-to-page"><a href="Writing/PSY%E2%80%932026%E2%80%930318%20Subject%20BERLIN%203281308b4204809caca4f6182270ff29.html" data-notion-page-id="3281308b-4204-809c-aca4-f6182270ff29" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">PSY–2026–0318: Subject BERLIN</a></figure><figure id="31e1308b-4204-8012-9bd5-dd7951f98112" class="link-to-page"><a href="Writing/Reflecting%20on%2012%20years%20of%20writing%20code%2031e1308b420480129bd5dd7951f98112.html" data-notion-page-id="31e1308b-4204-8012-9bd5-dd7951f98112" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Reflecting on 12 years of writing code</a></figure><p id="3231308b-4204-80c5-87c6-d11b092bfe4e" class="" dir="auto">
+</p><h3 id="1cf1308b-4204-808e-933e-e956144eba26" class="" dir="auto">Spring 2025</h3><figure id="1cf1308b-4204-80ed-ab1d-de76922f50c8" class="link-to-page"><a href="Writing/Learning%20to%20unlearn%201cf1308b420480edab1dde76922f50c8.html" data-notion-page-id="1cf1308b-4204-80ed-ab1d-de76922f50c8" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Learning to unlearn</a></figure><p id="22a1308b-4204-801d-a73f-d8d81ee754f4" class="" dir="auto">
+</p><h3 id="1141308b-4204-8004-99f7-d596bdc0ea6e" class="" dir="auto">Fall 2024</h3><figure id="1141308b-4204-80d5-a095-c5e17a967f79" class="link-to-page"><a href="Writing/My%20first%20text-to-SQL%20RAG%20pipeline%201141308b420480d5a095c5e17a967f79.html" data-notion-page-id="1141308b-4204-80d5-a095-c5e17a967f79" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">My first text-to-SQL RAG pipeline</a></figure><p id="1cf1308b-4204-80e3-95fd-d0d0b3d41bc1" class="" dir="auto">
+</p><h3 id="51759fdc-433d-4cbb-a6d0-fd85d1c4e74a" class="" dir="auto">Fall 2023</h3><figure id="73c4d45c-22ad-4ec7-aeca-49118f958790" class="link-to-page"><a href="Writing/Writing%20clean%20code%20with%20ChatGPT%2073c4d45c22ad4ec7aeca49118f958790.html" data-notion-page-id="73c4d45c-22ad-4ec7-aeca-49118f958790" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Writing clean code with ChatGPT</a></figure><p id="b01b6055-14d0-42cb-8ab2-e99f0eb9f359" class="" dir="auto">
+</p><h3 id="ae306242-3eb8-4a50-9800-372200c08100" class="" dir="auto">Summer 2023</h3><figure id="800b616f-ff05-4daf-96dc-e49b02c12866" class="link-to-page"><a href="Writing/Therapy%20as%20personal%20coaching%20800b616fff054daf96dce49b02c12866.html" data-notion-page-id="800b616f-ff05-4daf-96dc-e49b02c12866" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Therapy as personal coaching</a></figure><figure id="41d7d1cc-4825-4a65-82f2-b32708555d1b" class="link-to-page"><a href="Writing/Be%20the%203x%20personable%20engineer%20not%20the%2010x%20a%20hole%2041d7d1cc48254a6582f2b32708555d1b.html" data-notion-page-id="41d7d1cc-4825-4a65-82f2-b32708555d1b" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Be the 3x personable engineer not the 10x a**hole</a></figure><figure id="21dbaad2-e31e-49c7-93fe-5163df53699f" class="link-to-page"><a href="Writing/Learning%20soft%20skills%20as%20a%20software%20engineer%2021dbaad2e31e49c793fe5163df53699f.html" data-notion-page-id="21dbaad2-e31e-49c7-93fe-5163df53699f" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Learning soft skills as a software engineer</a></figure><p id="fd9579fe-3e8e-468d-bb10-621a10b1b033" class="" dir="auto">
+</p><h3 id="57d43842-c54d-4442-9cd4-5bae18260b4b" class="" dir="auto">Spring 2023</h3><figure id="bb3a7563-aadd-4d87-8818-1c7818eab735" class="link-to-page"><a href="Writing/Applying%20ML%20to%20flag%20risky%20payments%20bb3a7563aadd4d8788181c7818eab735.html" data-notion-page-id="bb3a7563-aadd-4d87-8818-1c7818eab735" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Applying ML to flag risky payments</a></figure><p id="2aa22008-a6d2-4eed-bb9b-ffe6b946ff1b" class="" dir="auto">
+</p><h3 id="83e9a76b-2eef-4a6d-960c-09b674b995b0" class="" dir="auto">Winter 2023</h3><figure id="4c440389-cf1e-43f4-8fe6-7c969967f655" class="link-to-page"><a href="Writing/1%20week%20with%20David%20Beazley%20and%20SICP%204c440389cf1e43f48fe67c969967f655.html" data-notion-page-id="4c440389-cf1e-43f4-8fe6-7c969967f655" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db"><span class="icon" data-emoji="🟧"></span>1 week with David Beazley and SICP</a></figure><figure id="d54621eb-95b3-4eee-b049-a0764587be13" class="link-to-page"><a href="Writing/Writing%20a%20blog%20post%20on%20SICP%20with%20ChatGPT%20d54621eb95b34eeeb049a0764587be13.html" data-notion-page-id="d54621eb-95b3-4eee-b049-a0764587be13" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Writing a blog post on SICP with ChatGPT</a></figure><p id="1910f571-9325-4b29-9523-0c31ca8c070e" class="" dir="auto">
+</p><h3 id="3753e513-49e7-4566-b988-8a1da6dbff66" class="" dir="auto">Fall 2022</h3><figure id="df1fdb53-64eb-42fd-ac11-eb23b25e9605" class="link-to-page"><a href="Writing/How%20to%20store%20a%20chess%20position%20in%2026%20bytes%20using%20bi%20df1fdb5364eb42fdac11eb23b25e9605.html" data-notion-page-id="df1fdb53-64eb-42fd-ac11-eb23b25e9605" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db"><span class="icon" data-emoji="🟧"></span>How to store a chess position in 26 bytes using bit-level magic</a></figure><p id="5bb60bab-e741-41e3-8e81-02b048e7fde2" class="" dir="auto">
+</p><h3 id="04a0791d-6007-491b-9b37-a2c692d01b5f" class="" dir="auto">Spring 2022</h3><figure id="1547eaa9-a46f-4b2d-a04a-4dfbb204f0c3" class="link-to-page"><a href="Writing/Paradigm%20shifts%201547eaa9a46f4b2da04a4dfbb204f0c3.html" data-notion-page-id="1547eaa9-a46f-4b2d-a04a-4dfbb204f0c3" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Paradigm shifts</a></figure><figure id="09879883-5865-4751-a853-8a05bde18f96" class="link-to-page"><a href="Writing/How%20to%20level%20up%20beyond%20ETLs%200987988358654751a8538a05bde18f96.html" data-notion-page-id="09879883-5865-4751-a853-8a05bde18f96" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db"><span class="icon" data-emoji="🟧"></span>How to level up beyond ETLs</a></figure><p id="d1c88292-fe03-474b-8d5a-9fcd49eb7270" class="" dir="auto">
+</p><h3 id="4c617d04-cf02-45de-94b8-516dcaf367c2" class="" dir="auto">Winter 2022</h3><figure id="bc768cb1-8671-4b57-9547-b7b8681ee32f" class="link-to-page"><a href="Writing/The%20many%20meanings%20of%20%E2%80%9Cstack%E2%80%9D%20bc768cb186714b579547b7b8681ee32f.html" data-notion-page-id="bc768cb1-8671-4b57-9547-b7b8681ee32f" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db"><span class="icon" data-emoji="🟧"></span>The many meanings of “stack”</a></figure><figure id="9a130f22-5666-4884-91ba-497004821fbb" class="link-to-page"><a href="Writing/Rewriting%20my%20toy%20blockchain%20in%20Rust%209a130f225666488491ba497004821fbb.html" data-notion-page-id="9a130f22-5666-4884-91ba-497004821fbb" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db"><span class="icon" data-emoji="🟧"></span>Rewriting my toy blockchain in Rust</a></figure><p id="b0cb303e-74dc-4cfb-8c53-1d8c0fd754b1" class="" dir="auto">
+</p><h3 id="8fef1d05-b272-48fe-beae-db0fa47f0dc8" class="" dir="auto">Fall 2021</h3><figure id="9559908f-03ad-4cb7-a09e-e60a457198e2" class="link-to-page"><a href="Writing/A%20minimal%20Bitcoin-inspired%20implementation%209559908f03ad4cb7a09ee60a457198e2.html" data-notion-page-id="9559908f-03ad-4cb7-a09e-e60a457198e2" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">A minimal Bitcoin-inspired implementation</a></figure><p id="ccc2bd02-e0ab-4d6b-9e85-50577070e89d" class="" dir="auto">
+</p><h3 id="d7bee9ac-6946-4469-a450-b0912c216619" class="" dir="auto">Fall 2020</h3><figure id="697a79a6-7149-40b2-b08a-6f85bcefabed" class="link-to-page"><a href="Writing/Intro%20to%20WebAssembly%20697a79a6714940b2b08a6f85bcefabed.html" data-notion-page-id="697a79a6-7149-40b2-b08a-6f85bcefabed" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Intro to WebAssembly</a></figure><figure id="23454a4b-6d25-45fb-8f70-018a0f33f0f1" class="link-to-page"><a href="Writing/Experiments%20in%20managing%20perfectionism%2023454a4b6d2545fb8f70018a0f33f0f1.html" data-notion-page-id="23454a4b-6d25-45fb-8f70-018a0f33f0f1" data-notion-space-id="2ff64240-cb0a-41a4-9953-11214bd0d1db">Experiments in managing perfectionism</a></figure><p id="f912120c-7b4a-4560-9067-bc9d39610a20" class="" dir="auto">
+</p><p id="6bc76c48-8ae6-49a3-b129-2970f9200829" class="" dir="auto">
 </p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
