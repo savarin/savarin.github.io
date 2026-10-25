@@ -14,6 +14,7 @@ uv run scripts/notion_export.py \
   .notion-preview \
   --replace \
   --metadata notion-metadata.json \
+  --exclude-page 94a4f72e2173443e98d4dcbfbe9013e2 \
   --site-url https://www.ezzeriesa.com \
   --notion-site https://ezzeriesa.notion.site \
   --domain www.ezzeriesa.com
@@ -26,6 +27,8 @@ Open **http://127.0.0.1:8765/**. The output is also readable by opening `.notion
 Without uv, install `beautifulsoup4==4.14.3` in a Python environment and run the same command with `python3 scripts/notion_export.py`.
 
 For future exports, unzip the HTML export, refresh the formatting snapshot as described below, point the first argument at the directory containing the top-level page, and rerun. Keep `scripts/notion_assets/` and `scripts/notion_metadata.py` beside the converter.
+
+The build command excludes the **Miscellaneous** page, its standalone page link, and its entries in breadcrumbs, search, and the sitemap. Its child pages remain available at their existing URLs, including the `Miscellaneous/` path segment. This changes only the static site; the original export and Notion pages remain untouched. If that page is later removed from the Notion export itself, remove the corresponding `--exclude-page` argument.
 
 ## Formatting that Notion omits from HTML
 
@@ -56,6 +59,7 @@ The converter deliberately builds into a separate directory. To deploy to GitHub
 | --- | --- |
 | `--replace` | Rebuild an unchanged, converter-owned output directory. |
 | `--root PATH_OR_ID` | Choose the homepage if an export has several top-level HTML files. |
+| `--exclude-page PATH_OR_ID` | Omit a page and links to it while keeping descendant pages and URLs. Repeat to exclude multiple pages. |
 | `--theme dark\|light\|auto` | Initial appearance; dark matches the supplied reference. Visitors can change it in the menu. |
 | `--site-url URL` | Canonical URLs and sitemap; supports a hosting subdirectory. |
 | `--notion-site URL` | Adds an “Open in Notion” link for the current page. |
@@ -88,9 +92,9 @@ Some details cannot be reconstructed from an HTML export. Database views become 
 
 ## Verification
 
-Every build checks local HTML links, assets, page fragments, and CSS font URLs before installing the output. The supplied export builds **134 pages and 49 assets** (46 images and 3 CSV files), with **2,368 local references verified**.
+Every build checks local HTML links, assets, page fragments, and CSS font URLs before installing the output. With Miscellaneous excluded, the supplied export builds **133 pages and 49 assets** (46 images and 3 CSV files), with **2,288 local references verified**.
 
-The export audit verified all 134 page IDs and 3,895 block IDs, all 252 code blocks with exact whitespace, all 7 equation payloads, and original paragraph/heading/quote text. All 49 assets match the source byte for byte, and all 133 previously served HTML paths remain available. Visual checks covered the homepage, Writing index, cover articles, mobile text and code pages, callouts, stacked columns, equations, and navigation. The live reference and preview were compared at the same browser zoom; the homepage title/quote geometry and Writing index heading positions align.
+The original export audit verified all 134 page IDs and 3,895 block IDs, all 252 code blocks with exact whitespace, all 7 equation payloads, and original paragraph/heading/quote text. The configured exclusion now omits only the Miscellaneous page and its page-link block. All 49 assets match the source byte for byte, and the retained pages keep their existing URLs. Visual checks covered the homepage, Writing index, cover articles, mobile text and code pages, callouts, stacked columns, equations, and navigation. The live reference and preview were compared at the same browser zoom; the homepage title/quote geometry and Writing index heading positions align.
 
 Run the regression suite:
 
@@ -98,7 +102,7 @@ Run the regression suite:
 uv run --with beautifulsoup4==4.14.3 python -m unittest discover -s tests -v
 ```
 
-The 53 tests cover content preservation, unusual filenames, relative links and fragments, Notion links, nested breadcrumbs, icons, favicons, deterministic builds, and safe replacement. Metadata tests exercise repeated substrings, Unicode offsets, multiline highlights, captioned code IDs, wrapping, image hashes/widths, stale snapshots, and public API error recovery. Build reports record restored metadata and export limitations.
+The 56 tests cover content preservation, unusual filenames, relative links and fragments, Notion links, nested breadcrumbs, icons, favicons, deterministic builds, and safe replacement. Page-exclusion tests verify descendant URLs, removed references, search and sitemap entries, and failure safety. Metadata tests exercise repeated substrings, Unicode offsets, multiline highlights, captioned code IDs, wrapping, image hashes/widths, stale snapshots, and public API error recovery. Build reports record restored metadata, excluded pages, and export limitations.
 
 The second visual pass measured the live and generated SICP code card and caption at the same viewport: 656px card width, 439.171875px card height, and 31.59375px caption height, with matching padding. The small Stack image also matches exactly: 240px outer box, 224px image, and a caption constrained to the image width. A nested numbered-list example matches the live 162px parent and 55px/53px child heights. Browser inspection confirms all 46 author highlight spans (887 characters) survive syntax highlighting with the live background color.
 

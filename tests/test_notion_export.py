@@ -151,6 +151,55 @@ class NotionConversionRegression(unittest.TestCase):
         # This is the existing deployed URL contract, not a proposed new slug scheme.
         self.assertEqual(self.document("index.html").select_one('.page-title').get_text(), TITLE)
 
+    def test_excluding_parent_removes_references_but_preserves_descendants(self):
+        source = self.source / HOME
+        source.write_text(source.read_text().replace(
+            '</div></article>',
+            f'<p>See <a href="https://example.notion.site/Learning-{LEARNING_ID.replace("-", "")}?view=all#section-one">the learning notes</a>.</p></div></article>',
+        ))
+        before = snapshot(self.source)
+        self.convert(extra=['--exclude-page', LEARNING_ID, '--site-url', 'https://example.com'])
+        self.assertFalse((self.output / 'index' / LEARNING).exists())
+        home = self.document('index.html')
+        self.assertIsNone(home.select_one('#to-learning'))
+        self.assertIn('See the learning notes.', home.select_one('.page-body').get_text())
+        self.assertFalse(any(LEARNING_ID.replace('-', '') in a['href'] for a in home.select('a[href]')))
+        child = self.document(f'index/Learning/{NESTED}')
+        self.assertEqual([e.get_text() for e in child.select('.breadcrumbs .crumb-label')], [TITLE, 'Nested & More'])
+        self.assertIsNone(child.select_one('#nested-parent'))
+        self.assertIn('Home Parent', child.select_one('.page-body').get_text())
+        self.assertEqual(child.select_one('#source-code code').get_text(), CODE)
+        self.assertEqual((self.output / 'index/Learning/Nested & More' / ASSET_NAME).read_bytes(), ASSET_BYTES)
+        index = (self.output / 'assets/notion/search-index.js').read_text()
+        entries = json.loads(index.removeprefix('window.NOTION_SEARCH_INDEX=').strip().removesuffix(';'))
+        self.assertEqual({e['title'] for e in entries}, {TITLE, 'Nested & More'})
+        self.assertNotIn('Learning', next(e['text'] for e in entries if e['title'] == TITLE))
+        sitemap = (self.output / 'sitemap.xml').read_text()
+        self.assertNotIn(quote(f'index/{LEARNING}'), sitemap)
+        self.assertIn(quote(f'index/Learning/{NESTED}'), sitemap)
+        self.assertEqual(snapshot(self.source), before)
+
+    def test_exclusion_rebuild_removes_only_the_selected_page(self):
+        self.convert()
+        child_path = self.output / 'index/Learning' / NESTED
+        self.convert(extra=['--replace', '--exclude-page', f'{TITLE}/{LEARNING}'])
+        self.assertFalse((self.output / 'index' / LEARNING).exists())
+        self.assertTrue(child_path.is_file())
+        report = json.loads((self.output / 'build-report.json').read_text())
+        self.assertEqual(report['pages'], 2)
+        self.assertEqual([p['id'] for p in report['excluded_pages']], [LEARNING_ID])
+        self.assertEqual(snapshot(self.source), self.before)
+
+    def test_invalid_exclusion_preserves_previous_output(self):
+        self.convert()
+        before = snapshot(self.output)
+        for value, error in [(HOME_ID, 'Cannot exclude the homepage'), ('missing-page', 'Excluded page not found')]:
+            with self.subTest(value=value):
+                result = self.convert(ok=False, extra=['--replace', '--exclude-page', value])
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn(error, result.stderr)
+                self.assertEqual(snapshot(self.output), before)
+
     def test_exported_emoji_link_keeps_its_rendering_class(self):
         # Notion stores some emoji as data attributes rendered by .icon::before.
         # Losing that class produces a silent, empty space beside the page link.

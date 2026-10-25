@@ -130,6 +130,7 @@ class Builder:
         self.routes: dict[Path, Path] = {}
         self.by_id: dict[str, Page] = {}
         self.by_path: dict[Path, Page] = {}
+        self.excluded_pages: list[Page] = []
 
     def icon_markup(self, owner: Page, receiver: Page, default=False) -> str:
         """Icons belong to their source page, even when shown in a breadcrumb."""
@@ -194,6 +195,41 @@ class Builder:
             if page is self.root:
                 continue
             page.parent = next((containers[d] for d in page.source.parents if d in containers and containers[d] is not page), self.root)
+
+    def exclude_pages(self):
+        """Omit selected pages and links without moving or deleting descendants."""
+        excluded = set()
+        for value in self.args.exclude_page:
+            matches = [p for p in self.pages if p.relative.as_posix() == value or key(p.id) == key(value)]
+            if len(matches) != 1:
+                raise ValueError(f"Excluded page not found or ambiguous: {value}")
+            if matches[0] is self.root:
+                raise ValueError("Cannot exclude the homepage.")
+            excluded.add(matches[0])
+        if not excluded:
+            return
+        self.excluded_pages = [p for p in self.pages if p in excluded]
+        excluded_routes = {p.route for p in excluded}
+        excluded_sources = {p.source for p in excluded}
+        self.pages = [p for p in self.pages if p not in excluded]
+        self.files = [p for p in self.files if p not in excluded_sources]
+        for page in self.pages:
+            while page.parent in excluded:
+                page.parent = page.parent.parent
+            for anchor in page.article.select("a[href]"):
+                parts = urlsplit(self.rewrite(anchor["href"], page))
+                if parts.scheme or parts.netloc:
+                    continue
+                route = Path(os.path.normpath(page.route.parent / unquote(parts.path))) if parts.path else page.route
+                if route not in excluded_routes:
+                    continue
+                figure = anchor.find_parent("figure", class_="link-to-page")
+                if figure:
+                    figure.decompose()
+                else:
+                    # Keep authored prose around an inline link; only the link
+                    # destination and standalone page-link blocks are omitted.
+                    anchor.unwrap()
 
     def rewrite(self, value: str, page: Page) -> str:
         parts = urlsplit(value)
@@ -447,6 +483,7 @@ class Builder:
 
     def build(self):
         self.inventory()
+        self.exclude_pages()
         self.check_output()
         self.output.parent.mkdir(parents=True, exist_ok=True)
         stage = Path(tempfile.mkdtemp(prefix=".notion-build-", dir=self.output.parent))
@@ -473,6 +510,7 @@ class Builder:
                 (stage / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join('<url><loc>' + html.escape(u) + '</loc></url>' for u in urls) + '</urlset>')
             checked = verify_site(stage)
             report = {"pages": len(self.pages), "export_assets": len(self.files) - len(self.pages), "checked_local_references": checked, "theme": self.args.theme, "code_metadata": {"blocks": self.metadata_count, "annotation_ranges": self.annotation_count}, "image_metadata": self.image_metadata_count, "warnings": self.warnings}
+            report["excluded_pages"] = [{"id": p.id, "title": p.title, "url": url_path(p.route)} for p in self.excluded_pages]
             (stage / "build-report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             files = {p.relative_to(stage).as_posix(): digest(p) for p in sorted(stage.rglob("*")) if p.is_file()}
             (stage / MANIFEST).write_text(json.dumps({"generator": "notion_export", "version": VERSION, "files": files}, indent=2) + "\n")
@@ -537,6 +575,7 @@ def main():
     parser.add_argument("output", help="New directory for the static site")
     parser.add_argument("--replace", action="store_true", help="Replace unmodified output previously made by this converter")
     parser.add_argument("--root", help="Homepage relative HTML path or Notion page ID (when ambiguous)")
+    parser.add_argument("--exclude-page", action="append", default=[], metavar="PATH_OR_ID", help="Omit a page and links to it, retaining descendant URLs; repeat for multiple pages")
     parser.add_argument("--theme", choices=["dark", "light", "auto"], default="dark")
     parser.add_argument("--layout", help="Optional JSON page-format overrides, indexed by page ID")
     parser.add_argument("--metadata", help="Public formatting snapshot from notion_metadata.py (code annotations, wrapping, image layouts)")
@@ -560,6 +599,8 @@ def main():
         print(f"Restored code wrapping for {report['code_metadata']['blocks']} blocks and {report['code_metadata']['annotation_ranges']} annotation ranges.")
     if report['image_metadata']:
         print(f"Restored {report['image_metadata']} image layouts.")
+    if report['excluded_pages']:
+        print(f"Excluded {len(report['excluded_pages'])} pages; descendants retain their existing URLs.")
     if not args.metadata:
         print("Export-only mode: use --metadata to restore formatting omitted by Notion's HTML export.")
 
