@@ -1,875 +1,10 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Nodes</title><meta name="data-notion-page-icon" content="📶"/><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%93%B6%3C%2Ftext%3E%3C%2Fsvg%3E"/><style>
-/* cspell:disable-file */
-/* webkit printing magic: print all background colors */
-html {
-	-webkit-print-color-adjust: exact;
-}
-* {
-	box-sizing: border-box;
-	-webkit-print-color-adjust: exact;
-}
-
-html,
-body {
-	margin: 0;
-	padding: 0;
-}
-@media only screen {
-	body {
-		margin: 2em auto;
-		max-width: 900px;
-		color: rgb(55, 53, 47);
-	}
-}
-
-body {
-	line-height: 1.5;
-	white-space: pre-wrap;
-}
-
-a,
-a.visited {
-	color: inherit;
-	text-decoration: underline;
-}
-
-.pdf-relative-link-path {
-	font-size: 80%;
-	color: #444;
-}
-
-h1,
-h2,
-h3 {
-	letter-spacing: -0.01em;
-	line-height: 1.2;
-	font-weight: 600;
-	margin-bottom: 0;
-}
-
-/* Override strong tags inside headings to maintain consistent weight */
-h1 strong,
-h2 strong,
-h3 strong {
-	font-weight: 600;
-}
-
-.page-title {
-	font-size: 2.5rem;
-	font-weight: 700;
-	margin-top: 0;
-	margin-bottom: 0.75em;
-}
-
-h1 {
-	font-size: 1.875rem;
-	margin-top: 1.875rem;
-}
-
-h2 {
-	font-size: 1.5rem;
-	margin-top: 1.5rem;
-}
-
-h3 {
-	font-size: 1.25rem;
-	margin-top: 1.25rem;
-}
-
-.source {
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	padding: 1.5em;
-	word-break: break-all;
-}
-
-.callout {
-	border-radius: 10px;
-	padding: 1rem;
-}
-
-/* For default-background callouts, render the border outline. */
-.callout.block-color-default_background {
-	border: 1px solid rgba(55, 53, 47, 0.09);
-}
-
-figure,
-aside,
-details {
-	margin: 1.25em 0;
-	page-break-inside: avoid;
-}
-
-figcaption {
-	opacity: 0.5;
-	font-size: 85%;
-	margin-top: 0.5em;
-}
-
-mark {
-	background-color: transparent;
-}
-
-.indented {
-	padding-left: 1.5em;
-}
-
-hr {
-	background: transparent;
-	display: block;
-	width: 100%;
-	height: 1px;
-	visibility: visible;
-	border: none;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
-}
-
-img {
-	max-width: 100%;
-}
-
-@media only print {
-	img {
-		max-height: 100vh;
-		object-fit: contain;
-	}
-
-	table.collection-content {
-		width: 100%;
-		table-layout: fixed;
-	}
-
-	table.collection-content th,
-	table.collection-content td {
-		overflow-wrap: anywhere;
-	}
-
-	table.collection-content td > .user,
-	table.collection-content td > time {
-		white-space: pre-wrap;
-	}
-}
-
-@page {
-	margin: 1in;
-}
-
-.collection-content-wrapper {
-	overflow-x: auto;
-}
-
-@media only print {
-	.collection-content-wrapper {
-		overflow-x: visible;
-	}
-}
-
-.collection-content {
-	font-size: 0.875rem;
-}
-
-.collection-content td {
-	white-space: pre-wrap;
-	word-break: break-word;
-}
-
-.column-list {
-	display: flex;
-	gap: 46px;
-}
-
-.column {
-	min-width: 0;
-	overflow: hidden;
-}
-
-.column > *:first-child {
-	margin-top: 0;
-}
-
-.table_of_contents-item {
-	display: block;
-	font-size: 0.875rem;
-	line-height: 1.3;
-	padding-inline: 0.125rem;
-	padding-block: 0.375rem;
-}
-
-.table_of_contents-indent-1 {
-	margin-left: 1.5rem;
-}
-
-.table_of_contents-indent-2 {
-	margin-left: 3rem;
-}
-
-.table_of_contents-indent-3 {
-	margin-left: 4.5rem;
-}
-
-.table_of_contents-link {
-	text-decoration: none;
-	opacity: 0.7;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
-}
-
-table,
-th,
-td {
-	border: 1px solid rgba(55, 53, 47, 0.09);
-}
-
-table {
-	border-collapse: collapse;
-	border-left: none;
-	border-right: none;
-}
-
-th,
-td {
-	font-weight: normal;
-	padding: 0.25em 0.5em;
-	line-height: 1.5;
-	min-height: 1.5em;
-	text-align: left;
-}
-
-th {
-	color: rgba(55, 53, 47, 0.6);
-}
-
-ol,
-ul {
-	margin: 0;
-	margin-block-start: 0.6em;
-	margin-block-end: 0.6em;
-}
-
-li > ol:first-child,
-li > ul:first-child {
-	margin-block-start: 0.6em;
-}
-
-ul > li {
-	list-style: disc;
-}
-
-ul.to-do-list {
-	padding-inline-start: 0;
-}
-
-ul.to-do-list > li {
-	list-style: none;
-}
-
-.to-do-children-checked {
-	text-decoration: line-through;
-	opacity: 0.375;
-}
-
-ul.toggle > li {
-	list-style: none;
-}
-
-ul {
-	padding-inline-start: 1.7em;
-}
-
-ul > li {
-	padding-left: 0.1em;
-}
-
-ol {
-	padding-inline-start: 1.6em;
-}
-
-ol.numbered-list.numbered-list-digits-2 {
-	padding-inline-start: 2em;
-}
-
-ol.numbered-list.numbered-list-digits-3plus {
-	padding-inline-start: 2.4em;
-}
-
-ol > li {
-	padding-left: 0.2em;
-}
-
-.mono ol {
-	padding-inline-start: 2em;
-}
-
-.mono ol > li {
-	text-indent: -0.4em;
-}
-
-.toggle {
-	padding-inline-start: 0em;
-	list-style-type: none;
-}
-
-/* Indent toggle children */
-.toggle > li > details {
-	padding-left: 1.7em;
-}
-
-.toggle > li > details > summary {
-	margin-left: -1.1em;
-}
-
-.selected-value {
-	display: inline-block;
-	padding: 0 0.5em;
-	background: rgba(206, 205, 202, 0.5);
-	border-radius: 3px;
-	margin-right: 0.5em;
-	margin-top: 0.3em;
-	margin-bottom: 0.3em;
-	white-space: nowrap;
-}
-
-.collection-title {
-	display: inline-block;
-	margin-right: 1em;
-}
-
-.page-description {
-	margin-bottom: 2em;
-}
-
-.simple-table {
-	margin-top: 1em;
-	font-size: 0.875rem;
-	empty-cells: show;
-}
-.simple-table td {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table th {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table-header-color {
-	background: rgb(247, 246, 243);
-	color: black;
-}
-.simple-table-header {
-	font-weight: 500;
-}
-
-time {
-	opacity: 0.5;
-}
-
-.icon {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	max-width: 1.2em;
-	max-height: 1.2em;
-	text-decoration: none;
-	vertical-align: text-bottom;
-	margin-right: 0.5em;
-}
-
-/*
- * Render emoji icons using a ::before pseudo-element to keep the glyph
- * out of the DOM textContent traversal. This avoids double-rendering icons
- * in callouts and page titles.
- * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
- * flag as a duplicate tag after codegen.
- */
-.icon[data-emoji]::before {
-	content: attr(data-emoji);
-}
-
-img.icon {
-	border-radius: 3px;
-}
-
-.callout img.notion-static-icon {
-	width: 1em;
-	height: 1em;
-}
-
-.callout p {
-	margin: 0;
-}
-
-.callout h1,
-.callout h2,
-.callout h3 {
-	margin: 0 0 0.6rem;
-}
-
-.user-icon {
-	width: 1.5em;
-	height: 1.5em;
-	border-radius: 100%;
-	margin-right: 0.5rem;
-}
-
-.user-icon-inner {
-	font-size: 0.8em;
-}
-
-.text-icon {
-	border: 1px solid #000;
-	text-align: center;
-}
-
-.page-cover-image {
-	display: block;
-	object-fit: cover;
-	width: 100%;
-	max-height: 30vh;
-}
-
-.page-header-icon {
-	font-size: 3rem;
-	margin-bottom: 1rem;
-}
-
-.page-header-icon-with-cover {
-	margin-top: -0.72em;
-	margin-left: 0.07em;
-}
-
-.page-header-icon img {
-	border-radius: 3px;
-}
-
-.link-to-page {
-	margin: 1em 0;
-	padding: 0;
-	border: none;
-	font-weight: 500;
-}
-
-p > .user {
-	opacity: 0.5;
-}
-
-td > .user,
-td > time {
-	white-space: nowrap;
-}
-
-input[type="checkbox"] {
-	margin-right: 0.4em;
-	vertical-align: middle;
-}
-
-p {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-
-.image {
-	border: none;
-	margin: 1.5em 0;
-	padding: 0;
-	border-radius: 0;
-	text-align: center;
-}
-
-.code,
-code {
-	background: rgba(135, 131, 120, 0.15);
-	border-radius: 3px;
-	padding: 0.2em 0.4em;
-	border-radius: 3px;
-	font-size: 85%;
-	tab-size: 2;
-}
-
-code {
-	color: #eb5757;
-}
-
-.code {
-	padding: 1.5em 1em;
-}
-
-.code-wrap {
-	white-space: pre-wrap;
-	word-break: break-all;
-}
-
-.code > code {
-	background: none;
-	padding: 0;
-	font-size: 100%;
-	color: inherit;
-}
-
-blockquote {
-	font-size: 1em;
-	margin: 1em 0;
-	padding-left: 1em;
-	border-left: 3px solid rgb(55, 53, 47);
-}
-
-blockquote.quote-large {
-	font-size: 1.25em;
-}
-
-.bookmark {
-	text-decoration: none;
-	max-height: 8em;
-	padding: 0;
-	display: flex;
-	width: 100%;
-	align-items: stretch;
-}
-
-.bookmark-title {
-	font-size: 0.85em;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	height: 1.75em;
-	white-space: nowrap;
-}
-
-.bookmark-text {
-	display: flex;
-	flex-direction: column;
-}
-
-.bookmark-info {
-	flex: 4 1 180px;
-	padding: 12px 14px 14px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.bookmark-image {
-	width: 33%;
-	flex: 1 1 180px;
-	display: block;
-	position: relative;
-	object-fit: cover;
-	border-radius: 1px;
-}
-
-.bookmark-description {
-	color: rgba(55, 53, 47, 0.6);
-	font-size: 0.75em;
-	overflow: hidden;
-	max-height: 4.5em;
-	word-break: break-word;
-}
-
-.bookmark-href {
-	font-size: 0.75em;
-	margin-top: 0.25em;
-}
-
-.tab {
-	margin: 1.25em 0;
-	padding-inline: 1rem;
-	border: 1px solid rgba(55, 53, 47, 0.09);
-}
-
-.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
-.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
-.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
-.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
-.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
-.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
-.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
-.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
-.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
-.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
-.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
-.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
-.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.highlight-default {
-	color: rgba(44, 44, 43, 1);
-}
-.highlight-gray {
-	color: rgba(125, 122, 117, 1);
-	fill: rgba(125, 122, 117, 1);
-}
-.highlight-brown {
-	color: rgba(159, 118, 90, 1);
-	fill: rgba(159, 118, 90, 1);
-}
-.highlight-orange {
-	color: rgba(210, 123, 45, 1);
-	fill: rgba(210, 123, 45, 1);
-}
-.highlight-yellow {
-	color: rgba(203, 148, 52, 1);
-	fill: rgba(203, 148, 52, 1);
-}
-.highlight-teal {
-	color: rgba(80, 148, 110, 1);
-	fill: rgba(80, 148, 110, 1);
-}
-.highlight-blue {
-	color: rgba(56, 125, 201, 1);
-	fill: rgba(56, 125, 201, 1);
-}
-.highlight-purple {
-	color: rgba(154, 107, 180, 1);
-	fill: rgba(154, 107, 180, 1);
-}
-.highlight-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.highlight-red {
-	color: rgba(207, 81, 72, 1);
-	fill: rgba(207, 81, 72, 1);
-}
-.highlight-default_background {
-	color: rgba(44, 44, 43, 1);
-}
-.highlight-gray_background {
-	background: rgba(42, 28, 0, 0.07);
-}
-.highlight-brown_background {
-	background: rgba(139, 46, 0, 0.086);
-}
-.highlight-orange_background {
-	background: rgba(224, 101, 1, 0.129);
-}
-.highlight-yellow_background {
-	background: rgba(211, 168, 0, 0.137);
-}
-.highlight-teal_background {
-	background: rgba(0, 100, 45, 0.09);
-}
-.highlight-blue_background {
-	background: rgba(0, 124, 215, 0.094);
-}
-.highlight-purple_background {
-	background: rgba(102, 0, 178, 0.078);
-}
-.highlight-pink_background {
-	background: rgba(197, 0, 93, 0.086);
-}
-.highlight-red_background {
-	background: rgba(223, 22, 0, 0.094);
-}
-.block-color-default {
-	color: inherit;
-	fill: inherit;
-}
-.block-color-gray {
-	color: rgba(125, 122, 117, 1);
-	fill: rgba(125, 122, 117, 1);
-}
-.block-color-brown {
-	color: rgba(159, 118, 90, 1);
-	fill: rgba(159, 118, 90, 1);
-}
-.block-color-orange {
-	color: rgba(210, 123, 45, 1);
-	fill: rgba(210, 123, 45, 1);
-}
-.block-color-yellow {
-	color: rgba(203, 148, 52, 1);
-	fill: rgba(203, 148, 52, 1);
-}
-.block-color-teal {
-	color: rgba(80, 148, 110, 1);
-	fill: rgba(80, 148, 110, 1);
-}
-.block-color-blue {
-	color: rgba(56, 125, 201, 1);
-	fill: rgba(56, 125, 201, 1);
-}
-.block-color-purple {
-	color: rgba(154, 107, 180, 1);
-	fill: rgba(154, 107, 180, 1);
-}
-.block-color-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.block-color-red {
-	color: rgba(207, 81, 72, 1);
-	fill: rgba(207, 81, 72, 1);
-}
-.block-color-default_background {
-	color: inherit;
-	fill: inherit;
-}
-.block-color-gray_background {
-	background: rgba(240, 239, 237, 1);
-}
-.block-color-brown_background {
-	background: rgba(245, 237, 233, 1);
-}
-.block-color-orange_background {
-	background: rgba(251, 235, 222, 1);
-}
-.block-color-yellow_background {
-	background: rgba(249, 243, 220, 1);
-}
-.block-color-teal_background {
-	background: rgba(232, 241, 236, 1);
-}
-.block-color-blue_background {
-	background: rgba(229, 242, 252, 1);
-}
-.block-color-purple_background {
-	background: rgba(243, 235, 249, 1);
-}
-.block-color-pink_background {
-	background: rgba(250, 233, 241, 1);
-}
-.block-color-red_background {
-	background: rgba(252, 233, 231, 1);
-}
-.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
-.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
-.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
-.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
-.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
-.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
-.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
-.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
-.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
-.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
-
-.checkbox {
-	display: inline-flex;
-	vertical-align: text-bottom;
-	width: 16;
-	height: 16;
-	background-size: 16px;
-	margin-left: 2px;
-	margin-right: 5px;
-}
-
-.checkbox-on {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-
-.checkbox-off {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-	
-</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><!--nfy-head--><meta name="viewport" content="width=device-width, initial-scale=1"/><style id="notionify">
-html { color-scheme: dark; }
-@media only screen { body { margin: 0; max-width: none; color: rgba(255,255,255,0.81); } }
-body { background: #191919; -webkit-font-smoothing: antialiased; }
-article.page { width: 100%; }
-
-/* ---- page header: full-bleed cover, overlapping icon, 40px title ---- */
-article > header > .page-cover-image { width: 100%; height: 30vh; max-height: 30vh; }
-article > header > *:not(.page-cover-image), .page-body {
-  width: 100%; max-width: calc(708px + 192px);
-  margin-left: auto; margin-right: auto;
-  padding-left: 96px; padding-right: 96px;
-}
-@media (max-width: 640px) {
-  article > header > *:not(.page-cover-image), .page-body { padding-left: 24px; padding-right: 24px; }
-}
-.page-header-icon { font-size: 78px; line-height: 1; margin-bottom: 0; }
-.page-header-icon-with-cover { margin-top: -44px; }
-.page-header-icon:not(.page-header-icon-with-cover) { margin-top: 72px; }
-article > header > .page-title:first-child { margin-top: 110px; }
-.page-title { font-size: 40px; font-weight: 700; line-height: 1.2; margin-top: 22px; margin-bottom: 26px; }
-.page-description:empty { display: none; }
-
-/* ---- block rhythm: Notion blocks are margin 0 + 3px vertical padding ---- */
-.page-body p { margin: 0; padding: 3px 2px; }
-.page-body h1, .page-body h2, .page-body h3 { padding: 3px 2px; margin-bottom: 0; }
-.page-body h1 { font-size: 1.875em; margin-top: 1em; }
-.page-body h2 { font-size: 1.5em; margin-top: 1.1em; }
-.page-body h3 { font-size: 1.25em; margin-top: 1em; }
-strong { font-weight: 600; }
-
-a, a.visited { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.35); text-underline-offset: 2.5px; }
-a:hover { text-decoration-color: rgba(255,255,255,0.6); }
-
-/* ---- code ---- */
-/* [class*="language-"] variants outrank the Prism light theme the export loads late in the document */
-code { color: #ff7369; background: rgba(135,131,120,0.15); border-radius: 4px; font-size: 85%; padding: 0.2em 0.4em; }
-pre.code, pre.code[class*="language-"] { background: #202020; border: 1px solid rgba(255,255,255,0.051); border-radius: 4px; padding: 32px 16px 32px 32px; margin: 6px 0; overflow-x: auto; }
-pre.code code, pre.code code[class*="language-"] { color: rgba(255,255,255,0.81); background: none; border-radius: 0; padding: 0; font-size: 85%; line-height: 1.5; tab-size: 2; text-shadow: none; }
-pre.code .token.comment, pre.code .token.block-comment, pre.code .token.prolog, pre.code .token.doctype, pre.code .token.cdata { color: #8a8f98; }
-pre.code .token.punctuation { color: rgba(255,255,255,0.55); }
-pre.code .token.keyword, pre.code .token.atrule { color: #cc99cd; }
-pre.code .token.boolean, pre.code .token.number, pre.code .token.function { color: #f08d49; }
-pre.code .token.string, pre.code .token.char, pre.code .token.attr-value { color: #7ec699; }
-pre.code .token.operator, pre.code .token.entity, pre.code .token.url { color: #67cdcc; }
-pre.code .token.class-name, pre.code .token.property, pre.code .token.symbol { color: #f8c555; }
-
-/* ---- other blocks ---- */
-.callout { background: #202020; border: none; border-radius: 8px; padding: 16px 16px 16px 12px; margin: 6px 0; }
-blockquote { font-size: 1em; margin: 6px 0; padding-left: 14px; border-left: 3px solid currentcolor; }
-hr { border-bottom: 1px solid rgba(255,255,255,0.13); margin: 13px 0; }
-figcaption { color: rgba(255,255,255,0.46); opacity: 1; }
-th, td { border: 1px solid rgba(255,255,255,0.094); }
-th { color: rgba(255,255,255,0.66); }
-.simple-table-header-color { background: #252525; color: inherit; }
-a.bookmark { border: 1px solid rgba(255,255,255,0.13); border-radius: 4px; color: inherit; }
-.table_of_contents-link { color: rgba(255,255,255,0.46); }
-::selection { background: rgba(46,170,220,0.35); }
-
-/* ---- Notion dark-mode block colors ---- */
-.block-color-gray, .highlight-gray { color: rgb(155,155,155); }
-.block-color-brown, .highlight-brown { color: rgb(186,133,111); }
-.block-color-orange, .highlight-orange { color: rgb(217,133,56); }
-.block-color-yellow, .highlight-yellow { color: rgb(203,148,51); }
-.block-color-green, .block-color-teal, .highlight-green, .highlight-teal { color: rgb(82,158,114); }
-.block-color-blue, .highlight-blue { color: rgb(82,156,202); }
-.block-color-purple, .highlight-purple { color: rgb(154,109,215); }
-.block-color-pink, .highlight-pink { color: rgb(209,87,150); }
-.block-color-red, .highlight-red { color: rgb(223,84,82); }
-.block-color-gray_background, .highlight-gray_background { background: rgb(47,47,47); }
-.block-color-brown_background, .highlight-brown_background { background: rgb(74,50,40); }
-.block-color-orange_background, .highlight-orange_background { background: rgb(92,59,35); }
-.block-color-yellow_background, .highlight-yellow_background { background: rgb(86,67,40); }
-.block-color-green_background, .block-color-teal_background, .highlight-green_background, .highlight-teal_background { background: rgb(36,61,48); }
-.block-color-blue_background, .highlight-blue_background { background: rgb(20,58,78); }
-.block-color-purple_background, .highlight-purple_background { background: rgb(60,45,86); }
-.block-color-pink_background, .highlight-pink_background { background: rgb(78,44,60); }
-.block-color-red_background, .highlight-red_background { background: rgb(82,46,42); }
-
-/* ---- topbar ---- */
-.nfy-topbar {
-  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-  position: sticky; top: 0; z-index: 99; white-space: normal;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  height: 44px; padding: 0 12px; background: #191919; font-size: 14px; line-height: 1.2;
-}
-.nfy-crumbs { display: flex; align-items: center; gap: 2px; min-width: 0; overflow: hidden; }
-.nfy-crumb { display: flex; align-items: center; gap: 6px; padding: 2px 6px; border-radius: 6px; color: rgba(255,255,255,0.81); max-width: 300px; text-decoration: none; }
-a.nfy-crumb:hover { background: rgba(255,255,255,0.055); }
-.nfy-crumb-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.nfy-sep { color: rgba(255,255,255,0.32); margin: 0 1px; }
-.nfy-actions { display: flex; align-items: center; gap: 2px; flex: none; }
-.nfy-actions svg { display: block; width: 20px; height: 20px; padding: 4px; border-radius: 6px; color: rgba(255,255,255,0.66); box-sizing: content-box; }
-.nfy-actions svg:hover { background: rgba(255,255,255,0.055); }
-.nfy-cta { margin-left: 6px; height: 30px; display: flex; align-items: center; padding: 0 12px; border-radius: 8px; background: rgba(255,255,255,0.13); color: rgba(255,255,255,0.94); font-weight: 500; text-decoration: none; white-space: nowrap; }
-.nfy-cta:hover { background: rgba(255,255,255,0.18); }
-
-/* ---- right-hand outline rail ---- */
-.nfy-outline { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 14px; align-items: flex-end; z-index: 50; white-space: normal; }
-.nfy-ol { height: 2px; border-radius: 1px; background: rgba(255,255,255,0.30); }
-.nfy-l1 { width: 16px; }
-.nfy-l2 { width: 11px; }
-.nfy-l3 { width: 7px; }
-@media (max-width: 700px) { .nfy-outline { display: none; } }
-</style><!--/nfy-head--></head><body><!--nfy-body--><div class="nfy-topbar"><div class="nfy-crumbs"><a class="nfy-crumb" href="../../../index.html"><span class="nfy-crumb-label">🌉❄️📝</span></a><span class="nfy-sep">/</span><a class="nfy-crumb" href="../../Writing%20efa7772a3ae64a8193c7ef981ac619fc.html"><span class="nfy-crumb-label">Writing</span></a><span class="nfy-sep">/</span><a class="nfy-crumb" href="../A%20minimal%20Bitcoin-inspired%20implementation%209559908f03ad4cb7a09ee60a457198e2.html"><span class="nfy-crumb-label">A minimal Bitcoin-inspired implementation</span></a><span class="nfy-sep">/</span><span class="nfy-crumb"><span>📶</span><span class="nfy-crumb-label">Nodes</span></span></div><div class="nfy-actions"><svg viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.75" stroke="currentColor" stroke-width="1.5"/><line x1="13" y1="13" x2="17.25" y2="17.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7.5H5.2A1.7 1.7 0 0 0 3.5 9.2v6.1A1.7 1.7 0 0 0 5.2 17h9.6a1.7 1.7 0 0 0 1.7-1.7V9.2a1.7 1.7 0 0 0-1.7-1.7h-1.3"/><line x1="10" y1="2.75" x2="10" y2="11.5"/><polyline points="6.9,5.4 10,2.4 13.1,5.4"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><circle cx="4.5" cy="10" r="1.4"/><circle cx="10" cy="10" r="1.4"/><circle cx="15.5" cy="10" r="1.4"/></svg><a class="nfy-cta" href="https://www.notion.com">Get Notion free</a></div></div><aside class="nfy-outline"><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div><div class="nfy-ol nfy-l3"></div></aside><!--/nfy-body--><article id="2faee375-971f-45e2-804f-143c8ffb1fd7" class="page sans" data-notion-page-icon="📶"><header><img class="page-cover-image" src="Nodes/node2.jpg" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon" data-emoji="📶"></span></div><h1 class="page-title" dir="auto">Nodes</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><p id="1477abe2-724f-4517-b28d-8c2ed6c75865" class="" dir="auto">In the previous <a href="Chains%20564943cf92ee48c98da4e51d3789d559.html">post</a>, we introduced a single miner. Now let&#x27;s set up 3 nodes that mine and broadcast to each other.</p><p id="702f97a3-b038-432d-98b0-6f6be2da8e0a" class="" dir="auto">
-</p><h3 id="cae88c8e-9029-41ab-8f88-71fc6bd49eb6" class="" dir="auto">Context</h3><p id="00e7feeb-e14c-4096-ad50-800898e06406" class="" dir="auto">Let&#x27;s start by sketching out what each node would do. In mining mode, the node tries 1,000 nonce values at a time and extends the blockchain if a solution is found. In listening mode, the node listens to the network and replaces its blockchain if the broadcasted blockchain is valid and longer than the existing blockchain. To keep things simple, the node would alternate between the two modes instead of running both in parallel.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="c25d4f10-439a-4389-984d-c53740f18194" class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">while True:
+<!doctype html><html lang="en" data-theme="dark" data-resolved-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Nodes</title><meta name="description" content="In the previous post , we introduced a single miner. Now let&#x27;s set up 3 nodes that mine and broadcast to each other. Context Let&#x27;s start by sketching out what each node would do. I"><meta property="og:title" content="Nodes"><meta property="og:type" content="article"><link rel="canonical" href="https://www.ezzeriesa.com/index/Writing/A%20minimal%20Bitcoin-inspired%20implementation/Nodes%202faee375971f45e2804f143c8ffb1fd7.html"><meta property="og:url" content="https://www.ezzeriesa.com/index/Writing/A%20minimal%20Bitcoin-inspired%20implementation/Nodes%202faee375971f45e2804f143c8ffb1fd7.html"><link href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%93%B6%3C%2Ftext%3E%3C%2Fsvg%3E" rel="icon"/><script src="../../../assets/notion/theme.js"></script><link rel="stylesheet" href="../../../assets/notion/export-b227894f977b.css"><link rel="stylesheet" href="../../../assets/notion/notion.css"><script defer src="../../../assets/notion/vendor/prism.js"></script><script defer src="../../../assets/notion/vendor/prism-keep-markup.js"></script><script defer src="../../../assets/notion/search-index.js"></script><script defer src="../../../assets/notion/notion.js"></script></head><body data-root="../../../index.html"><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-topbar"><nav class="breadcrumbs" aria-label="Breadcrumb"><a class="crumb" href="../../../index.html"><span class="crumb-label">🌉❄️📝</span></a><span class="crumb-separator" aria-hidden="true">/</span><a class="crumb" href="../../Writing%20efa7772a3ae64a8193c7ef981ac619fc.html"><span class="crumb-label">Writing</span></a><span class="crumb-separator" aria-hidden="true">/</span><a class="crumb" href="../A%20minimal%20Bitcoin-inspired%20implementation%209559908f03ad4cb7a09ee60a457198e2.html"><span class="crumb-label">A minimal Bitcoin-inspired implementation</span></a><span class="crumb-separator" aria-hidden="true">/</span><span class="crumb" aria-current="page"><div aria-hidden="true" class="page-link-icon"><span class="icon" data-emoji="📶"></span></div><span class="crumb-label">Nodes</span></span></nav>
+<div class="site-actions"><button type="button" data-action="search" aria-label="Search this site" title="Search"><svg class="" aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.6" cy="8.6" r="6.1"/><path d="m13.1 13.1 4.5 4.5"/></svg></button><button type="button" data-action="share" aria-label="Copy page link" title="Copy page link"><svg class="" aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7H4.5A1.5 1.5 0 0 0 3 8.5v8A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 15.5 7H14M10 12V2m-3.5 3.5L10 2l3.5 3.5"/></svg></button><button type="button" data-action="menu" aria-label="More options" aria-expanded="false" aria-controls="site-menu"><svg class="" aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="10" r=".8"/><circle cx="10" cy="10" r=".8"/><circle cx="16" cy="10" r=".8"/></svg></button><a class="notion-cta" href="https://www.notion.com/">Get Notion free</a></div></header>
+<div id="site-menu" class="site-menu" hidden><a href="https://ezzeriesa.notion.site/2faee375971f45e2804f143c8ffb1fd7">Open in Notion ↗</a><button type="button" data-theme-choice="light">Light appearance</button><button type="button" data-theme-choice="dark">Dark appearance</button><button type="button" data-theme-choice="auto">Use system appearance</button><button type="button" data-action="print">Print page</button></div>
+<nav class="page-outline" aria-label="On this page"><a href="#cae88c8e-9029-41ab-8f88-71fc6bd49eb6" class="outline-entry level-3" style="--depth:0" aria-label="Context"><span>Context</span></a><a href="#28b72693-3a5b-4ca1-bc88-f8b92aff03ed" class="outline-entry level-3" style="--depth:0" aria-label="Broadcasters"><span>Broadcasters</span></a><a href="#2c6db033-28e9-4f76-a103-f3dae4af6d43" class="outline-entry level-3" style="--depth:0" aria-label="Miners"><span>Miners</span></a></nav>
+<dialog id="site-search" aria-labelledby="search-title"><div class="search-heading"><h2 id="search-title">Search</h2><button type="button" data-action="close-search" aria-label="Close search">×</button></div><input id="search-input" type="search" placeholder="Search pages…" aria-label="Search pages" autocomplete="off"><ul id="search-results"></ul><p id="search-status" role="status"></p></dialog><div class="toast" id="site-status" role="status"></div><main id="main" tabindex="-1"><article class="page sans has-cover has-icon" data-notion-page-icon="📶" id="2faee375-971f-45e2-804f-143c8ffb1fd7"><header><img alt="" class="page-cover-image" decoding="async" src="Nodes/node2.jpg" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon" data-emoji="📶"></span></div><h1 class="page-title" dir="auto">Nodes</h1></header><div class="page-body"><p class="" dir="auto" id="1477abe2-724f-4517-b28d-8c2ed6c75865">In the previous <a href="Chains%20564943cf92ee48c98da4e51d3789d559.html">post</a>, we introduced a single miner. Now let's set up 3 nodes that mine and broadcast to each other.</p><p class="notion-blank" dir="auto" id="702f97a3-b038-432d-98b0-6f6be2da8e0a">
+</p><h3 class="" dir="auto" id="cae88c8e-9029-41ab-8f88-71fc6bd49eb6">Context</h3><p class="" dir="auto" id="00e7feeb-e14c-4096-ad50-800898e06406">Let's start by sketching out what each node would do. In mining mode, the node tries 1,000 nonce values at a time and extends the blockchain if a solution is found. In listening mode, the node listens to the network and replaces its blockchain if the broadcasted blockchain is valid and longer than the existing blockchain. To keep things simple, the node would alternate between the two modes instead of running both in parallel.</p><pre class="code code-wrap" data-notion-code-syntax="python" id="c25d4f10-439a-4389-984d-c53740f18194" tabindex="0"><code class="language-python keep-markup drop-tokens">while True:
     try:
         # Listen for incoming messages.
         #     If message received, check blockchain received is valid and longer      
@@ -880,27 +15,27 @@ a.nfy-crumb:hover { background: rgba(255,255,255,0.055); }
     except:
         # Run proof-of-work.
         #     If not solved after 1000 nonce values, switch to listening mode.
-        #     Otherwise, update blockchain and broadcast to network.</code></pre><p id="944aa21e-8ea0-477b-8ff1-ee8ad91d657a" class="" dir="auto">
-</p><h3 id="28b72693-3a5b-4ca1-bc88-f8b92aff03ed" class="" dir="auto">Broadcasters</h3><p id="2c59e54a-af2f-4b46-96bf-99d19b167e46" class="" dir="auto">Since most of our focus so far has been on mining, let&#x27;s switch gears briefly to set up nodes that broadcast to each other. To ensure our nodes are set up correctly, we create a <code>.env</code> file with the IP address by running the following command in a terminal window.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" integrity="sha512-whYhDwtTmlC/NpZlCr6PSsAaLOrfjVg/iXAnC4H/dtiHawpShhT2SlIMbpIhT/IL/NrpdMm+Hq2C13+VKpHTYw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="a4f4ee5d-cfbb-4733-a0a0-8be4720b3d00" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">echo &#x27;NODE_IP=&#x27;&quot;$(ipconfig getifaddr en0)&quot; &gt; .env</code></pre><p id="f6e5864a-36ab-4efb-95da-95aa13807ded" class="" dir="auto">
-</p><p id="bf1e7621-448e-4dff-b41d-46ee7c698a9f" class="" dir="auto">Next we load the IP address as an environment variable, and enumerate all the ports to be used.</p><figure id="1d642b10-42b4-47ee-bf7b-64b3b562758d" data-notion-code-syntax="python"><pre class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import dotenv
+        #     Otherwise, update blockchain and broadcast to network.</code></pre><p class="notion-blank" dir="auto" id="944aa21e-8ea0-477b-8ff1-ee8ad91d657a">
+</p><h3 class="" dir="auto" id="28b72693-3a5b-4ca1-bc88-f8b92aff03ed">Broadcasters</h3><p class="" dir="auto" id="2c59e54a-af2f-4b46-96bf-99d19b167e46">Since most of our focus so far has been on mining, let's switch gears briefly to set up nodes that broadcast to each other. To ensure our nodes are set up correctly, we create a <code>.env</code> file with the IP address by running the following command in a terminal window.</p><pre class="code code-wrap" data-notion-code-syntax="bash" id="a4f4ee5d-cfbb-4733-a0a0-8be4720b3d00" tabindex="0"><code class="language-bash keep-markup drop-tokens">echo 'NODE_IP='"$(ipconfig getifaddr en0)" &gt; .env</code></pre><p class="notion-blank" dir="auto" id="f6e5864a-36ab-4efb-95da-95aa13807ded">
+</p><p class="" dir="auto" id="bf1e7621-448e-4dff-b41d-46ee7c698a9f">Next we load the IP address as an environment variable, and enumerate all the ports to be used.</p><figure data-notion-code-syntax="python" id="1d642b10-42b4-47ee-bf7b-64b3b562758d"><pre class="code code-wrap" data-notion-code-syntax="python" tabindex="0"><code class="language-python keep-markup drop-tokens">import dotenv
 import os
 
 dotenv.load_dotenv()
 
-NODE_IP = os.getenv(&quot;NODE_IP&quot;)
-NODE_PORTS = [7000, 8000, 9000]</code></pre><figcaption>node.py</figcaption></figure><p id="b0dc8deb-017f-4c81-95d0-adc73daeb287" class="" dir="auto">
-</p><p id="31cc18a2-1477-4109-90a1-09ddd0f59f87" class="" dir="auto">We introduce a helper function to bind the network socket to the IP address-port pair.</p><figure id="52def574-3bd6-4f7a-8d1b-4f7eaf1a46a9" data-notion-code-syntax="python"><pre class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import socket
+NODE_IP = os.getenv("NODE_IP")
+NODE_PORTS = [7000, 8000, 9000]</code></pre><figcaption>node.py</figcaption></figure><p class="notion-blank" dir="auto" id="b0dc8deb-017f-4c81-95d0-adc73daeb287">
+</p><p class="" dir="auto" id="31cc18a2-1477-4109-90a1-09ddd0f59f87">We introduce a helper function to bind the network socket to the IP address-port pair.</p><figure data-notion-code-syntax="python" id="52def574-3bd6-4f7a-8d1b-4f7eaf1a46a9"><pre class="code code-wrap" data-notion-code-syntax="python" tabindex="0"><code class="language-python keep-markup drop-tokens">import socket
 
 def bind_socket(ip_address: str, port: int) -&gt; socket.socket:
-    &quot;&quot;&quot; &quot;&quot;&quot;
+    """ """
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((ip_address, port))
-    return sock</code></pre><figcaption>node.py</figcaption></figure><p id="a89e282c-e75e-466a-8833-cc4babf2e02e" class="" dir="auto">
-</p><p id="584cfe7e-7c49-486c-8624-317e270decff" class="" dir="auto">Let&#x27;s wrap the socket in a class and create functions to (i) initialize the node, and (ii) broadcast to other nodes. The node class also stores the blockchain state - we&#x27;ll use this in the next section.</p><figure id="a822b49e-2023-4490-822d-a47e670f4e6f" data-notion-code-syntax="python"><pre class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import dataclasses
+    return sock</code></pre><figcaption>node.py</figcaption></figure><p class="notion-blank" dir="auto" id="a89e282c-e75e-466a-8833-cc4babf2e02e">
+</p><p class="" dir="auto" id="584cfe7e-7c49-486c-8624-317e270decff">Let's wrap the socket in a class and create functions to (i) initialize the node, and (ii) broadcast to other nodes. The node class also stores the blockchain state - we'll use this in the next section.</p><figure data-notion-code-syntax="python" id="a822b49e-2023-4490-822d-a47e670f4e6f"><pre class="code code-wrap" data-notion-code-syntax="python" tabindex="0"><code class="language-python keep-markup drop-tokens">import dataclasses
 
 @dataclasses.dataclass
 class Node:
-    &quot;&quot;&quot; &quot;&quot;&quot;
+    """ """
 
     port: int
     sock: socket.socket
@@ -908,9 +43,9 @@ class Node:
     block_counter: int
 
 def init_node(
-    port: int, blockchain: bytes = b&quot;&quot;, block_counter: int = 0
+    port: int, blockchain: bytes = b"", block_counter: int = 0
 ) -&gt; Node:
-    &quot;&quot;&quot; &quot;&quot;&quot;
+    """ """
     assert NODE_IP is not None
     sock = bind_socket(NODE_IP, port)
 
@@ -922,67 +57,67 @@ def init_node(
     )
 
 def broadcast(node: Node, message: bytes):
-    &quot;&quot;&quot; &quot;&quot;&quot;
+    """ """
     for node_port in NODE_PORTS:
         if node_port == node.port:
             continue
 
-        node.sock.sendto(message, (NODE_IP, node_port))</code></pre><figcaption><a href="http://node.py">node.py</a></figcaption></figure><p id="095fbb07-94db-4f1b-a7cd-ab721cf703e4" class="" dir="auto">
-</p><p id="756d8825-6297-455a-aef9-bc11c883d9da" class="" dir="auto">In the placeholder version, we set up the nodes to broadcast a simple message to the network and then sleep for a random time.</p><figure id="403d90c4-35bf-474d-a068-6f1ec61c1d5f" data-notion-code-syntax="python"><pre class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import random
+        node.sock.sendto(message, (NODE_IP, node_port))</code></pre><figcaption><a href="http://node.py">node.py</a></figcaption></figure><p class="notion-blank" dir="auto" id="095fbb07-94db-4f1b-a7cd-ab721cf703e4">
+</p><p class="" dir="auto" id="756d8825-6297-455a-aef9-bc11c883d9da">In the placeholder version, we set up the nodes to broadcast a simple message to the network and then sleep for a random time.</p><figure data-notion-code-syntax="python" id="403d90c4-35bf-474d-a068-6f1ec61c1d5f"><pre class="code code-wrap" data-notion-code-syntax="python" tabindex="0"><code class="language-python keep-markup drop-tokens">import random
 import time
 
 def run(node: Node):
-    &quot;&quot;&quot; &quot;&quot;&quot;
+    """ """
     while True:
         try:
             node.sock.settimeout(1)
             message, _ = node.sock.recvfrom(9216)
 
-            node_port = int.from_bytes(message[:2], byteorder=&quot;big&quot;)
+            node_port = int.from_bytes(message[:2], byteorder="big")
             sleep_time = message[2]
 
-            print(f&quot;OTHER {node_port} sleep for {sleep_time} seconds...&quot;)
+            print(f"OTHER {node_port} sleep for {sleep_time} seconds...")
 
         except socket.timeout:
             sleep_time = random.randint(1, 9)
             message = node.port.to_bytes(
-                2, byteorder=&quot;big&quot;
-            ) + sleep_time.to_bytes(1, byteorder=&quot;big&quot;)
+                2, byteorder="big"
+            ) + sleep_time.to_bytes(1, byteorder="big")
 
             broadcast(node, message)
-            print(f&quot;SELF {node.port} sleep for {sleep_time} seconds...&quot;)
+            print(f"SELF {node.port} sleep for {sleep_time} seconds...")
 
-            time.sleep(sleep_time)</code></pre><figcaption><a href="http://node.py">node.py</a> - placeholder version</figcaption></figure><p id="bac0d61a-83ab-48a7-ae05-5c146829266b" class="" dir="auto">
-</p><p id="e71e6351-da21-40a4-969a-298db6ebf02b" class="" dir="auto">We set up main to take in the port number as a command line argument.</p><figure id="4bc0ad70-db90-428b-b8b4-15a6d61f8be2" data-notion-code-syntax="python"><pre class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import sys
+            time.sleep(sleep_time)</code></pre><figcaption><a href="http://node.py">node.py</a> - placeholder version</figcaption></figure><p class="notion-blank" dir="auto" id="bac0d61a-83ab-48a7-ae05-5c146829266b">
+</p><p class="" dir="auto" id="e71e6351-da21-40a4-969a-298db6ebf02b">We set up main to take in the port number as a command line argument.</p><figure data-notion-code-syntax="python" id="4bc0ad70-db90-428b-b8b4-15a6d61f8be2"><pre class="code code-wrap" data-notion-code-syntax="python" tabindex="0"><code class="language-python keep-markup drop-tokens">import sys
 
-if __name__ == &quot;__main__&quot;:
+if __name__ == "__main__":
     port = int(sys.argv[1])
     assert port in NODE_PORTS
 
     node = init_node(port)
-    run(node)</code></pre><figcaption>node.py</figcaption></figure><p id="8125dd44-6e4d-458b-84d4-6870b29b5c14" class="" dir="auto">
-</p><p id="d52aff1a-32c9-4e17-9495-3c0274109d85" class="" dir="auto">That&#x27;s a fair amount of setup! Now respectively run each line in different terminal windows. A sample run can be seen <a href="https://vimeo.com/647162718">here</a>, and the code in a single file <a href="https://github.com/savarin/readcoin/blob/v1-basic/src/node.py">here</a>.</p><pre id="25d23cf0-09cf-43cc-ae48-892d41c9e3ae" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">python node.py 7000
+    run(node)</code></pre><figcaption>node.py</figcaption></figure><p class="notion-blank" dir="auto" id="8125dd44-6e4d-458b-84d4-6870b29b5c14">
+</p><p class="" dir="auto" id="d52aff1a-32c9-4e17-9495-3c0274109d85">That's a fair amount of setup! Now respectively run each line in different terminal windows. A sample run can be seen <a href="https://vimeo.com/647162718">here</a>, and the code in a single file <a href="https://github.com/savarin/readcoin/blob/v1-basic/src/node.py">here</a>.</p><pre class="code code-wrap" data-notion-code-syntax="bash" id="25d23cf0-09cf-43cc-ae48-892d41c9e3ae" tabindex="0"><code class="language-bash keep-markup drop-tokens">python node.py 7000
 python node.py 8000
-python node.py 9000</code></pre><p id="480d66ba-2a72-4f9b-b8c6-943b875720d5" class="" dir="auto">
-</p><h3 id="2c6db033-28e9-4f76-a103-f3dae4af6d43" class="" dir="auto">Miners</h3><p id="b595a3a6-f9ab-4a51-a8d1-6ee66c35c12b" class="" dir="auto">Now that we&#x27;ve done the heavy-lifting of setting up nodes that broadcast to each other, we can incorporate mining into the nodes.</p><p id="c058dce5-9aa3-47de-a494-567cc8474777" class="" dir="auto">
-</p><p id="809b2d37-6372-424b-a032-ff042a823823" class="" dir="auto">We modify the node initialization so that the blockchain starts with the genesis block.</p><figure id="710cbfe6-df7a-443e-8422-5724d0e05328" data-notion-code-syntax="python"><pre class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import sys
+python node.py 9000</code></pre><p class="notion-blank" dir="auto" id="480d66ba-2a72-4f9b-b8c6-943b875720d5">
+</p><h3 class="" dir="auto" id="2c6db033-28e9-4f76-a103-f3dae4af6d43">Miners</h3><p class="" dir="auto" id="b595a3a6-f9ab-4a51-a8d1-6ee66c35c12b">Now that we've done the heavy-lifting of setting up nodes that broadcast to each other, we can incorporate mining into the nodes.</p><p class="notion-blank" dir="auto" id="c058dce5-9aa3-47de-a494-567cc8474777">
+</p><p class="" dir="auto" id="809b2d37-6372-424b-a032-ff042a823823">We modify the node initialization so that the blockchain starts with the genesis block.</p><figure data-notion-code-syntax="python" id="710cbfe6-df7a-443e-8422-5724d0e05328"><pre class="code code-wrap" data-notion-code-syntax="python" tabindex="0"><code class="language-python keep-markup drop-tokens">import sys
 
 import blocks
 
 genesis_hash, genesis_block = blocks.init_genesis_block()
 
-if __name__ == &quot;__main__&quot;:
+if __name__ == "__main__":
     port = int(sys.argv[1])
     assert port in NODE_PORTS
 
     node = init_node(port, genesis_block, 1)
-    run(node)</code></pre><figcaption>blocks.py</figcaption></figure><p id="b9bde7e0-4770-46aa-a125-cdf5038add01" class="" dir="auto">
-</p><p id="f882c92b-c495-4795-b72b-cb68d3ae592a" class="" dir="auto">At the <a href="Nodes%202faee375971f45e2804f143c8ffb1fd7.html">start</a> of this post, we discussed alternating between mining mode and listening mode. The steps in mining mode is similar to the previous <a href="Chains%20564943cf92ee48c98da4e51d3789d559.html">post</a>; the switch from mining to listening mode happens after trying 1,000 nonce values. The steps in listening mode are as follows.</p><ol type="1" id="abff0ccd-d3fc-41ec-be73-6af091a1bd21" class="numbered-list" start="1" dir="auto"><li>Listen to incoming messages from other nodes.</li></ol><ol type="1" id="f3f7e9a4-67d9-4d7c-a878-87d6df5121ef" class="numbered-list" start="2" dir="auto"><li>If message is received, check broadcasted blockchain in the message is valid and longer than the existing blockchain.<ol type="a" id="182b44c2-20da-422e-ab75-10da15d07edb" class="numbered-list" start="1" dir="auto"><li>If the broadcasted blockchain is valid and longer than the existing blockchain, replace the stored blockchain with the broadcasted blockchain.</li></ol><ol type="a" id="57cc6a70-8ac4-46f4-8317-04bdbe450437" class="numbered-list" start="2" dir="auto"><li>If the broadcasted blockchain is invalid or not longer than the existing blockchain, ignore the broadcasted blockchain.</li></ol></li></ol><ol type="1" id="7f9ca01d-4a17-4ae0-bedb-d2a3ab16773e" class="numbered-list" start="3" dir="auto"><li>If no message is received after listening for 1 second, switch to mining mode.</li></ol><p id="f8b06071-f0fe-427a-9d8b-d1eef14ee37f" class="" dir="auto">
-</p><p id="344637fa-17ef-46e7-a7db-0bcb58e28056" class="" dir="auto">Since the blockchain is an array of bytes, we can broadcast it directly! For simplicity, the whole blockchain is sent over the wire instead of only the latest block. </p><figure id="31c33903-d7e0-4aa6-b4ba-cd5790272c36" data-notion-code-syntax="python"><pre class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import binascii
+    run(node)</code></pre><figcaption>blocks.py</figcaption></figure><p class="notion-blank" dir="auto" id="b9bde7e0-4770-46aa-a125-cdf5038add01">
+</p><p class="" dir="auto" id="f882c92b-c495-4795-b72b-cb68d3ae592a">At the <a href="Nodes%202faee375971f45e2804f143c8ffb1fd7.html">start</a> of this post, we discussed alternating between mining mode and listening mode. The steps in mining mode is similar to the previous <a href="Chains%20564943cf92ee48c98da4e51d3789d559.html">post</a>; the switch from mining to listening mode happens after trying 1,000 nonce values. The steps in listening mode are as follows.</p><ol class="numbered-list notion-group-after" data-list-type="1" dir="auto" id="abff0ccd-d3fc-41ec-be73-6af091a1bd21" role="list" start="1" type="1"><li><div class="list-title">Listen to incoming messages from other nodes.</div></li></ol><ol class="numbered-list notion-group-before notion-group-after" data-list-type="1" dir="auto" id="f3f7e9a4-67d9-4d7c-a878-87d6df5121ef" role="list" start="2" type="1"><li><div class="list-title">If message is received, check broadcasted blockchain in the message is valid and longer than the existing blockchain.</div><ol class="numbered-list notion-group-after" data-list-type="a" dir="auto" id="182b44c2-20da-422e-ab75-10da15d07edb" role="list" start="1" type="a"><li><div class="list-title">If the broadcasted blockchain is valid and longer than the existing blockchain, replace the stored blockchain with the broadcasted blockchain.</div></li></ol><ol class="numbered-list notion-group-before" data-list-type="a" dir="auto" id="57cc6a70-8ac4-46f4-8317-04bdbe450437" role="list" start="2" type="a"><li><div class="list-title">If the broadcasted blockchain is invalid or not longer than the existing blockchain, ignore the broadcasted blockchain.</div></li></ol></li></ol><ol class="numbered-list notion-group-before" data-list-type="1" dir="auto" id="7f9ca01d-4a17-4ae0-bedb-d2a3ab16773e" role="list" start="3" type="1"><li><div class="list-title">If no message is received after listening for 1 second, switch to mining mode.</div></li></ol><p class="notion-blank" dir="auto" id="f8b06071-f0fe-427a-9d8b-d1eef14ee37f">
+</p><p class="" dir="auto" id="344637fa-17ef-46e7-a7db-0bcb58e28056">Since the blockchain is an array of bytes, we can broadcast it directly! For simplicity, the whole blockchain is sent over the wire instead of only the latest block. </p><figure data-notion-code-syntax="python" id="31c33903-d7e0-4aa6-b4ba-cd5790272c36"><pre class="code code-wrap" data-notion-code-syntax="python" tabindex="0"><code class="language-python keep-markup drop-tokens">import binascii
 import time
 
 def run(node: Node):
-    &quot;&quot;&quot; &quot;&quot;&quot;
+    """ """
     previous_hash = GENESIS_HASH
     timestamp = int(time.time())
     nonce = 0
@@ -1003,7 +138,7 @@ def run(node: Node):
 
             # Skip if invalid or not longer than existing blockchain.
             if not is_new_block or block_counter &lt;= node.block_counter:
-                print(&quot;IGNORE blockchain...&quot;)
+                print("IGNORE blockchain...")
                 continue
 
             # Replace if valid and longer than existing.
@@ -1012,17 +147,17 @@ def run(node: Node):
 
             assert current_hash is not None
             print(
-                f&quot;COPY block {node.block_counter - 1}: {binascii.hexlify(current_hash).decode()}!&quot;
+                f"COPY block {node.block_counter - 1}: {binascii.hexlify(current_hash).decode()}!"
             )
 
             # Force sleep to randomize timestamp.
             sleep_time = (node.port + block_counter) % 3 + 1
-            print(f&quot;SLEEP for {sleep_time} seconds...&quot;)
+            print(f"SLEEP for {sleep_time} seconds...")
             time.sleep(sleep_time)
 
         except socket.timeout:
             # Run proof-of-work.
-            print(f&quot;TRY up to {nonce}...&quot;)
+            print(f"TRY up to {nonce}...")
             is_new_block, _, current_hash, header = blocks.run_proof_of_work(
                 previous_hash, timestamp, nonce, 1000
             )
@@ -1046,15 +181,15 @@ def run(node: Node):
             # Broadcast full blockchain to network.
             broadcast(node, node.blockchain)
             print(
-                f&quot;CREATE block {node.block_counter - 1}: {binascii.hexlify(current_hash).decode()}!&quot;
+                f"CREATE block {node.block_counter - 1}: {binascii.hexlify(current_hash).decode()}!"
             )
 
         # Reset values for next block header.
         previous_hash = current_hash
         timestamp = int(time.time())
-        nonce = 0</code></pre><figcaption><a href="http://node.py">node.py</a> - actual version</figcaption></figure><p id="ccd4d06a-05b5-47ac-a6b5-64a0861537b5" class="" dir="auto">
-</p><p id="91c2cd5e-47a2-46f8-926f-204fa7d8cc75" class="" dir="auto">With the changes in place, we re-run each line below in different terminal windows. A sample run is shown below.</p><pre id="f96bd192-841f-4424-8254-5235bcefed83" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">python node.py 7000
+        nonce = 0</code></pre><figcaption><a href="http://node.py">node.py</a> - actual version</figcaption></figure><p class="notion-blank" dir="auto" id="ccd4d06a-05b5-47ac-a6b5-64a0861537b5">
+</p><p class="" dir="auto" id="91c2cd5e-47a2-46f8-926f-204fa7d8cc75">With the changes in place, we re-run each line below in different terminal windows. A sample run is shown below.</p><pre class="code code-wrap" data-notion-code-syntax="bash" id="f96bd192-841f-4424-8254-5235bcefed83" tabindex="0"><code class="language-bash keep-markup drop-tokens">python node.py 7000
 python node.py 8000
-python node.py 9000</code></pre><p id="6d0c320e-c3ea-477a-8902-41d0a8b2fb9c" class="" dir="auto">
-</p><figure id="a8f054ba-ca9c-44e2-b223-66b55b338209" dir="ltr"><div class="source"><a href="https://vimeo.com/647162882">https://vimeo.com/647162882</a></div></figure><p id="b125aeda-83a9-4d6a-bd7d-ee688fc09a23" class="" dir="auto">
-</p><p id="56d18ec9-8dfc-4dab-9880-fdd3e6d680c8" class="" dir="auto">In the next series of posts, we&#x27;ll take a closer look at transactions and validating that each coin is only spent once.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+python node.py 9000</code></pre><p class="notion-blank" dir="auto" id="6d0c320e-c3ea-477a-8902-41d0a8b2fb9c">
+</p><figure dir="ltr" id="a8f054ba-ca9c-44e2-b223-66b55b338209"><div class="source"><a href="https://vimeo.com/647162882">https://vimeo.com/647162882</a></div></figure><p class="notion-blank" dir="auto" id="b125aeda-83a9-4d6a-bd7d-ee688fc09a23">
+</p><p class="" dir="auto" id="56d18ec9-8dfc-4dab-9880-fdd3e6d680c8">In the next series of posts, we'll take a closer look at transactions and validating that each coin is only spent once.</p></div></article></main></body></html>
